@@ -6,7 +6,7 @@
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="no-cache, no-store, must-revalidate" http-equiv="Cache-Control"/>
 <meta content="yes" name="apple-mobile-web-app-capable"/>
-<title>StödGuiden – Mobil demo (compat v8)</title>
+<title>StödGuiden – för unga vuxna</title>
 <style>
     :root{--bg:#0f1f1c;--panel:#112e28;--text:#f3fff8;--muted:#cfe7df;--chip:#134238;--line:#2a4d59;--link:#8edbff}
     *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(255,255,255,0.08)}
@@ -78,16 +78,14 @@
 .sgcp-1177{color:#ffdfe7;text-decoration:none}
 .sgcp-1177:hover{text-decoration:underline}
 /* Spacing so content never hides behind bars; will be updated by JS */
-:root{ --sgcp-top-h:64px; --sgcp-foot-h:64px }
-body{ padding-top:var(--sgcp-top-h)!important; padding-bottom:var(--sgcp-foot-h)!important }
+:root{ --sgcp-foot-h:64px }
+body{ padding-top:0!important; padding-bottom:var(--sgcp-foot-h)!important }
 </style><style>
 /* Freeze page when modal is open */
 .sgcp-lockscroll { position: fixed; width: 100%; overflow: hidden; }
-#sgcpFeedbackModal::backdrop { background: rgba(0,0,0,0.5); }
 /* Ensure dialog doesn't wiggle */
-#sgcpFeedbackModal { margin: 0 auto; }
 </style><style>
-:root{ --sgcp-top-h: 60px; --sgcp-foot-h: 64px; }
+:root{ --sgcp-foot-h: 64px; }
 .sgcp-topbar{
   background:#0b1220 !important; /* mørkgrøn/blå nuance som resten */
   border-bottom:1px solid #142032 !important;
@@ -95,71 +93,34 @@ body{ padding-top:var(--sgcp-top-h)!important; padding-bottom:var(--sgcp-foot-h)
   display:flex; align-items:center; padding:.5rem .75rem;
   box-shadow: 0 2px 10px rgba(0,0,0,.25);
 }
-body{ padding-top: var(--sgcp-top-h) !important; padding-bottom: var(--sgcp-foot-h) !important; }
+body{ padding-top: 0 !important; padding-bottom: var(--sgcp-foot-h) !important; }
 </style><style>.sgcp-footer-akut{ height: var(--sgcp-foot-h); display:flex; align-items:center; }</style><style>
-/* Lock feedback modal centered and non-draggable */
-#sgcpFeedbackModal {
-  position: fixed !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
-  margin: 0 !important;
-  max-width: 92vw;
-  width: 420px;
-  border-radius: 12px;
-}
-#sgcpFeedbackModal::backdrop { background: rgba(0,0,0,0.5); }
 </style><style>.sgcp-btn{cursor:pointer}</style><style>.sgcp-hi{outline:2px solid #38bdf8; outline-offset:2px; border-radius:12px;}</style><style>
-#sgcpLangMenu{display:none;position:absolute;margin-top:.25rem;background:#0b1220;border:1px solid #253042;border-radius:12px;padding:.3rem;}
-#sgcpLangMenu.open{display:block;}
-#sgcpLangMenu .sgcp-langitem{display:block;width:100%;text-align:left;padding:.35rem .6rem;border-radius:.6rem;}
-#sgcpLangBtn{position:relative;}
 </style><style>
-#sgcpLangMenu{display:none;background:#0b1220;border:1px solid #253042;border-radius:12px;padding:.3rem;min-width:160px;box-shadow:0 10px 24px rgba(0,0,0,.35)}
-#sgcpLangMenu.open{display:block}
-#sgcpLangMenu .sgcp-langitem{display:block;width:100%;text-align:left;padding:.45rem .8rem;border-radius:.6rem}
-#sgcpLangMenu .sgcp-langitem:hover{background:#152033}
 </style><style>
-/* Freeze feedback modal */
-.sgcp-feedback, .sgcp-modal, [data-sgcp-modal="feedback"] {
-  position: fixed !important;
-  left: 50% !important;
-  top: 12vh !important;
-  transform: translateX(-50%) !important;
-  right: auto !important;
-  bottom: auto !important;
-  max-width: 680px !important;
-  width: min(92vw, 680px) !important;
-}
-</style><style>
-#sgcpBackdrop{backdrop-filter: blur(1px)}
-/* ensure blue tip card and smart-guide row have consistent spacing in compact view */
-.sgcp-sec .sgcp-item{margin-bottom:10px}
+
 </style></head>
-<body><div class="sgcp-topbar"><div><div class="sgcp-langwrap"><button class="sgcp-btn sgcp-langbtn" id="sgcpLangBtn" type="button">🌐 Språk</button><div class="sgcp-langmenu" id="sgcpLangMenu"><button class="sgcp-langitem" data-sgcp-lang="sv" type="button">Svenska</button><button class="sgcp-langitem" data-sgcp-lang="en" type="button">English</button><button class="sgcp-langitem" data-sgcp-lang="uk" type="button">Українська</button><button class="sgcp-langitem" data-sgcp-lang="da" type="button">Dansk</button><button class="sgcp-langitem" data-sgcp-lang="no" type="button">Norsk</button></div></div><button class="sgcp-btn" id="sgcpFeedbackBtn" type="button">🗣️ Vad tycker du?</button></div></div>
-<header>
+<body><header>
 <div class="brand"><div class="badge">SG</div>StödGuiden</div>
 <nav class="nav">
 <button class="chip" id="btnHem" type="button">🏠 Hem</button>
-<button class="chip" id="btnKommun" type="button">🏷️ Kommun</button>
 </nav>
 </header>
 <div class="wrap">
 <div id="homeView">
 <h1>Välkommen till StödGuiden</h1>
-<div class="lead">Guiden för unga vuxna – trygga länkar och snabba svar.</div>
+<div class="lead">Din guide till samhällets stöd – hitta rätt hjälp enkelt och snabbt, oavsett var du befinner dig i livet.</div>
 <div class="panel" id="snabblinks">
 <div class="snabblinks">
 <div class="s-card"><div class="emoji">💼</div><div><div class="label"><a href="https://arbetsformedlingen.se" rel="noopener" target="_blank">Arbetsförmedlingen</a></div></div></div>
 <div class="s-card"><div class="emoji">🧑‍⚕️</div><div><div class="label"><a href="https://www.1177.se" rel="noopener" target="_blank">1177 – Råd &amp; vård</a></div></div></div>
 <div class="s-card"><div class="emoji">🏛️</div><div><div class="label"><a href="https://www.forsakringskassan.se" rel="noopener" target="_blank">Försäkringskassan</a></div></div></div>
-<div class="s-card"><div class="emoji">🏷️</div><div><div class="label"><a href="https://www.orebro.se" rel="noopener" target="_blank">Örebro kommun</a></div></div></div>
 <div class="s-card"><div class="emoji">🚌</div><div><div class="label"><a href="https://www.lanstrafiken.se" rel="noopener" target="_blank">Länstrafiken</a></div></div></div>
 <div class="s-card"><div class="emoji">🚆</div><div><div class="label"><a href="https://www.sj.se" rel="noopener" target="_blank">SJ – tågbiljetter</a></div></div></div>
 </div>
-<div class="tips" style="margin-top:8px">💡 <b>Veckans tips:</b> Ett tips kan vara att slå på e‑faktura/autogiro för hyra &amp; el – många tycker det förenklar.</div>
+<div class="tips" style="margin-top:8px">💡 <b>Veckans tips:</b> Visste du att du kan ansöka om CSN redan från gymnasiet? Kolla dina möjligheter på csn.se – det kan göra stor skillnad!</div>
 <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
-<input id="askInput" placeholder="Fråga StödGuiden… (t.ex. 'hyreskontrakt', 'CV', '1177')" type="text"/>
+<input id="askInput" placeholder="Sök… (t.ex. 'hyreskontrakt', 'CV', '1177')" type="text"/>
 <button class="btn" id="askBtn" type="button">Sök</button>
 <button class="btn" id="clearBtn" style="background:#2b2b2b;border-color:#555" type="button">Rensa</button>
 </div>
@@ -178,7 +139,6 @@ body{ padding-top: var(--sgcp-top-h) !important; padding-bottom: var(--sgcp-foot
 <button class="cat-btn" onclick="openCat('kontaktperson')" type="button">🤝 Kontaktperson</button>
 <button class="cat-btn" onclick="openCat('viktiga')" type="button">☎️ Viktiga nummer</button>
 <button class="cat-btn" onclick="openCat('aktiviteter')" type="button">🌟 Aktiviteter &amp; fritid</button>
-<button class="cat-btn" onclick="openCat('events')" type="button">🎉 Evenemang</button>
 </div>
 </div>
 <div class="backbar" id="backBar"><button onclick="goHome()" type="button">← Tillbaka</button></div>
@@ -441,64 +401,9 @@ body{ padding-top: var(--sgcp-top-h) !important; padding-bottom: var(--sgcp-foot
 </ul>
 </div>
 </section>
-<!-- Evenemang -->
-<section class="cat-section" id="events">
-<h3>🎉 Evenemang i Örebro</h3>
-<p>Se vad som händer i stan.</p>
-<ul>
-<li><a href="https://www.orebro.se/kultur--fritid/evenemang.html" rel="noopener" target="_blank">Örebro kommuns evenemang</a></li>
-<li><a href="https://www.visitorebro.se/evenemang/" rel="noopener" target="_blank">Visit Örebro – kalender</a></li>
-<li><a href="https://www.orebrokonserthus.com/" rel="noopener" target="_blank">Örebro Konserthus</a></li>
-<li><a href="https://extra.orebro.se/kulturskolan/varakurser/bildformfilmochskrivande.4.67dc06801544c4eb9ff23a2.html" rel="noopener" target="_blank">Kulturskolan – Bild, film &amp; skrivande</a></li>
-<li><a href="https://extra.orebro.se/openart.4.3d5e9e7a17715b84a751abf.html" rel="noopener" target="_blank">OpenArt Örebro</a></li>
-</ul>
-<div class="tips">
-<b>💡 Tips &amp; Inspiration</b><br/> <b>Eventtips</b>
-<ul>
-<li>Håll utkik efter nya evenemang i Örebro – det kan vara ett sätt att hitta nya vänner och prova något nytt.</li>
-</ul>
+
 </div>
-</section>
-</div>
-<div class="modal" id="kommunModal">
-<div class="sheet">
-<button class="close" id="closeModal" type="button">✖</button>
-<h2>Örebro kommun</h2>
-<p class="lead">Servicecenter &amp; lokala länkar</p>
-<ul>
-<li><b>Servicecenter:</b> 019-21 10 00</li>
-<li><a href="https://www.orebro.se" rel="noopener" target="_blank">orebro.se</a></li>
-<li><a href="https://www.orebro.se/#contact" rel="noopener" target="_blank">Kontakt – Örebro</a></li>
-<li><a href="https://www.orebro.se/ovrigt/e-tjanster--blanketter.html" rel="noopener" target="_blank">E‑tjänster &amp; blanketter</a></li>
-<li><a href="https://www.orebro.se/kommun--politik/kris--sakerhet/akuthjalp.html" rel="noopener" target="_blank">Akuthjälp – Örebro kommun</a></li>
-</ul>
-</div>
-</div>
-<div id="sgcpAdditions">
-<div class="sgcp-section" id="sgcpNews">
-<div class="sgcp-row"><h3>🧰 Nyheter / Viktigt från kommunen</h3>
-<button class="sgcp-btn" id="sgcpNewsExamples" type="button">Exempel</button><button class="sgcp-btn" id="sgcpNewsAdd" type="button">+</button><button class="sgcp-btn" id="sgcpNewsReset" type="button">🔄 Nollställ</button></div>
-<div class="sgcp-muted" id="sgcpNewsInfo">Demo: Kommunen kan enkelt lägga till eller ta bort egna nyheter här.</div><div class="sgcp-list" id="sgcpNewsList"></div>
-</div>
-<div class="sgcp-section" id="sgcpEvents">
-<div class="sgcp-row"><h3>🎉 Evenemang i Örebro</h3>
-<a class="sgcp-btn" href="https://www.orebro.se/kultur--fritid/evenemang.html" target="_blank">Örebro kommun ↗</a></div>
-<div class="sgcp-list" id="sgcpEventsList"></div>
-</div>
-<div class="sgcp-section" id="sgcpAsk">
-<div class="sgcp-row"><h3>❓ Fråga StödGuiden (anonymt)</h3>
-<button class="sgcp-btn" id="sgcpFAQ" type="button">FAQ</button></div>
-<div class="sgcp-item">
-<label for="sgcpQ">Din fråga (anonymt – inga namn sparas)</label>
-<textarea id="sgcpQ" placeholder="Skriv din fråga… t.ex. ”Hur får jag BankID?”, ”Vem kan jag prata med om ångest?”" rows="3" style="width:100%;margin-top:.4rem"></textarea>
-<div class="sgcp-row" style="margin-top:.5rem">
-<span class="sgcp-...">Demo – sparas i din webbläsare</span>
-<button class="sgcp-btn" id="sgcpSendQ" type="button">Skicka</button>
-</div>
-</div>
-<div class="sgcp-muted" id="sgcpAskInfo">Ställ en anonym fråga om vardag, stöd, jobb, boende m.m. (Demo: sparas bara på din enhet). Exempel: ”Hur får jag BankID?”</div><div class="sgcp-list" id="sgcpQAList"></div>
-</div>
-</div><script>
+<script>
     function scrollTopInstant(){ try{ window.scrollTo(0,0); }catch(e){} }
     function hideAll(){ document.querySelectorAll('.cat-section').forEach(s=>s.style.display='none'); }
     function openCat(id){
@@ -508,13 +413,9 @@ body{ padding-top: var(--sgcp-top-h) !important; padding-bottom: var(--sgcp-foot
       if(el){ el.style.display='block'; scrollTopInstant(); }
     }
     function goHome(){ hideAll(); var bb=document.getElementById('backBar'); if(bb) bb.style.display='none';
-      var hv=document.getElementById('homeView'); if(hv) hv.style.display='block'; document.getElementById('snabblinks').scrollIntoView({behavior:'smooth'}); }
+      var hv=document.getElementById('homeView'); if(hv) hv.style.display='block'; var _sl=document.getElementById('snabblinks'); if(_sl) _sl.scrollIntoView({behavior:'smooth'}); }
     var hemBtn=document.getElementById('btnHem'); if(hemBtn) hemBtn.addEventListener('click', goHome);
 
-    var kBtn=document.getElementById('btnKommun'), modal=document.getElementById('kommunModal'), closeModal=document.getElementById('closeModal');
-    if(kBtn&&modal){ kBtn.addEventListener('click', function(){ modal.style.display='grid'; }); }
-    if(closeModal&&modal){ closeModal.addEventListener('click', function(){ modal.style.display='none'; }); }
-    if(modal){ modal.addEventListener('click', function(e){ if(e.target===modal) modal.style.display='none'; }); }
 
 
     var askMap={
@@ -541,6 +442,18 @@ body{ padding-top: var(--sgcp-top-h) !important; padding-bottom: var(--sgcp-foot
     });}
     if(clearBtn){ clearBtn.addEventListener('click', function(){ askInput.value=''; askInput.focus(); }); }
 
+    // Skjul den røde bjælke når tastaturet er åbent (mobilfix)
+    var footer = document.querySelector('.sgcp-footer-akut');
+    var allInputs = document.querySelectorAll('input, textarea');
+    allInputs.forEach(function(inp){
+      inp.addEventListener('focus', function(){
+        if(footer) footer.style.display='none';
+      });
+      inp.addEventListener('blur', function(){
+        setTimeout(function(){ if(footer) footer.style.display='flex'; }, 200);
+      });
+    });
+
     var saveInput=document.getElementById('saveInput'), calcBtn=document.getElementById('calcBtn'), saveResult=document.getElementById('saveResult'), saveMotivation=document.getElementById('saveMotivation');
     if(calcBtn){ calcBtn.addEventListener('click', function(){
       var v=parseFloat(saveInput.value);
@@ -558,6 +471,7 @@ body{ padding-top: var(--sgcp-top-h) !important; padding-bottom: var(--sgcp-foot
     (function(){
       var up=document.getElementById('pageUp');
       function onScroll(){
+        if(!up) return;
         up.style.display = (window.scrollY>400) ? 'block' : 'none';
       }
       window.addEventListener('scroll', onScroll, {passive:true});
@@ -571,596 +485,10 @@ body{ padding-top: var(--sgcp-top-h) !important; padding-bottom: var(--sgcp-foot
     })();
 
     // start on home
-    hideAll(); document.getElementById('homeView').style.display='block';
+    hideAll(); var _hv=document.getElementById('homeView'); if(_hv) _hv.style.display='block';
   </script>
 <div class="sgcp-footer-akut"><a class="sgcp-akut-link" href="tel:112">🚨 Akut hjälp – ring 112</a><a class="sgcp-1177" href="https://www.1177.se" rel="noopener" target="_blank">❤️‍🩹 Icke‑akut: 1177 Vårdguiden ↗</a></div>
-<dialog id="sgcpFeedbackModal">
-<div class="sgcp-section" style="margin:0;min-width:min(92vw,640px)">
-<div class="sgcp-row">
-<h3>🗣️ Hjälp oss att bli bättre</h3>
-<button class="sgcp-btn" onclick="document.getElementById('sgcpFeedbackModal').close()">✕</button>
-</div>
-<div class="sgcp-list">
-<textarea id="sgcpFBText" placeholder="Skriv kort hvad du tycker eller vill förbättra..." rows="4"></textarea>
-<div class="sgcp-row">
-<span class="sgcp-...">Demo – sparas lokalt</span>
-<button class="sgcp-btn" id="sgcpFBSend" type="button">Skicka</button>
-</div>
-<div class="sgcp-list" id="sgcpFBList"></div>
-</div>
-</div>
-</dialog>
-<script>
-(function(){
-  // Example news items for municipalities to see the concept
-  var sgcpExampleNews = [
-    {title:"📢 Nya öppettider – Ungdomens Hus", body:"Från 1 oktober: mån–tors 15:00–21:00, fre 15:00–22:00.", date:new Date().toLocaleString()},
-    {title:"🛡️ Socialjouren – kvällar & helger", body:"Kom ihåg: Du kan alltid kontakta Socialjouren vid akuta frågor.", date:new Date().toLocaleString()},
-    {title:"🎓 Gratis CV‑workshop", body:"Lär dig skriva CV – 23 september kl. 17:00 på Biblioteket.", date:new Date().toLocaleString()},
-    {title:"💡 Bostadsbidrag – kom ihåg", body:"Ansök senast 25 september – hjälp finns hos Försäkringskassan.", date:new Date().toLocaleString()}
-  ];
 
-  function getNews(){ try{return JSON.parse(localStorage.getItem('sgcp_news')||'[]');}catch(e){return [];} }
-  function setNews(x){ localStorage.setItem('sgcp_news', JSON.stringify(x)); }
-  function renderNews(){
-    var list=document.getElementById('sgcpNewsList'); if(!list) return; list.innerHTML='';
-    var items=getNews();
-    if(items.length===0){
-      var d=document.createElement('div'); d.className='sgcp-item sgcp-muted';
-      d.innerHTML="Tryck på <b>Exempel</b> för att se hur nyheter kan se ut.";
-      list.appendChild(d);
-    } else {
-      items.forEach(function(n,i){
-        var d=document.createElement('div'); d.className='sgcp-item';
-        d.innerHTML="<div class='sgcp-row'><b>"+n.title+"</b><button class='sgcp-btn' data-del='"+i+"'>✕</button></div><div class='sgcp-muted' style='margin-top:.35rem'>"+n.body+"</div><div class='sgcp-muted' style='margin-top:.35rem'>"+n.date+"</div>";
-        list.appendChild(d);
-      });
-      list.querySelectorAll('button[data-del]').forEach(function(btn){
-        btn.addEventListener('click', function(){ var i=+btn.getAttribute('data-del'); var it=getNews(); it.splice(i,1); setNews(it); renderNews(); });
-      });
-    }
-  }
 
-  // Seed examples on first load if list is empty
-  (function seedIfEmpty(){
-    var items = getNews();
-    if(items.length===0){
-      // Take first 3 to avoid scrolling too much
-      items = sgcpExampleNews.slice(0,3);
-      setNews(items);
-    }
-  })();
-
-  // "Exempel" button appends the next example (cycles)
-  var exBtn = document.getElementById('sgcpNewsExamples');
-  if(exBtn){
-    exBtn.addEventListener('click', function(){
-      var items = getNews();
-      // pick next unused example (by title)
-      var used = items.map(function(x){return x.title;});
-      var next = sgcpExampleNews.find(function(x){return used.indexOf(x.title)===-1;});
-      if(!next){ next = sgcpExampleNews[(items.length)%sgcpExampleNews.length]; }
-      // refresh date to now for visibility
-      next = Object.assign({}, next, {date:new Date().toLocaleString()});
-      items.push(next); setNews(items); renderNews();
-    });
-  }
-
-  // Also allow tapping empty space in the news section to add another example (for demo)
-  var newsWrap = document.getElementById('sgcpNews');
-  if(newsWrap){
-    newsWrap.addEventListener('click', function(e){
-      // only when clicking on background / not on buttons
-      if(e.target.id==='sgcpNewsAdd' || e.target.id==='sgcpNewsExamples' || e.target.closest('button')) return;
-      var items = getNews();
-      var used = items.map(function(x){return x.title;});
-      var next = sgcpExampleNews.find(function(x){return used.indexOf(x.title)===-1;});
-      if(!next){ next = sgcpExampleNews[(items.length)%sgcpExampleNews.length]; }
-      next = Object.assign({}, next, {date:new Date().toLocaleString()});
-      items.push(next); setNews(items); renderNews();
-    });
-  }
-
-  // Re-render list after seeding
-  renderNews();
-})();</script><script>
-(function(){
-  var resetBtn=document.getElementById('sgcpNewsReset');
-  if(resetBtn){
-    resetBtn.addEventListener('click',function(){
-      if(confirm('Är du säker på att du vill nollställa nyheterna?')){
-        localStorage.removeItem('sgcp_news');
-        location.reload();
-      }
-    });
-  }
-})();</script><script>
-(function(){
-  var dlg = document.getElementById('sgcpFeedbackModal');
-  if(!dlg) return;
-  var scrollY = 0;
-  function lock() {
-    scrollY = window.scrollY || window.pageYOffset || 0;
-    document.body.classList.add('sgcp-lockscroll');
-    document.body.style.top = (-scrollY) + 'px';
-  }
-  function unlock() {
-    document.body.classList.remove('sgcp-lockscroll');
-    document.body.style.top = '';
-    window.scrollTo(0, scrollY);
-  }
-  // Hook into showModal & close button
-  var openBtn = document.getElementById('sgcpFeedbackBtn');
-  if(openBtn && dlg.showModal){
-    openBtn.addEventListener('click', function(){
-      lock();
-      dlg.showModal();
-    });
-  }
-  dlg.addEventListener('close', unlock);
-  // Close on ESC/backdrop click default works; also ensure unlock on cancel
-  dlg.addEventListener('cancel', function(e){ e.preventDefault(); dlg.close(); });
-})();</script><script>
-(function(){
-  var EVENTS_URL = "https://www.orebro.se/kultur--fritid/evenemang.html";
-
-  function renderEventsList(items){
-    var list = document.getElementById('sgcpEventsList');
-    if(!list) return;
-    list.innerHTML = "";
-    items.forEach(function(ev){
-      var d = document.createElement('div');
-      d.className = 'sgcp-item';
-      var linkBtn = ev.link ? "<a class='sgcp-btn' target='_blank' href='"+ev.link+"'>↗</a>" : "";
-      var meta = [ev.date, ev.place].filter(Boolean).join(" • ");
-      d.innerHTML = "<div class='sgcp-row'><b>"+ev.title+"</b>"+linkBtn+"</div>" +
-                    (meta ? "<div class='sgcp-muted' style='margin-top:.35rem'>"+meta+"</div>" : "");
-      list.appendChild(d);
-    });
-  }
-
-  // existing demo events as fallback
-  var demoEvents = [
-    {title:"Öppet hus – Ungdomens hus", date:"2025-09-20", place:"Järntorget 2", link:EVENTS_URL},
-    {title:"Gratis fotboll för unga", date:"2025-09-22", place:"Behrn Arena", link:EVENTS_URL},
-    {title:"Studieverkstad: CV & personligt brev", date:"2025-09-24", place:"Biblioteket", link:EVENTS_URL},
-    {title:"Workshop: Mat på budget", date:"2025-09-26", place:"Navet", link:EVENTS_URL}
-  ];
-
-  async function loadLiveEvents(){
-    try{
-      var res = await fetch(EVENTS_URL, {mode:"cors"});
-      if(!res.ok) throw new Error("HTTP "+res.status);
-      var html = await res.text();
-      var doc = new DOMParser().parseFromString(html, "text/html");
-
-      // Heuristic extraction: pick prominent links that look like event items
-      var candidates = Array.from(doc.querySelectorAll("main a, .content a, article a, .teaser a, .event a"))
-        .filter(a => a.textContent && a.textContent.trim().length > 12);
-
-      // Deduplicate by text and prefer links containing '/evenemang'
-      var seen = new Set();
-      var picked = [];
-      for (var a of candidates){
-        var title = a.textContent.trim().replace(/\s+/g, " ");
-        var href = a.getAttribute("href") || EVENTS_URL;
-        if(!/https?:/.test(href)) { // make absolute
-          var u = new URL(EVENTS_URL);
-          href = u.origin + (href.startsWith("/") ? href : (u.pathname.replace(/\/[^\/]*$/,"/") + href));
-        }
-        if(!seen.has(title) && (/evenemang/.test(href) || /event/.test(href) || title.length > 18)){
-          seen.add(title);
-          picked.push({title: title, link: href});
-        }
-        if(picked.length >= 3) break;
-      }
-
-      if(picked.length >= 2){
-        renderEventsList(picked);
-      } else {
-        // fallback to demo if structure not matched
-        renderEventsList(demoEvents.slice(0,3));
-      }
-    } catch(e){
-      // Likely CORS blocked; keep demo and show a subtle note
-      renderEventsList(demoEvents.slice(0,3));
-      var sec = document.getElementById("sgcpEvents");
-      if(sec && !sec.querySelector(".sgcp-events-note")){
-        var note = document.createElement("div");
-        note.className = "sgcp-muted sgcp-events-note";
-        note.style.marginTop = ".35rem";
-        note.textContent = "Tips: Öppna länken för fler evenemang (automatisk hämtning kan blockeras av CORS).";
-        sec.appendChild(note);
-      }
-    }
-  }
-
-  // Kick off
-  loadLiveEvents();
-})();</script>
-<script>
-(function(){
-  // Single source of truth (updated categories)
-  const KB = {
-    "bankid":        { svar:"BankID får du via din bank.", link:"https://www.bankid.com", kategori:"Bank & betalningar", icon:"💳" },
-    "id-kort":       { svar:"Nationellt ID‑kort ordnas hos Polisen.", link:"https://polisen.se/tjanster-tillstand/pass-och-nationellt-id-kort/", kategori:"Bank & betalningar", icon:"💳" },
-    "nationellt id": { svar:"Nationellt ID‑kort ordnas hos Polisen.", link:"https://polisen.se/tjanster-tillstand/pass-och-nationellt-id-kort/", kategori:"Bank & betalningar", icon:"💳" },
-    "bostad":        { svar:"Sök bostad via kommunen och privata hyresvärdar.", link:"https://www.orebro.se/bygga-bo-och-trafik/bostader-och-tomter.html", kategori:"Boende", icon:"🏠" },
-    "jobb":          { svar:"Sök lediga jobb via Arbetsförmedlingen.", link:"https://arbetsformedlingen.se/", kategori:"Jobb", icon:"👔" },
-    "cv":            { svar:"Få hjälp med CV i kommunens studie‑/jobbverkstad.", link:"https://www.orebro.se/", kategori:"Jobb", icon:"👔" },
-    "ångest":        { svar:"Börja med råd & stöd om psykisk hälsa. Vid akut läge: 112 eller 1177.", link:"https://www.1177.se/Halsa-och-vard/psykisk-halsa/", kategori:"Hälsa & stöd", icon:"🧠" }
-  };
-  const EXAMPLES = [
-    "Hur får jag BankID?",
-    "Var får jag ID-kort?",
-    "Var söker jag bostad?",
-    "Hur gör jag ett CV?",
-    "Vem kan jag prata med om ångest?",
-    "Var hittar jag jobb?"
-  ];
-
-  function findUI(){
-    const input = document.querySelector("input[placeholder*='Fråga'], textarea[placeholder*='Fråga']")
-               || document.querySelector("input[placeholder*='StödGuiden'], textarea[placeholder*='StödGuiden']");
-    let searchBtn=null, clearBtn=null;
-    if(input){
-      const root = input.closest("form") || input.parentElement;
-      if(root){
-        root.querySelectorAll("button, input[type=submit]").forEach(b=>{
-          const t=(b.innerText||b.value||"").trim().toLowerCase();
-          if(t==="sök") searchBtn=b;
-          if(t.indexOf("rensa")>=0) clearBtn=b;
-        });
-      }
-    }
-    return {input, searchBtn, clearBtn};
-  }
-
-  function ensurePanel(container){
-    let out = container.querySelector("#sg-smart-out");
-    if(!out){
-      out = document.createElement("div");
-      out.id = "sg-smart-out";
-      out.className = "sgcp-item";
-      out.style.marginTop = ".5rem";
-      out.style.background = "#0a1020";
-      out.style.border = "1px solid #1f2937";
-      container.appendChild(out);
-    }
-    return out;
-  }
-
-  function lookup(text){
-    const q=(text||"").toLowerCase();
-    for(const k of Object.keys(KB)){ if(q.includes(k)) return KB[k]; }
-    if(/id/.test(q) && /kort/.test(q)) return KB["id-kort"];
-    if(/nationell/.test(q) && /id/.test(q)) return KB["nationellt id"];
-    return null;
-  }
-
-  function render(text, container){
-    const out = ensurePanel(container);
-    if(!text){ out.innerHTML = "<div class='sgcp-muted'>🤔 Skriv en fråga…</div>"; return; }
-    const r = lookup(text);
-    if(r){
-      out.innerHTML = "<div><b>💡 "+r.svar+"</b></div>"
-       + (r.link ? "<div style='margin-top:.35rem'><a class='sgcp-btn' target='_blank' href='"+r.link+"' style='padding:.25rem .5rem;font-size:.85rem'>Läs mer ↗</a></div>" : "")
-       + "<div class='sgcp-muted' style='margin-top:.35rem'>Tips: "+(r.icon||"")+" kategori <b>"+r.kategori+"</b></div>";
-      if(r.svar.indexOf("BankID får du via din bank")===0){
-        out.innerHTML = out.innerHTML.replace(/Digital vardag/g, "Bank & betalningar").replace(/💻/g, "💳");
-      }
-    }else{
-      out.innerHTML = "<div class='sgcp-muted'>🤔 Vi hittade inget direkt svar. Testa kategorierna nedan.</div>";
-    }
-  }
-
-  function wire(){
-    const ui = findUI();
-    if(!ui.input) return false;
-    const container = ui.input.closest(".sgcp-item") || ui.input.parentElement;
-    if(ui.searchBtn && !ui.searchBtn.__bound26){
-      ui.searchBtn.__bound26 = true;
-      ui.searchBtn.addEventListener("click", e=>{ e.preventDefault(); render(ui.input.value.trim(), container); }, true);
-    }
-    ui.input.addEventListener("keydown", e=>{ if(e.key==="Enter"){ e.preventDefault(); render(ui.input.value.trim(), container);} });
-    if(ui.clearBtn && !ui.clearBtn.__bound26){
-      ui.clearBtn.__bound26 = true;
-      ui.clearBtn.addEventListener("click", ()=>{ const out=document.getElementById("sg-smart-out"); if(out) out.remove(); });
-    }
-    if(!document.getElementById("sg-next-example")){
-      let btn=document.createElement("button");
-      btn.id="sg-next-example"; btn.className="sgcp-btn";
-      btn.style.cssText="margin-top:.5rem;padding:.3rem .6rem;font-size:.85rem;";
-      btn.textContent="🎲 Nytt exempel";
-      let i=0;
-      btn.addEventListener("click", ()=>{ ui.input.value=EXAMPLES[i%EXAMPLES.length]; i++; render(ui.input.value, container); });
-      (ui.searchBtn && ui.searchBtn.parentElement || container).appendChild(btn);
-    }
-    return true;
-  }
-  if(!wire()){
-    const mo=new MutationObserver(()=>{ if(wire()){ mo.disconnect(); } });
-    mo.observe(document, {childList:true, subtree:true});
-  }
-
-  // Language dropdown: fixed-position menu with viewport clamping
-  (function ensureLang(){
-    let btn=document.getElementById('sgcpLangBtn');
-    let menu=document.getElementById('sgcpLangMenu');
-    if(!btn){
-      const bar=document.querySelector('.sgcp-topbar')||document.body;
-      btn=document.createElement('button'); btn.id='sgcpLangBtn'; btn.className='sgcp-btn'; btn.textContent='🌐 Språk';
-      bar.appendChild(btn);
-    }
-    if(!menu){
-      menu=document.createElement('div'); menu.id='sgcpLangMenu'; menu.className='sgcp-langmenu';
-      document.body.appendChild(menu); // portal to body so det ikke klippes
-    }
-    if(!menu.children.length){
-      [["sv","Svenska"],["en","English"],["uk","Українська"],["da","Dansk"],["no","Norsk"]].forEach(([c,l])=>{
-        const it=document.createElement('button'); it.className='sgcp-langitem'; it.type='button'; it.dataset.sgcpLang=c; it.textContent=l; menu.appendChild(it);
-      });
-    }
-    function place(){
-      const r=btn.getBoundingClientRect();
-      const vw = Math.max(document.documentElement.clientWidth, window.innerWidth||0);
-      const pad = 8;
-      menu.style.position='fixed';
-      menu.style.zIndex='99999';
-      menu.style.top = (r.bottom + 6) + 'px';
-      let left = Math.min(Math.max(pad, r.left), vw - menu.offsetWidth - pad);
-      menu.style.left = left + 'px';
-    }
-    function open(){
-      menu.classList.add('open'); menu.style.display='block'; place();
-    }
-    function close(){ menu.classList.remove('open'); menu.style.display='none'; }
-    btn.addEventListener('click', (e)=>{ e.stopPropagation(); (menu.classList.contains('open')? close(): open()); });
-    window.addEventListener('resize', ()=>{ if(menu.classList.contains('open')) place(); });
-    document.addEventListener('click', close);
-    document.addEventListener('keydown', e=>{ if(e.key==='Escape') close(); });
-    menu.querySelectorAll('.sgcp-langitem').forEach(it=>{
-      it.addEventListener('click', ()=>{
-        localStorage.setItem('sgcp_lang', it.dataset.sgcpLang);
-        close();
-        const t=document.createElement('div');
-        t.textContent='Språk valt: '+it.textContent+' (demo)';
-        t.style.cssText='position:fixed;bottom:76px;left:12px;background:#0b1220;color:#e5e7eb;border:1px solid #243044;border-radius:10px;padding:8px 12px;z-index:99999;';
-        document.body.appendChild(t); setTimeout(()=>t.remove(),1400);
-      });
-    });
-  })();
-})();</script><script>
-(function(){
-  // Freeze the feedback modal in place (centered, non-draggable horizontally)
-  function freezeFeedbackModal(){
-    const modal = document.querySelector('.sgcp-feedback, .sgcp-modal, [data-sgcp-modal="feedback"]');
-    if(!modal) return;
-    const panel = modal.querySelector('.sgcp-panel, .sgcp-box, .panel, .card') || modal.firstElementChild || modal;
-    modal.style.position = 'fixed';
-    modal.style.left = '50%';
-    modal.style.top = '12vh';
-    modal.style.transform = 'translateX(-50%)';
-    modal.style.right = 'auto';
-    modal.style.bottom = 'auto';
-    modal.style.zIndex = '100000';
-    modal.style.maxWidth = '680px';
-    modal.style.width = 'min(92vw, 680px)';
-    modal.style.touchAction = 'manipulation'; // allow taps but avoid pan-x on the modal
-    // Prevent horizontal drag inside modal
-    modal.addEventListener('touchmove', function(e){
-      // allow vertical scroll inside textarea but block horizontal pan that shifts the modal
-      if(Math.abs(e.touches[0].clientX - (modal.__x||0)) > Math.abs(e.touches[0].clientY - (modal.__y||0))){
-        e.preventDefault();
-      }
-    }, {passive:false});
-    modal.addEventListener('touchstart', function(e){
-      modal.__x = e.touches[0].clientX; modal.__y = e.touches[0].clientY;
-    }, {passive:true});
-  }
-  // Observe when modal appears
-  const mo = new MutationObserver(()=>freezeFeedbackModal());
-  mo.observe(document.documentElement, {childList:true, subtree:true});
-  // Also run once on load
-  window.addEventListener('load', freezeFeedbackModal);
-
-  // Ensure Polisen ID-kort link is present under "Bank & betalningar" category list
-  (function ensurePolisenLinkInCategory(){
-    const linkHref = 'https://polisen.se/tjanster-tillstand/pass-och-nationellt-id-kort/';
-    const txt = 'Nationellt ID‑kort (Polisen)';
-    const candidates = Array.from(document.querySelectorAll('*')).filter(el => {
-      const t = (el.textContent||'').trim().toLowerCase();
-      return t.includes('bank & betalningar') || t.includes('bank och betalningar') || t.includes('bank & bet');
-    });
-    if(!candidates.length) return;
-    const target = candidates[0].closest('.sgcp-item, .sgcp-section, section, div') || candidates[0];
-    // avoid duplicates
-    if (document.querySelector('a[href*="polisen.se"][href*="nationellt-id"]')) return;
-    const row = document.createElement('div');
-    row.style.marginTop = '.5rem';
-    const a = document.createElement('a');
-    a.href = linkHref; a.target = '_blank'; a.rel = 'noopener';
-    a.className = 'sgcp-btn';
-    a.style.padding = '.35rem .6rem';
-    a.textContent = txt + ' ↗';
-    row.appendChild(a);
-    target.appendChild(row);
-  })();
-})();</script><script>
-(function(){
-  // --- Ensure Polisen link appears inside "Bank & betalningar" bullet list ---
-  function ensurePolisenInsideList(){
-    var sections = Array.from(document.querySelectorAll("h2, h3")).filter(h=>/bank\s*&\s*betalningar|bank\s+och\s+betalningar/i.test(h.textContent||""));
-    if(!sections.length) return;
-    var sec = sections[0];
-    // find the first UL/OL after the heading
-    var ul = sec.parentElement.querySelector("ul,ol");
-    if(!ul){
-      // try to find within the next sibling container
-      var next = sec.nextElementSibling;
-      while(next && !/UL|OL/.test(next.tagName)){ next = next.nextElementSibling; }
-      ul = next;
-    }
-    if(!ul){
-      // Create a list if none
-      ul = document.createElement("ul");
-      ul.style.marginTop = ".5rem";
-      sec.after(ul);
-    }
-    var href = "https://polisen.se/tjanster-tillstand/pass-och-nationellt-id-kort/";
-    var exists = ul.querySelector('a[href*="polisen.se"][href*="nationellt-id"]');
-    if(!exists){
-      var li = document.createElement("li");
-      var a = document.createElement("a");
-      a.href = href; a.target = "_blank"; a.rel = "noopener";
-      a.textContent = "Polisen – nationellt ID-kort";
-      li.appendChild(a);
-      // insert after any 'BankID – officiell' item if present
-      var bankidLi = Array.from(ul.querySelectorAll("li")).find(li=>/bankid/i.test(li.textContent||""));
-      if(bankidLi && bankidLi.nextSibling){
-        ul.insertBefore(li, bankidLi.nextSibling);
-      } else {
-        ul.appendChild(li);
-      }
-    }
-  }
-
-  // --- Compact Home view when tapping "Hem" ---
-  function setupCompactHome(){
-    var homeBtn = Array.from(document.querySelectorAll("a,button")).find(el=>/^\s*hem\s*$/i.test((el.textContent||"").trim()));
-    if(!homeBtn) return;
-    if(homeBtn.__sgHomeBound) return;
-    homeBtn.__sgHomeBound = true;
-    homeBtn.addEventListener("click", function(e){
-      e.preventDefault();
-      // elements to keep: hero/welcome, quick links (the first large list of external links), weekly tip, smart guide row
-      var bodyChildren = Array.from(document.querySelectorAll("body > *"));
-      // Instead of hiding body children (could be risky), hide sections inside main content
-      var main = document.querySelector("main") || document.body;
-      var blocks = Array.from(main.children);
-      // Heuristics: keep first intro block, first external-links block, first tips block, smart-guide block
-      var keepers = [];
-      blocks.forEach(function(b){
-        var t=(b.textContent||"").toLowerCase();
-        var isIntro = /välkommen till stödguiden|guiden för unga/.test(t);
-        var isLinks = /arbetsförmedlingen|1177|försäkringskassan|örebro kommun|länstrafiken|sj/.test(t);
-        var isTip = /veckans tips/.test(t);
-        var isSmart = /fråga stödguiden|sök/.test(t) && b.querySelector("input,textarea");
-        if(isIntro || isLinks || isTip || isSmart) keepers.push(b);
-      });
-      blocks.forEach(function(b){
-        if(keepers.indexOf(b)===-1){
-          b.__sgPrevDisplay = b.style.display;
-          b.style.display = "none";
-        }
-      });
-      // Scroll to top
-      window.scrollTo({top:0, behavior:"smooth"});
-    });
-  }
-
-  // Run on load and observe DOM (in case content renders late)
-  function init(){
-    ensurePolisenInsideList();
-    setupCompactHome();
-  }
-  init();
-  var mo = new MutationObserver(init);
-  mo.observe(document.documentElement, {childList:true, subtree:true});
-})();</script><script>
-(function(){
-  // ---- Perfectly center the feedback modal and lock it ----
-  function centerFeedback(){
-    var modal = document.querySelector('.sgcp-feedback, .sgcp-modal, [data-sgcp-modal="feedback"]');
-    if(!modal) return;
-    modal.style.position = 'fixed';
-    modal.style.left = '50%';
-    modal.style.top = '50%';
-    modal.style.transform = 'translate(-50%, -50%)';
-    modal.style.right = 'auto';
-    modal.style.bottom = 'auto';
-    modal.style.margin = '0';
-    modal.style.maxWidth = '720px';
-    modal.style.width = 'min(92vw, 720px)';
-    modal.style.zIndex = '100000';
-    modal.style.touchAction = 'manipulation';
-    // Add a subtle backdrop to avoid visual clutter
-    if(!document.getElementById('sgcpBackdrop')){
-      var bg = document.createElement('div');
-      bg.id = 'sgcpBackdrop';
-      bg.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:99999';
-      document.body.appendChild(bg);
-      bg.addEventListener('click', function(){ /* allow closing only with X for demo stability */ });
-    }
-    // prevent horizontal dragging
-    var startX=0,startY=0;
-    modal.addEventListener('touchstart', function(e){ startX=e.touches[0].clientX; startY=e.touches[0].clientY; }, {passive:true});
-    modal.addEventListener('touchmove', function(e){
-      var dx=Math.abs(e.touches[0].clientX-startX), dy=Math.abs(e.touches[0].clientY-startY);
-      if(dx>dy){ e.preventDefault(); }
-    }, {passive:false});
-    // recenter on orientation change
-    var recenter=function(){ modal.style.left='50%'; modal.style.top='50%'; modal.style.transform='translate(-50%,-50%)'; };
-    window.addEventListener('resize', recenter);
-    window.addEventListener('orientationchange', recenter);
-  }
-  // Observe if the modal appears
-  new MutationObserver(centerFeedback).observe(document.documentElement, {childList:true, subtree:true});
-
-  // ---- Compact Home: keep only hero + snabblinks + blue tip + smart guide row ----
-  function setupCompactHome(){
-    var homeBtn = Array.from(document.querySelectorAll("a,button"))
-      .find(el => /^\s*hem\s*$/i.test((el.textContent||"").trim()));
-    if(!homeBtn || homeBtn.__sgBound) return;
-    homeBtn.__sgBound = true;
-    homeBtn.addEventListener('click', function(e){
-      e.preventDefault();
-      var main = document.querySelector('main') || document.body;
-      var blocks = Array.from(main.children);
-      // Tag all as sections first
-      blocks.forEach(function(b){ b.classList.add('sgcp-sec'); });
-      // Choose keepers by heuristics
-      var keepers = new Set();
-      blocks.forEach(function(b){
-        var t = (b.textContent||"").toLowerCase();
-        var hasInput = !!b.querySelector('input,textarea');
-        var isHero = /välkommen till stödguiden|guiden för unga/.test(t);
-        var isLinks = /arbetsförmedlingen|1177\s*–|försäkringskassan|örebro kommun|länstrafiken|sj\s*–\s*tågbiljetter/.test(t);
-        var isTip = /veckans tips/.test(t);
-        var isSmart = hasInput && /fråga stödguiden|sök/.test(t);
-        if(isHero || isLinks || isTip || isSmart){ keepers.add(b); }
-      });
-      // If no explicit hero found, keep the first block as hero
-      if(!Array.from(keepers).some(b => /välkommen/i.test((b.textContent||"")) ) && blocks.length){
-        keepers.add(blocks[0]);
-      }
-      // Hide non-keepers, show keepers with tidy spacing
-      blocks.forEach(function(b){
-        if(keepers.has(b)){
-          b.style.display = '';
-          b.style.marginBottom = '14px';
-        } else {
-          b.style.display = 'none';
-        }
-      });
-      // Scroll to top and add a small "Visa allt" to return
-      if(!document.getElementById('sgcpShowAll')){
-        var back = document.createElement('button');
-        back.id = 'sgcpShowAll';
-        back.className = 'sgcp-btn';
-        back.textContent = 'Visa allt';
-        back.style.cssText = 'position:sticky;top:8px;margin:6px 0;z-index:10';
-        main.prepend(back);
-        back.addEventListener('click', function(){
-          blocks.forEach(function(b){ b.style.display = ''; });
-          back.remove();
-          window.scrollTo({top:0, behavior:'smooth'});
-        });
-      }
-      window.scrollTo({top:0, behavior:'smooth'});
-    });
-  }
-  setupCompactHome();
-  new MutationObserver(setupCompactHome).observe(document.documentElement, {childList:true, subtree:true});
-})();</script></body>
+</body>
 </html>
