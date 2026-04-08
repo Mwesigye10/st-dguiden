@@ -4,491 +4,1477 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
-<meta content="no-cache, no-store, must-revalidate" http-equiv="Cache-Control"/>
+<meta content="#0c1e19" name="theme-color"/>
 <meta content="yes" name="apple-mobile-web-app-capable"/>
-<title>StödGuiden – för unga vuxna</title>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="StödGuiden – hitta rätt enkelt och snabbt. Jobb, ekonomi, hälsa, boende och mycket mer." name="description"/>
+<title>StödGuiden – Örebro</title>
 <style>
-    :root{--bg:#0f1f1c;--panel:#112e28;--text:#f3fff8;--muted:#cfe7df;--chip:#134238;--line:#2a4d59;--link:#8edbff}
-    *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(255,255,255,0.08)}
-    body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;line-height:1.35}
-    a{color:var(--link);text-decoration:underline}
-    a:visited{color:#b6e6ff}
-    a:active{opacity:.9}
-    header{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;background:#0d1c19;border-bottom:1px solid #224}
-    .brand{display:flex;gap:10px;align-items:center;font-weight:800}
-    .badge{width:32px;height:32px;border-radius:9px;background:#1a4138;display:grid;place-items:center}
-    .nav .chip{background:#134238;border:1px solid #2b5;padding:8px 12px;border-radius:12px;font-size:14px;color:#fff}
-    .wrap{max-width:720px;margin:0 auto;padding:12px}
-    h1{margin:6px 0 4px;font-size:22px}
-    .lead{color:var(--muted);margin-bottom:10px}
-    .panel{background:var(--panel);border:1px solid #1f5a4c;border-radius:14px;padding:12px;margin:10px 0}
-    .snabblinks{display:grid;grid-template-columns:1fr;gap:8px}
-    @media (min-width:380px){ .snabblinks{grid-template-columns:1fr 1fr;} }
-    .s-card{min-width:0;background:#12322c;border:1px solid #1f5a4c;border-radius:12px;padding:10px;display:flex;gap:10px;align-items:center}
-    .s-card .emoji{font-size:20px}
-    .s-card .label{font-weight:800;font-size:14px;word-break:break-word}
-    .cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-    @media (min-width:420px){ .cat-grid{grid-template-columns:1fr 1fr 1fr;} }
-    .cat-btn{background:#103a33;color:#e9fff6;border:1px solid #2f8a72;padding:12px;border-radius:12px;text-align:left;font-size:14px}
-    .backbar{display:none;margin:8px 0}
-    .backbar button{padding:9px 12px;border-radius:10px;background:#0f2f2a;border:1px solid #2f8a72;color:#fff}
-    .cat-section{display:none;background:#1a2f3a;border:1px solid var(--line);border-radius:14px;padding:12px}
-    .cat-section h3{margin-top:0}
-    .tips{background:#0f2530;border:1px solid #2d5570;border-radius:10px;padding:10px;margin-top:8px}
-    .tips ul{margin:6px 0 0 18px}
-    .tips li{margin:4px 0}
-    .tips b{color:#bfeaff}
-    input[type="text"],input[type="number"]{background:#0d3027;border:1px solid #2a6;color:var(--text);padding:10px;border-radius:10px;min-width:140px}
-    .btn{background:#1f5648;border:1px solid #39ae86;color:#fff;padding:9px 12px;border-radius:10px}
-    .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);place-items:center;z-index:90}
-    .sheet{background:#0f2228;border:1px solid #2f6;max-width:560px;width:92%;border-radius:14px;padding:14px}
-    .close{float:right;background:transparent;border:0;color:#fff;font-size:22px}
-    .inspire{background:#0f2e3a;border:1px solid #2e9dbb}
-    .inspire .tips{background:#0f2c36;border-color:#2e9dbb}
-  
-    /* Bottom fixed up-arrow */
-    #pageUp{position:fixed;right:12px;bottom:12px;width:36px;height:36px;border-radius:50%;display:none;
-      background:#ffffff;border:1px solid #d0d0d0;color:#0b2a24;font-weight:700;font-size:18px;line-height:36px;text-align:center;
-      box-shadow:0 2px 8px rgba(0,0,0,.25);z-index:90}
-    #pageUp:active{transform:scale(0.98)}
-
-  </style>
-<style>
-/* SG Classic+ additions */
-.sgcp-topbar{position:fixed;top:0;left:0;right:0;z-index:10000;background:#0f172a;
-  color:#e5e7eb;border-bottom:1px solid #1f2937;display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding:.5rem .75rem;
-  box-shadow:0 2px 10px rgba(0,0,0,.35); font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
-.sgcp-left{display:flex;align-items:center;gap:.5rem}
-.sgcp-pill{border:1px solid #334155;border-radius:999px;padding:.2rem .5rem;font-size:.8rem;color:#94a3b8}
-.sgcp-btn{border:1px solid #334155;background:#0b1220;color:#e5e7eb;border-radius:.6rem;padding:.35rem .6rem;text-decoration:none;font-size:.9rem}
-.sgcp-btn:active{transform:translateY(1px)}
-.sgcp-langwrap{position:relative; display:inline-block}
-.sgcp-langbtn{min-width:92px}
-.sgcp-langmenu{position:absolute; right:0; top:calc(100% + 6px); background:#0b1220; border:1px solid #243044; border-radius:.6rem; padding:.35rem; display:none; min-width:160px; box-shadow:0 8px 20px rgba(0,0,0,.35); z-index:99999}
-.sgcp-langmenu.open{display:block}
-.sgcp-langitem{display:block; width:100%; text-align:left; padding:.4rem .55rem; border:1px solid transparent; background:transparent; color:#e5e7eb; border-radius:.45rem; cursor:pointer; font-size:.9rem}
-.sgcp-langitem:hover{background:#0f182a; border-color:#1f2b45}
-.sgcp-section{margin:1rem .75rem;border:1px solid #1f2937;background:#0b1220;color:#e5e7eb;border-radius:.8rem;padding:.75rem;font-family:system-ui}
-.sgcp-row{display:flex;align-items:center;justify-content:space-between;gap:.5rem}
-.sgcp-list{display:flex;flex-direction:column;gap:.5rem;margin-top:.5rem}
-.sgcp-item{border:1px solid #1f2937;background:#0a1020;border-radius:.6rem;padding:.6rem}
-.sgcp-footer-akut{position:fixed;left:0;right:0;bottom:0;z-index:10000;background:rgba(127,29,29,.9);backdrop-filter:blur(6px); border-top:1px solid #7f1d1d;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding:.6rem .8rem;font-family:system-ui}
-.sgcp-akut-link{color:#fff;text-decoration:none}
-.sgcp-akut-link:hover{text-decoration:underline}
-.sgcp-1177{color:#ffdfe7;text-decoration:none}
-.sgcp-1177:hover{text-decoration:underline}
-/* Spacing so content never hides behind bars; will be updated by JS */
-:root{ --sgcp-foot-h:64px }
-body{ padding-top:0!important; padding-bottom:var(--sgcp-foot-h)!important }
-</style><style>
-/* Freeze page when modal is open */
-.sgcp-lockscroll { position: fixed; width: 100%; overflow: hidden; }
-/* Ensure dialog doesn't wiggle */
-</style><style>
-:root{ --sgcp-foot-h: 64px; }
-.sgcp-topbar{
-  background:#0b1220 !important; /* mørkgrøn/blå nuance som resten */
-  border-bottom:1px solid #142032 !important;
-  height: var(--sgcp-top-h);
-  display:flex; align-items:center; padding:.5rem .75rem;
-  box-shadow: 0 2px 10px rgba(0,0,0,.25);
+:root {
+  --bg: #0c1e19;
+  --panel: #112e24;
+  --panel2: #0f2820;
+  --border: rgba(45,122,95,0.2);
+  --border2: rgba(255,255,255,0.07);
+  --green: #2d7a5f;
+  --green2: #1e5c45;
+  --accent: #6dcfa0;
+  --accent2: #a8edc8;
+  --text: #e8f5ee;
+  --muted: #6a9a82;
+  --muted2: #4a7062;
+  --red: #7a1818;
+  --red2: #5e1010;
+  --gold: #f0c674;
+  --gold2: #d4a84b;
 }
-body{ padding-top: 0 !important; padding-bottom: var(--sgcp-foot-h) !important; }
-</style><style>.sgcp-footer-akut{ height: var(--sgcp-foot-h); display:flex; align-items:center; }</style><style>
-</style><style>.sgcp-btn{cursor:pointer}</style><style>.sgcp-hi{outline:2px solid #38bdf8; outline-offset:2px; border-radius:12px;}</style><style>
-</style><style>
-</style><style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh;overflow-x:hidden;padding-bottom:60px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
 
-</style></head>
-<body><header>
-<div class="brand"><div class="badge">SG</div>StödGuiden</div>
-<nav class="nav">
-<button class="chip" id="btnHem" type="button">🏠 Hem</button>
-</nav>
+/* ── ONBOARDING ── */
+#onboarding{position:fixed;inset:0;background:var(--bg);z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;text-align:center;transition:opacity 0.5s}
+#onboarding.hidden{opacity:0;pointer-events:none}
+.ob-logo{width:72px;height:72px;background:linear-gradient(135deg,var(--green),var(--green2));border-radius:20px;display:grid;place-items:center;font-weight:800;font-size:26px;color:var(--accent);margin:0 auto 24px;box-shadow:0 8px 32px rgba(45,122,95,0.4)}
+.ob-title{font-size:28px;font-weight:800;margin-bottom:12px;line-height:1.2}
+.ob-title em{font-style:normal;color:var(--accent)}
+.ob-sub{font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:32px;max-width:300px}
+.ob-features{display:flex;flex-direction:column;gap:14px;margin-bottom:36px;width:100%;max-width:320px}
+.ob-feat{display:flex;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:14px 16px;text-align:left}
+.ob-feat-ic{font-size:22px;flex-shrink:0}
+.ob-feat-text{font-size:13px;color:var(--muted);line-height:1.5}
+.ob-feat-text strong{color:var(--text);display:block;margin-bottom:2px;font-size:14px}
+.ob-btn{background:linear-gradient(135deg,var(--green),var(--green2));color:var(--text);padding:16px 40px;border-radius:16px;font-size:16px;font-weight:700;border:none;cursor:pointer;width:100%;max-width:320px;box-shadow:0 4px 20px rgba(45,122,95,0.4)}
+.ob-skip{font-size:12px;color:var(--muted2);margin-top:14px;cursor:pointer;padding:8px}
+
+/* ── HEADER ── */
+header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-badge{width:34px;height:34px;background:linear-gradient(135deg,var(--green),var(--green2));border-radius:10px;display:grid;place-items:center;font-weight:800;font-size:13px;color:var(--accent);flex-shrink:0}
+.brand-name{font-weight:800;font-size:17px}
+.brand-tagline{font-size:10px;color:var(--muted2);margin-top:1px}
+.hdr-right{display:flex;align-items:center;gap:8px}
+.feedback-btn{background:rgba(45,122,95,0.15);border:1px solid var(--border);color:var(--accent);padding:7px 13px;border-radius:50px;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px}
+.lang-btn{background:rgba(255,255,255,0.05);border:1px solid var(--border2);color:var(--muted);padding:7px 10px;border-radius:50px;font-size:11px;font-weight:600;cursor:pointer}
+.lang-btn:hover{background:rgba(45,122,95,0.15);color:var(--accent);border-color:var(--border)}
+
+/* ── WRAP ── */
+.wrap{max-width:600px;margin:0 auto;padding:0 16px}
+
+/* ── HERO ── */
+.hero{padding:22px 0 16px}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(45,122,95,0.15);border:1px solid rgba(45,122,95,0.3);color:var(--accent);font-size:11px;font-weight:600;padding:5px 12px;border-radius:50px;margin-bottom:14px;letter-spacing:0.4px}
+.hero-tag::before{content:"";width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
+.hero h1{font-size:28px;font-weight:800;line-height:1.15;margin-bottom:10px}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero-sub{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:20px}
+.hero-trust{display:flex;gap:16px;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted2)}
+.trust-item span{font-size:14px}
+
+/* ── SEARCH ── */
+.search-wrap{margin:16px 0}
+.search-box{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--border2);border-radius:14px;padding:12px 16px;transition:border-color 0.2s}
+.search-box:focus-within{border-color:rgba(45,122,95,0.5)}
+.search-icon{font-size:16px;opacity:0.5;flex-shrink:0}
+.search-box input{background:none;border:none;outline:none;color:var(--text);font-size:14px;flex:1;font-family:inherit}
+.search-box input::placeholder{color:var(--muted2)}
+.search-clear{background:none;border:none;color:var(--muted2);font-size:18px;cursor:pointer;padding:0 4px;display:none}
+#searchResults{margin-top:10px;display:none}
+.search-result{background:var(--panel);border:1px solid var(--border2);border-radius:12px;padding:12px 14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:border-color 0.2s}
+.search-result:hover{border-color:var(--border)}
+.search-result .sr-icon{font-size:20px;flex-shrink:0}
+.search-result .sr-text .sr-cat{font-size:11px;color:var(--muted2);margin-bottom:2px}
+.search-result .sr-text .sr-name{font-size:14px;font-weight:600}
+.search-no-result{text-align:center;padding:20px;color:var(--muted);font-size:14px}
+
+/* ── QUICK LINKS ── */
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.section-title{font-size:15px;font-weight:700;color:var(--text)}
+.quick-grid{display:flex;gap:10px;margin-bottom:20px;overflow-x:auto;padding-bottom:8px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.quick-grid::-webkit-scrollbar{display:none}
+.quick-card{flex:0 0 auto;width:130px}
+.quick-card .qtx{font-size:12px;font-weight:600;color:var(--text);line-height:1.3;word-break:break-word}
+.quick-card .qsub{font-size:10px;color:var(--muted2);margin-top:2px;line-height:1.3}
+.quick-card{background:var(--panel);border:1px solid var(--border2);border-radius:14px;padding:14px 12px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:all 0.2s;text-decoration:none}
+.quick-card:hover{border-color:var(--border);background:var(--panel2);text-decoration:none}
+.quick-card .qic{font-size:20px;flex-shrink:0}
+
+
+/* ── TIP ── */
+.tip-card{background:linear-gradient(135deg,rgba(45,122,95,0.15),rgba(30,92,69,0.1));border:1px solid rgba(45,122,95,0.25);border-radius:14px;padding:14px 16px;display:flex;gap:12px;margin-bottom:20px}
+.tip-ic{font-size:20px;flex-shrink:0;margin-top:1px}
+.tip-tx{font-size:13px;color:var(--muted);line-height:1.6}
+.tip-tx strong{color:var(--accent2);display:block;margin-bottom:3px;font-size:14px}
+
+/* ── FAVORITES SECTION ── */
+#favoritesSection{display:none;margin-bottom:20px}
+#favoritesSection.has-favorites{display:block}
+.favorites-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.favorites-title{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:700;color:var(--gold)}
+.favorites-title span{font-size:18px}
+.favorites-count{background:rgba(240,198,116,0.15);color:var(--gold);font-size:11px;font-weight:600;padding:3px 8px;border-radius:50px}
+.favorites-grid{display:flex;flex-direction:column;gap:8px}
+.fav-item{display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,rgba(240,198,116,0.08),rgba(212,168,75,0.04));border:1px solid rgba(240,198,116,0.2);border-radius:12px;padding:12px 14px;text-decoration:none;transition:all 0.2s}
+.fav-item:hover{border-color:rgba(240,198,116,0.4);background:linear-gradient(135deg,rgba(240,198,116,0.12),rgba(212,168,75,0.06));text-decoration:none}
+.fav-item .fi-ic{font-size:20px;flex-shrink:0}
+.fav-item .fi-tx{flex:1;min-width:0}
+.fav-item .fi-name{font-size:14px;font-weight:600;color:var(--text);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fav-item .fi-cat{font-size:11px;color:var(--muted2);margin-top:2px}
+.fav-remove{background:none;border:none;color:var(--muted2);font-size:16px;cursor:pointer;padding:6px;border-radius:8px;transition:all 0.2s;flex-shrink:0}
+.fav-remove:hover{background:rgba(122,24,24,0.2);color:#ff6b6b}
+.fav-item .fi-arrow{color:var(--gold);font-size:14px;flex-shrink:0;opacity:0.6}
+
+/* ── CATEGORIES ── */
+.cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+@media(min-width:420px){.cat-grid{grid-template-columns:1fr 1fr 1fr}}
+.cat-btn{background:var(--panel);border:1px solid var(--border2);border-radius:14px;padding:16px 12px;text-align:left;cursor:pointer;transition:all 0.2s;font-family:inherit}
+.cat-btn:hover{border-color:var(--border);background:var(--panel2);transform:translateY(-1px)}
+.cat-btn.active{border-color:var(--green);background:rgba(45,122,95,0.12)}
+.cat-ic{font-size:24px;display:block;margin-bottom:8px}
+.cat-name{font-size:13px;font-weight:700;color:var(--text);display:block}
+.cat-desc{font-size:11px;color:var(--muted2);margin-top:3px;display:block;line-height:1.4}
+
+/* ── BACK BAR ── */
+.backbar{display:none;margin:14px 0 10px}
+.back-btn{background:var(--panel);border:1px solid var(--border2);border-radius:12px;padding:10px 14px;color:var(--text);font-size:14px;cursor:pointer;display:flex;align-items:center;gap:8px;font-family:inherit}
+
+/* ── CAT SECTION ── */
+.cat-section{display:none;background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:18px;margin-bottom:16px}
+.cat-section-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--border2)}
+.cat-section-ic{font-size:30px}
+.cat-section-title{font-size:18px;font-weight:800}
+.cat-section-sub{font-size:12px;color:var(--muted);margin-top:2px}
+.link-group{margin-bottom:16px}
+.link-group-title{font-size:11px;color:var(--muted2);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+
+/* ── LINK ITEMS WITH FAVORITE ── */
+.link-item{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,0.03);border:1px solid var(--border2);border-radius:12px;padding:12px 14px;margin-bottom:8px;text-decoration:none;transition:border-color 0.2s;position:relative}
+.link-item:hover{border-color:var(--border);text-decoration:none}
+.link-item .li-ic{font-size:20px;flex-shrink:0;margin-top:1px}
+.link-item .li-tx{flex:1;min-width:0}
+.link-item .li-tx .li-name{font-size:14px;font-weight:600;color:var(--text);display:block}
+.link-item .li-tx .li-desc{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.5;display:block}
+.link-item .li-actions{display:flex;align-items:center;gap:6px;flex-shrink:0;align-self:center}
+.link-item .li-arrow{color:var(--muted2);font-size:14px}
+
+/* Favorite button */
+.fav-btn{background:none;border:none;font-size:16px;cursor:pointer;padding:6px;border-radius:8px;transition:all 0.2s;opacity:0.5;color:var(--muted2)}
+.fav-btn:hover{opacity:1;background:rgba(240,198,116,0.1)}
+.fav-btn.is-favorite{opacity:1;color:var(--gold);text-shadow:0 0 8px rgba(240,198,116,0.4)}
+.fav-btn.is-favorite:hover{background:rgba(240,198,116,0.15)}
+
+.info-box{background:rgba(45,122,95,0.1);border:1px solid rgba(45,122,95,0.2);border-radius:12px;padding:12px 14px;font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px}
+.info-box strong{color:var(--accent2)}
+
+/* ── NUMBERS ── */
+.num-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.num-card{background:rgba(255,255,255,0.03);border:1px solid var(--border2);border-radius:12px;padding:12px;text-align:center;text-decoration:none;transition:border-color 0.2s}
+.num-card:hover{border-color:var(--border)}
+.num-card .nc-num{font-size:18px;font-weight:800;color:var(--accent);display:block}
+.num-card .nc-name{font-size:11px;color:var(--muted);margin-top:3px;display:block}
+
+/* ── SAVINGS CALC ── */
+.calc-box{background:rgba(255,255,255,0.03);border:1px solid var(--border2);border-radius:12px;padding:14px}
+.calc-row{display:flex;gap:8px;align-items:center;margin-bottom:10px}
+.calc-box input{background:var(--bg);border:1px solid var(--border2);color:var(--text);padding:10px 12px;border-radius:10px;font-size:14px;flex:1;font-family:inherit;outline:none}
+.calc-box input:focus{border-color:var(--green)}
+.calc-box button{background:var(--green);color:var(--text);border:none;padding:10px 16px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit}
+.calc-result{font-size:14px;color:var(--accent);font-weight:700}
+.calc-motivation{font-size:12px;color:var(--muted);margin-top:4px}
+
+/* ── FEEDBACK MODAL ── */
+#feedbackModal{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:500;display:none;place-items:center;padding:20px}
+#feedbackModal.open{display:grid}
+.feedback-sheet{background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:20px;width:100%;max-width:400px}
+.feedback-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.feedback-header h3{font-size:17px;font-weight:800}
+.feedback-close{background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;line-height:1}
+.feedback-options{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.fb-opt{background:rgba(255,255,255,0.04);border:1px solid var(--border2);border-radius:12px;padding:10px;text-align:center;cursor:pointer;font-size:12px;font-weight:600;color:var(--muted);transition:all 0.2s}
+.fb-opt:hover,.fb-opt.selected{background:rgba(45,122,95,0.15);border-color:var(--green);color:var(--accent)}
+.feedback-sheet textarea{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border2);border-radius:12px;color:var(--text);padding:12px;font-size:13px;font-family:inherit;resize:none;outline:none;margin-bottom:12px}
+.feedback-sheet textarea:focus{border-color:var(--green)}
+.feedback-consent{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;background:rgba(45,122,95,0.08);border:1px solid rgba(45,122,95,0.2);border-radius:10px;padding:10px 12px}
+.feedback-consent input[type="checkbox"]{width:18px;height:18px;min-width:18px;accent-color:var(--green);margin-top:2px;cursor:pointer}
+.feedback-consent label{font-size:11px;color:var(--muted);line-height:1.6;cursor:pointer}
+.feedback-consent label a{color:var(--accent)}
+.feedback-send{width:100%;background:linear-gradient(135deg,var(--green),var(--green2));color:var(--text);border:none;padding:13px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:opacity 0.2s}
+.feedback-send:disabled{opacity:0.4;cursor:not-allowed}
+.feedback-thanks{text-align:center;padding:20px 0;display:none}
+.feedback-thanks .ft-ic{font-size:40px;margin-bottom:12px}
+.feedback-thanks p{font-size:14px;color:var(--muted);line-height:1.6}
+
+/* ── AKUT FOOTER ── */
+.akut-bar{position:fixed;bottom:0;left:0;right:0;z-index:100;background:linear-gradient(90deg,var(--red),var(--red2));padding:10px 16px;display:flex;align-items:center;justify-content:space-between}
+.akut-left{font-size:13px;font-weight:700;color:#fff}
+.akut-right{font-size:12px;color:#ffbbbb}
+
+/* ── UP BUTTON ── */
+#upBtn{position:fixed;right:16px;bottom:70px;width:44px;height:44px;background:var(--green);color:var(--text);border:none;border-radius:50%;font-size:18px;cursor:pointer;display:none;place-items:center;box-shadow:0 4px 12px rgba(0,0,0,0.3);z-index:90}
+
+/* ── SUPPORT SECTION ── */
+.support-section{background:linear-gradient(135deg,rgba(45,122,95,0.1),rgba(30,92,69,0.05));border:1px solid rgba(45,122,95,0.2);border-radius:16px;padding:18px;margin:24px 0 20px;text-align:center}
+.support-title{font-size:16px;font-weight:700;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px}
+.support-text{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px}
+.support-swish{background:rgba(255,255,255,0.05);border:1px solid var(--border2);border-radius:10px;padding:10px 16px;display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--text)}
+.support-note{font-size:11px;color:var(--muted2);margin-top:10px}
+
+/* ── TOAST NOTIFICATION ── */
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--panel);border:1px solid var(--gold);color:var(--text);padding:12px 20px;border-radius:12px;font-size:13px;font-weight:600;z-index:1000;opacity:0;transition:all 0.3s ease;display:flex;align-items:center;gap:8px;box-shadow:0 4px 20px rgba(0,0,0,0.3)}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.toast .toast-icon{font-size:16px}
+</style>
+</head>
+<body>
+<!-- ONBOARDING -->
+<div id="onboarding">
+<div class="ob-logo">SG</div>
+<h1 class="ob-title">Välkommen till <em>StödGuiden</em></h1>
+<p class="ob-sub">Allt du behöver veta om jobb, ekonomi, hälsa och boende — samlat och enkelt.</p>
+<div class="ob-features">
+<div class="ob-feat"><span class="ob-feat-ic">🔒</span><div class="ob-feat-text"><strong>Anonymt &amp; tryggt</strong>Vi sparar ingen data om dig.</div></div>
+<div class="ob-feat"><span class="ob-feat-ic">✅</span><div class="ob-feat-text"><strong>Officiella källor</strong>Myndigheter och etablerade organisationer.</div></div>
+<div class="ob-feat"><span class="ob-feat-ic">⭐</span><div class="ob-feat-text"><strong>Spara favoriter</strong>Markera de länkar du använder mest.</div></div>
+</div>
+<button class="ob-btn" onclick="closeOnboarding()">Kom igång</button>
+<div class="ob-skip" onclick="closeOnboarding()">Hoppa över</div>
+</div>
+<!-- HEADER -->
+<header>
+<div class="brand" onclick="goHome()" style="cursor:pointer">
+<div class="brand-badge">SG</div>
+<div><div class="brand-name">StödGuiden</div><div class="brand-tagline">Örebro</div></div>
+</div>
+<div class="hdr-right">
+<button class="feedback-btn" data-i18n="fb-btn" onclick="openFeedback()">💬 Feedback</button>
+<button class="lang-btn" id="langBtn" onclick="toggleLang()" style=";display:none;">🌐 EN</button>
+</div>
 </header>
-<div class="wrap">
-<div id="homeView">
-<h1>Välkommen till StödGuiden</h1>
-<div class="lead">Din guide till samhällets stöd – hitta rätt hjälp enkelt och snabbt, oavsett var du befinner dig i livet.</div>
-<div class="panel" id="snabblinks">
-<div class="snabblinks">
-<div class="s-card"><div class="emoji">💼</div><div><div class="label"><a href="https://arbetsformedlingen.se" rel="noopener" target="_blank">Arbetsförmedlingen</a></div></div></div>
-<div class="s-card"><div class="emoji">🧑‍⚕️</div><div><div class="label"><a href="https://www.1177.se" rel="noopener" target="_blank">1177 – Råd &amp; vård</a></div></div></div>
-<div class="s-card"><div class="emoji">🏛️</div><div><div class="label"><a href="https://www.forsakringskassan.se" rel="noopener" target="_blank">Försäkringskassan</a></div></div></div>
-<div class="s-card"><div class="emoji">🚌</div><div><div class="label"><a href="https://www.lanstrafiken.se" rel="noopener" target="_blank">Länstrafiken</a></div></div></div>
-<div class="s-card"><div class="emoji">🚆</div><div><div class="label"><a href="https://www.sj.se" rel="noopener" target="_blank">SJ – tågbiljetter</a></div></div></div>
-</div>
-<div class="tips" style="margin-top:8px">💡 <b>Veckans tips:</b> Visste du att du kan ansöka om CSN redan från gymnasiet? Kolla dina möjligheter på csn.se – det kan göra stor skillnad!</div>
-<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
-<input id="askInput" placeholder="Sök… (t.ex. 'hyreskontrakt', 'CV', '1177')" type="text"/>
-<button class="btn" id="askBtn" type="button">Sök</button>
-<button class="btn" id="clearBtn" style="background:#2b2b2b;border-color:#555" type="button">Rensa</button>
+<!-- HOME VIEW -->
+<div class="wrap" id="homeView">
+<!-- HERO -->
+<div class="hero">
+<div class="hero-tag" data-i18n="hero-tag">Alltid anonymt &amp; gratis</div>
+<h1 data-i18n="hero-h1">Koll på läget<br/>— <em>direkt</em></h1>
+<p class="hero-sub" data-i18n="hero-sub">Jobb, ekonomi, hälsa, boende och mycket mer — samlat på ett ställe. Enkelt, tryggt och alltid tillgängligt.</p>
+<div class="hero-trust">
+<div class="trust-item"><span>🔒</span><span data-i18n="trust-1">Anonymt</span></div>
+<div class="trust-item"><span>✅</span><span data-i18n="trust-2">Officiella källor</span></div>
+<div class="trust-item"><span>💚</span><span data-i18n="trust-3">Gratis</span></div>
+<div class="trust-item"><span>⭐</span><span data-i18n="trust-4">Spara favoriter</span></div>
 </div>
 </div>
-<div class="cat-grid" id="categoryGrid">
-<button class="cat-btn" onclick="openCat('halsa')" type="button">🧠 Hälsa &amp; stöd</button>
-<button class="cat-btn" onclick="openCat('ekonomi')" type="button">💸 Ekonomi</button>
-<button class="cat-btn" onclick="openCat('jobb')" type="button">👔 Jobb</button>
-<button class="cat-btn" onclick="openCat('boende')" type="button">🏡 Boende</button>
-<button class="cat-btn" onclick="openCat('hemtips')" type="button">🏠 Hemtips</button>
-<button class="cat-btn" onclick="openCat('vardag')" type="button">🧺 Vardag</button>
-<button class="cat-btn" onclick="openCat('mat')" type="button">🍲 Mat &amp; hushåll</button>
-<button class="cat-btn" onclick="openCat('bank')" type="button">💳 Bank &amp; betalningar</button>
-<button class="cat-btn" onclick="openCat('studier')" type="button">🎓 Studier</button>
-<button class="cat-btn" onclick="openCat('digital')" type="button">📱 Digital vardag</button>
-<button class="cat-btn" onclick="openCat('kontaktperson')" type="button">🤝 Kontaktperson</button>
-<button class="cat-btn" onclick="openCat('viktiga')" type="button">☎️ Viktiga nummer</button>
-<button class="cat-btn" onclick="openCat('aktiviteter')" type="button">🌟 Aktiviteter &amp; fritid</button>
+<!-- SEARCH -->
+<div class="search-wrap">
+<div class="search-box">
+<span class="search-icon">🔍</span>
+<input data-i18n="search-placeholder" id="searchInput" oninput="doSearch(this.value)" placeholder="Sök t.ex. CSN, BankID, hyreskontrakt..." type="text"/>
+<button class="search-clear" id="clearBtn" onclick="clearSearch()">×</button>
+</div>
+<div id="searchResults"></div>
+</div>
+<!-- FAVORITES SECTION -->
+<div id="favoritesSection">
+<div class="favorites-header">
+<div class="favorites-title"><span>⭐</span><span data-i18n="fav-title">Mina favoriter</span></div>
+<span class="favorites-count" id="favCount">0</span>
+</div>
+<div class="favorites-grid" id="favoritesGrid"></div>
+</div>
+<!-- QUICK LINKS -->
+<div class="section-header">
+<span class="section-title" data-i18n="quick-title">Snabblänkar</span>
+</div>
+<div class="quick-grid">
+<a class="quick-card" data-href-en="https://arbetsformedlingen.se/other-languages/english-engelska" data-href-sv="https://arbetsformedlingen.se" href="https://arbetsformedlingen.se" rel="noopener" target="_blank">
+<span class="qic">💼</span><div><div class="qtx" data-i18n="ql-af">Arbets­förmedlingen</div><div class="qsub" data-i18n="ql-af-sub">Jobb &amp; karriär</div></div>
+</a>
+<a class="quick-card" href="https://www.1177.se" rel="noopener" target="_blank">
+<span class="qic">🏥</span><div><div class="qtx" data-i18n="ql-1177">1177 Vårdguiden</div><div class="qsub" data-i18n="ql-1177-sub">Råd &amp; vård</div></div>
+</a>
+<a class="quick-card" data-href-en="https://www.forsakringskassan.se/english" data-href-sv="https://www.forsakringskassan.se" href="https://www.forsakringskassan.se" rel="noopener" target="_blank">
+<span class="qic">🏛️</span><div><div class="qtx" data-i18n="ql-fk">Försäkrings­kassan</div><div class="qsub" data-i18n="ql-fk-sub">Bidrag &amp; ersättning</div></div>
+</a>
+<a class="quick-card" data-href-en="https://www.csn.se/languages/english.html" data-href-sv="https://www.csn.se" href="https://www.csn.se" rel="noopener" target="_blank">
+<span class="qic">🎓</span><div><div class="qtx">CSN</div><div class="qsub" data-i18n="ql-csn-sub">Studiemedel</div></div>
+</a>
+<a class="quick-card" data-href-en="https://skatteverket.se/privat/etjansterochblanketter/sabordings/telefonochbokamote/telefoninternational.4.361dc8c15312eff6fd2b0f5.html" data-href-sv="https://www.skatteverket.se" href="https://www.skatteverket.se" rel="noopener" target="_blank">
+<span class="qic">📋</span><div><div class="qtx" data-i18n="ql-skv">Skatteverket</div><div class="qsub" data-i18n="ql-skv-sub">Skatt &amp; folkbokföring</div></div>
+</a>
+<a class="quick-card" data-href-en="https://kronofogden.se/en" data-href-sv="https://www.kronofogden.se" href="https://www.kronofogden.se" rel="noopener" target="_blank">
+<span class="qic">⚖️</span><div><div class="qtx" data-i18n="ql-kfm">Kronofogden</div><div class="qsub" data-i18n="ql-kfm-sub">Skulder &amp; betalning</div></div>
+</a>
+<a class="quick-card" data-href-en="https://www.sj.se/en" data-href-sv="https://www.sj.se" href="https://www.sj.se" rel="noopener" target="_blank">
+<span class="qic">🚆</span><div><div class="qtx">SJ</div><div class="qsub" data-i18n="ql-sj-sub">Tågbiljetter</div></div>
+</a>
+<a class="quick-card" data-href-en="https://www.lanstrafiken.se" data-href-sv="https://www.lanstrafiken.se" href="https://www.lanstrafiken.se" rel="noopener" target="_blank">
+<span class="qic">🚌</span><div><div class="qtx">Länstrafiken</div><div class="qsub" data-i18n="ql-lt-sub">Buss i Örebro</div></div>
+</a>
+</div>
+<!-- TIP -->
+<div class="tip-card">
+<span class="tip-ic">💡</span>
+<div class="tip-tx"><strong data-i18n="tip-title">Visste du?</strong> <span id="tipText"></span></div>
+</div>
+<!-- CATEGORIES -->
+<div class="section-header">
+<span class="section-title" data-i18n="cat-title">Kategorier</span>
+</div>
+<div class="cat-grid">
+<button class="cat-btn" onclick="openCat('halsa')"><span class="cat-ic">🧠</span><span class="cat-name" data-i18n="cat-halsa">Hälsa &amp; vård</span><span class="cat-desc" data-i18n="cat-halsa-desc">Vård, psykisk hälsa, kontaktlinjer</span></button>
+<button class="cat-btn" onclick="openCat('ekonomi')"><span class="cat-ic">💸</span><span class="cat-name" data-i18n="cat-ekonomi">Ekonomi</span><span class="cat-desc" data-i18n="cat-ekonomi-desc">Bidrag, budget, skulder</span></button>
+<button class="cat-btn" onclick="openCat('jobb')"><span class="cat-ic">💼</span><span class="cat-name" data-i18n="cat-jobb">Jobb &amp; karriär</span><span class="cat-desc" data-i18n="cat-jobb-desc">CV, intervju, söka jobb</span></button>
+<button class="cat-btn" onclick="openCat('boende')"><span class="cat-ic">🏡</span><span class="cat-name" data-i18n="cat-boende">Boende</span><span class="cat-desc" data-i18n="cat-boende-desc">Hyra, kontrakt, regler</span></button>
+<button class="cat-btn" onclick="openCat('studier')"><span class="cat-ic">🎓</span><span class="cat-name" data-i18n="cat-studier">Studier</span><span class="cat-desc" data-i18n="cat-studier-desc">CSN, antagning, komvux</span></button>
+<button class="cat-btn" onclick="openCat('bank')"><span class="cat-ic">💳</span><span class="cat-name" data-i18n="cat-bank">Bank &amp; betalningar</span><span class="cat-desc" data-i18n="cat-bank-desc">BankID, konto, skulder</span></button>
+<button class="cat-btn" onclick="openCat('digital')"><span class="cat-ic">📱</span><span class="cat-name" data-i18n="cat-digital">Digital vardag</span><span class="cat-desc" data-i18n="cat-digital-desc">Mina sidor, e-tjänster</span></button>
+<button class="cat-btn" onclick="openCat('vardag')"><span class="cat-ic">🧺</span><span class="cat-name" data-i18n="cat-vardag">Vardag &amp; hemtips</span><span class="cat-desc" data-i18n="cat-vardag-desc">Mat, tvätt, hushåll</span></button>
+<button class="cat-btn" onclick="openCat('kontakt')"><span class="cat-ic">🏛️</span><span class="cat-name" data-i18n="cat-kontakt">Stöd från kommunen</span><span class="cat-desc" data-i18n="cat-kontakt-desc">Kontaktperson &amp; socialt stöd</span></button>
+<button class="cat-btn" onclick="openCat('aktiviteter')"><span class="cat-ic">🌟</span><span class="cat-name" data-i18n="cat-aktiviteter">Aktiviteter</span><span class="cat-desc" data-i18n="cat-aktiviteter-desc">Fritid, föreningar, sport</span></button>
+<button class="cat-btn" onclick="openCat('transport')"><span class="cat-ic">🚌</span><span class="cat-name" data-i18n="cat-transport">Transport</span><span class="cat-desc" data-i18n="cat-transport-desc">Buss, tåg och kollektivtrafik</span></button>
+<button class="cat-btn" onclick="openCat('rattigheter')"><span class="cat-ic">⚖️</span><span class="cat-name" data-i18n="cat-rattigheter">Rättigheter</span><span class="cat-desc" data-i18n="cat-rattigheter-desc">Dina rättigheter, diskriminering</span></button>
+<button class="cat-btn" onclick="openCat('nummer')"><span class="cat-ic">☎️</span><span class="cat-name" data-i18n="cat-nummer">Viktiga nummer</span><span class="cat-desc" data-i18n="cat-nummer-desc">Akut, vård, myndigheter</span></button>
+</div>
+<!-- SUPPORT SECTION -->
+<div class="support-section">
+<div class="support-title" data-i18n="support-title">💚 Stöd projektet</div>
+<p class="support-text" data-i18n="support-text">StödGuiden är helt gratis och utan reklam. Om appen har hjälpt dig och du vill bidra till att den fortsätter utvecklas, kan du swisha valfritt belopp.</p>
+<div style="display:flex;flex-direction:column;align-items:center;gap:12px;margin:16px 0;">
+<img src="data:image/png;base64,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" alt="Swish QR-kod" style="width:140px;height:140px;border-radius:12px;"/>
+<div class="support-swish"><span data-i18n="support-swish-label">Swish:</span> 073 891 15 35</div>
+</div>
+<div class="support-note" data-i18n="support-note">Tack för att du stöttar fri och öppen samhällsinfo! 💚</div>
 </div>
 </div>
-<div class="backbar" id="backBar"><button onclick="goHome()" type="button">← Tillbaka</button></div>
-<!-- Hälsa & stöd -->
-<section class="cat-section" id="halsa">
-<h3>🧠 Hälsa &amp; stöd</h3>
-<p>Direktlänkar till proffshjälp.</p>
-<ul>
-<li><a href="https://www.1177.se" rel="noopener" target="_blank">1177 Vårdguiden</a></li>
-<li><a href="https://www.bris.se" rel="noopener" target="_blank">BRIS – stöd för unga</a></li>
-<li><a href="https://mind.se/hitta-hjalp/" rel="noopener" target="_blank">Mind – stödlinjer</a></li>
-<li><a href="https://www.umo.se/" rel="noopener" target="_blank">UMO – ungdomsmottagning online</a></li>
-<li><a href="https://www.brottsoffermyndigheten.se/" rel="noopener" target="_blank">Brottsoffermyndigheten – stöd för brottsoffer</a></li>
-<li><a href="https://orebrolan.boj.se/" rel="noopener" target="_blank">Brottsofferjouren Örebro län</a></li>
-<li><a href="https://www.orebro.se/omsorg--stod/missbruk-beroende--kriminalitet/stod-vid-missbruk--beroende-unga/maria-ungdom-orebro.html" rel="noopener" target="_blank">Maria Ungdom Örebro</a></li>
-<li><a href="https://www.orebro.se/omsorg--stod/stod-till-barn-och-unga.html" rel="noopener" target="_blank">Örebro – stöd för unga</a></li>
-</ul>
-<div class="tips">
-<b>💡 Tips &amp; Inspiration</b><br/> <b>Snäll påminnelse</b>
-<ul>
-<li>Kom ihåg att det alltid finns någon att prata med – du är inte ensam. Om du mår dåligt eller känner oro, börja med att ta ett litet steg och kontakta en trygg instans.</li>
-</ul>
+<!-- BACK BAR -->
+<div class="backbar wrap" id="backBar">
+<button class="back-btn" data-i18n="back-btn" onclick="goHome()">← Tillbaka till startsidan</button>
 </div>
-</section>
-<!-- Ekonomi -->
-<section class="cat-section" id="ekonomi">
-<h3>💸 Ekonomi</h3>
-<p>CSN, budget, skuldråd.</p>
-<ul>
-<li><a href="https://www.csn.se" rel="noopener" target="_blank">CSN – studiemedel</a></li>
-<li><a href="https://www.hallakonsument.se" rel="noopener" target="_blank">Hallå konsument</a></li>
-<li><a href="https://www.kronofogden.se" rel="noopener" target="_blank">Kronofogden – skulder</a></li>
-<li><a href="https://www.konsumentverket.se/" rel="noopener" target="_blank">Konsumentverket</a></li>
-<li><a href="https://www.skatteverket.se/" rel="noopener" target="_blank">Skatteverket – Mina sidor</a></li>
-<li><a href="https://budgetkalkylen.konsumentverket.se/budgetkalkylen-berakna/?bkName=Min+budgetkalkyl#content" rel="noopener" target="_blank">Budgetkalkyl – räkna ut din budget</a></li></ul>
-<div class="tips">
-<b>💡 Tips &amp; Inspiration</b><br/> <b>Sparräknare</b><br/>
-        Lägg undan per månad:
-        <input id="saveInput" placeholder="t.ex. 200" style="width:110px" type="number"/> SEK
-        <button class="btn" id="calcBtn" type="button">Räkna</button>
-<div class="lead" id="saveResult">År: –</div>
-<div class="lead" id="saveMotivation"></div>
+<!-- ═══ HÄLSA ═══ -->
+<div class="cat-section wrap" id="cat-halsa">
+<div class="cat-section-header">
+<span class="cat-section-ic">🧠</span>
+<div><div class="cat-section-title" data-i18n="sec-halsa">Hälsa &amp; vård</div><div class="cat-section-sub" data-i18n="sec-halsa-sub">Vård, psykisk hälsa och kontaktlinjer</div></div>
 </div>
-</section>
-<!-- Jobb -->
-<section class="cat-section" id="jobb">
-<h3>👔 Jobb</h3>
-<p>CV, personligt brev, intervju.</p>
-<ul>
-<li><a href="https://arbetsformedlingen.se/platsbanken" rel="noopener" target="_blank">Platsbanken – Arbetsförmedlingen</a></li>
-<li><a href="https://www.jobbsafari.se/" rel="noopener" target="_blank">Jobbsafari – lediga jobb</a></li>
-<li><a href="https://extra.orebro.se/jobb.4.62db1a0715249deeeb212f.html" rel="noopener" target="_blank">Lediga jobb – Örebro</a></li>
-<li><a href="https://www.unionen.se/filer/ovrigt/cv-mallar" rel="noopener" target="_blank">Unionen – CV-mallar</a></li>
-</ul>
-<div class="tips">
-<b>💡 Tips &amp; Inspiration</b><br/> <b>Tips för CV</b>
-<ul>
-<li>Det kan vara hjälpsamt att hålla det till 1 sida.</li>
-<li>Kronologisk ordning – senaste först – gör det lättare att läsa.</li>
-<li>Lyft gärna fram resultat (t.ex. “+20% försäljning”).</li>
-<li>Att anpassa för varje annons kan ge bättre träff.</li>
-</ul>
+<div class="info-box" data-i18n="sec-halsa-info"><strong>Bra att veta:</strong> I Örebro är vård gratis för dig under 20 år. Hitta din vårdcentral på 1177.se eller ring 1177 för rådgivning.</div>
+<div class="link-group">
+<div class="link-group-title" data-i18n="lg-halsa-fysisk">Fysisk hälsa i Örebro</div>
+<div class="link-item" data-fav-cat="Hälsa" data-fav-icon="🏥" data-fav-id="vardcentral" data-fav-name="Hitta vårdcentral i Örebro">
+<span class="li-ic">🏥</span>
+<a class="li-tx" href="https://www.1177.se/Orebrolan/sa-fungerar-varden/varden-i-orebro-lan/valja-vardcentral-i-region-orebro-lan/" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-vardcentral">Hitta vårdcentral i Örebro</span>
+<span class="li-desc" data-i18n="link-vardcentral-desc">Välj och lista dig på en vårdcentral i Region Örebro. Gratis vård under 20 år.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
 </div>
-<div class="tips">
-<b>💡 Tips &amp; Inspiration</b><br/> <b>Tips för personligt brev</b>
-<ul>
-<li>Börja gärna med varför just detta jobb lockar dig.</li>
-<li>Beskriv kort varför du passar – erfarenhet &amp; styrkor.</li>
-<li>Avsluta positivt och framåtblickande.</li>
-<li>Max 1 sida brukar kännas lagom.</li>
-</ul>
 </div>
-</section>
-<!-- Boende -->
-<section class="cat-section" id="boende">
-<h3>🏡 Boende</h3>
-<p>Hitta, kontrakt, försäkring.</p>
-<ul>
-<li><a href="https://www.hyresgastforeningen.se/" rel="noopener" target="_blank">Hyresgästföreningen</a></li>
-<li><a href="https://www.boverket.se" rel="noopener" target="_blank">Boverket – regler</a></li>
-<li><a href="https://uthyrningsportal.se/" rel="noopener" target="_blank">Uthyrningsportal.se – hitta bostad</a></li>
-<li><a href="https://bostadsportal.se/" rel="noopener" target="_blank">Bostadsportal.se – hyresbostäder</a></li>
-<li><a href="https://www.orebro.se/bygga-bo--trafik/bostader--tomter/skaffa-bostad/bostadsloftet.html" rel="noopener" target="_blank">Bostadslöftet – Örebro kommun</a></li>
-</ul>
-<div class="tips">
-<b>💡 Tips &amp; Inspiration</b><br/> <b>Kom ihåg</b>
-<ul>
-<li>Det kan vara bra att läsa uppsägningstid &amp; deposition innan du skriver på.</li>
-<li>Ett tips är att fotografera vid inflytt (datum/skador) och spara i molnet.</li>
-<li>Många väljer att teckna hemförsäkring dag 1 – det kan skapa trygghet.</li>
-<li>Att stänga av lampor/standby kan sänka elräkningen.</li>
-<li>Källsortering och grovsopor – kolla hur det funkar i din kommun.</li>
-</ul>
+<div class="link-item" data-fav-cat="Hälsa" data-fav-icon="🏥" data-fav-id="1177" data-fav-name="1177 Vårdguiden" data-fav-url="https://www.1177.se">
+<span class="li-ic">🏥</span>
+<a class="li-tx" href="https://www.1177.se" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-1177">1177 Vårdguiden</span>
+<span class="li-desc" data-i18n="link-1177-desc">Råd, vägledning och hitta vård. Ring 1177 dygnet runt.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
 </div>
-</section>
-<!-- Hemtips -->
-<section class="cat-section" id="hemtips">
-<h3>🏠 Hemtips &amp; trygghet</h3>
-<p>Brandskydd, el, kris.</p>
-<ul>
-<li><a href="https://www.brandskyddsforeningen.se/brandskydd/brandskydd-i-hemmet/" rel="noopener" target="_blank">Brandskydd i hemmet</a></li>
-<li><a href="https://www.elsakerhetsverket.se/privatpersoner/" rel="noopener" target="_blank">Elsäkerhet hemma</a></li>
-<li><a href="https://www.msb.se/sv/rad-till-privatpersoner/" rel="noopener" target="_blank">MSB – Råd till privatpersoner</a></li>
-</ul>
-<div class="tips">
-<b>💡 Tips &amp; Inspiration</b><br/> <b>Snälla tips</b>
-<ul>
-<li>Det kan vara bra att testa brandvarnaren ungefär en gång i månaden.</li>
-<li>Att tvätta fulla maskiner &amp; dosera rätt tvättmedel kan spara både el och pengar.</li>
-<li>Att frosta av frysen ibland kan sänka elförbrukningen.</li>
-<li>Lite städning varje vecka kan göra att det känns lättare att hålla rent.</li>
-</ul>
 </div>
-</section>
-<!-- Vardag -->
-<section class="cat-section" id="vardag">
-<h3>🧺 Vardag</h3>
-<p>Tvätt, schema, rutiner.</p>
-<ul>
-<li><a href="https://www.xn--tvttsymbol-r5a.se/" rel="noopener" target="_blank">Tvättsymboler – så läser du dem</a></li>
-<li><a href="https://levaochbo.expressen.se/inredning/badrum/tvattrad--har-ar-11-tips-du-bara-maste-ha/" rel="noopener" target="_blank">Tvättråd – 11 tips</a></li>
-<li><a href="https://levaochbo.expressen.se/gor-det-sjalv/husmorstips/stada-som-proffsen--har-ar-13-smarta-tips/" rel="noopener" target="_blank">Städa som proffsen – 13 smarta tips</a></li>
-<li><a href="https://www.brandskyddsforeningen.se/" rel="noopener" target="_blank">Brandskyddsföreningen – Brandskyddstips</a></li>
-<li><a href="https://levaochbo.expressen.se/gor-det-sjalv/husmorstips/sa-enkelt-loser-du-stoppet-i-avloppet-1/" rel="noopener" target="_blank">Stopp i avloppet – guide</a></li><li><a href="https://www.naturskyddsforeningen.se/barnfamilj/stada-miljovanligt/" rel="noopener" target="_blank">Städa miljövänligt</a></li><li><a href="https://www.sopor.nu/" rel="noopener" target="_blank">Källsortering &amp; återvinning</a></li><li><a href="https://www.elsakerhetsverket.se/privatpersoner/" rel="noopener" target="_blank">Elsäkerhet i vardagen</a></li><li><a href="https://www.konsumentverket.se/varor-och-tjanster/tvattrad-i-klader/" rel="noopener" target="_blank">Tvätt &amp; klädvård</a></li><li><a href="https://www.koket.se/billig-mat" rel="noopener" target="_blank">Billig mat – tips</a></li></ul>
-<div class="tips">
-<b>💡 Tips &amp; Inspiration</b><br/> <b>Vardagstips</b>
-<ul>
-<li>En enkel rutin för tvätt kan göra att det känns lättare.</li>
-<li>Att dela upp städningen i små steg kan underlätta.</li>
-<li>När du vill spara tid: tvätta när tvättstugan är ledig.</li>
-</ul>
+<div class="link-item" data-fav-cat="Hälsa" data-fav-icon="💚" data-fav-id="umo-orebro" data-fav-name="Region Örebro – vård för unga" data-fav-url="https://www.regionorebrolan.se/">
+<span class="li-ic">💚</span>
+<a class="li-tx" href="https://www.regionorebrolan.se/" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-umo-orebro">Region Örebro – vård för unga</span>
+<span class="li-desc" data-i18n="link-umo-orebro-desc">Hitta ungdomsmottagning och annan vård i Örebro län. Sök på sidan.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
 </div>
-</section>
-<!-- Mat & hushåll -->
-<section class="cat-section" id="mat">
-<h3>🍲 Mat &amp; hushåll</h3>
-<p>Budget, recept, planering.</p>
-<ul>
-<li><a href="https://www.ica.se/recept/" rel="noopener" target="_blank">Recept – ICA</a></li>
-<li><a href="https://www.coop.se/recept/" rel="noopener" target="_blank">Recept – Coop</a></li>
-<li><a href="https://www.ica.se/erbjudanden/student/" rel="noopener" target="_blank">ICA Student – erbjudanden</a></li>
-</ul>
-<div class="tips">
-<b>💡 Tips &amp; Inspiration</b><br/> <b>Smarta mattips</b>
-<ul>
-<li>Basvaror och extrapriser kan ge mycket för pengarna.</li>
-<li>Storkok &amp; frys kan spara både tid och pengar.</li>
-<li>En enkel veckomeny kan underlätta när du vill planera.</li>
-<li>Att handla mätt kan göra att kostnaden blir lägre.</li>
-</ul>
 </div>
-</section>
-<!-- Bank -->
-<section class="cat-section" id="bank">
-<h3>💳 Bank &amp; betalningar</h3>
-<p>BankID, abonnemang, skulder.</p>
-<ul>
-<li><a href="https://www.bankid.com/" rel="noopener" target="_blank">BankID – officiell</a></li>
-<li><a href="https://www.hallakonsument.se" rel="noopener" target="_blank">Hallå konsument – abonnemang</a></li>
-<li><a href="https://www.kronofogden.se" rel="noopener" target="_blank">Kronofogden – skulder</a></li>
-</ul>
-<div class="tips">
-<b>💡 Tips &amp; Inspiration</b><br/> <b>Betalningstips</b>
-<ul>
-<li>Ett tips är att avsluta onödiga abonnemang.</li>
-<li>E‑faktura/autogiro kan göra betalningar enklare att sköta.</li>
-</ul>
+<div class="link-item" data-fav-cat="Hälsa" data-fav-icon="💚" data-fav-id="umo" data-fav-name="UMO – Ungdomsmottagning online" data-fav-url="https://www.umo.se">
+<span class="li-ic">💚</span>
+<a class="li-tx" href="https://www.umo.se" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-umo">UMO – Ungdomsmottagning online</span>
+<span class="li-desc" data-i18n="link-umo-desc">Sex, relationer, hälsa och identitet för unga upp till 25 år.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
 </div>
-</section>
-<!-- Studier -->
-<section class="cat-section" id="studier">
-<h3>🎓 Studier &amp; utbildning</h3>
-<p>Komvux, SFI, antagning.</p>
-<ul>
-<li><a href="https://www.orebro.se/komvux" rel="noopener" target="_blank">Komvux Örebro</a></li>
-<li><a href="https://antagning.se" rel="noopener" target="_blank">Antagning.se</a></li>
-<li><a href="https://pomodorometoden.se/" rel="noopener" target="_blank">Pomodorometoden – så funkar den</a></li>
-<li><a href="https://www.oru.se/utbildning/jag-ar-student/stod-under-studietiden/studieteknik/" rel="noopener" target="_blank">Studieteknik – Örebro universitet</a></li>
-<li><a href="https://www.edx.org/" rel="noopener" target="_blank">edX – gratis onlinekurser</a></li>
-<li><a href="https://www.coursera.org/" rel="noopener" target="_blank">Coursera – kurser &amp; certifikat</a></li>
-<li><a href="https://www.orebro.se/barn--utbildning/utbildning-for-vuxna.html" rel="noopener" target="_blank">Örebro kommun – Utbildning för vuxna</a></li>
-<li><a href="https://www.umo.se/vald-och-krankningar/stod-om-du-ar-utsatt/skyddat-boende/" rel="noopener" target="_blank">Flytta hemifrån – UMO</a></li></ul>
-<div class="tips">
-<b>💡 Tips &amp; Inspiration</b><br/> <b>Pluggtips</b>
-<ul>
-<li>Det kan vara hjälpsamt att testa Pomodorometoden – korta fokuspass med pauser.</li>
-<li>7–8 timmars sömn brukar stödja minnet.</li>
-<li>Anteckningar för hand kan göra inlärningen lättare.</li>
-<li>En lugn plats, gärna samma tid, kan underlätta fokus.</li>
-<li>En enkel veckoplanering kan göra studierna tydligare.</li>
-<li>Plugga ihop med andra kan vara hjälpsamt och roligare.</li>
-</ul>
 </div>
-</section>
-<!-- Digital vardag -->
-<section class="cat-section" id="digital">
-<h3>📱 Digital vardag</h3>
-<p>Säkerhet &amp; e-tjänster.</p>
-<ul>
-<li><a href="https://internetstiftelsen.se/" rel="noopener" target="_blank">Internetstiftelsen – Digital kunskap &amp; säkerhet</a></li>
-<li><a href="https://www.krisinformation.se/forbered-dig/internetsakerhet/din-egen-informationssakerhet" rel="noopener" target="_blank">Krisinformation.se – Din egen informationssäkerhet</a></li>
-</ul>
-<div class="tips">
-<b>💡 Tips &amp; Inspiration</b><br/> <b>Säkert &amp; smart</b>
-<ul>
-<li>Lämna aldrig ut din BankID‑kod.</li>
-<li>Skärmtidsgränser kan vara hjälpsamma om mobilen tar mycket tid.</li>
-<li>Säkerhetskopiera gärna viktiga foton/dokument i molnet.</li>
-<li>Var uppmärksam på länkar i mejl/SMS (phishing).</li>
-</ul>
 </div>
-<div class="tips">
-<b>💡 Tips &amp; Inspiration</b><br/>
-        Var försiktig med vad du delar på nätet – tänk efter före du klickar.
-      </div>
-</section>
-<!-- Kontaktperson -->
-<section class="cat-section" id="kontaktperson">
-<h3>🤝 Kontaktperson</h3>
-<p><b>Vad är en kontaktperson?</b> En person som kommunen utser för att ge socialt stöd – t.ex. följa med på aktiviteter, hjälpa med läxor eller vara ett tryggt sällskap.
-      Du ansöker via kommunen och insatsen beslutas av socialtjänsten.</p>
-<ul>
-<li><a href="https://www.orebro.se/omsorg--stod/stod-till-barn-och-unga/insatser-for-barn-och-unga/kontaktperson.html" rel="noopener" target="_blank">Örebro – kontaktperson</a></li>
-</ul>
-</section>
-<!-- Viktiga nummer -->
-<section class="cat-section" id="viktiga">
-<h3>☎️ Viktiga nummer</h3>
-<p>Snabbt att ringa.</p>
-<ul>
-<li><a href="tel:112"><b>112</b> – Akut</a></li>
-<li><a href="tel:1177"><b>1177</b> – Sjukvårdsrådgivning</a></li>
-<li><a href="tel:11414"><b>114 14</b> – Polis (icke akut)</a></li>
-<li><a href="tel:+4619211000"><b>Örebro Servicecenter</b> – 019-21 10 00</a></li>
-<li><a href="https://www.orebro.se/omsorg--stod/stod-i-akuta-situationer/socialjouren.html" rel="noopener" target="_blank"><b>Socialjouren</b> – kväll/helg (Örebro)</a></li>
-</ul>
-</section>
-<!-- Aktiviteter -->
-<section class="cat-section inspire" id="aktiviteter">
-<h3>🌟 Aktiviteter &amp; fritid</h3>
-<p>Föreningar, hobbyer och gemenskap – när du känner för det.</p>
-<ul>
-<li><a href="https://www.visitorebro.se/se-gora/gratis-aktiviteter" rel="noopener" target="_blank">Gratis aktiviteter – Visit Örebro</a></li>
-<li><a href="https://www.orebro.se/kultur--fritid/fritid--aktiviteter.html" rel="noopener" target="_blank">Fritid &amp; aktiviteter – Örebro.se</a></li>
-<li><a href="https://extra.orebro.se/fritidsboost.4.35fa03b9193903fa3363dfd.html" rel="noopener" target="_blank">Fritidsboost – Örebro</a></li>
-<li><a href="https://extra.orebro.se/kulturskolan.4.71003a4d1528ca6d06a2bd7.html" rel="noopener" target="_blank">Kulturskolan – Örebro</a></li>
-<li><a href="https://www.orebro.se/kultur--fritid/fritid--aktiviteter/funkissommar.html" rel="noopener" target="_blank">Funkissommar – Örebro</a></li>
-<li><a href="https://extra.orebro.se/lovorebro.4.7c3e9c6018120e0601efaff.html" rel="noopener" target="_blank">LovÖrebro</a></li>
-<li><a href="https://www.orebro.se/kultur--fritid/fritid--aktiviteter/fiske--batliv.html" rel="noopener" target="_blank">Fiske &amp; båtliv – Örebro</a></li>
-</ul>
-<div class="tips">
-<b>💡 Tips &amp; Inspiration</b><br/> <b>Inspiration</b>
-<ul>
-<li>Prova en ny aktivitet när du känner för det – det kan ge nya upplevelser och vänner.</li>
-<li>Att gå med i en förening kan göra det lättare att hitta gemenskap.</li>
-<li>Saknar du utrustning? Det kan vara möjligt att låna på Fritidsbanken.</li>
-<li>Fråga gärna din kommun eller stödperson om trygga ställen och tips.</li>
-<li>💡 Prova gärna en gratis aktivitet först – det är ett enkelt sätt att utforska något nytt utan att det kostar pengar.</li>
-<li>💡 Kom ihåg: det viktigaste är inte hur ofta du gör en aktivitet, utan att du gör det när du själv känner för det.</li>
-</ul>
+<div class="link-group">
+<div class="link-group-title" data-i18n="lg-halsa-psykisk">Psykisk hälsa</div>
+<div class="link-item" data-fav-cat="Hälsa" data-fav-icon="🫂" data-fav-id="mind" data-fav-name="Mind – Självmordslinjen" data-fav-url="https://mind.se">
+<span class="li-ic">🫂</span>
+<a class="li-tx" href="https://mind.se" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-mind">Mind – Självmordslinjen &amp; Äldrelinjen</span>
+<span class="li-desc" data-i18n="link-mind-desc">Samtal, chatt och mail med utbildade samtalspersoner. Gratis &amp; anonymt.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
 </div>
-</section>
-
+</div>
+<div class="link-item" data-fav-cat="Hälsa" data-fav-icon="🌈" data-fav-id="bris" data-fav-name="BRIS – Barnens rätt i samhället" data-fav-url="https://www.bris.se">
+<span class="li-ic">🌈</span>
+<a class="li-tx" href="https://www.bris.se" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-bris">BRIS – Barnens rätt i samhället</span>
+<span class="li-desc" data-i18n="link-bris-desc">För barn och unga under 18. Ring 116 111, chatt eller mail.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+<div class="link-item" data-fav-cat="Hälsa" data-fav-icon="🧩" data-fav-id="youmo" data-fav-name="Youmo – psykisk hälsa för nyanlända" data-fav-url="https://www.youmo.se">
+<span class="li-ic">🧩</span>
+<a class="li-tx" href="https://www.youmo.se" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-youmo">Youmo – psykisk hälsa för nyanlända</span>
+<span class="li-desc" data-i18n="link-youmo-desc">Information om psykisk hälsa på flera språk.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+</div>
+<div class="link-group">
+<div class="link-group-title" data-i18n="lg-halsa-beroende">Beroende &amp; droger</div>
+<div class="link-item" data-fav-cat="Hälsa" data-fav-icon="💊" data-fav-id="drugsmart" data-fav-name="Drugsmart" data-fav-url="https://www.drugsmart.se">
+<span class="li-ic">💊</span>
+<a class="li-tx" href="https://www.drugsmart.se" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-drugsmart">Drugsmart</span>
+<span class="li-desc" data-i18n="link-drugsmart-desc">Fakta om droger, alkohol och beroende för unga.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+<div class="link-item" data-fav-cat="Hälsa" data-fav-icon="🤝" data-fav-id="iogt" data-fav-name="IOGT-NTO – vid beroende" data-fav-url="https://www.iogt.se">
+<span class="li-ic">🤝</span>
+<a class="li-tx" href="https://www.iogt.se" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-iogt">IOGT-NTO – vid beroende</span>
+<span class="li-desc" data-i18n="link-iogt-desc">Information och vägledning för dig eller någon nära som har problem med alkohol eller droger.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+<div class="link-item" data-fav-cat="Hälsa" data-fav-icon="💚" data-fav-id="maria-ungdom" data-fav-name="Maria Ungdom Örebro" data-fav-url="https://www.1177.se/Orebrolan/hitta-vard/kontaktkort/Maria-Ungdom-Orebro/">
+<span class="li-ic">💚</span>
+<a class="li-tx" href="https://www.1177.se/Orebrolan/hitta-vard/kontaktkort/Maria-Ungdom-Orebro/" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-maria-ungdom">Maria Ungdom Örebro</span>
+<span class="li-desc" data-i18n="link-maria-ungdom-desc">Stöd för unga upp till 21 år med frågor om alkohol, droger eller spel. Gratis och anonymt.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+</div>
+<div class="link-group">
+<div class="link-group-title" data-i18n="lg-halsa-trygghet">Trygghet &amp; rättigheter</div>
+<div class="link-item" data-fav-cat="Hälsa" data-fav-icon="⚖️" data-fav-id="brottsoffermynd" data-fav-name="Brottsoffermyndigheten" data-fav-url="https://www.brottsoffermyndigheten.se">
+<span class="li-ic">⚖️</span>
+<a class="li-tx" href="https://www.brottsoffermyndigheten.se" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-brottsoffermynd">Brottsoffermyndigheten</span>
+<span class="li-desc" data-i18n="link-brottsoffermynd-desc">Information och ersättning om du blivit utsatt för brott.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+<div class="link-item" data-fav-cat="Hälsa" data-fav-icon="💜" data-fav-id="kvinnofrid" data-fav-name="Kvinnofridslinjen" data-fav-url="tel:0205050">
+<span class="li-ic">💜</span>
+<a class="li-tx" href="tel:0205050">
+<span class="li-name" data-i18n="link-kvinnofrid">Kvinnofridslinjen – 020-50 50 50</span>
+<span class="li-desc" data-i18n="link-kvinnofrid-desc">Vid våld i nära relationer. Gratis, anonymt, dygnet runt.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+</div>
+</div>
+<!-- ═══ EKONOMI ═══ -->
+<div class="cat-section wrap" id="cat-ekonomi">
+<div class="cat-section-header">
+<span class="cat-section-ic">💸</span>
+<div><div class="cat-section-title" data-i18n="sec-ekonomi">Ekonomi</div><div class="cat-section-sub" data-i18n="sec-ekonomi-sub">Bidrag, budget och privatekonomi</div></div>
+</div>
+<div class="info-box" data-i18n="sec-ekonomi-info"><strong>Tips:</strong> Slå på autogiro för hyra och el — undviker sena avgifter och ger bättre koll.</div>
+<div class="link-group">
+<div class="link-group-title" data-i18n="lg-ekon-bidrag">Bidrag &amp; ersättningar</div>
+<div class="link-item" data-fav-cat="Ekonomi" data-fav-icon="🏛️" data-fav-id="fk" data-fav-name="Försäkringskassan" data-fav-url="https://www.forsakringskassan.se">
+<span class="li-ic">🏛️</span>
+<a class="li-tx" href="https://www.forsakringskassan.se" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-fk">Försäkringskassan</span>
+<span class="li-desc" data-i18n="link-fk-desc">Sjukpenning, bostadsbidrag, föräldrapenning och mycket mer.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+<div class="link-item" data-fav-cat="Ekonomi" data-fav-icon="🏠" data-fav-id="bostadsbidrag" data-fav-name="Bostadsbidrag" data-fav-url="https://www.forsakringskassan.se/privatperson/arbetssokande/bostadsbidrag">
+<span class="li-ic">🏠</span>
+<a class="li-tx" href="https://www.forsakringskassan.se/privatperson/arbetssokande/bostadsbidrag" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-bostadsbidrag">Bostadsbidrag</span>
+<span class="li-desc" data-i18n="link-bostadsbidrag-desc">Bidrag till din boendekostnad om du har låg inkomst. Ansök via Försäkringskassan.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+<div class="link-item" data-fav-cat="Ekonomi" data-fav-icon="💵" data-fav-id="bistand" data-fav-name="Pengar & bidrag – Örebro" data-fav-url="https://www.orebro.se/omsorg--stod/pengar--bidrag.html">
+<span class="li-ic">💵</span>
+<a class="li-tx" href="https://www.orebro.se/omsorg--stod/pengar--bidrag.html" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-bistand">Pengar & bidrag – Örebro kommun</span>
+<span class="li-desc" data-i18n="link-bistand-desc">Information om ekonomiskt stöd och bidrag via Örebro kommun.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+</div>
+<div class="link-group">
+<div class="link-group-title" data-i18n="lg-ekon-skuld">Skulder &amp; betalningsproblem</div>
+<div class="link-item" data-fav-cat="Ekonomi" data-fav-icon="⚖️" data-fav-id="kfm" data-fav-name="Kronofogden" data-fav-url="https://www.kronofogden.se">
+<span class="li-ic">⚖️</span>
+<a class="li-tx" href="https://www.kronofogden.se" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-kfm">Kronofogden</span>
+<span class="li-desc" data-i18n="link-kfm-desc">Information om skulder, betalningsanmärkningar och skuldsanering.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+<div class="link-item" data-fav-cat="Ekonomi" data-fav-icon="📊" data-fav-id="budget-skuld" data-fav-name="Budget- och skuldrådgivning Örebro" data-fav-url="https://www.orebro.se/omsorg--stod/pengar--bidrag/budget---skuldradgivning.html">
+<span class="li-ic">📊</span>
+<a class="li-tx" href="https://www.orebro.se/omsorg--stod/pengar--bidrag/budget---skuldradgivning.html" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-budget-skuld">Budget- och skuldrådgivning Örebro</span>
+<span class="li-desc" data-i18n="link-budget-skuld-desc">Gratis rådgivning om ekonomi och skulder från Örebro kommun.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+</div>
+<div class="link-group">
+<div class="link-group-title" data-i18n="lg-ekon-spara">Spara &amp; budgetera</div>
+<div class="calc-box">
+<div data-i18n="calc-title" style="font-size:13px;font-weight:600;margin-bottom:10px">💰 Sparräknare</div>
+<div class="calc-row">
+<input id="saveInput" min="0" placeholder="Kr per månad" type="number"/>
+<button data-i18n="calc-btn" onclick="calcSave()">Räkna</button>
+</div>
+<div class="calc-result" id="saveResult"></div>
+<div class="calc-motivation" id="saveMotivation"></div>
+</div>
+<div class="link-item" data-fav-cat="Ekonomi" data-fav-icon="📋" data-fav-id="budget-kv" data-fav-name="Konsumentverket – budgetkalkyl" data-fav-url="https://www.konsumentverket.se/ekonomi/budgetkalkylen-att-gora-en-budget/">
+<span class="li-ic">📋</span>
+<a class="li-tx" href="https://www.konsumentverket.se/ekonomi/budgetkalkylen-att-gora-en-budget/" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-budget">Konsumentverket – budgetkalkyl</span>
+<span class="li-desc" data-i18n="link-budget-desc">Gör en budget och se vad ett rimligt liv kostar.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+</div>
+</div>
+<!-- ═══ JOBB ═══ -->
+<div class="cat-section wrap" id="cat-jobb">
+<div class="cat-section-header">
+<span class="cat-section-ic">💼</span>
+<div><div class="cat-section-title" data-i18n="sec-jobb">Jobb &amp; karriär</div><div class="cat-section-sub" data-i18n="sec-jobb-sub">Hitta jobb, CV och intervjutips</div></div>
+</div>
+<div class="info-box" data-i18n="sec-jobb-info"><strong>Tips:</strong> Registrera dig på Arbetsförmedlingen tidigt — det ger tillgång till fler resurser och insatser.</div>
+<div class="link-group">
+<div class="link-group-title" data-i18n="lg-jobb-soka">Söka jobb</div>
+<div class="link-item" data-fav-cat="Jobb" data-fav-icon="💼" data-fav-id="af" data-fav-name="Arbetsförmedlingen" data-fav-url="https://arbetsformedlingen.se">
+<span class="li-ic">💼</span>
+<a class="li-tx" href="https://arbetsformedlingen.se" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-af">Arbetsförmedlingen</span>
+<span class="li-desc" data-i18n="link-af-desc">Registrera dig, sök jobb och få stöd i din jobbsökning.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+<div class="link-item" data-fav-cat="Jobb" data-fav-icon="🔍" data-fav-id="platsbanken" data-fav-name="Platsbanken" data-fav-url="https://arbetsformedlingen.se/platsbanken">
+<span class="li-ic">🔍</span>
+<a class="li-tx" href="https://arbetsformedlingen.se/platsbanken" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-platsbanken">Platsbanken</span>
+<span class="li-desc" data-i18n="link-platsbanken-desc">Sök bland tusentals lediga jobb i hela Sverige.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+<div class="link-item" data-fav-cat="Jobb" data-fav-icon="💼" data-fav-id="linkedin" data-fav-name="LinkedIn" data-fav-url="https://www.linkedin.com">
+<span class="li-ic">💼</span>
+<a class="li-tx" href="https://www.linkedin.com" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-linkedin">LinkedIn</span>
+<span class="li-desc" data-i18n="link-linkedin-desc">Professionellt nätverk. Bygg din profil och hitta jobb.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+</div>
+<div class="link-group">
+<div class="link-group-title" data-i18n="lg-jobb-cv">CV &amp; ansökan</div>
+<div class="link-item" data-fav-cat="Jobb" data-fav-icon="📝" data-fav-id="cv-tips" data-fav-name="CV-tips från Arbetsförmedlingen" data-fav-url="https://arbetsformedlingen.se/for-arbetssokande/cv-ansokan-och-intervju/skriva-cv">
+<span class="li-ic">📝</span>
+<a class="li-tx" href="https://arbetsformedlingen.se/for-arbetssokande/cv-ansokan-och-intervju/skriva-cv" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-cv-tips">CV-tips från Arbetsförmedlingen</span>
+<span class="li-desc" data-i18n="link-cv-tips-desc">Hur du skriver ett bra CV och personligt brev.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+</div>
+<div class="link-group">
+<div class="link-group-title" data-i18n="lg-jobb-ratt">Dina rättigheter på jobbet</div>
+<div class="link-item" data-fav-cat="Jobb" data-fav-icon="⚖️" data-fav-id="do" data-fav-name="Diskrimineringsombudsmannen" data-fav-url="https://www.do.se">
+<span class="li-ic">⚖️</span>
+<a class="li-tx" href="https://www.do.se" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-do">Diskrimineringsombudsmannen (DO)</span>
+<span class="li-desc" data-i18n="link-do-desc">Anmäl diskriminering på jobbet.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+</div>
+</div>
+<!-- ═══ BOENDE ═══ -->
+<div class="cat-section wrap" id="cat-boende">
+<div class="cat-section-header">
+<span class="cat-section-ic">🏡</span>
+<div><div class="cat-section-title" data-i18n="sec-boende">Boende</div><div class="cat-section-sub" data-i18n="sec-boende-sub">Hyra, kontrakt och bostadsrättigheter</div></div>
+</div>
+<div class="info-box" data-i18n="sec-boende-info"><strong>Kom ihåg:</strong> Ställ dig i ÖBOs kö så tidigt som möjligt — det är gratis från 16 år. Privata hyresvärdar som Behrn och Söderberg kräver ingen kötid.</div>
+<div class="link-group">
+<div class="link-group-title" data-i18n="lg-boende-hitta">Hitta bostad</div>
+<div class="link-item" data-fav-cat="Boende" data-fav-icon="🏠" data-fav-id="obo" data-fav-name="ÖBO – Bostadskö" data-fav-url="https://www.obo.se">
+<span class="li-ic">🏠</span>
+<a class="li-tx" href="https://www.obo.se" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-obo">ÖBO – Bostadskö</span>
+<span class="li-desc" data-i18n="link-obo-desc">Kommunala bostäder i Örebro. Gratis kö från 16 år.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+<div class="link-item" data-fav-cat="Boende" data-fav-icon="🔍" data-fav-id="blocket-bostad" data-fav-name="Blocket Bostad" data-fav-url="https://www.blocket.se/bostad">
+<span class="li-ic">🔍</span>
+<a class="li-tx" href="https://www.blocket.se/bostad" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-blocket">Blocket Bostad</span>
+<span class="li-desc" data-i18n="link-blocket-desc">Hitta andrahandsboenden och privata hyresvärdar.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+</div>
+<div class="link-group">
+<div class="link-group-title" data-i18n="lg-boende-ratt">Hyresgästrättigheter</div>
+<div class="link-item" data-fav-cat="Boende" data-fav-icon="🏢" data-fav-id="hyresgast" data-fav-name="Hyresgästföreningen" data-fav-url="https://www.hyresgastforeningen.se">
+<span class="li-ic">🏢</span>
+<a class="li-tx" href="https://www.hyresgastforeningen.se" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-hyresgast">Hyresgästföreningen</span>
+<span class="li-desc" data-i18n="link-hyresgast-desc">Dina rättigheter som hyresgäst. Juridisk hjälp och rådgivning.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+</div>
+</div>
+<!-- ═══ STUDIER ═══ -->
+<div class="cat-section wrap" id="cat-studier">
+<div class="cat-section-header">
+<span class="cat-section-ic">🎓</span>
+<div><div class="cat-section-title" data-i18n="sec-studier">Studier</div><div class="cat-section-sub" data-i18n="sec-studier-sub">CSN, antagning och utbildning</div></div>
+</div>
+<div class="info-box" data-i18n="sec-studier-info"><strong>Bra att veta:</strong> CSN ger studiebidrag på 1 250 kr/månad för gymnasiet. Ansök på csn.se — finns på engelska.</div>
+<div class="link-group">
+<div class="link-group-title" data-i18n="lg-studier-stod">Studiestöd</div>
+<div class="link-item" data-fav-cat="Studier" data-fav-icon="🎓" data-fav-id="csn" data-fav-name="CSN" data-fav-url="https://www.csn.se">
+<span class="li-ic">🎓</span>
+<a class="li-tx" href="https://www.csn.se" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-csn">CSN – Studiestöd</span>
+<span class="li-desc" data-i18n="link-csn-desc">Ansök om studiebidrag och studielån.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+</div>
+<div class="link-group">
+<div class="link-group-title" data-i18n="lg-studier-soka">Söka utbildning</div>
+<div class="link-item" data-fav-cat="Studier" data-fav-icon="📚" data-fav-id="antagning" data-fav-name="Antagning.se" data-fav-url="https://www.antagning.se">
+<span class="li-ic">📚</span>
+<a class="li-tx" href="https://www.antagning.se" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-antagning">Antagning.se</span>
+<span class="li-desc" data-i18n="link-antagning-desc">Sök till universitet och högskola i Sverige.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+<div class="link-item" data-fav-cat="Studier" data-fav-icon="📖" data-fav-id="komvux" data-fav-name="Vuxenutbildning Örebro" data-fav-url="https://www.orebro.se/barn--utbildning/utbildning-for-vuxna/utbildningar.html">
+<span class="li-ic">📖</span>
+<a class="li-tx" href="https://www.orebro.se/barn--utbildning/utbildning-for-vuxna/utbildningar.html" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-komvux">Vuxenutbildning Örebro</span>
+<span class="li-desc" data-i18n="link-komvux-desc">Komvux och andra utbildningar för vuxna i Örebro.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+</div>
+</div>
+<!-- ═══ BANK ═══ -->
+<div class="cat-section wrap" id="cat-bank">
+<div class="cat-section-header">
+<span class="cat-section-ic">💳</span>
+<div><div class="cat-section-title" data-i18n="sec-bank">Bank &amp; betalningar</div><div class="cat-section-sub" data-i18n="sec-bank-sub">BankID, konto och ekonomi</div></div>
+</div>
+<div class="info-box" data-i18n="sec-bank-info"><strong>Viktigt:</strong> BankID behövs för nästan alla myndigheter online. Skaffa det via din bank — du behöver legitimation.</div>
+<div class="link-group">
+<div class="link-group-title" data-i18n="lg-bank-digital">Digitala verktyg</div>
+<div class="link-item" data-fav-cat="Bank" data-fav-icon="🔐" data-fav-id="bankid" data-fav-name="BankID" data-fav-url="https://www.bankid.com">
+<span class="li-ic">🔐</span>
+<a class="li-tx" href="https://www.bankid.com" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-bankid">BankID</span>
+<span class="li-desc" data-i18n="link-bankid-desc">Digital legitimation för att logga in hos myndigheter och banker.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+<div class="link-item" data-fav-cat="Bank" data-fav-icon="💸" data-fav-id="swish" data-fav-name="Swish" data-fav-url="https://www.swish.nu">
+<span class="li-ic">💸</span>
+<a class="li-tx" href="https://www.swish.nu" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-swish">Swish</span>
+<span class="li-desc" data-i18n="link-swish-desc">Skicka och ta emot pengar direkt med mobilen.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+</div>
+</div>
+<!-- ═══ DIGITAL ═══ -->
+<div class="cat-section wrap" id="cat-digital">
+<div class="cat-section-header">
+<span class="cat-section-ic">📱</span>
+<div><div class="cat-section-title" data-i18n="sec-digital">Digital vardag</div><div class="cat-section-sub" data-i18n="sec-digital-sub">Mina sidor, e-tjänster och BankID</div></div>
+</div>
+<div class="info-box" data-i18n="sec-digital-info"><strong>Bra att veta:</strong> "Mina sidor" är din personliga inloggning hos myndigheter. Du behöver BankID för att logga in.</div>
+<div class="link-group">
+<div class="link-group-title" data-i18n="lg-digital-myndighet">Myndigheternas e-tjänster</div>
+<div class="link-item" data-fav-cat="Digital" data-fav-icon="🏛️" data-fav-id="fk-mina" data-fav-name="Försäkringskassan" data-fav-url="https://www.forsakringskassan.se/">
+<span class="li-ic">🏛️</span>
+<a class="li-tx" href="https://www.forsakringskassan.se/" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-fk-mina">Försäkringskassan</span>
+<span class="li-desc" data-i18n="link-fk-mina-desc">Logga in, ansök om bidrag och håll koll på dina ärenden.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+<div class="link-item" data-fav-cat="Digital" data-fav-icon="💼" data-fav-id="af-mina" data-fav-name="Logga in – Arbetsförmedlingen" data-fav-url="https://arbetsformedlingen.se/loggain">
+<span class="li-ic">💼</span>
+<a class="li-tx" href="https://arbetsformedlingen.se/loggain" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-af-mina">Logga in – Arbetsförmedlingen</span>
+<span class="li-desc" data-i18n="link-af-mina-desc">Registrera dig som arbetssökande och se dina ärenden.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+</div>
+<div class="link-group">
+<div class="link-group-title" data-i18n="lg-digital-sakerhet">Säkerhet online</div>
+<div class="link-item" data-fav-cat="Digital" data-fav-icon="🔒" data-fav-id="iis" data-fav-name="IIS – Säkerhet på nätet" data-fav-url="https://www.iis.se/sakerhet">
+<span class="li-ic">🔒</span>
+<a class="li-tx" href="https://www.iis.se/sakerhet" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-iis">IIS – Säkerhet på nätet</span>
+<span class="li-desc" data-i18n="link-iis-desc">Tips om lösenord, bedrägerier och hur du skyddar dig online.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+</div>
+</div>
+<!-- ═══ VARDAG ═══ -->
+<div class="cat-section wrap" id="cat-vardag">
+<div class="cat-section-header">
+<span class="cat-section-ic">🧺</span>
+<div><div class="cat-section-title" data-i18n="sec-vardag">Vardag &amp; hemtips</div><div class="cat-section-sub" data-i18n="sec-vardag-sub">Mat, hushåll och praktiska tips</div></div>
+</div>
+<div class="info-box" data-i18n="sec-vardag-info"><strong>Tips:</strong> Matpriser varierar mycket mellan butiker. Willys och Lidl är ofta billigast för basvaror.</div>
+<div class="link-group">
+<div class="link-group-title" data-i18n="lg-vardag-mat">Mat &amp; hushåll</div>
+<div class="link-item" data-fav-cat="Vardag" data-fav-icon="🍳" data-fav-id="ica-recept" data-fav-name="ICA – Budgetrecept" data-fav-url="https://www.ica.se/recept/budgetrecept/">
+<span class="li-ic">🍳</span>
+<a class="li-tx" href="https://www.ica.se/recept/budgetrecept/" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-ica">ICA – Budgetrecept</span>
+<span class="li-desc" data-i18n="link-ica-desc">Smakliga recept för lite pengar. Filtrera på budget och tid.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+<div class="link-item" data-fav-cat="Vardag" data-fav-icon="🥗" data-fav-id="coop-recept" data-fav-name="Coop – Recept" data-fav-url="https://www.coop.se/recept/">
+<span class="li-ic">🥗</span>
+<a class="li-tx" href="https://www.coop.se/recept/" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-coop">Coop – Recept</span>
+<span class="li-desc" data-i18n="link-coop-desc">Recept och matinspiration från Coop.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+<div class="link-item" data-fav-cat="Vardag" data-fav-icon="🛒" data-fav-id="willys" data-fav-name="Willys – Erbjudanden" data-fav-url="https://www.willys.se/erbjudanden/butik">
+<span class="li-ic">🛒</span>
+<a class="li-tx" href="https://www.willys.se/erbjudanden/butik" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-willys">Willys – Erbjudanden</span>
+<span class="li-desc" data-i18n="link-willys-desc">Hitta veckans bästa erbjudanden nära dig.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+</div>
+</div>
+<!-- ═══ KONTAKT ═══ -->
+<div class="cat-section wrap" id="cat-kontakt">
+<div class="cat-section-header">
+<span class="cat-section-ic">🏛️</span>
+<div><div class="cat-section-title" data-i18n="sec-kontakt">Stöd från kommunen</div><div class="cat-section-sub" data-i18n="sec-kontakt-sub">Kontaktperson och socialt stöd i Örebro</div></div>
+</div>
+<div class="info-box" data-i18n="sec-kontakt-info"><strong>Bra att veta:</strong> Du kan ansöka om en kontaktperson via kommunen. Det är <strong>helt frivilligt och kostnadsfritt</strong>.</div>
+<div class="link-group">
+<div class="link-group-title" data-i18n="lg-kontakt-kommun">Örebro kommun</div>
+<div class="link-item" data-fav-cat="Stöd" data-fav-icon="🤝" data-fav-id="kontaktperson-kommun" data-fav-name="Kontaktperson – Örebro kommun" data-fav-url="https://www.orebro.se/omsorg--stod/funktionsnedsattning/stod--insatser/kontaktperson---funktionsnedsattning.html">
+<span class="li-ic">🤝</span>
+<a class="li-tx" href="https://www.orebro.se/omsorg--stod/funktionsnedsattning/stod--insatser/kontaktperson---funktionsnedsattning.html" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-kontaktperson">Kontaktperson – Örebro kommun</span>
+<span class="li-desc" data-i18n="link-kontaktperson-desc">Ansök om en kontaktperson som kan ge stöd i vardagen. Kostnadsfritt via kommunen.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+<div class="link-item" data-fav-cat="Stöd" data-fav-icon="📋" data-fav-id="bistand-ansokan" data-fav-name="Ansökan & biståndsbeslut" data-fav-url="https://www.orebro.se/omsorg--stod/stod-i-hemmet/ansokan--bistandsbeslut.html">
+<span class="li-ic">📋</span>
+<a class="li-tx" href="https://www.orebro.se/omsorg--stod/stod-i-hemmet/ansokan--bistandsbeslut.html" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-bistand-ansokan">Ansökan & biståndsbeslut</span>
+<span class="li-desc" data-i18n="link-bistand-ansokan-desc">Information om hur du ansöker om stöd och hjälp via Örebro kommun.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+</div>
+</div>
+<!-- ═══ AKTIVITETER ═══ -->
+<div class="cat-section wrap" id="cat-aktiviteter">
+<div class="cat-section-header">
+<span class="cat-section-ic">🌟</span>
+<div><div class="cat-section-title" data-i18n="sec-aktiviteter">Aktiviteter &amp; fritid</div><div class="cat-section-sub" data-i18n="sec-aktiviteter-sub">Föreningar, sport och kultur</div></div>
+</div>
+<div class="info-box" data-i18n="sec-aktiviteter-info"><strong>Tips:</strong> Örebro har över 20 gratis fritidsgårdar och mötesplatser! Fritidsboost erbjuder gratis aktiviteter för unga hela året.</div>
+<div class="link-group">
+<div class="link-group-title" data-i18n="lg-akt-hitta">Hitta aktiviteter</div>
+<div class="link-item" data-fav-cat="Aktiviteter" data-fav-icon="🏠" data-fav-id="fritidsgard" data-fav-name="Mötesplatser för unga" data-fav-url="https://www.orebro.se/kultur--fritid/fritid--aktiviteter/motesplatser/motesplatser-for-unga.html">
+<span class="li-ic">🏠</span>
+<a class="li-tx" href="https://www.orebro.se/kultur--fritid/fritid--aktiviteter/motesplatser/motesplatser-for-unga.html" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-fritidsgard">Mötesplatser för unga</span>
+<span class="li-desc" data-i18n="link-fritidsgard-desc">Fritidsgårdar och mötesplatser i Örebro. Gratis att besöka!</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+<div class="link-item" data-fav-cat="Aktiviteter" data-fav-icon="🚀" data-fav-id="fritidsboost" data-fav-name="Fritidsboost Örebro" data-fav-url="https://www.orebro.se/fritidsboost">
+<span class="li-ic">🚀</span>
+<a class="li-tx" href="https://www.orebro.se/fritidsboost" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-fritidsboost">Fritidsboost Örebro</span>
+<span class="li-desc" data-i18n="link-fritidsboost-desc">Gratis aktiviteter för unga i Örebro — dans, gaming, simning, sport och mer.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+</div>
+</div>
+<!-- ═══ TRANSPORT ═══ -->
+<div class="cat-section wrap" id="cat-transport">
+<div class="cat-section-header">
+<span class="cat-section-ic">🚌</span>
+<div><div class="cat-section-title" data-i18n="sec-transport">Transport</div><div class="cat-section-sub" data-i18n="sec-transport-sub">Buss, tåg och kollektivtrafik</div></div>
+</div>
+<div class="info-box" data-i18n="sec-transport-info"><strong>Tips:</strong> Köp månadskort på Länstrafiken — det är billigare än att köpa enstaka biljetter. Ungdomsrabatt finns för dig under 26 år!</div>
+<div class="link-group">
+<div class="link-group-title" data-i18n="lg-transport-lokalt">Lokalt i Örebro</div>
+<div class="link-item" data-fav-cat="Transport" data-fav-icon="🚌" data-fav-id="lt" data-fav-name="Länstrafiken Örebro" data-fav-url="https://www.lanstrafiken.se">
+<span class="li-ic">🚌</span>
+<a class="li-tx" href="https://www.lanstrafiken.se" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-lt">Länstrafiken Örebro</span>
+<span class="li-desc" data-i18n="link-lt-desc">Buss i Örebro stad och länet. Köp biljett i appen, online eller ombord med bankkort.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+</div>
+<div class="link-group">
+<div class="link-group-title" data-i18n="lg-transport-nationellt">Nationellt</div>
+<div class="link-item" data-fav-cat="Transport" data-fav-icon="🚆" data-fav-id="sj" data-fav-name="SJ – Tågbiljetter" data-fav-url="https://www.sj.se">
+<span class="li-ic">🚆</span>
+<a class="li-tx" href="https://www.sj.se" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-sj">SJ – Tågbiljetter</span>
+<span class="li-desc" data-i18n="link-sj-desc">Boka tåg i hela Sverige. Köp tidigt för bästa pris.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+<div class="link-item" data-fav-cat="Transport" data-fav-icon="🚍" data-fav-id="flixbus" data-fav-name="FlixBus" data-fav-url="https://www.flixbus.se">
+<span class="li-ic">🚍</span>
+<a class="li-tx" href="https://www.flixbus.se" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-flixbus">FlixBus</span>
+<span class="li-desc" data-i18n="link-flixbus-desc">Billiga bussar till och från Örebro. Ofta billigare än tåg för längre resor.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+</div>
+</div>
+<!-- ═══ RÄTTIGHETER ═══ -->
+<div class="cat-section wrap" id="cat-rattigheter">
+<div class="cat-section-header">
+<span class="cat-section-ic">⚖️</span>
+<div><div class="cat-section-title" data-i18n="sec-rattigheter">Dina rättigheter</div><div class="cat-section-sub" data-i18n="sec-rattigheter-sub">Diskriminering, rättshjälp och information</div></div>
+</div>
+<div class="info-box" data-i18n="sec-rattigheter-info"><strong>Bra att veta:</strong> Diskriminering är olagligt i Sverige. DO (Diskrimineringsombudsmannen) kan hjälpa dig anmäla.</div>
+<div class="link-group">
+<div class="link-group-title" data-i18n="lg-ratt-disk">Diskriminering</div>
+<div class="link-item" data-fav-cat="Rättigheter" data-fav-icon="⚖️" data-fav-id="do2" data-fav-name="Diskrimineringsombudsmannen" data-fav-url="https://www.do.se">
+<span class="li-ic">⚖️</span>
+<a class="li-tx" href="https://www.do.se" rel="noopener" target="_blank">
+<span class="li-name" data-i18n="link-do2">Diskrimineringsombudsmannen (DO)</span>
+<span class="li-desc" data-i18n="link-do2-desc">Anmäl diskriminering på jobbet, i skolan eller i samhället.</span>
+</a>
+<div class="li-actions">
+<button class="fav-btn" onclick="toggleFavorite(this)" title="Spara som favorit">☆</button>
+<span class="li-arrow">↗</span>
+</div>
+</div>
+</div>
+</div>
+<!-- ═══ VIKTIGA NUMMER ═══ -->
+<div class="cat-section wrap" id="cat-nummer">
+<div class="cat-section-header">
+<span class="cat-section-ic">☎️</span>
+<div><div class="cat-section-title" data-i18n="sec-nummer">Viktiga nummer</div><div class="cat-section-sub" data-i18n="sec-nummer-sub">Akut, vård och myndigheter</div></div>
+</div>
+<div class="info-box" data-i18n="sec-nummer-info"><strong>Viktigt:</strong> 112 fungerar alltid, även utan SIM-kort. 1177 har tolkar för de flesta språk.</div>
+<div class="num-grid">
+<a class="num-card" href="tel:112"><span class="nc-num">112</span><span class="nc-name" data-i18n="num-112">Nödsamtal (akut)</span></a>
+<a class="num-card" href="tel:1177"><span class="nc-num">1177</span><span class="nc-name" data-i18n="num-1177">Sjukvårdsrådgivning</span></a>
+<a class="num-card" href="tel:11414"><span class="nc-num">114 14</span><span class="nc-name" data-i18n="num-11414">Polis (ej akut)</span></a>
+<a class="num-card" href="tel:116111"><span class="nc-num">116 111</span><span class="nc-name" data-i18n="num-bris">BRIS (under 18)</span></a>
+<a class="num-card" href="tel:90101"><span class="nc-num">90 101</span><span class="nc-name" data-i18n="num-mind">Mind Självmordslinjen</span></a>
+<a class="num-card" href="tel:0200505050"><span class="nc-num">020-50 50 50</span><span class="nc-name" data-i18n="num-kvinnofrid">Kvinnofridslinjen</span></a>
+</div>
+</div>
+<!-- FEEDBACK MODAL -->
+<div id="feedbackModal">
+<div class="feedback-sheet">
+<div id="feedbackForm">
+<div class="feedback-header">
+<h3 data-i18n="fb-title">Skicka feedback</h3>
+<button class="feedback-close" onclick="closeFeedback()">×</button>
+</div>
+<div class="feedback-options">
+<div class="fb-opt" data-i18n="fb-opt-1" onclick="selectFbOpt(this,'Förslag')">💡 Förslag</div>
+<div class="fb-opt" data-i18n="fb-opt-2" onclick="selectFbOpt(this,'Fel')">🐛 Något fel</div>
+<div class="fb-opt" data-i18n="fb-opt-3" onclick="selectFbOpt(this,'Positivt')">💚 Positivt</div>
+<div class="fb-opt" data-i18n="fb-opt-4" onclick="selectFbOpt(this,'Övrigt')">💬 Övrigt</div>
+</div>
+<textarea data-i18n="fb-placeholder" id="fbText" placeholder="Skriv din feedback här..." rows="4"></textarea>
+<div class="feedback-consent">
+<input id="fbConsent" onchange="toggleSendBtn()" type="checkbox"/>
+<label data-i18n="fb-consent" for="fbConsent">Jag förstår att min feedback skickas anonymt till utvecklaren och kan användas för att förbättra appen.</label>
+</div>
+<button class="feedback-send" data-i18n="fb-send" disabled="" id="fbSendBtn" onclick="sendFeedback()">Skicka feedback</button>
+</div>
+<div class="feedback-thanks" id="feedbackThanks">
+<div class="ft-ic">💚</div>
+<p data-i18n="fb-thanks">Tack för din feedback!<br/>Din åsikt hjälper oss att göra StödGuiden bättre.</p>
+</div>
+</div>
+</div>
+<!-- ── AKUT BAR ── -->
+<div class="akut-bar">
+<a class="akut-left" data-i18n="akut-left" href="tel:112">🚨 Akut? Ring 112</a>
+<a class="akut-right" data-i18n="akut-right" href="https://www.1177.se" rel="noopener" target="_blank">Icke-akut: 1177 →</a>
+</div>
+<button id="upBtn" onclick="goHome()">↑</button>
+<!-- TOAST -->
+<div class="toast" id="toast">
+<span class="toast-icon">⭐</span>
+<span id="toastText">Sparad som favorit!</span>
 </div>
 <script>
-    function scrollTopInstant(){ try{ window.scrollTo(0,0); }catch(e){} }
-    function hideAll(){ document.querySelectorAll('.cat-section').forEach(s=>s.style.display='none'); }
-    function openCat(id){
-      var hv=document.getElementById('homeView'); if(hv) hv.style.display='none';
-      var bb=document.getElementById('backBar'); if(bb) bb.style.display='block';
-      hideAll(); var el=document.getElementById(id);
-      if(el){ el.style.display='block'; scrollTopInstant(); }
+// ═══ FAVORITES SYSTEM ═══
+let favorites = JSON.parse(localStorage.getItem('sg_favorites') || '[]');
+
+function getFavoriteData(linkItem) {
+  const link = linkItem.querySelector('a.li-tx');
+  return {
+    id: linkItem.dataset.favId,
+    name: linkItem.dataset.favName,
+    icon: linkItem.dataset.favIcon,
+    cat: linkItem.dataset.favCat,
+    url: link ? link.href : linkItem.dataset.favUrl
+  };
+}
+
+function isFavorite(id) {
+  return favorites.some(f => f.id === id);
+}
+
+function toggleFavorite(btn) {
+  event.preventDefault();
+  event.stopPropagation();
+  
+  const linkItem = btn.closest('.link-item');
+  const data = getFavoriteData(linkItem);
+  
+  if (isFavorite(data.id)) {
+    // Remove from favorites
+    favorites = favorites.filter(f => f.id !== data.id);
+    btn.classList.remove('is-favorite');
+    btn.innerHTML = '☆';
+    showToast('Borttagen från favoriter', '✕');
+  } else {
+    // Add to favorites
+    favorites.push(data);
+    btn.classList.add('is-favorite');
+    btn.innerHTML = '★';
+    showToast('Sparad som favorit!', '⭐');
+  }
+  
+  localStorage.setItem('sg_favorites', JSON.stringify(favorites));
+  renderFavorites();
+}
+
+function removeFavorite(id) {
+  event.preventDefault();
+  event.stopPropagation();
+  
+  favorites = favorites.filter(f => f.id !== id);
+  localStorage.setItem('sg_favorites', JSON.stringify(favorites));
+  
+  // Update button state in categories
+  const linkItem = document.querySelector(`[data-fav-id="${id}"]`);
+  if (linkItem) {
+    const btn = linkItem.querySelector('.fav-btn');
+    if (btn) {
+      btn.classList.remove('is-favorite');
+      btn.innerHTML = '☆';
     }
-    function goHome(){ hideAll(); var bb=document.getElementById('backBar'); if(bb) bb.style.display='none';
-      var hv=document.getElementById('homeView'); if(hv) hv.style.display='block'; var _sl=document.getElementById('snabblinks'); if(_sl) _sl.scrollIntoView({behavior:'smooth'}); }
-    var hemBtn=document.getElementById('btnHem'); if(hemBtn) hemBtn.addEventListener('click', goHome);
+  }
+  
+  showToast('Borttagen från favoriter', '✕');
+  renderFavorites();
+}
 
+function renderFavorites() {
+  const section = document.getElementById('favoritesSection');
+  const grid = document.getElementById('favoritesGrid');
+  const count = document.getElementById('favCount');
+  
+  if (favorites.length === 0) {
+    section.classList.remove('has-favorites');
+    return;
+  }
+  
+  section.classList.add('has-favorites');
+  count.textContent = favorites.length;
+  
+  grid.innerHTML = favorites.map(fav => `
+    <div class="fav-item">
+      <span class="fi-ic">${fav.icon}</span>
+      <a href="${fav.url}" target="_blank" rel="noopener" class="fi-tx">
+        <span class="fi-name">${fav.name}</span>
+        <span class="fi-cat">${fav.cat}</span>
+      </a>
+      <button class="fav-remove" onclick="removeFavorite('${fav.id}')" title="Ta bort">✕</button>
+      <span class="fi-arrow">↗</span>
+    </div>
+  `).join('');
+}
 
-
-    var askMap={
-      'hyra':'boende','hyreskontrakt':'boende','lägenhet':'boende','boende':'boende',
-      'jobb':'jobb','cv':'jobb','intervju':'jobb','platsbanken':'jobb',
-      'ekonomi':'ekonomi','csn':'ekonomi','bidrag':'ekonomi','kronofogden':'ekonomi','spara':'ekonomi',
-      '1177':'halsa','vård':'halsa','hälsa':'halsa','kontaktperson':'kontaktperson',
-      'bankid':'bank','bank':'bank','konto':'bank',
-      'studier':'studier','antagning':'studier','komvux':'studier','sfi':'studier',
-      'digital':'digital','skatteverket':'digital',
-      'tvätt':'vardag','tvättstuga':'vardag',
-      'mat':'mat','recept':'mat',
-      'viktiga nummer':'viktiga','112':'viktiga','polis':'viktiga',
-      'event':'events','evenemang':'events','konsert':'events','helgen':'events',
-      'aktivitet':'aktiviteter','aktiviteter':'aktiviteter','fritid':'aktiviteter','förening':'aktiviteter','hobby':'aktiviteter','gym':'aktiviteter','dans':'aktiviteter','musik':'aktiviteter','kurs':'aktiviteter'
-    };
-    var askInput=document.getElementById('askInput');
-    var askBtn=document.getElementById('askBtn');
-    var clearBtn=document.getElementById('clearBtn');
-    if(askBtn){ askBtn.addEventListener('click', function(){
-      var q=(askInput.value||'').toLowerCase().trim(), target=null;
-      if(askMap[q]) target=askMap[q]; else { for(var k in askMap){ if(q.indexOf(k)>-1){ target=askMap[k]; break; } } }
-      if(target){ openCat(target); } else { alert('Inget direkt svar – prova ett annat ord eller klicka en kategori.'); }
-    });}
-    if(clearBtn){ clearBtn.addEventListener('click', function(){ askInput.value=''; askInput.focus(); }); }
-
-    // Skjul den røde bjælke når tastaturet er åbent (mobilfix)
-    var footer = document.querySelector('.sgcp-footer-akut');
-    var allInputs = document.querySelectorAll('input, textarea');
-    allInputs.forEach(function(inp){
-      inp.addEventListener('focus', function(){
-        if(footer) footer.style.display='none';
-      });
-      inp.addEventListener('blur', function(){
-        setTimeout(function(){ if(footer) footer.style.display='flex'; }, 200);
-      });
-    });
-
-    var saveInput=document.getElementById('saveInput'), calcBtn=document.getElementById('calcBtn'), saveResult=document.getElementById('saveResult'), saveMotivation=document.getElementById('saveMotivation');
-    if(calcBtn){ calcBtn.addEventListener('click', function(){
-      var v=parseFloat(saveInput.value);
-      if(isNaN(v) || v<0){ saveResult.textContent='År: –'; if(saveMotivation) saveMotivation.textContent=''; return; }
-      var year=v*12; saveResult.textContent='År: ' + year.toLocaleString('sv-SE') + ' SEK';
-      var msg=''; if(year>=20000) msg='🔥 Grymt! Stark buffert – redo för oväntade kostnader.';
-      else if(year>=10000) msg='💪 Snyggt! Stabil buffert – kan vara fint för flytt eller dator.';
-      else if(year>=5000) msg='👏 Bra start! Kan räcka till månadskort, kurs eller resa.';
-      else if(year>0) msg='✨ Varje krona kan göra skillnad över tid.';
-      if(saveMotivation) saveMotivation.textContent=msg;
-    });}
-
-    
-    // Bottom up arrow logic
-    (function(){
-      var up=document.getElementById('pageUp');
-      function onScroll(){
-        if(!up) return;
-        up.style.display = (window.scrollY>400) ? 'block' : 'none';
+function initFavoriteButtons() {
+  document.querySelectorAll('.link-item').forEach(item => {
+    const id = item.dataset.favId;
+    if (id && isFavorite(id)) {
+      const btn = item.querySelector('.fav-btn');
+      if (btn) {
+        btn.classList.add('is-favorite');
+        btn.innerHTML = '★';
       }
-      window.addEventListener('scroll', onScroll, {passive:true});
-      if(up){
-        up.addEventListener('click', function(){
-          try{ goHome(); }catch(e){}
-          window.scrollTo({top:0, behavior:'smooth'});
-        });
+    }
+  });
+}
+
+function showToast(message, icon = '⭐') {
+  const toast = document.getElementById('toast');
+  const toastText = document.getElementById('toastText');
+  const toastIcon = toast.querySelector('.toast-icon');
+  
+  toastText.textContent = message;
+  toastIcon.textContent = icon;
+  toast.classList.add('show');
+  
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2000);
+}
+
+// ── ONBOARDING ──
+function closeOnboarding(){
+  var ob=document.getElementById('onboarding');
+  ob.classList.add('hidden');
+  localStorage.setItem('sg_seen','1');
+  setTimeout(function(){ob.style.display='none'},500);
+}
+if(localStorage.getItem('sg_seen')){
+  var ob=document.getElementById('onboarding');
+  ob.style.display='none';
+}
+
+// ── ROTATING TIPS ──
+var tips=[
+  {sv:'Du kan ansöka om CSN redan från gymnasiet. Studiebidraget är 1 250 kr/månad och behovsprövat tillägg kan ge upp till 855 kr extra.',en:'You can apply for CSN student finance from high school. The grant is 1,250 kr/month. Apply at csn.se (English available).'},
+  {sv:'Ställ dig i ÖBOs bostadskö redan från 16 år — det är helt gratis och ger dig försprång när du ska flytta hemifrån.',en:'Join ÖBO housing queue from age 16 — it\'s free and gives you a head start when you move out.'},
+  {sv:'Vård är gratis i Örebro om du är under 20 år. Ring 1177 för rådgivning dygnet runt.',en:'Healthcare is free in Örebro if you\'re under 20. Call 1177 for 24/7 health advice (interpreters available).'},
+  {sv:'Med BankID kan du logga in på alla myndigheter, signera avtal och använda Swish. Skaffa det via din bank.',en:'With BankID you can access all government services, sign contracts, and use Swish. Get it through your bank.'},
+  {sv:'Registrera dig på Arbetsförmedlingen tidigt — även om du har jobb. Det ger tillgång till fler resurser om du behöver dem senare.',en:'Register at Arbetsförmedlingen (job agency) early — even if employed. It gives access to more resources if needed later.'},
+  {sv:'Kronofogden är inte bara för skulder — de ger också gratis rådgivning om hur du undviker ekonomiska problem.',en:'Kronofogden isn\'t just for debts — they also offer free advice on avoiding financial problems.'},
+  {sv:'Tryck på ⭐ vid en länk för att spara den som favorit — då hittar du den snabbt nästa gång!',en:'Tap ⭐ on any link to save it as a favorite — find it quickly next time!'}
+];
+var currentTipIndex=Math.floor(Math.random()*tips.length);
+var currentLang='sv';
+
+function showTip(){
+  var tipEl=document.getElementById('tipText');
+  if(tipEl){
+    tipEl.textContent=tips[currentTipIndex][currentLang||'sv'];
+  }
+}
+
+// ── NAVIGATION ──
+var currentCat=null;
+function openCat(id){
+  if(currentCat){
+    var prev=document.getElementById('cat-'+currentCat);
+    if(prev)prev.style.display='none';
+    var prevBtn=document.querySelector('.cat-btn.active');
+    if(prevBtn)prevBtn.classList.remove('active');
+  }
+  currentCat=id;
+  document.getElementById('homeView').style.display='none';
+  document.getElementById('backBar').style.display='block';
+  var sec=document.getElementById('cat-'+id);
+  if(sec){sec.style.display='block';window.scrollTo({top:0,behavior:'smooth'});}
+  var btn=document.querySelector('[onclick="openCat(\''+id+'\')"]');
+  if(btn)btn.classList.add('active');
+}
+function goHome(){
+  if(currentCat){
+    var sec=document.getElementById('cat-'+currentCat);
+    if(sec)sec.style.display='none';
+    currentCat=null;
+  }
+  document.getElementById('homeView').style.display='block';
+  document.getElementById('backBar').style.display='none';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── SEARCH ──
+var searchData=[
+  {cat:'halsa',catName:'Hälsa & vård',icon:'🧠',keywords:['hälsa','vård','sjuk','1177','bris','mind','psykisk','beroende','brott','umo','läkare','vårdcentral','depression','ångest']},
+  {cat:'ekonomi',catName:'Ekonomi',icon:'💸',keywords:['ekonomi','pengar','bidrag','skuld','csn','budget','spara','kronofogden','bostadsbidrag','socialbidrag','försäkringskassan','räkningar']},
+  {cat:'jobb',catName:'Jobb & karriär',icon:'💼',keywords:['jobb','arbete','cv','intervju','arbetsförmedlingen','lön','anställning','praktik','sommarjobb','karriär','linkedin','platsbanken']},
+  {cat:'boende',catName:'Boende',icon:'🏡',keywords:['boende','hyra','lägenhet','hyresrätt','kontrakt','bostadskö','andrahand','hyresgäst','blocket','flytta','bostadsbidrag']},
+  {cat:'studier',catName:'Studier',icon:'🎓',keywords:['studier','csn','antagning','gymnasium','högskola','komvux','sfi','studielån','studiebidrag','skola','utbildning']},
+  {cat:'bank',catName:'Bank & betalningar',icon:'💳',keywords:['bank','bankid','konto','swish','kort','betalning','skuld','kronofogden','id-kort','lån','kredit']},
+  {cat:'digital',catName:'Digital vardag',icon:'📱',keywords:['digital','bankid','mina sidor','e-tjänst','skatteverket','internet','online','dator','mobil','bedrägeri']},
+  {cat:'vardag',catName:'Vardag & hemtips',icon:'🧺',keywords:['vardag','mat','recept','tvätt','städ','transport','sl','sj','buss','tåg','hushåll','hemtips']},
+  {cat:'kontakt',catName:'Stöd från kommunen',icon:'🏛️',keywords:['kontaktperson','stöd','kommun','socialtjänst','bistånd','hjälp','kommunen','socialt stöd']},
+  {cat:'aktiviteter',catName:'Aktiviteter',icon:'🌟',keywords:['aktiviteter','fritid','sport','föreningar','kultur','idrott','musik','dans','gym']},
+  {cat:'transport',catName:'Transport',icon:'🚌',keywords:['transport','buss','tåg','länstrafiken','sj','kollektivtrafik','månadskort','resa','flixbus','resrobot','örebro c']},
+  {cat:'rattigheter',catName:'Rättigheter',icon:'⚖️',keywords:['rättigheter','diskriminering','do','rfsl','hbtq','juridik','rättshjälp','konsument']},
+  {cat:'nummer',catName:'Viktiga nummer',icon:'☎️',keywords:['nummer','telefon','112','1177','polisen','akut','bris','krislinjen','ring']}
+];
+
+function doSearch(q){
+  var clearBtn=document.getElementById('clearBtn');
+  var resultsDiv=document.getElementById('searchResults');
+  q=q.toLowerCase().trim();
+  clearBtn.style.display=q?'block':'none';
+  if(!q){resultsDiv.style.display='none';resultsDiv.innerHTML='';return;}
+  var matches=searchData.filter(function(d){
+    return d.keywords.some(function(k){return k.includes(q)||q.includes(k)});
+  });
+  resultsDiv.style.display='block';
+  if(matches.length===0){
+    resultsDiv.innerHTML='<div class="search-no-result">😕 Inget hittades för "'+q+'" — prova ett annat ord eller välj en kategori nedan.</div>';
+    return;
+  }
+  resultsDiv.innerHTML=matches.map(function(m){
+    return '<div class="search-result" onclick="openCat(\''+m.cat+'\');clearSearch()"><span class="sr-icon">'+m.icon+'</span><div class="sr-text"><div class="sr-cat">Kategori</div><div class="sr-name">'+m.catName+'</div></div><span style="color:var(--muted2);font-size:14px">→</span></div>';
+  }).join('');
+}
+function clearSearch(){
+  document.getElementById('searchInput').value='';
+  document.getElementById('clearBtn').style.display='none';
+  document.getElementById('searchResults').style.display='none';
+  document.getElementById('searchResults').innerHTML='';
+}
+
+// ── SAVINGS CALC ──
+function calcSave(){
+  var v=parseFloat(document.getElementById('saveInput').value);
+  var res=document.getElementById('saveResult');
+  var mot=document.getElementById('saveMotivation');
+  if(isNaN(v)||v<0){res.textContent='Ange ett belopp';return;}
+  var year=v*12;
+  res.textContent='På ett år: '+year.toLocaleString('sv-SE')+' kr';
+  var msg='';
+  if(year>=50000)msg='🔥 Imponerande! Det räcker till en bra buffert och semester.';
+  else if(year>=20000)msg='💪 Grymt! Stark ekonomisk buffert för oväntade kostnader.';
+  else if(year>=10000)msg='👏 Bra jobbat! Kan räcka till flytt, dator eller resa.';
+  else if(year>=5000)msg='✨ En bra start — varje krona räknas!';
+  else if(year>0)msg='🌱 Varje krona du sparar är ett steg i rätt riktning.';
+  mot.textContent=msg;
+}
+
+// ── FEEDBACK ──
+var fbOpt='';
+function selectFbOpt(el,val){
+  fbOpt=val;
+  document.querySelectorAll('.fb-opt').forEach(function(o){o.classList.remove('selected')});
+  el.classList.add('selected');
+}
+function openFeedback(){
+  document.getElementById('feedbackModal').classList.add('open');
+  document.getElementById('feedbackForm').style.display='block';
+  document.getElementById('feedbackThanks').style.display='none';
+}
+function closeFeedback(){
+  document.getElementById('feedbackModal').classList.remove('open');
+  fbOpt='';
+  document.querySelectorAll('.fb-opt').forEach(function(o){o.classList.remove('selected')});
+  document.getElementById('fbText').value='';
+  document.getElementById('fbConsent').checked=false;
+  var btn=document.getElementById('fbSendBtn');
+  if(btn)btn.disabled=true;
+}
+function toggleSendBtn(){
+  var consent=document.getElementById('fbConsent');
+  var btn=document.getElementById('fbSendBtn');
+  btn.disabled=!consent.checked;
+}
+function sendFeedback(){
+  var consent=document.getElementById('fbConsent');
+  if(!consent.checked) return;
+  var txt=document.getElementById('fbText').value;
+  var type=fbOpt||'Övrigt';
+  var cat=currentCat||'startsida';
+  var btn=document.getElementById('fbSendBtn');
+  btn.textContent='Skickar...';
+  btn.disabled=true;
+  fetch('https://formspree.io/f/mgonjkeb', {
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({
+      typ: type,
+      meddelande: txt||'(inget meddelande)',
+      kategori: cat,
+      datum: new Date().toLocaleString('sv-SE')
+    })
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(data){
+    document.getElementById('feedbackForm').style.display='none';
+    document.getElementById('feedbackThanks').style.display='block';
+    setTimeout(closeFeedback,2500);
+  })
+  .catch(function(){
+    alert('Något gick fel. Kontrollera din internetanslutning och försök igen.');
+    var btn=document.getElementById('fbSendBtn');
+    btn.textContent='Skicka feedback';
+    btn.disabled=false;
+  });
+}
+document.getElementById('feedbackModal').addEventListener('click',function(e){
+  if(e.target===this)closeFeedback();
+});
+
+// ── UP BUTTON ──
+var upBtn=document.getElementById('upBtn');
+window.addEventListener('scroll',function(){
+  upBtn.style.display=window.scrollY>400?'grid':'none';
+},{passive:true});
+
+// ── LANGUAGE TOGGLE ──
+var translations={
+  'hero-tag':{sv:'Alltid anonymt & gratis',en:'Always anonymous & free'},
+  'hero-h1':{sv:'Koll på läget<br/>— <em>direkt</em>',en:'Know your options<br/>— <em>now</em>'},
+  'hero-sub':{sv:'Jobb, ekonomi, hälsa, boende och mycket mer — samlat på ett ställe. Enkelt, tryggt och alltid tillgängligt.',en:'Jobs, money, health, housing and more — all in one place. Simple, safe, always available.'},
+  'trust-1':{sv:'Anonymt',en:'Anonymous'},
+  'trust-2':{sv:'Officiella källor',en:'Official sources'},
+  'trust-3':{sv:'Gratis',en:'Free'},
+  'trust-4':{sv:'Spara favoriter',en:'Save favorites'},
+  'search-placeholder':{sv:'Sök t.ex. CSN, BankID, hyreskontrakt...',en:'Search e.g. CSN, BankID, housing...'},
+  'quick-title':{sv:'Snabblänkar',en:'Quick links'},
+  'fav-title':{sv:'Mina favoriter',en:'My favorites'},
+  'ql-af':{sv:'Arbets­förmedlingen',en:'Job Agency'},
+  'ql-af-sub':{sv:'Jobb & karriär',en:'Jobs & career'},
+  'ql-1177':{sv:'1177 Vårdguiden',en:'1177 Healthcare'},
+  'ql-1177-sub':{sv:'Råd & vård',en:'Health advice'},
+  'ql-fk':{sv:'Försäkrings­kassan',en:'Social Insurance'},
+  'ql-fk-sub':{sv:'Bidrag & ersättning',en:'Benefits & payments'},
+  'ql-csn-sub':{sv:'Studiemedel',en:'Student finance'},
+  'ql-skv':{sv:'Skatteverket',en:'Tax Agency'},
+  'ql-skv-sub':{sv:'Skatt & folkbokföring',en:'Tax & registration'},
+  'ql-kfm':{sv:'Kronofogden',en:'Debt Authority'},
+  'ql-kfm-sub':{sv:'Skulder & betalning',en:'Debts & payments'},
+  'ql-sj-sub':{sv:'Tågbiljetter',en:'Train tickets'},
+  'ql-lt-sub':{sv:'Buss i Örebro',en:'Bus in Örebro'},
+  'tip-title':{sv:'Visste du?',en:'Did you know?'},
+  'cat-title':{sv:'Kategorier',en:'Categories'},
+  'cat-halsa':{sv:'Hälsa & vård',en:'Health & care'},
+  'cat-halsa-desc':{sv:'Vård, psykisk hälsa, kontaktlinjer',en:'Healthcare, mental health, helplines'},
+  'cat-ekonomi':{sv:'Ekonomi',en:'Money & benefits'},
+  'cat-ekonomi-desc':{sv:'Bidrag, budget, skulder',en:'Benefits, budget, debts'},
+  'cat-jobb':{sv:'Jobb & karriär',en:'Jobs & career'},
+  'cat-jobb-desc':{sv:'CV, intervju, söka jobb',en:'CV, interview, job search'},
+  'cat-boende':{sv:'Boende',en:'Housing'},
+  'cat-boende-desc':{sv:'Hyra, kontrakt, regler',en:'Rent, contracts, rules'},
+  'cat-studier':{sv:'Studier',en:'Studies'},
+  'cat-studier-desc':{sv:'CSN, antagning, komvux',en:'Student finance, admissions'},
+  'cat-bank':{sv:'Bank & betalningar',en:'Bank & payments'},
+  'cat-bank-desc':{sv:'BankID, konto, skulder',en:'BankID, accounts, debts'},
+  'cat-digital':{sv:'Digital vardag',en:'Digital life'},
+  'cat-digital-desc':{sv:'Mina sidor, e-tjänster',en:'Online services, e-ID'},
+  'cat-vardag':{sv:'Vardag & hemtips',en:'Daily life'},
+  'cat-vardag-desc':{sv:'Mat, tvätt, hushåll',en:'Food, laundry, household'},
+  'cat-kontakt':{sv:'Stöd från kommunen',en:'Municipal support'},
+  'cat-kontakt-desc':{sv:'Kontaktperson & socialt stöd',en:'Contact person & social support'},
+  'cat-aktiviteter':{sv:'Aktiviteter',en:'Activities'},
+  'cat-aktiviteter-desc':{sv:'Fritid, föreningar, sport',en:'Leisure, clubs, sports'},
+  'cat-transport':{sv:'Transport',en:'Transport'},
+  'cat-transport-desc':{sv:'Buss, tåg och kollektivtrafik',en:'Bus, train, public transit'},
+  'cat-rattigheter':{sv:'Rättigheter',en:'Your rights'},
+  'cat-rattigheter-desc':{sv:'Dina rättigheter, diskriminering',en:'Rights, discrimination'},
+  'cat-nummer':{sv:'Viktiga nummer',en:'Important numbers'},
+  'cat-nummer-desc':{sv:'Akut, vård, myndigheter',en:'Emergency, health, authorities'},
+  'back-btn':{sv:'← Tillbaka till startsidan',en:'← Back to start'},
+  'akut-left':{sv:'🚨 Akut? Ring 112',en:'🚨 Emergency? Call 112'},
+  'akut-right':{sv:'Icke-akut: 1177 →',en:'Non-urgent: 1177 →'},
+  'fb-btn':{sv:'💬 Feedback',en:'💬 Feedback'},
+  'support-title':{sv:'💚 Stöd projektet',en:'💚 Support the project'},
+  'support-text':{sv:'StödGuiden är helt gratis och utan reklam. Om appen har hjälpt dig och du vill bidra till att den fortsätter utvecklas, kan du swisha valfritt belopp.',en:'StödGuiden is completely free and ad-free. If the app has helped you and you want to contribute to its continued development, you can Swish any amount.'},
+  'support-swish-label':{sv:'Swish:',en:'Swish:'},
+  'support-note':{sv:'Tack för att du stöttar fri och öppen samhällsinfo! 💚',en:'Thank you for supporting free and open civic info! 💚'}
+};
+
+function toggleLang(){
+  currentLang=(currentLang==='sv')?'en':'sv';
+  document.getElementById('langBtn').textContent=(currentLang==='sv')?'🌐 EN':'🌐 SV';
+  
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var key=el.getAttribute('data-i18n');
+    if(translations[key]){
+      if(el.tagName==='INPUT'){
+        el.placeholder=translations[key][currentLang];
+      }else{
+        el.innerHTML=translations[key][currentLang];
       }
-      onScroll();
-    })();
+    }
+  });
+  
+  document.querySelectorAll('[data-href-sv][data-href-en]').forEach(function(el){
+    el.href=el.getAttribute('data-href-'+currentLang);
+  });
+  
+  showTip();
+}
 
-    // start on home
-    hideAll(); var _hv=document.getElementById('homeView'); if(_hv) _hv.style.display='block';
-  </script>
-<div class="sgcp-footer-akut"><a class="sgcp-akut-link" href="tel:112">🚨 Akut hjälp – ring 112</a><a class="sgcp-1177" href="https://www.1177.se" rel="noopener" target="_blank">❤️‍🩹 Icke‑akut: 1177 Vårdguiden ↗</a></div>
-
-
-</body>
+// ── INIT ──
+document.addEventListener('DOMContentLoaded', function() {
+  showTip();
+  initFavoriteButtons();
+  renderFavorites();
+});
+</script>
+<script>
+function toggleLang() { return; }
+</script></body>
 </html>
