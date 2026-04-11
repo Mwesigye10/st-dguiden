@@ -56,9 +56,46 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
 .brand-name{font-weight:800;font-size:17px}
 .brand-tagline{font-size:10px;color:var(--muted2);margin-top:1px}
 .hdr-right{display:flex;align-items:center;gap:8px}
+.menu-btn{background:rgba(45,122,95,0.15);border:1px solid var(--border);color:var(--accent);padding:7px 12px;border-radius:50px;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px}
+.menu-btn:hover{background:rgba(45,122,95,0.25)}
 .feedback-btn{background:rgba(45,122,95,0.15);border:1px solid var(--border);color:var(--accent);padding:7px 13px;border-radius:50px;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px}
 .lang-btn{background:rgba(255,255,255,0.05);border:1px solid var(--border2);color:var(--muted);padding:7px 10px;border-radius:50px;font-size:11px;font-weight:600;cursor:pointer}
 .lang-btn:hover{background:rgba(45,122,95,0.15);color:var(--accent);border-color:var(--border)}
+
+/* ── MENU MODAL ── */
+#menuModal{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:200;display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s}
+#menuModal.open{opacity:1;pointer-events:auto}
+.menu-sheet{background:var(--bg);border-top-left-radius:24px;border-top-right-radius:24px;width:100%;max-width:500px;max-height:85vh;overflow-y:auto;padding:20px 16px 40px;transform:translateY(100%);transition:transform 0.3s}
+#menuModal.open .menu-sheet{transform:translateY(0)}
+.menu-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--border2)}
+.menu-header h3{font-size:18px;font-weight:700;color:var(--text)}
+.menu-close{background:none;border:none;color:var(--muted);font-size:24px;cursor:pointer;padding:4px 8px}
+.menu-grid{display:flex;flex-direction:column;gap:8px}
+.menu-item{background:var(--panel);border:1px solid var(--border2);border-radius:14px;padding:14px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all 0.2s}
+.menu-item:hover{border-color:var(--border);background:var(--panel2)}
+.menu-item-icon{font-size:24px;flex-shrink:0}
+.menu-item-text{flex:1;min-width:0}
+.menu-item-name{font-size:14px;font-weight:600;color:var(--text)}
+.menu-item-desc{font-size:12px;color:var(--muted);margin-top:2px}
+.menu-item-info{background:rgba(109,207,160,0.1);border:none;color:var(--accent);font-size:11px;padding:6px 10px;border-radius:20px;cursor:pointer;font-weight:600;flex-shrink:0}
+.menu-item-info:hover{background:rgba(109,207,160,0.2)}
+.menu-item-arrow{color:var(--muted2);font-size:14px;flex-shrink:0}
+
+/* ── INFO POPUP ── */
+.info-popup{position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:300;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity 0.2s}
+.info-popup.open{opacity:1;pointer-events:auto}
+.info-popup-content{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:20px;max-width:340px;width:100%;text-align:center;transform:scale(0.9);transition:transform 0.2s}
+.info-popup.open .info-popup-content{transform:scale(1)}
+.info-popup-icon{font-size:36px;margin-bottom:12px}
+.info-popup-title{font-size:18px;font-weight:700;color:var(--text);margin-bottom:8px}
+.info-popup-text{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:16px}
+.info-popup-btn{background:linear-gradient(135deg,var(--green),var(--green2));color:var(--text);border:none;padding:12px 24px;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;width:100%}
+.info-popup-btn:hover{opacity:0.9}
+.info-popup-close{background:rgba(255,255,255,0.05);color:var(--muted);border:1px solid var(--border2);padding:10px 20px;border-radius:12px;font-size:13px;cursor:pointer;width:100%;margin-top:8px}
+
+/* ── LINK INFO BUTTON ── */
+.link-info-btn{background:none;border:none;color:var(--muted2);font-size:14px;cursor:pointer;padding:6px;border-radius:8px;transition:all 0.2s;opacity:0.6}
+.link-info-btn:hover{opacity:1;background:rgba(109,207,160,0.1);color:var(--accent)}
 
 /* ── WRAP ── */
 .wrap{max-width:600px;margin:0 auto;padding:0 16px}
@@ -250,8 +287,9 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
 <div><div class="brand-name">StödGuiden</div><div class="brand-tagline">Örebro</div></div>
 </div>
 <div class="hdr-right">
+<button class="menu-btn" onclick="openMenu()" title="Kategorier"><span data-i18n="menu-btn">☰ Kategorier</span></button>
 <button class="feedback-btn" data-i18n="fb-btn" onclick="openFeedback()">💬 Feedback</button>
-<button class="lang-btn" id="langBtn" onclick="toggleLang()" style=";display:none;">🌐 EN</button>
+<button class="lang-btn" id="langBtn" onclick="toggleLang()">🌐 EN</button>
 </div>
 </header>
 <!-- HOME VIEW -->
@@ -517,7 +555,7 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
 <div class="link-group-title" data-i18n="lg-ekon-bidrag">Bidrag &amp; ersättningar</div>
 <div class="link-item" data-fav-cat="Ekonomi" data-fav-icon="🏛️" data-fav-id="fk" data-fav-name="Försäkringskassan" data-fav-url="https://www.forsakringskassan.se">
 <span class="li-ic">🏛️</span>
-<a class="li-tx" href="https://www.forsakringskassan.se" rel="noopener" target="_blank">
+<a class="li-tx" data-href-sv="https://www.forsakringskassan.se" data-href-en="https://www.forsakringskassan.se/english" href="https://www.forsakringskassan.se" rel="noopener" target="_blank">
 <span class="li-name" data-i18n="link-fk">Försäkringskassan</span>
 <span class="li-desc" data-i18n="link-fk-desc">Sjukpenning, bostadsbidrag, föräldrapenning och mycket mer.</span>
 </a>
@@ -553,7 +591,7 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
 <div class="link-group-title" data-i18n="lg-ekon-skuld">Skulder &amp; betalningsproblem</div>
 <div class="link-item" data-fav-cat="Ekonomi" data-fav-icon="⚖️" data-fav-id="kfm" data-fav-name="Kronofogden" data-fav-url="https://www.kronofogden.se">
 <span class="li-ic">⚖️</span>
-<a class="li-tx" href="https://www.kronofogden.se" rel="noopener" target="_blank">
+<a class="li-tx" data-href-sv="https://www.kronofogden.se" data-href-en="https://kronofogden.se/en" href="https://www.kronofogden.se" rel="noopener" target="_blank">
 <span class="li-name" data-i18n="link-kfm">Kronofogden</span>
 <span class="li-desc" data-i18n="link-kfm-desc">Information om skulder, betalningsanmärkningar och skuldsanering.</span>
 </a>
@@ -609,7 +647,7 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
 <div class="link-group-title" data-i18n="lg-jobb-soka">Söka jobb</div>
 <div class="link-item" data-fav-cat="Jobb" data-fav-icon="💼" data-fav-id="af" data-fav-name="Arbetsförmedlingen" data-fav-url="https://arbetsformedlingen.se">
 <span class="li-ic">💼</span>
-<a class="li-tx" href="https://arbetsformedlingen.se" rel="noopener" target="_blank">
+<a class="li-tx" data-href-sv="https://arbetsformedlingen.se" data-href-en="https://arbetsformedlingen.se/other-languages/english-engelska" href="https://arbetsformedlingen.se" rel="noopener" target="_blank">
 <span class="li-name" data-i18n="link-af">Arbetsförmedlingen</span>
 <span class="li-desc" data-i18n="link-af-desc">Registrera dig, sök jobb och få stöd i din jobbsökning.</span>
 </a>
@@ -659,7 +697,7 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
 <div class="link-group-title" data-i18n="lg-jobb-ratt">Dina rättigheter på jobbet</div>
 <div class="link-item" data-fav-cat="Jobb" data-fav-icon="⚖️" data-fav-id="do" data-fav-name="Diskrimineringsombudsmannen" data-fav-url="https://www.do.se">
 <span class="li-ic">⚖️</span>
-<a class="li-tx" href="https://www.do.se" rel="noopener" target="_blank">
+<a class="li-tx" data-href-sv="https://www.do.se" data-href-en="https://www.do.se/other-languages/english" href="https://www.do.se" rel="noopener" target="_blank">
 <span class="li-name" data-i18n="link-do">Diskrimineringsombudsmannen (DO)</span>
 <span class="li-desc" data-i18n="link-do-desc">Anmäl diskriminering på jobbet.</span>
 </a>
@@ -728,7 +766,7 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
 <div class="link-group-title" data-i18n="lg-studier-stod">Studiestöd</div>
 <div class="link-item" data-fav-cat="Studier" data-fav-icon="🎓" data-fav-id="csn" data-fav-name="CSN" data-fav-url="https://www.csn.se">
 <span class="li-ic">🎓</span>
-<a class="li-tx" href="https://www.csn.se" rel="noopener" target="_blank">
+<a class="li-tx" data-href-sv="https://www.csn.se" data-href-en="https://www.csn.se/languages/english.html" href="https://www.csn.se" rel="noopener" target="_blank">
 <span class="li-name" data-i18n="link-csn">CSN – Studiestöd</span>
 <span class="li-desc" data-i18n="link-csn-desc">Ansök om studiebidrag och studielån.</span>
 </a>
@@ -775,7 +813,7 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
 <div class="link-group-title" data-i18n="lg-bank-digital">Digitala verktyg</div>
 <div class="link-item" data-fav-cat="Bank" data-fav-icon="🔐" data-fav-id="bankid" data-fav-name="BankID" data-fav-url="https://www.bankid.com">
 <span class="li-ic">🔐</span>
-<a class="li-tx" href="https://www.bankid.com" rel="noopener" target="_blank">
+<a class="li-tx" data-href-sv="https://www.bankid.com" data-href-en="https://www.bankid.com/en" href="https://www.bankid.com" rel="noopener" target="_blank">
 <span class="li-name" data-i18n="link-bankid">BankID</span>
 <span class="li-desc" data-i18n="link-bankid-desc">Digital legitimation för att logga in hos myndigheter och banker.</span>
 </a>
@@ -979,7 +1017,7 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
 <div class="link-group-title" data-i18n="lg-transport-nationellt">Nationellt</div>
 <div class="link-item" data-fav-cat="Transport" data-fav-icon="🚆" data-fav-id="sj" data-fav-name="SJ – Tågbiljetter" data-fav-url="https://www.sj.se">
 <span class="li-ic">🚆</span>
-<a class="li-tx" href="https://www.sj.se" rel="noopener" target="_blank">
+<a class="li-tx" data-href-sv="https://www.sj.se" data-href-en="https://www.sj.se/en" href="https://www.sj.se" rel="noopener" target="_blank">
 <span class="li-name" data-i18n="link-sj">SJ – Tågbiljetter</span>
 <span class="li-desc" data-i18n="link-sj-desc">Boka tåg i hela Sverige. Köp tidigt för bästa pris.</span>
 </a>
@@ -1012,7 +1050,7 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
 <div class="link-group-title" data-i18n="lg-ratt-disk">Diskriminering</div>
 <div class="link-item" data-fav-cat="Rättigheter" data-fav-icon="⚖️" data-fav-id="do2" data-fav-name="Diskrimineringsombudsmannen" data-fav-url="https://www.do.se">
 <span class="li-ic">⚖️</span>
-<a class="li-tx" href="https://www.do.se" rel="noopener" target="_blank">
+<a class="li-tx" data-href-sv="https://www.do.se" data-href-en="https://www.do.se/other-languages/english" href="https://www.do.se" rel="noopener" target="_blank">
 <span class="li-name" data-i18n="link-do2">Diskrimineringsombudsmannen (DO)</span>
 <span class="li-desc" data-i18n="link-do2-desc">Anmäl diskriminering på jobbet, i skolan eller i samhället.</span>
 </a>
@@ -1037,6 +1075,144 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
 <a class="num-card" href="tel:116111"><span class="nc-num">116 111</span><span class="nc-name" data-i18n="num-bris">BRIS (under 18)</span></a>
 <a class="num-card" href="tel:90101"><span class="nc-num">90 101</span><span class="nc-name" data-i18n="num-mind">Mind Självmordslinjen</span></a>
 <a class="num-card" href="tel:0200505050"><span class="nc-num">020-50 50 50</span><span class="nc-name" data-i18n="num-kvinnofrid">Kvinnofridslinjen</span></a>
+</div>
+</div>
+<!-- MENU MODAL -->
+<div id="menuModal">
+<div class="menu-sheet">
+<div class="menu-header">
+<h3 data-i18n="menu-title">Kategorier</h3>
+<button class="menu-close" onclick="closeMenu()">×</button>
+</div>
+<div class="menu-grid">
+<div class="menu-item" onclick="openCat('halsa');closeMenu()">
+<span class="menu-item-icon">🧠</span>
+<div class="menu-item-text">
+<div class="menu-item-name" data-i18n="cat-halsa">Hälsa & vård</div>
+<div class="menu-item-desc" data-i18n="cat-halsa-desc">Vård, psykisk hälsa, kontaktlinjer</div>
+</div>
+<button class="menu-item-info" onclick="event.stopPropagation();showCatInfo('halsa')" data-i18n="menu-info">Läs mer</button>
+<span class="menu-item-arrow">→</span>
+</div>
+<div class="menu-item" onclick="openCat('ekonomi');closeMenu()">
+<span class="menu-item-icon">💸</span>
+<div class="menu-item-text">
+<div class="menu-item-name" data-i18n="cat-ekonomi">Ekonomi</div>
+<div class="menu-item-desc" data-i18n="cat-ekonomi-desc">Bidrag, budget, skulder</div>
+</div>
+<button class="menu-item-info" onclick="event.stopPropagation();showCatInfo('ekonomi')" data-i18n="menu-info">Läs mer</button>
+<span class="menu-item-arrow">→</span>
+</div>
+<div class="menu-item" onclick="openCat('jobb');closeMenu()">
+<span class="menu-item-icon">💼</span>
+<div class="menu-item-text">
+<div class="menu-item-name" data-i18n="cat-jobb">Jobb & karriär</div>
+<div class="menu-item-desc" data-i18n="cat-jobb-desc">CV, intervju, söka jobb</div>
+</div>
+<button class="menu-item-info" onclick="event.stopPropagation();showCatInfo('jobb')" data-i18n="menu-info">Läs mer</button>
+<span class="menu-item-arrow">→</span>
+</div>
+<div class="menu-item" onclick="openCat('boende');closeMenu()">
+<span class="menu-item-icon">🏡</span>
+<div class="menu-item-text">
+<div class="menu-item-name" data-i18n="cat-boende">Boende</div>
+<div class="menu-item-desc" data-i18n="cat-boende-desc">Hyra, kontrakt, regler</div>
+</div>
+<button class="menu-item-info" onclick="event.stopPropagation();showCatInfo('boende')" data-i18n="menu-info">Läs mer</button>
+<span class="menu-item-arrow">→</span>
+</div>
+<div class="menu-item" onclick="openCat('studier');closeMenu()">
+<span class="menu-item-icon">🎓</span>
+<div class="menu-item-text">
+<div class="menu-item-name" data-i18n="cat-studier">Studier</div>
+<div class="menu-item-desc" data-i18n="cat-studier-desc">CSN, antagning, komvux</div>
+</div>
+<button class="menu-item-info" onclick="event.stopPropagation();showCatInfo('studier')" data-i18n="menu-info">Läs mer</button>
+<span class="menu-item-arrow">→</span>
+</div>
+<div class="menu-item" onclick="openCat('bank');closeMenu()">
+<span class="menu-item-icon">💳</span>
+<div class="menu-item-text">
+<div class="menu-item-name" data-i18n="cat-bank">Bank & betalningar</div>
+<div class="menu-item-desc" data-i18n="cat-bank-desc">BankID, konto, skulder</div>
+</div>
+<button class="menu-item-info" onclick="event.stopPropagation();showCatInfo('bank')" data-i18n="menu-info">Läs mer</button>
+<span class="menu-item-arrow">→</span>
+</div>
+<div class="menu-item" onclick="openCat('digital');closeMenu()">
+<span class="menu-item-icon">📱</span>
+<div class="menu-item-text">
+<div class="menu-item-name" data-i18n="cat-digital">Digital vardag</div>
+<div class="menu-item-desc" data-i18n="cat-digital-desc">Mina sidor, e-tjänster</div>
+</div>
+<button class="menu-item-info" onclick="event.stopPropagation();showCatInfo('digital')" data-i18n="menu-info">Läs mer</button>
+<span class="menu-item-arrow">→</span>
+</div>
+<div class="menu-item" onclick="openCat('vardag');closeMenu()">
+<span class="menu-item-icon">🧺</span>
+<div class="menu-item-text">
+<div class="menu-item-name" data-i18n="cat-vardag">Vardag & hemtips</div>
+<div class="menu-item-desc" data-i18n="cat-vardag-desc">Mat, tvätt, hushåll</div>
+</div>
+<button class="menu-item-info" onclick="event.stopPropagation();showCatInfo('vardag')" data-i18n="menu-info">Läs mer</button>
+<span class="menu-item-arrow">→</span>
+</div>
+<div class="menu-item" onclick="openCat('kontakt');closeMenu()">
+<span class="menu-item-icon">🏛️</span>
+<div class="menu-item-text">
+<div class="menu-item-name" data-i18n="cat-kontakt">Stöd från kommunen</div>
+<div class="menu-item-desc" data-i18n="cat-kontakt-desc">Kontaktperson & socialt stöd</div>
+</div>
+<button class="menu-item-info" onclick="event.stopPropagation();showCatInfo('kontakt')" data-i18n="menu-info">Läs mer</button>
+<span class="menu-item-arrow">→</span>
+</div>
+<div class="menu-item" onclick="openCat('aktiviteter');closeMenu()">
+<span class="menu-item-icon">🌟</span>
+<div class="menu-item-text">
+<div class="menu-item-name" data-i18n="cat-aktiviteter">Aktiviteter</div>
+<div class="menu-item-desc" data-i18n="cat-aktiviteter-desc">Fritid, föreningar, sport</div>
+</div>
+<button class="menu-item-info" onclick="event.stopPropagation();showCatInfo('aktiviteter')" data-i18n="menu-info">Läs mer</button>
+<span class="menu-item-arrow">→</span>
+</div>
+<div class="menu-item" onclick="openCat('transport');closeMenu()">
+<span class="menu-item-icon">🚌</span>
+<div class="menu-item-text">
+<div class="menu-item-name" data-i18n="cat-transport">Transport</div>
+<div class="menu-item-desc" data-i18n="cat-transport-desc">Buss, tåg och kollektivtrafik</div>
+</div>
+<button class="menu-item-info" onclick="event.stopPropagation();showCatInfo('transport')" data-i18n="menu-info">Läs mer</button>
+<span class="menu-item-arrow">→</span>
+</div>
+<div class="menu-item" onclick="openCat('rattigheter');closeMenu()">
+<span class="menu-item-icon">⚖️</span>
+<div class="menu-item-text">
+<div class="menu-item-name" data-i18n="cat-rattigheter">Rättigheter</div>
+<div class="menu-item-desc" data-i18n="cat-rattigheter-desc">Dina rättigheter, diskriminering</div>
+</div>
+<button class="menu-item-info" onclick="event.stopPropagation();showCatInfo('rattigheter')" data-i18n="menu-info">Läs mer</button>
+<span class="menu-item-arrow">→</span>
+</div>
+<div class="menu-item" onclick="openCat('nummer');closeMenu()">
+<span class="menu-item-icon">☎️</span>
+<div class="menu-item-text">
+<div class="menu-item-name" data-i18n="cat-nummer">Viktiga nummer</div>
+<div class="menu-item-desc" data-i18n="cat-nummer-desc">Akut, vård, myndigheter</div>
+</div>
+<button class="menu-item-info" onclick="event.stopPropagation();showCatInfo('nummer')" data-i18n="menu-info">Läs mer</button>
+<span class="menu-item-arrow">→</span>
+</div>
+</div>
+</div>
+</div>
+<!-- INFO POPUP -->
+<div class="info-popup" id="infoPopup">
+<div class="info-popup-content">
+<div class="info-popup-icon" id="infoPopupIcon">🧠</div>
+<div class="info-popup-title" id="infoPopupTitle">Hälsa & vård</div>
+<div class="info-popup-text" id="infoPopupText">Här hittar du länkar till vård, psykisk hälsa och hjälplinjer.</div>
+<button class="info-popup-btn" id="infoPopupBtn" onclick="goToCatFromInfo()">Gå till kategori</button>
+<button class="info-popup-close" onclick="closeInfoPopup()">Stäng</button>
 </div>
 </div>
 <!-- FEEDBACK MODAL -->
@@ -1384,6 +1560,7 @@ window.addEventListener('scroll',function(){
 
 // ── LANGUAGE TOGGLE ──
 var translations={
+  // ── UI & NAVIGATION ──
   'hero-tag':{sv:'Alltid anonymt & gratis',en:'Always anonymous & free'},
   'hero-h1':{sv:'Koll på läget<br/>— <em>direkt</em>',en:'Know your options<br/>— <em>now</em>'},
   'hero-sub':{sv:'Jobb, ekonomi, hälsa, boende och mycket mer — samlat på ett ställe. Enkelt, tryggt och alltid tillgängligt.',en:'Jobs, money, health, housing and more — all in one place. Simple, safe, always available.'},
@@ -1436,13 +1613,225 @@ var translations={
   'cat-nummer':{sv:'Viktiga nummer',en:'Important numbers'},
   'cat-nummer-desc':{sv:'Akut, vård, myndigheter',en:'Emergency, health, authorities'},
   'back-btn':{sv:'← Tillbaka till startsidan',en:'← Back to start'},
+  'menu-title':{sv:'Kategorier',en:'Categories'},
+  'menu-btn':{sv:'☰ Kategorier',en:'☰ Categories'},
+  'menu-info':{sv:'Läs mer',en:'Read more'},
   'akut-left':{sv:'🚨 Akut? Ring 112',en:'🚨 Emergency? Call 112'},
   'akut-right':{sv:'Icke-akut: 1177 →',en:'Non-urgent: 1177 →'},
   'fb-btn':{sv:'💬 Feedback',en:'💬 Feedback'},
   'support-title':{sv:'💚 Stöd projektet',en:'💚 Support the project'},
   'support-text':{sv:'StödGuiden är helt gratis och utan reklam. Om appen har hjälpt dig och du vill bidra till att den fortsätter utvecklas, kan du swisha valfritt belopp.',en:'StödGuiden is completely free and ad-free. If the app has helped you and you want to contribute to its continued development, you can Swish any amount.'},
   'support-swish-label':{sv:'Swish:',en:'Swish:'},
-  'support-note':{sv:'Tack för att du stöttar fri och öppen samhällsinfo! 💚',en:'Thank you for supporting free and open civic info! 💚'}
+  'support-note':{sv:'Tack för att du stöttar fri och öppen samhällsinfo! 💚',en:'Thank you for supporting free and open civic info! 💚'},
+
+  // ── HÄLSA SECTION ──
+  'sec-halsa':{sv:'Hälsa & vård',en:'Health & care'},
+  'sec-halsa-sub':{sv:'Vård, psykisk hälsa och kontaktlinjer',en:'Healthcare, mental health and helplines'},
+  'sec-halsa-info':{sv:'<strong>Bra att veta:</strong> I Örebro är vård gratis för dig under 20 år. Hitta din vårdcentral på 1177.se eller ring 1177 för rådgivning.',en:'<strong>Good to know:</strong> In Örebro, healthcare is free if you\'re under 20. Find your health center at 1177.se or call 1177 for advice (interpreters available).'},
+  'lg-halsa-fysisk':{sv:'Fysisk hälsa i Örebro',en:'Physical health in Örebro'},
+  'link-vardcentral':{sv:'Hitta vårdcentral i Örebro',en:'Find health center in Örebro'},
+  'link-vardcentral-desc':{sv:'Välj och lista dig på en vårdcentral i Region Örebro. Gratis vård under 20 år.',en:'Choose and register at a health center in Region Örebro. Free healthcare under 20.'},
+  'link-1177':{sv:'1177 Vårdguiden',en:'1177 Healthcare Guide'},
+  'link-1177-desc':{sv:'Råd, vägledning och hitta vård. Ring 1177 dygnet runt.',en:'Advice, guidance and find care. Call 1177 around the clock (interpreters available).'},
+  'link-umo-orebro':{sv:'Region Örebro – vård för unga',en:'Region Örebro – youth healthcare'},
+  'link-umo-orebro-desc':{sv:'Hitta ungdomsmottagning och annan vård i Örebro län. Sök på sidan.',en:'Find youth clinic and other care in Örebro county.'},
+  'link-umo':{sv:'UMO – Ungdomsmottagning online',en:'UMO – Youth clinic online'},
+  'link-umo-desc':{sv:'Sex, relationer, hälsa och identitet för unga upp till 25 år.',en:'Sex, relationships, health and identity for young people up to 25.'},
+  'lg-halsa-psykisk':{sv:'Psykisk hälsa',en:'Mental health'},
+  'link-mind':{sv:'Mind – Självmordslinjen & Äldrelinjen',en:'Mind – Suicide helpline'},
+  'link-mind-desc':{sv:'Samtal, chatt och mail med utbildade samtalspersoner. Gratis & anonymt.',en:'Talk, chat and email with trained counselors. Free & anonymous.'},
+  'link-bris':{sv:'BRIS – Barnens rätt i samhället',en:'BRIS – Children\'s rights'},
+  'link-bris-desc':{sv:'För barn och unga under 18. Ring 116 111, chatt eller mail.',en:'For children and young people under 18. Call 116 111, chat or email.'},
+  'link-youmo':{sv:'Youmo – psykisk hälsa för nyanlända',en:'Youmo – mental health for newcomers'},
+  'link-youmo-desc':{sv:'Information om psykisk hälsa på flera språk.',en:'Mental health information in multiple languages.'},
+  'lg-halsa-beroende':{sv:'Beroende & droger',en:'Addiction & drugs'},
+  'link-drugsmart':{sv:'Drugsmart',en:'Drugsmart'},
+  'link-drugsmart-desc':{sv:'Fakta om droger, alkohol och beroende för unga.',en:'Facts about drugs, alcohol and addiction for young people.'},
+  'link-iogt':{sv:'IOGT-NTO – vid beroende',en:'IOGT-NTO – addiction support'},
+  'link-iogt-desc':{sv:'Information och vägledning för dig eller någon nära som har problem med alkohol eller droger.',en:'Information and guidance if you or someone close has problems with alcohol or drugs.'},
+  'link-maria-ungdom':{sv:'Maria Ungdom Örebro',en:'Maria Youth Örebro'},
+  'link-maria-ungdom-desc':{sv:'Stöd för unga upp till 21 år med frågor om alkohol, droger eller spel. Gratis och anonymt.',en:'Support for young people up to 21 with questions about alcohol, drugs or gambling. Free and anonymous.'},
+  'lg-halsa-trygghet':{sv:'Trygghet & rättigheter',en:'Safety & rights'},
+  'link-brottsoffermynd':{sv:'Brottsoffermyndigheten',en:'Crime Victim Authority'},
+  'link-brottsoffermynd-desc':{sv:'Information och ersättning om du blivit utsatt för brott.',en:'Information and compensation if you\'ve been a victim of crime.'},
+  'link-kvinnofrid':{sv:'Kvinnofridslinjen – 020-50 50 50',en:'Women\'s helpline – 020-50 50 50'},
+  'link-kvinnofrid-desc':{sv:'Vid våld i nära relationer. Gratis, anonymt, dygnet runt.',en:'For domestic violence. Free, anonymous, 24/7.'},
+
+  // ── EKONOMI SECTION ──
+  'sec-ekonomi':{sv:'Ekonomi',en:'Money & benefits'},
+  'sec-ekonomi-sub':{sv:'Bidrag, budget och privatekonomi',en:'Benefits, budget and personal finance'},
+  'sec-ekonomi-info':{sv:'<strong>Tips:</strong> Slå på autogiro för hyra och el — undviker sena avgifter och ger bättre koll.',en:'<strong>Tip:</strong> Set up automatic payments for rent and electricity — avoids late fees and gives better control.'},
+  'lg-ekon-bidrag':{sv:'Bidrag & ersättningar',en:'Benefits & payments'},
+  'link-fk':{sv:'Försäkringskassan',en:'Social Insurance Agency'},
+  'link-fk-desc':{sv:'Sjukpenning, bostadsbidrag, föräldrapenning och mycket mer.',en:'Sick pay, housing benefit, parental leave and much more.'},
+  'link-bostadsbidrag':{sv:'Bostadsbidrag',en:'Housing benefit'},
+  'link-bostadsbidrag-desc':{sv:'Bidrag till din boendekostnad om du har låg inkomst. Ansök via Försäkringskassan.',en:'Financial help with housing costs if you have low income. Apply via Försäkringskassan.'},
+  'link-bistand':{sv:'Pengar & bidrag – Örebro kommun',en:'Money & benefits – Örebro municipality'},
+  'link-bistand-desc':{sv:'Information om ekonomiskt stöd och bidrag via Örebro kommun.',en:'Information about financial support and benefits via Örebro municipality.'},
+  'lg-ekon-skuld':{sv:'Skulder & betalningsproblem',en:'Debts & payment problems'},
+  'link-kfm':{sv:'Kronofogden',en:'Debt Enforcement Authority'},
+  'link-kfm-desc':{sv:'Information om skulder, betalningsanmärkningar och skuldsanering.',en:'Information about debts, payment defaults and debt restructuring.'},
+  'link-budget-skuld':{sv:'Budget- och skuldrådgivning Örebro',en:'Budget & debt counseling Örebro'},
+  'link-budget-skuld-desc':{sv:'Gratis rådgivning om ekonomi och skulder från Örebro kommun.',en:'Free advice about finances and debts from Örebro municipality.'},
+  'lg-ekon-spara':{sv:'Spara & budgetera',en:'Save & budget'},
+  'calc-title':{sv:'💰 Sparräknare',en:'💰 Savings calculator'},
+  'calc-btn':{sv:'Räkna',en:'Calculate'},
+  'link-budget':{sv:'Konsumentverket – budgetkalkyl',en:'Consumer Agency – budget calculator'},
+  'link-budget-desc':{sv:'Gör en budget och se vad ett rimligt liv kostar.',en:'Make a budget and see what a reasonable life costs.'},
+
+  // ── JOBB SECTION ──
+  'sec-jobb':{sv:'Jobb & karriär',en:'Jobs & career'},
+  'sec-jobb-sub':{sv:'Hitta jobb, CV och intervjutips',en:'Find jobs, CV and interview tips'},
+  'sec-jobb-info':{sv:'<strong>Tips:</strong> Registrera dig på Arbetsförmedlingen tidigt — det ger tillgång till fler resurser och insatser.',en:'<strong>Tip:</strong> Register at the Employment Agency early — it gives access to more resources and support.'},
+  'lg-jobb-soka':{sv:'Söka jobb',en:'Job search'},
+  'link-af':{sv:'Arbetsförmedlingen',en:'Employment Agency'},
+  'link-af-desc':{sv:'Registrera dig, sök jobb och få stöd i din jobbsökning.',en:'Register, search for jobs and get support in your job search.'},
+  'link-platsbanken':{sv:'Platsbanken',en:'Job Bank'},
+  'link-platsbanken-desc':{sv:'Sök bland tusentals lediga jobb i hela Sverige.',en:'Search thousands of job openings across Sweden.'},
+  'link-linkedin':{sv:'LinkedIn',en:'LinkedIn'},
+  'link-linkedin-desc':{sv:'Professionellt nätverk. Bygg din profil och hitta jobb.',en:'Professional network. Build your profile and find jobs.'},
+  'lg-jobb-cv':{sv:'CV & ansökan',en:'CV & application'},
+  'link-cv-tips':{sv:'CV-tips från Arbetsförmedlingen',en:'CV tips from Employment Agency'},
+  'link-cv-tips-desc':{sv:'Hur du skriver ett bra CV och personligt brev.',en:'How to write a good CV and cover letter.'},
+  'lg-jobb-ratt':{sv:'Dina rättigheter på jobbet',en:'Your rights at work'},
+  'link-do':{sv:'Diskrimineringsombudsmannen (DO)',en:'Equality Ombudsman (DO)'},
+  'link-do-desc':{sv:'Anmäl diskriminering på jobbet.',en:'Report discrimination at work.'},
+
+  // ── BOENDE SECTION ──
+  'sec-boende':{sv:'Boende',en:'Housing'},
+  'sec-boende-sub':{sv:'Hyra, kontrakt och bostadsrättigheter',en:'Rent, contracts and housing rights'},
+  'sec-boende-info':{sv:'<strong>Kom ihåg:</strong> Ställ dig i ÖBOs kö så tidigt som möjligt — det är gratis från 16 år. Privata hyresvärdar som Behrn och Söderberg kräver ingen kötid.',en:'<strong>Remember:</strong> Join ÖBO\'s housing queue as early as possible — it\'s free from age 16. Private landlords don\'t require queue time.'},
+  'lg-boende-hitta':{sv:'Hitta bostad',en:'Find housing'},
+  'link-obo':{sv:'ÖBO – Bostadskö',en:'ÖBO – Housing queue'},
+  'link-obo-desc':{sv:'Kommunala bostäder i Örebro. Gratis kö från 16 år.',en:'Municipal housing in Örebro. Free queue from age 16.'},
+  'link-blocket':{sv:'Blocket Bostad',en:'Blocket Housing'},
+  'link-blocket-desc':{sv:'Hitta andrahandsboenden och privata hyresvärdar.',en:'Find sublets and private landlords.'},
+  'lg-boende-ratt':{sv:'Hyresgästrättigheter',en:'Tenant rights'},
+  'link-hyresgast':{sv:'Hyresgästföreningen',en:'Tenants\' Association'},
+  'link-hyresgast-desc':{sv:'Dina rättigheter som hyresgäst. Juridisk hjälp och rådgivning.',en:'Your rights as a tenant. Legal help and advice.'},
+
+  // ── STUDIER SECTION ──
+  'sec-studier':{sv:'Studier',en:'Studies'},
+  'sec-studier-sub':{sv:'CSN, antagning och utbildning',en:'Student finance, admissions and education'},
+  'sec-studier-info':{sv:'<strong>Bra att veta:</strong> CSN ger studiebidrag på 1 250 kr/månad för gymnasiet. Ansök på csn.se — finns på engelska.',en:'<strong>Good to know:</strong> CSN gives student grants of 1,250 kr/month for high school. Apply at csn.se — available in English.'},
+  'lg-studier-stod':{sv:'Studiestöd',en:'Student support'},
+  'link-csn':{sv:'CSN – Studiestöd',en:'CSN – Student finance'},
+  'link-csn-desc':{sv:'Ansök om studiebidrag och studielån.',en:'Apply for student grants and loans.'},
+  'lg-studier-soka':{sv:'Söka utbildning',en:'Apply for education'},
+  'link-antagning':{sv:'Antagning.se',en:'University Admissions'},
+  'link-antagning-desc':{sv:'Sök till universitet och högskola i Sverige.',en:'Apply to university and college in Sweden.'},
+  'link-komvux':{sv:'Vuxenutbildning Örebro',en:'Adult education Örebro'},
+  'link-komvux-desc':{sv:'Komvux och andra utbildningar för vuxna i Örebro.',en:'Adult education and other courses for adults in Örebro.'},
+
+  // ── BANK SECTION ──
+  'sec-bank':{sv:'Bank & betalningar',en:'Bank & payments'},
+  'sec-bank-sub':{sv:'BankID, konto och ekonomi',en:'BankID, accounts and finances'},
+  'sec-bank-info':{sv:'<strong>Viktigt:</strong> BankID behövs för nästan alla myndigheter online. Skaffa det via din bank — du behöver legitimation.',en:'<strong>Important:</strong> BankID is needed for almost all government services online. Get it through your bank — you need ID.'},
+  'lg-bank-digital':{sv:'Digitala verktyg',en:'Digital tools'},
+  'link-bankid':{sv:'BankID',en:'BankID'},
+  'link-bankid-desc':{sv:'Digital legitimation för att logga in hos myndigheter och banker.',en:'Digital ID to log in to government services and banks.'},
+  'link-swish':{sv:'Swish',en:'Swish'},
+  'link-swish-desc':{sv:'Skicka och ta emot pengar direkt med mobilen.',en:'Send and receive money instantly with your phone.'},
+
+  // ── DIGITAL SECTION ──
+  'sec-digital':{sv:'Digital vardag',en:'Digital life'},
+  'sec-digital-sub':{sv:'Mina sidor, e-tjänster och BankID',en:'My pages, e-services and BankID'},
+  'sec-digital-info':{sv:'<strong>Bra att veta:</strong> "Mina sidor" är din personliga inloggning hos myndigheter. Du behöver BankID för att logga in.',en:'<strong>Good to know:</strong> "My pages" is your personal login at government agencies. You need BankID to log in.'},
+  'lg-digital-myndighet':{sv:'Myndigheternas e-tjänster',en:'Government e-services'},
+  'link-fk-mina':{sv:'Försäkringskassan',en:'Social Insurance Agency'},
+  'link-fk-mina-desc':{sv:'Logga in, ansök om bidrag och håll koll på dina ärenden.',en:'Log in, apply for benefits and track your cases.'},
+  'link-af-mina':{sv:'Logga in – Arbetsförmedlingen',en:'Log in – Employment Agency'},
+  'link-af-mina-desc':{sv:'Registrera dig som arbetssökande och se dina ärenden.',en:'Register as job seeker and view your cases.'},
+  'lg-digital-sakerhet':{sv:'Säkerhet online',en:'Online safety'},
+  'link-iis':{sv:'IIS – Säkerhet på nätet',en:'IIS – Online safety'},
+  'link-iis-desc':{sv:'Tips om lösenord, bedrägerier och hur du skyddar dig online.',en:'Tips about passwords, fraud and how to protect yourself online.'},
+
+  // ── VARDAG SECTION ──
+  'sec-vardag':{sv:'Vardag & hemtips',en:'Daily life'},
+  'sec-vardag-sub':{sv:'Mat, hushåll och praktiska tips',en:'Food, household and practical tips'},
+  'sec-vardag-info':{sv:'<strong>Tips:</strong> Matpriser varierar mycket mellan butiker. Willys och Lidl är ofta billigast för basvaror.',en:'<strong>Tip:</strong> Food prices vary a lot between stores. Willys and Lidl are often cheapest for basics.'},
+  'lg-vardag-mat':{sv:'Mat & hushåll',en:'Food & household'},
+  'link-ica':{sv:'ICA – Budgetrecept',en:'ICA – Budget recipes'},
+  'link-ica-desc':{sv:'Smakliga recept för lite pengar. Filtrera på budget och tid.',en:'Tasty recipes for less money. Filter by budget and time.'},
+  'link-coop':{sv:'Coop – Recept',en:'Coop – Recipes'},
+  'link-coop-desc':{sv:'Recept och matinspiration från Coop.',en:'Recipes and food inspiration from Coop.'},
+  'link-willys':{sv:'Willys – Erbjudanden',en:'Willys – Offers'},
+  'link-willys-desc':{sv:'Hitta veckans bästa erbjudanden nära dig.',en:'Find this week\'s best offers near you.'},
+
+  // ── KONTAKT SECTION ──
+  'sec-kontakt':{sv:'Stöd från kommunen',en:'Municipal support'},
+  'sec-kontakt-sub':{sv:'Kontaktperson och socialt stöd i Örebro',en:'Contact person and social support in Örebro'},
+  'sec-kontakt-info':{sv:'<strong>Bra att veta:</strong> Du kan ansöka om en kontaktperson via kommunen. Det är <strong>helt frivilligt och kostnadsfritt</strong>.',en:'<strong>Good to know:</strong> You can apply for a contact person through the municipality. It\'s <strong>completely voluntary and free</strong>.'},
+  'lg-kontakt-kommun':{sv:'Örebro kommun',en:'Örebro municipality'},
+  'link-kontaktperson':{sv:'Kontaktperson – Örebro kommun',en:'Contact person – Örebro municipality'},
+  'link-kontaktperson-desc':{sv:'Ansök om en kontaktperson som kan ge stöd i vardagen. Kostnadsfritt via kommunen.',en:'Apply for a contact person who can provide daily support. Free through the municipality.'},
+  'link-bistand-ansokan':{sv:'Ansökan & biståndsbeslut',en:'Application & support decisions'},
+  'link-bistand-ansokan-desc':{sv:'Information om hur du ansöker om stöd och hjälp via Örebro kommun.',en:'Information about how to apply for support and help via Örebro municipality.'},
+
+  // ── AKTIVITETER SECTION ──
+  'sec-aktiviteter':{sv:'Aktiviteter & fritid',en:'Activities & leisure'},
+  'sec-aktiviteter-sub':{sv:'Föreningar, sport och kultur',en:'Clubs, sports and culture'},
+  'sec-aktiviteter-info':{sv:'<strong>Tips:</strong> Örebro har över 20 gratis fritidsgårdar och mötesplatser! Fritidsboost erbjuder gratis aktiviteter för unga hela året.',en:'<strong>Tip:</strong> Örebro has over 20 free youth centers! Fritidsboost offers free activities for young people all year.'},
+  'lg-akt-hitta':{sv:'Hitta aktiviteter',en:'Find activities'},
+  'link-fritidsgard':{sv:'Mötesplatser för unga',en:'Youth meeting places'},
+  'link-fritidsgard-desc':{sv:'Fritidsgårdar och mötesplatser i Örebro. Gratis att besöka!',en:'Youth centers and meeting places in Örebro. Free to visit!'},
+  'link-fritidsboost':{sv:'Fritidsboost Örebro',en:'Fritidsboost Örebro'},
+  'link-fritidsboost-desc':{sv:'Gratis aktiviteter för unga i Örebro — dans, gaming, simning, sport och mer.',en:'Free activities for young people in Örebro — dance, gaming, swimming, sports and more.'},
+
+  // ── TRANSPORT SECTION ──
+  'sec-transport':{sv:'Transport',en:'Transport'},
+  'sec-transport-sub':{sv:'Buss, tåg och kollektivtrafik',en:'Bus, train and public transport'},
+  'sec-transport-info':{sv:'<strong>Tips:</strong> Köp månadskort på Länstrafiken — det är billigare än att köpa enstaka biljetter. Ungdomsrabatt finns för dig under 26 år!',en:'<strong>Tip:</strong> Buy a monthly pass from Länstrafiken — it\'s cheaper than single tickets. Youth discount available if you\'re under 26!'},
+  'lg-transport-lokalt':{sv:'Lokalt i Örebro',en:'Local in Örebro'},
+  'link-lt':{sv:'Länstrafiken Örebro',en:'Länstrafiken Örebro'},
+  'link-lt-desc':{sv:'Buss i Örebro stad och länet. Köp biljett i appen, online eller ombord med bankkort.',en:'Bus in Örebro city and county. Buy tickets in the app, online or on board with card.'},
+  'lg-transport-nationellt':{sv:'Nationellt',en:'National'},
+  'link-sj':{sv:'SJ – Tågbiljetter',en:'SJ – Train tickets'},
+  'link-sj-desc':{sv:'Boka tåg i hela Sverige. Köp tidigt för bästa pris.',en:'Book trains across Sweden. Buy early for best price.'},
+  'link-flixbus':{sv:'FlixBus',en:'FlixBus'},
+  'link-flixbus-desc':{sv:'Billiga bussar till och från Örebro. Ofta billigare än tåg för längre resor.',en:'Cheap buses to and from Örebro. Often cheaper than trains for longer trips.'},
+
+  // ── RÄTTIGHETER SECTION ──
+  'sec-rattigheter':{sv:'Dina rättigheter',en:'Your rights'},
+  'sec-rattigheter-sub':{sv:'Diskriminering, rättshjälp och information',en:'Discrimination, legal aid and information'},
+  'sec-rattigheter-info':{sv:'<strong>Bra att veta:</strong> Diskriminering är olagligt i Sverige. DO (Diskrimineringsombudsmannen) kan hjälpa dig anmäla.',en:'<strong>Good to know:</strong> Discrimination is illegal in Sweden. DO (Equality Ombudsman) can help you report it.'},
+  'lg-ratt-disk':{sv:'Diskriminering',en:'Discrimination'},
+  'link-do2':{sv:'Diskrimineringsombudsmannen (DO)',en:'Equality Ombudsman (DO)'},
+  'link-do2-desc':{sv:'Anmäl diskriminering på jobbet, i skolan eller i samhället.',en:'Report discrimination at work, school or in society.'},
+
+  // ── VIKTIGA NUMMER SECTION ──
+  'sec-nummer':{sv:'Viktiga nummer',en:'Important numbers'},
+  'sec-nummer-sub':{sv:'Akut, vård och myndigheter',en:'Emergency, healthcare and authorities'},
+  'sec-nummer-info':{sv:'<strong>Viktigt:</strong> 112 fungerar alltid, även utan SIM-kort. 1177 har tolkar för de flesta språk.',en:'<strong>Important:</strong> 112 always works, even without a SIM card. 1177 has interpreters for most languages.'},
+  'num-112':{sv:'Nödsamtal (akut)',en:'Emergency (urgent)'},
+  'num-1177':{sv:'Sjukvårdsrådgivning',en:'Healthcare advice'},
+  'num-11414':{sv:'Polis (ej akut)',en:'Police (non-urgent)'},
+  'num-bris':{sv:'BRIS (under 18)',en:'BRIS (under 18)'},
+  'num-mind':{sv:'Mind Självmordslinjen',en:'Mind Suicide line'},
+  'num-kvinnofrid':{sv:'Kvinnofridslinjen',en:'Women\'s helpline'},
+
+  // ── FEEDBACK MODAL ──
+  'fb-title':{sv:'Skicka feedback',en:'Send feedback'},
+  'fb-opt-1':{sv:'💡 Förslag',en:'💡 Suggestion'},
+  'fb-opt-2':{sv:'🐛 Något fel',en:'🐛 Something wrong'},
+  'fb-opt-3':{sv:'💚 Positivt',en:'💚 Positive'},
+  'fb-opt-4':{sv:'💬 Övrigt',en:'💬 Other'},
+  'fb-placeholder':{sv:'Skriv din feedback här...',en:'Write your feedback here...'},
+  'fb-consent':{sv:'Jag förstår att min feedback skickas anonymt till utvecklaren och kan användas för att förbättra appen.',en:'I understand my feedback is sent anonymously to the developer and may be used to improve the app.'},
+  'fb-send':{sv:'Skicka feedback',en:'Send feedback'},
+  'fb-thanks':{sv:'Tack för din feedback!<br/>Din åsikt hjälper oss att göra StödGuiden bättre.',en:'Thank you for your feedback!<br/>Your opinion helps us make StödGuiden better.'},
+
+  // ── ONBOARDING ──
+  'ob-title':{sv:'Välkommen till<br/><em>StödGuiden</em>',en:'Welcome to<br/><em>StödGuiden</em>'},
+  'ob-sub':{sv:'Din guide till samhällsinfo i Örebro – gratis, anonymt och enkelt.',en:'Your guide to civic info in Örebro – free, anonymous and simple.'},
+  'ob-feat1-title':{sv:'Officiella källor',en:'Official sources'},
+  'ob-feat1-desc':{sv:'Endast verifierad info från myndigheter',en:'Only verified info from authorities'},
+  'ob-feat2-title':{sv:'Helt anonymt',en:'Completely anonymous'},
+  'ob-feat2-desc':{sv:'Ingen data sparas om dig',en:'No data stored about you'},
+  'ob-feat3-title':{sv:'Alltid gratis',en:'Always free'},
+  'ob-feat3-desc':{sv:'Inga annonser, ingen prenumeration',en:'No ads, no subscription'},
+  'ob-btn':{sv:'Kom igång',en:'Get started'},
+  'ob-skip':{sv:'Hoppa över introduktion',en:'Skip introduction'}
 };
 
 function toggleLang(){
@@ -1467,14 +1856,235 @@ function toggleLang(){
   showTip();
 }
 
+// ── MENU MODAL ──
+function openMenu(){
+  document.getElementById('menuModal').classList.add('open');
+}
+function closeMenu(){
+  document.getElementById('menuModal').classList.remove('open');
+}
+document.getElementById('menuModal').addEventListener('click',function(e){
+  if(e.target===this)closeMenu();
+});
+
+// ── INFO POPUP ──
+var currentInfoCat='';
+var categoryInfo={
+  halsa:{
+    icon:'🧠',
+    sv:{title:'Hälsa & vård',text:'Här hittar du länkar till vårdcentraler, ungdomsmottagningar, psykisk hälsa och stödlinjer. Alla tjänster är gratis för dig under 20 år i Örebro.'},
+    en:{title:'Health & care',text:'Here you find links to health centers, youth clinics, mental health and support lines. All services are free if you\'re under 20 in Örebro.'}
+  },
+  ekonomi:{
+    icon:'💸',
+    sv:{title:'Ekonomi',text:'Här hittar du information om bidrag från Försäkringskassan, bostadsbidrag, skuldrådgivning och tips för att spara pengar.'},
+    en:{title:'Money & benefits',text:'Here you find information about benefits from the Social Insurance Agency, housing allowance, debt counseling and tips for saving money.'}
+  },
+  jobb:{
+    icon:'💼',
+    sv:{title:'Jobb & karriär',text:'Här hittar du hjälp att söka jobb, skriva CV, förbereda intervjuer och information om dina rättigheter på arbetsplatsen.'},
+    en:{title:'Jobs & career',text:'Here you find help searching for jobs, writing CVs, preparing for interviews and information about your rights at work.'}
+  },
+  boende:{
+    icon:'🏡',
+    sv:{title:'Boende',text:'Här hittar du information om bostadskö, hur du hittar lägenhet, dina rättigheter som hyresgäst och tips för att flytta hemifrån.'},
+    en:{title:'Housing',text:'Here you find information about housing queues, how to find an apartment, your rights as a tenant and tips for moving out.'}
+  },
+  studier:{
+    icon:'🎓',
+    sv:{title:'Studier',text:'Här hittar du information om studiebidrag (CSN), hur du söker till utbildningar och vuxenutbildning i Örebro.'},
+    en:{title:'Studies',text:'Here you find information about student grants (CSN), how to apply for education and adult education in Örebro.'}
+  },
+  bank:{
+    icon:'💳',
+    sv:{title:'Bank & betalningar',text:'Här hittar du information om BankID (digital legitimation), Swish och hur du hanterar din privatekonomi.'},
+    en:{title:'Bank & payments',text:'Here you find information about BankID (digital ID), Swish and how to manage your personal finances.'}
+  },
+  digital:{
+    icon:'📱',
+    sv:{title:'Digital vardag',text:'Här hittar du hjälp med att logga in på myndigheters e-tjänster, skapa BankID och tips för säkerhet online.'},
+    en:{title:'Digital life',text:'Here you find help logging in to government e-services, creating BankID and tips for online safety.'}
+  },
+  vardag:{
+    icon:'🧺',
+    sv:{title:'Vardag & hemtips',text:'Här hittar du budgetrecept, tips för matinköp och praktiska råd för hushållet.'},
+    en:{title:'Daily life',text:'Here you find budget recipes, tips for grocery shopping and practical household advice.'}
+  },
+  kontakt:{
+    icon:'🏛️',
+    sv:{title:'Stöd från kommunen',text:'Här hittar du information om hur du kan få en kontaktperson via kommunen som kan stötta dig i vardagen. Det är frivilligt och kostnadsfritt.'},
+    en:{title:'Municipal support',text:'Here you find information about getting a contact person through the municipality who can support you in daily life. It\'s voluntary and free.'}
+  },
+  aktiviteter:{
+    icon:'🌟',
+    sv:{title:'Aktiviteter & fritid',text:'Här hittar du gratis fritidsaktiviteter, föreningar, fritidsgårdar och evenemang för unga i Örebro.'},
+    en:{title:'Activities & leisure',text:'Here you find free leisure activities, clubs, youth centers and events for young people in Örebro.'}
+  },
+  transport:{
+    icon:'🚌',
+    sv:{title:'Transport',text:'Här hittar du information om bussar i Örebro, tågbiljetter och hur du reser billigt. Ungdomsrabatt finns för dig under 26!'},
+    en:{title:'Transport',text:'Here you find information about buses in Örebro, train tickets and how to travel cheaply. Youth discount available if you\'re under 26!'}
+  },
+  rattigheter:{
+    icon:'⚖️',
+    sv:{title:'Dina rättigheter',text:'Här hittar du information om diskriminering, var du kan anmäla och vilka rättigheter du har i Sverige.'},
+    en:{title:'Your rights',text:'Here you find information about discrimination, where to report it and what rights you have in Sweden.'}
+  },
+  nummer:{
+    icon:'☎️',
+    sv:{title:'Viktiga nummer',text:'Här hittar du de viktigaste telefonnumren: 112 för nödsituationer, 1177 för sjukvårdsrådgivning, BRIS och fler. 112 fungerar alltid, även utan SIM-kort.'},
+    en:{title:'Important numbers',text:'Here you find the most important phone numbers: 112 for emergencies, 1177 for healthcare advice, BRIS and more. 112 always works, even without a SIM card.'}
+  }
+};
+
+function showCatInfo(cat){
+  currentInfoCat=cat;
+  var info=categoryInfo[cat];
+  var lang=currentLang||'sv';
+  document.getElementById('infoPopupIcon').textContent=info.icon;
+  document.getElementById('infoPopupTitle').textContent=info[lang].title;
+  document.getElementById('infoPopupText').textContent=info[lang].text;
+  document.getElementById('infoPopupBtn').textContent=(lang==='sv')?'Gå till kategori':'Go to category';
+  document.getElementById('infoPopup').classList.add('open');
+}
+
+function closeInfoPopup(){
+  document.getElementById('infoPopup').classList.remove('open');
+  currentInfoCat='';
+}
+
+function goToCatFromInfo(){
+  closeInfoPopup();
+  closeMenu();
+  openCat(currentInfoCat);
+}
+
+document.getElementById('infoPopup').addEventListener('click',function(e){
+  if(e.target===this)closeInfoPopup();
+});
+
+// ── LINK INFO DATA ──
+var currentLinkId='';
+var currentLinkUrl='';
+var linkInfo={
+  // HÄLSA
+  'vardcentral':{icon:'🏥',sv:{title:'Hitta vårdcentral',text:'Här kan du välja och byta vårdcentral i Örebro. En vårdcentral är din "hemmaklinik" dit du går för vanliga sjukdomar, vaccin och hälsokontroller. Vården är gratis om du är under 20 år.'},en:{title:'Find health center',text:'Here you can choose and change your health center in Örebro. A health center is your "home clinic" for common illnesses, vaccines and health checks. Healthcare is free if you\'re under 20.'}},
+  '1177':{icon:'🏥',sv:{title:'1177 Vårdguiden',text:'Ring 1177 för gratis sjukvårdsrådgivning dygnet runt. De kan hjälpa dig bedöma om du behöver söka vård och vart du ska vända dig. Tolkar finns på de flesta språk.'},en:{title:'1177 Healthcare Guide',text:'Call 1177 for free healthcare advice 24/7. They can help you assess if you need care and where to go. Interpreters available in most languages.'}},
+  'umo-orebro':{icon:'💚',sv:{title:'Region Örebro',text:'Region Örebros officiella sida där du kan söka efter ungdomsmottagningar, vårdcentraler och annan vård i länet.'},en:{title:'Region Örebro',text:'Region Örebro\'s official site where you can search for youth clinics, health centers and other care in the county.'}},
+  'umo':{icon:'💚',sv:{title:'UMO',text:'UMO är en sajt för dig som är ung och har frågor om kroppen, sex, relationer, psykisk hälsa eller identitet. Du kan också chatta eller ställa frågor anonymt. För unga upp till 25 år.'},en:{title:'UMO',text:'UMO is a site for young people with questions about the body, sex, relationships, mental health or identity. You can also chat or ask questions anonymously. For young people up to 25.'}},
+  'mind':{icon:'🫂',sv:{title:'Mind Självmordslinjen',text:'Hit kan du ringa, chatta eller maila om du mår dåligt eller har tankar på att skada dig själv. Helt gratis och anonymt. Utbildade volontärer lyssnar utan att döma.'},en:{title:'Mind Suicide Line',text:'Call, chat or email if you\'re feeling bad or having thoughts of self-harm. Completely free and anonymous. Trained volunteers listen without judgment.'}},
+  'bris':{icon:'🌈',sv:{title:'BRIS',text:'BRIS hjälper barn och unga under 18 år. Du kan ringa 116 111, chatta eller maila om vad som helst — mobbing, familj, oro eller bara om du behöver prata med någon. Gratis och anonymt.'},en:{title:'BRIS',text:'BRIS helps children and young people under 18. You can call 116 111, chat or email about anything — bullying, family, worries or just if you need to talk. Free and anonymous.'}},
+  'youmo':{icon:'🧩',sv:{title:'Youmo',text:'Youmo har information om psykisk hälsa, kroppen och relationer på flera språk — perfekt om du är nyanländ till Sverige och vill ha info på ditt språk.'},en:{title:'Youmo',text:'Youmo has information about mental health, the body and relationships in multiple languages — perfect if you\'re new to Sweden and want info in your language.'}},
+  'drugsmart':{icon:'💊',sv:{title:'Drugsmart',text:'Fakta om droger, alkohol och beroende skrivet för unga. Ingen moralpredikning — bara ärlig information så du kan fatta egna beslut.'},en:{title:'Drugsmart',text:'Facts about drugs, alcohol and addiction written for young people. No moralizing — just honest information so you can make your own decisions.'}},
+  'iogt':{icon:'🤝',sv:{title:'IOGT-NTO',text:'IOGT-NTO ger stöd om du eller någon nära har problem med alkohol, droger eller spel. De har lokala grupper och aktiviteter.'},en:{title:'IOGT-NTO',text:'IOGT-NTO provides support if you or someone close has problems with alcohol, drugs or gambling. They have local groups and activities.'}},
+  'maria-ungdom':{icon:'💚',sv:{title:'Maria Ungdom',text:'Maria Ungdom i Örebro hjälper unga upp till 21 år med frågor om alkohol, droger eller spel. Du kan komma själv eller med någon. Helt gratis och anonymt.'},en:{title:'Maria Youth',text:'Maria Youth in Örebro helps young people up to 21 with questions about alcohol, drugs or gambling. You can come alone or with someone. Completely free and anonymous.'}},
+  'brottsoffermynd':{icon:'⚖️',sv:{title:'Brottsoffermyndigheten',text:'Har du blivit utsatt för brott? Här kan du få information om dina rättigheter och ansöka om ersättning från staten.'},en:{title:'Crime Victim Authority',text:'Have you been a victim of crime? Here you can get information about your rights and apply for compensation from the state.'}},
+  'kvinnofrid':{icon:'💜',sv:{title:'Kvinnofridslinjen',text:'Ring 020-50 50 50 om du eller någon du känner utsätts för våld i en relation. Gratis, anonymt och öppet dygnet runt. De kan hjälpa dig planera nästa steg.'},en:{title:'Women\'s Helpline',text:'Call 020-50 50 50 if you or someone you know is experiencing domestic violence. Free, anonymous and open 24/7. They can help you plan next steps.'}},
+  
+  // EKONOMI
+  'fk':{icon:'🏛️',sv:{title:'Försäkringskassan',text:'Försäkringskassan betalar ut bidrag som bostadsbidrag, sjukpenning och föräldrapenning. Du behöver BankID för att logga in på deras sida.'},en:{title:'Social Insurance Agency',text:'Försäkringskassan pays out benefits like housing allowance, sick pay and parental leave. You need BankID to log in to their site.'}},
+  'bostadsbidrag':{icon:'🏠',sv:{title:'Bostadsbidrag',text:'Om du har låg inkomst kan du få hjälp att betala hyran. Ansök via Försäkringskassan. Beloppet beror på din inkomst och hur hög hyran är.'},en:{title:'Housing benefit',text:'If you have low income you can get help paying rent. Apply via Försäkringskassan. The amount depends on your income and rent level.'}},
+  'bistand':{icon:'💵',sv:{title:'Pengar & bidrag – Örebro',text:'Örebro kommuns sida om ekonomiskt stöd. Här finns info om försörjningsstöd (socialbidrag) och andra bidrag du kan ansöka om via kommunen.'},en:{title:'Money & benefits – Örebro',text:'Örebro municipality\'s page about financial support. Here you find info about income support and other benefits you can apply for through the municipality.'}},
+  'kfm':{icon:'⚖️',sv:{title:'Kronofogden',text:'Kronofogden hanterar skulder och kan hjälpa dig med skuldsanering om du har stora betalningsproblem. De ger också gratis rådgivning om ekonomi.'},en:{title:'Debt Enforcement Authority',text:'Kronofogden handles debts and can help with debt restructuring if you have serious payment problems. They also give free financial advice.'}},
+  'budget-skuld':{icon:'📊',sv:{title:'Budget- och skuldrådgivning',text:'Gratis rådgivning från Örebro kommun om du har skulder eller behöver hjälp att planera din ekonomi. Helt konfidentiellt.'},en:{title:'Budget & debt counseling',text:'Free advice from Örebro municipality if you have debts or need help planning your finances. Completely confidential.'}},
+  'budget-kv':{icon:'📋',sv:{title:'Konsumentverkets budgetkalkyl',text:'Räkna ut vad ett rimligt liv kostar med Konsumentverkets kalkyl. Bra verktyg för att göra en budget och se om pengarna räcker.'},en:{title:'Consumer Agency budget calculator',text:'Calculate what a reasonable life costs with the Consumer Agency\'s calculator. Good tool for making a budget and seeing if money is enough.'}},
+  
+  // JOBB
+  'af':{icon:'💼',sv:{title:'Arbetsförmedlingen',text:'Arbetsförmedlingen hjälper dig hitta jobb, praktik och utbildning. Registrera dig för att få tillgång till jobbcoacher, CV-hjälp och arbetsmarknadsutbildningar.'},en:{title:'Employment Agency',text:'The Employment Agency helps you find jobs, internships and training. Register to get access to job coaches, CV help and labor market training.'}},
+  'platsbanken':{icon:'🔍',sv:{title:'Platsbanken',text:'Sveriges största jobbsajt med tusentals lediga jobb. Du kan filtrera på ort, bransch och anställningsform. Finns på engelska.'},en:{title:'Job Bank',text:'Sweden\'s largest job site with thousands of job openings. You can filter by location, industry and employment type. Available in English.'}},
+  'linkedin':{icon:'💼',sv:{title:'LinkedIn',text:'LinkedIn är ett professionellt nätverk där du bygger din profil, nätverkar med andra och hittar jobb. Många arbetsgivare rekryterar via LinkedIn.'},en:{title:'LinkedIn',text:'LinkedIn is a professional network where you build your profile, network with others and find jobs. Many employers recruit via LinkedIn.'}},
+  'cv-tips':{icon:'📝',sv:{title:'CV-tips',text:'Arbetsförmedlingens guide till att skriva ett bra CV och personligt brev. Konkreta tips och mallar du kan använda.'},en:{title:'CV tips',text:'The Employment Agency\'s guide to writing a good CV and cover letter. Concrete tips and templates you can use.'}},
+  'do':{icon:'⚖️',sv:{title:'Diskrimineringsombudsmannen',text:'DO arbetar mot diskriminering. Har du blivit orättvist behandlad på jobbet på grund av kön, ursprung, religion eller funktionsnedsättning? Här kan du anmäla.'},en:{title:'Equality Ombudsman',text:'DO works against discrimination. Have you been treated unfairly at work because of gender, origin, religion or disability? You can report here.'}},
+  
+  // BOENDE
+  'obo':{icon:'🏠',sv:{title:'ÖBO Bostadskö',text:'ÖBO är det kommunala bostadsbolaget i Örebro. Ställ dig i kön redan från 16 år — det är gratis! Ju längre kötid, desto bättre chanser.'},en:{title:'ÖBO Housing Queue',text:'ÖBO is the municipal housing company in Örebro. Join the queue from age 16 — it\'s free! The longer queue time, the better chances.'}},
+  'blocket-bostad':{icon:'🔍',sv:{title:'Blocket Bostad',text:'Hitta andrahandsboenden, inneboende och privata hyresvärdar på Blocket. Var försiktig med bedrägerier — betala aldrig i förskott!'},en:{title:'Blocket Housing',text:'Find sublets, roommates and private landlords on Blocket. Be careful with scams — never pay in advance!'}},
+  'hyresgast':{icon:'🏢',sv:{title:'Hyresgästföreningen',text:'Hyresgästföreningen kan hjälpa dig med juridisk rådgivning om du har problem med hyresvärden. Du behöver vara medlem för att få full hjälp.'},en:{title:'Tenants\' Association',text:'The Tenants\' Association can help with legal advice if you have problems with your landlord. You need to be a member for full help.'}},
+  
+  // STUDIER
+  'csn':{icon:'🎓',sv:{title:'CSN',text:'CSN betalar ut studiebidrag och studielån. På gymnasiet får du ca 1 250 kr/månad automatiskt. På högskola måste du ansöka. Sidan finns på engelska.'},en:{title:'CSN',text:'CSN pays out student grants and loans. In high school you get about 1,250 kr/month automatically. For university you must apply. Site available in English.'}},
+  'antagning':{icon:'📚',sv:{title:'Antagning.se',text:'Här söker du till alla universitet och högskolor i Sverige. Du behöver skapa ett konto och göra din ansökan före sista ansökningsdag.'},en:{title:'University Admissions',text:'Here you apply to all universities and colleges in Sweden. You need to create an account and submit your application before the deadline.'}},
+  'komvux':{icon:'📖',sv:{title:'Vuxenutbildning',text:'Komvux är gratis utbildning för vuxna. Du kan läsa in gymnasiet, lära dig svenska (SFI) eller ta yrkesutbildningar.'},en:{title:'Adult education',text:'Komvux is free education for adults. You can complete high school, learn Swedish (SFI) or take vocational training.'}},
+  
+  // BANK
+  'bankid':{icon:'🔐',sv:{title:'BankID',text:'BankID är din digitala legitimation i Sverige. Du behöver det för att logga in på myndigheter, banker och signera avtal. Skaffa det via din bank — du behöver ID-kort.'},en:{title:'BankID',text:'BankID is your digital ID in Sweden. You need it to log in to government services, banks and sign contracts. Get it through your bank — you need an ID card.'}},
+  'swish':{icon:'💸',sv:{title:'Swish',text:'Swish är en app för att skicka och ta emot pengar direkt med mobilen. Du behöver ett svenskt bankkonto och BankID för att använda Swish.'},en:{title:'Swish',text:'Swish is an app to send and receive money instantly with your phone. You need a Swedish bank account and BankID to use Swish.'}},
+  
+  // DIGITAL
+  'fk-mina':{icon:'🏛️',sv:{title:'Logga in på Försäkringskassan',text:'Logga in med BankID för att se dina ärenden, ansöka om bidrag och ladda upp dokument till Försäkringskassan.'},en:{title:'Log in to Social Insurance',text:'Log in with BankID to see your cases, apply for benefits and upload documents to Försäkringskassan.'}},
+  'af-mina':{icon:'💼',sv:{title:'Logga in på Arbetsförmedlingen',text:'Logga in för att uppdatera din profil, se jobbförslag och boka möten med din handläggare.'},en:{title:'Log in to Employment Agency',text:'Log in to update your profile, see job suggestions and book meetings with your case worker.'}},
+  'iis':{icon:'🔒',sv:{title:'Säkerhet på nätet',text:'Tips om hur du skyddar dig online: starka lösenord, undvika bedrägerier och vad du gör om du blivit hackad.'},en:{title:'Online safety',text:'Tips on how to protect yourself online: strong passwords, avoiding scams and what to do if you\'ve been hacked.'}},
+  
+  // VARDAG
+  'ica-recept':{icon:'🍳',sv:{title:'ICA Budgetrecept',text:'Goda recept som inte kostar mycket. Du kan filtrera på budget, tid och antal portioner.'},en:{title:'ICA Budget recipes',text:'Tasty recipes that don\'t cost much. You can filter by budget, time and number of servings.'}},
+  'coop-recept':{icon:'🥗',sv:{title:'Coop Recept',text:'Matinspiration och recept från Coop. Bra för att hitta idéer till veckans middagar.'},en:{title:'Coop Recipes',text:'Food inspiration and recipes from Coop. Good for finding ideas for the week\'s dinners.'}},
+  'willys':{icon:'🛒',sv:{title:'Willys Erbjudanden',text:'Se veckans erbjudanden på Willys nära dig. Willys är ofta billigast för basvaror.'},en:{title:'Willys Offers',text:'See this week\'s offers at Willys near you. Willys is often cheapest for basics.'}},
+  
+  // KONTAKT
+  'kontaktperson-kommun':{icon:'🤝',sv:{title:'Kontaktperson',text:'En kontaktperson är en vuxen som du kan träffa regelbundet för att göra saker tillsammans — fika, träna, prata. Det är helt frivilligt och gratis via kommunen.'},en:{title:'Contact person',text:'A contact person is an adult you can meet regularly to do things together — have coffee, exercise, talk. It\'s completely voluntary and free through the municipality.'}},
+  'bistand-ansokan':{icon:'📋',sv:{title:'Ansökan & bistånd',text:'Information om hur du ansöker om stöd och hjälp från Örebro kommun. Här finns blanketter och kontaktuppgifter.'},en:{title:'Application & support',text:'Information about how to apply for support and help from Örebro municipality. Here you find forms and contact details.'}},
+  
+  // AKTIVITETER
+  'fritidsgard':{icon:'🏠',sv:{title:'Mötesplatser för unga',text:'Örebro har många gratis fritidsgårdar och mötesplatser. Här kan du umgås, spela spel, lyssna på musik och träffa nya vänner.'},en:{title:'Youth meeting places',text:'Örebro has many free youth centers and meeting places. Here you can hang out, play games, listen to music and meet new friends.'}},
+  'fritidsboost':{icon:'🚀',sv:{title:'Fritidsboost',text:'Gratis aktiviteter för unga hela året — simning, dans, gaming, sport och mer. Kolla deras schema för att se vad som händer.'},en:{title:'Fritidsboost',text:'Free activities for young people all year — swimming, dance, gaming, sports and more. Check their schedule to see what\'s happening.'}},
+  
+  // TRANSPORT
+  'lt':{icon:'🚌',sv:{title:'Länstrafiken',text:'Buss i Örebro stad och länet. Köp biljett i appen, online eller ombord med bankkort. Ungdomsrabatt finns för dig under 26!'},en:{title:'Länstrafiken',text:'Bus in Örebro city and county. Buy tickets in the app, online or on board with card. Youth discount available if you\'re under 26!'}},
+  'sj':{icon:'🚆',sv:{title:'SJ Tåg',text:'Boka tåg i hela Sverige. Tips: köp biljett tidigt — priserna är lägre ju tidigare du bokar. Finns på engelska.'},en:{title:'SJ Train',text:'Book trains across Sweden. Tip: buy early — prices are lower the earlier you book. Available in English.'}},
+  'flixbus':{icon:'🚍',sv:{title:'FlixBus',text:'Billiga bussar till och från Örebro. Ofta billigare än tåg för längre resor. Boka online.'},en:{title:'FlixBus',text:'Cheap buses to and from Örebro. Often cheaper than trains for longer trips. Book online.'}},
+  
+  // RÄTTIGHETER
+  'do2':{icon:'⚖️',sv:{title:'Diskrimineringsombudsmannen',text:'DO arbetar mot diskriminering i skolan, på jobbet och i samhället. Du kan anmäla om du blivit orättvist behandlad på grund av kön, ursprung, religion, funktionsnedsättning, ålder eller sexuell läggning.'},en:{title:'Equality Ombudsman',text:'DO works against discrimination in school, at work and in society. You can report if you\'ve been treated unfairly because of gender, origin, religion, disability, age or sexual orientation.'}}
+};
+
+function showLinkInfo(linkId, url){
+  currentLinkId=linkId;
+  currentLinkUrl=url;
+  var info=linkInfo[linkId];
+  if(!info)return;
+  var lang=currentLang||'sv';
+  document.getElementById('infoPopupIcon').textContent=info.icon;
+  document.getElementById('infoPopupTitle').textContent=info[lang].title;
+  document.getElementById('infoPopupText').textContent=info[lang].text;
+  document.getElementById('infoPopupBtn').textContent=(lang==='sv')?'Öppna sidan':'Open page';
+  document.getElementById('infoPopupBtn').onclick=function(){
+    window.open(currentLinkUrl,'_blank');
+    closeInfoPopup();
+  };
+  document.getElementById('infoPopup').classList.add('open');
+}
+
 // ── INIT ──
 document.addEventListener('DOMContentLoaded', function() {
   showTip();
   initFavoriteButtons();
   renderFavorites();
+  initLinkInfoButtons();
 });
+
+// Automatisk tilføj info-knapper til alle links der har data i linkInfo
+function initLinkInfoButtons(){
+  document.querySelectorAll('.link-item').forEach(function(item){
+    var linkId=item.dataset.favId;
+    if(linkId && linkInfo[linkId]){
+      var actionsDiv=item.querySelector('.li-actions');
+      var link=item.querySelector('a.li-tx');
+      var url=link?link.href:'';
+      if(actionsDiv && !actionsDiv.querySelector('.link-info-btn')){
+        var infoBtn=document.createElement('button');
+        infoBtn.className='link-info-btn';
+        infoBtn.title='Läs mer';
+        infoBtn.innerHTML='ℹ️';
+        infoBtn.onclick=function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          showLinkInfo(linkId,url);
+        };
+        actionsDiv.insertBefore(infoBtn,actionsDiv.firstChild);
+      }
+    }
+  });
+}
 </script>
-<script>
-function toggleLang() { return; }
-</script></body>
+</body>
 </html>
