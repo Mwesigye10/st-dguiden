@@ -9,6 +9,7 @@
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="StödGuiden – hitta rätt enkelt och snabbt. Jobb, ekonomi, hälsa, boende och mycket mer." name="description"/>
 <title>StödGuiden – Örebro</title>
+<link rel="manifest" href="manifest.json">
 <style>
 :root {
   --bg: #0c1e19;
@@ -2084,6 +2085,10 @@ function initLinkInfoButtons(){
       }
     }
   });
+}
+// PWA Service Worker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js');
 }
 </script>
 </body>
