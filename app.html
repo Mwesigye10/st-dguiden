@@ -23,7 +23,6 @@
   --text: #e8f5ee;
   --muted: #6a9a82;
   --muted2: #4a7062;
-  --gold: #f0c674;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth}
@@ -31,20 +30,17 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
 
-/* Header */
 header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
-.brand{display:flex;align-items:center;gap:10px;cursor:pointer}
+.brand{display:flex;align-items:center;gap:10px;cursor:pointer;text-decoration:none}
 .brand-badge{width:34px;height:34px;background:linear-gradient(135deg,var(--green),var(--green2));border-radius:10px;display:grid;place-items:center;font-weight:800;font-size:13px;color:var(--accent);flex-shrink:0}
-.brand-name{font-weight:800;font-size:17px}
+.brand-name{font-weight:800;font-size:17px;color:var(--text)}
 .brand-tagline{font-size:10px;color:var(--muted2);margin-top:1px}
 .hdr-right{display:flex;align-items:center;gap:8px}
-.city-btn{background:rgba(45,122,95,0.15);border:1px solid var(--border);color:var(--accent);padding:7px 12px;border-radius:50px;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px}
-.city-btn:hover{background:rgba(45,122,95,0.25)}
+.city-btn{background:rgba(45,122,95,0.15);border:1px solid var(--border);color:var(--accent);padding:7px 12px;border-radius:50px;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;text-decoration:none}
+.city-btn:hover{background:rgba(45,122,95,0.25);text-decoration:none}
 
-/* Wrap */
 .wrap{max-width:600px;margin:0 auto;padding:0 16px}
 
-/* Hero */
 .hero{padding:22px 0 16px}
 .hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(45,122,95,0.15);border:1px solid rgba(45,122,95,0.3);color:var(--accent);font-size:11px;font-weight:600;padding:5px 12px;border-radius:50px;margin-bottom:14px}
 .hero h1{font-size:28px;font-weight:800;line-height:1.15;margin-bottom:10px}
@@ -53,26 +49,21 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
 .hero-trust{display:flex;gap:16px;flex-wrap:wrap}
 .trust-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted2)}
 
-/* Info box */
 .info-box{background:linear-gradient(135deg,rgba(45,122,95,0.12),rgba(30,92,69,0.08));border:1px solid rgba(45,122,95,0.2);border-radius:12px;padding:14px 16px;margin-bottom:16px;font-size:13px;color:var(--muted);line-height:1.6}
 .info-box strong{color:var(--accent2)}
 
-/* Categories */
 .section-title{font-size:15px;font-weight:700;color:var(--text);margin-bottom:12px}
 .cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
 @media(min-width:420px){.cat-grid{grid-template-columns:1fr 1fr 1fr}}
 .cat-btn{background:var(--panel);border:1px solid var(--border2);border-radius:14px;padding:16px 12px;text-align:left;cursor:pointer;transition:all 0.2s;font-family:inherit}
 .cat-btn:hover{border-color:var(--border);background:var(--panel2)}
-.cat-btn.active{border-color:var(--green);background:rgba(45,122,95,0.12)}
 .cat-ic{font-size:24px;display:block;margin-bottom:8px}
 .cat-name{font-size:13px;font-weight:700;color:var(--text);display:block}
 .cat-desc{font-size:11px;color:var(--muted2);margin-top:3px;display:block;line-height:1.4}
 
-/* Back bar */
 .backbar{display:none;margin:14px 0 10px}
 .back-btn{background:var(--panel);border:1px solid var(--border2);border-radius:12px;padding:10px 14px;color:var(--text);font-size:14px;cursor:pointer;display:flex;align-items:center;gap:8px;font-family:inherit}
 
-/* Category section */
 .cat-section{display:none;background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:18px;margin-bottom:16px}
 .cat-section.active{display:block}
 .cat-section-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--border2)}
@@ -80,7 +71,6 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
 .cat-section-title{font-size:18px;font-weight:800}
 .cat-section-sub{font-size:12px;color:var(--muted);margin-top:2px}
 
-/* Link groups */
 .link-group{margin-bottom:16px}
 .link-group-title{font-size:11px;color:var(--muted2);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
 .link-item{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,0.03);border:1px solid var(--border2);border-radius:12px;padding:12px 14px;margin-bottom:8px;text-decoration:none;transition:border-color 0.2s}
@@ -92,7 +82,6 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
 .link-item .li-arrow{color:var(--muted2);font-size:14px;flex-shrink:0;align-self:center}
 .link-item .li-local{background:rgba(109,207,160,0.15);color:var(--accent);font-size:9px;padding:2px 6px;border-radius:4px;margin-left:6px;font-weight:600}
 
-/* Numbers grid */
 .num-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 @media(min-width:400px){.num-grid{grid-template-columns:1fr 1fr 1fr}}
 .num-card{background:var(--panel);border:1px solid var(--border2);border-radius:12px;padding:14px;text-align:center;text-decoration:none;transition:all 0.2s}
@@ -100,31 +89,18 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
 .nc-num{display:block;font-size:18px;font-weight:800;color:var(--accent);margin-bottom:4px}
 .nc-name{display:block;font-size:11px;color:var(--muted)}
 
-/* Footer */
 .footer{text-align:center;padding:30px 16px;color:var(--muted2);font-size:12px}
 .footer a{color:var(--accent)}
-
-/* Loading */
-.loading{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;color:var(--muted)}
-.loading-spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite;margin-bottom:16px}
-@keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
-
-<div class="loading" id="loading">
-  <div class="loading-spinner"></div>
-  <p>Laddar...</p>
-</div>
-
-<div id="app" style="display:none;">
 
 <header>
   <a href="index.html" class="brand">
     <div class="brand-badge">SG</div>
     <div>
       <div class="brand-name">StödGuiden</div>
-      <div class="brand-tagline" id="cityName">Laddar...</div>
+      <div class="brand-tagline" id="cityName">Örebro</div>
     </div>
   </a>
   <div class="hdr-right">
@@ -146,293 +122,98 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
 <div class="wrap" id="categoriesView">
   <div class="section-title">Kategorier</div>
   <div class="cat-grid">
-    <button class="cat-btn" onclick="openCat('halsa')">
-      <span class="cat-ic">🧠</span>
-      <span class="cat-name">Hälsa & vård</span>
-      <span class="cat-desc">Vård, psykisk hälsa</span>
-    </button>
-    <button class="cat-btn" onclick="openCat('ekonomi')">
-      <span class="cat-ic">💸</span>
-      <span class="cat-name">Ekonomi</span>
-      <span class="cat-desc">Bidrag, budget, skulder</span>
-    </button>
-    <button class="cat-btn" onclick="openCat('jobb')">
-      <span class="cat-ic">💼</span>
-      <span class="cat-name">Jobb & karriär</span>
-      <span class="cat-desc">CV, intervju, söka jobb</span>
-    </button>
-    <button class="cat-btn" onclick="openCat('boende')">
-      <span class="cat-ic">🏡</span>
-      <span class="cat-name">Boende</span>
-      <span class="cat-desc">Hyra, kontrakt</span>
-    </button>
-    <button class="cat-btn" onclick="openCat('transport')">
-      <span class="cat-ic">🚌</span>
-      <span class="cat-name">Transport</span>
-      <span class="cat-desc">Buss, tåg</span>
-    </button>
-    <button class="cat-btn" onclick="openCat('aktiviteter')">
-      <span class="cat-ic">🌟</span>
-      <span class="cat-name">Aktiviteter</span>
-      <span class="cat-desc">Fritid, föreningar</span>
-    </button>
-    <button class="cat-btn" onclick="openCat('kontakt')">
-      <span class="cat-ic">🏛️</span>
-      <span class="cat-name">Stöd från kommunen</span>
-      <span class="cat-desc">Kontaktperson</span>
-    </button>
-    <button class="cat-btn" onclick="openCat('nummer')">
-      <span class="cat-ic">☎️</span>
-      <span class="cat-name">Viktiga nummer</span>
-      <span class="cat-desc">Akut, vård</span>
-    </button>
+    <button class="cat-btn" onclick="openCat('halsa')"><span class="cat-ic">🧠</span><span class="cat-name">Hälsa & vård</span><span class="cat-desc">Vård, psykisk hälsa</span></button>
+    <button class="cat-btn" onclick="openCat('ekonomi')"><span class="cat-ic">💸</span><span class="cat-name">Ekonomi</span><span class="cat-desc">Bidrag, budget, skulder</span></button>
+    <button class="cat-btn" onclick="openCat('jobb')"><span class="cat-ic">💼</span><span class="cat-name">Jobb & karriär</span><span class="cat-desc">CV, intervju, söka jobb</span></button>
+    <button class="cat-btn" onclick="openCat('boende')"><span class="cat-ic">🏡</span><span class="cat-name">Boende</span><span class="cat-desc">Hyra, kontrakt</span></button>
+    <button class="cat-btn" onclick="openCat('transport')"><span class="cat-ic">🚌</span><span class="cat-name">Transport</span><span class="cat-desc">Buss, tåg</span></button>
+    <button class="cat-btn" onclick="openCat('aktiviteter')"><span class="cat-ic">🌟</span><span class="cat-name">Aktiviteter</span><span class="cat-desc">Fritid, föreningar</span></button>
+    <button class="cat-btn" onclick="openCat('kontakt')"><span class="cat-ic">🏛️</span><span class="cat-name">Stöd från kommunen</span><span class="cat-desc">Kontaktperson</span></button>
+    <button class="cat-btn" onclick="openCat('nummer')"><span class="cat-ic">☎️</span><span class="cat-name">Viktiga nummer</span><span class="cat-desc">Akut, vård</span></button>
   </div>
 </div>
 
-<div class="backbar wrap" id="backbar">
-  <button class="back-btn" onclick="closeCat()">← Tillbaka till kategorier</button>
-</div>
+<div class="backbar wrap" id="backbar"><button class="back-btn" onclick="closeCat()">← Tillbaka till kategorier</button></div>
 
 <!-- HÄLSA -->
 <div class="cat-section wrap" id="cat-halsa">
-  <div class="cat-section-header">
-    <span class="cat-section-ic">🧠</span>
-    <div>
-      <div class="cat-section-title">Hälsa & vård</div>
-      <div class="cat-section-sub">Vård, psykisk hälsa och kontaktlinjer</div>
-    </div>
-  </div>
+  <div class="cat-section-header"><span class="cat-section-ic">🧠</span><div><div class="cat-section-title">Hälsa & vård</div><div class="cat-section-sub">Vård, psykisk hälsa och kontaktlinjer</div></div></div>
   <div class="info-box" id="info-halsa"></div>
-  <div class="link-group">
-    <div class="link-group-title" id="lg-halsa-local"></div>
-    <div id="links-halsa-local"></div>
-  </div>
+  <div class="link-group"><div class="link-group-title" id="lg-halsa-local">Lokalt</div><div id="links-halsa-local"></div></div>
   <div class="link-group">
     <div class="link-group-title">Nationella resurser</div>
-    <div class="link-item">
-      <span class="li-ic">🏥</span>
-      <a class="li-tx" href="https://www.1177.se" target="_blank" rel="noopener">
-        <span class="li-name">1177 Vårdguiden</span>
-        <span class="li-desc">Råd, vägledning och hitta vård. Ring 1177 dygnet runt.</span>
-      </a>
-      <span class="li-arrow">↗</span>
-    </div>
-    <div class="link-item">
-      <span class="li-ic">💚</span>
-      <a class="li-tx" href="https://www.umo.se" target="_blank" rel="noopener">
-        <span class="li-name">UMO – Ungdomsmottagning online</span>
-        <span class="li-desc">Sex, relationer, hälsa och identitet för unga upp till 25 år.</span>
-      </a>
-      <span class="li-arrow">↗</span>
-    </div>
+    <a class="link-item" href="https://www.1177.se" target="_blank" rel="noopener"><span class="li-ic">🏥</span><span class="li-tx"><span class="li-name">1177 Vårdguiden</span><span class="li-desc">Råd, vägledning och hitta vård. Ring 1177 dygnet runt.</span></span><span class="li-arrow">↗</span></a>
+    <a class="link-item" href="https://www.umo.se" target="_blank" rel="noopener"><span class="li-ic">💚</span><span class="li-tx"><span class="li-name">UMO – Ungdomsmottagning online</span><span class="li-desc">Sex, relationer, hälsa och identitet för unga upp till 25 år.</span></span><span class="li-arrow">↗</span></a>
   </div>
   <div class="link-group">
     <div class="link-group-title">Psykisk hälsa</div>
-    <div class="link-item">
-      <span class="li-ic">🫂</span>
-      <a class="li-tx" href="https://mind.se" target="_blank" rel="noopener">
-        <span class="li-name">Mind – Självmordslinjen</span>
-        <span class="li-desc">Samtal, chatt och mail. Gratis & anonymt.</span>
-      </a>
-      <span class="li-arrow">↗</span>
-    </div>
-    <div class="link-item">
-      <span class="li-ic">🌈</span>
-      <a class="li-tx" href="https://www.bris.se" target="_blank" rel="noopener">
-        <span class="li-name">BRIS – Barnens rätt i samhället</span>
-        <span class="li-desc">För barn och unga under 18. Ring 116 111.</span>
-      </a>
-      <span class="li-arrow">↗</span>
-    </div>
+    <a class="link-item" href="https://mind.se" target="_blank" rel="noopener"><span class="li-ic">🫂</span><span class="li-tx"><span class="li-name">Mind – Självmordslinjen</span><span class="li-desc">Samtal, chatt och mail. Gratis & anonymt.</span></span><span class="li-arrow">↗</span></a>
+    <a class="link-item" href="https://www.bris.se" target="_blank" rel="noopener"><span class="li-ic">🌈</span><span class="li-tx"><span class="li-name">BRIS – Barnens rätt i samhället</span><span class="li-desc">För barn och unga under 18. Ring 116 111.</span></span><span class="li-arrow">↗</span></a>
   </div>
 </div>
 
 <!-- EKONOMI -->
 <div class="cat-section wrap" id="cat-ekonomi">
-  <div class="cat-section-header">
-    <span class="cat-section-ic">💸</span>
-    <div>
-      <div class="cat-section-title">Ekonomi</div>
-      <div class="cat-section-sub">Bidrag, budget och skuldrådgivning</div>
-    </div>
-  </div>
-  <div class="link-group">
-    <div class="link-group-title" id="lg-ekon-local"></div>
-    <div id="links-ekon-local"></div>
-  </div>
+  <div class="cat-section-header"><span class="cat-section-ic">💸</span><div><div class="cat-section-title">Ekonomi</div><div class="cat-section-sub">Bidrag, budget och skuldrådgivning</div></div></div>
+  <div class="link-group"><div class="link-group-title" id="lg-ekon-local">Lokalt</div><div id="links-ekon-local"></div></div>
   <div class="link-group">
     <div class="link-group-title">Nationella resurser</div>
-    <div class="link-item">
-      <span class="li-ic">🏛️</span>
-      <a class="li-tx" href="https://www.forsakringskassan.se" target="_blank" rel="noopener">
-        <span class="li-name">Försäkringskassan</span>
-        <span class="li-desc">Sjukpenning, föräldrapenning, bostadsbidrag och mer.</span>
-      </a>
-      <span class="li-arrow">↗</span>
-    </div>
-    <div class="link-item">
-      <span class="li-ic">⚖️</span>
-      <a class="li-tx" href="https://www.kronofogden.se" target="_blank" rel="noopener">
-        <span class="li-name">Kronofogden</span>
-        <span class="li-desc">Information om skulder och skuldsanering.</span>
-      </a>
-      <span class="li-arrow">↗</span>
-    </div>
-    <div class="link-item">
-      <span class="li-ic">📋</span>
-      <a class="li-tx" href="https://www.konsumentverket.se/ekonomi/" target="_blank" rel="noopener">
-        <span class="li-name">Konsumentverket – Budget</span>
-        <span class="li-desc">Budgetkalkyl och tips för din ekonomi.</span>
-      </a>
-      <span class="li-arrow">↗</span>
-    </div>
+    <a class="link-item" href="https://www.forsakringskassan.se" target="_blank" rel="noopener"><span class="li-ic">🏛️</span><span class="li-tx"><span class="li-name">Försäkringskassan</span><span class="li-desc">Sjukpenning, föräldrapenning, bostadsbidrag och mer.</span></span><span class="li-arrow">↗</span></a>
+    <a class="link-item" href="https://www.kronofogden.se" target="_blank" rel="noopener"><span class="li-ic">⚖️</span><span class="li-tx"><span class="li-name">Kronofogden</span><span class="li-desc">Information om skulder och skuldsanering.</span></span><span class="li-arrow">↗</span></a>
+    <a class="link-item" href="https://www.csn.se" target="_blank" rel="noopener"><span class="li-ic">🎓</span><span class="li-tx"><span class="li-name">CSN – Studiestöd</span><span class="li-desc">Studiemedel, bidrag och lån för studier.</span></span><span class="li-arrow">↗</span></a>
   </div>
 </div>
 
 <!-- JOBB -->
 <div class="cat-section wrap" id="cat-jobb">
-  <div class="cat-section-header">
-    <span class="cat-section-ic">💼</span>
-    <div>
-      <div class="cat-section-title">Jobb & karriär</div>
-      <div class="cat-section-sub">Hitta jobb, CV och intervjutips</div>
-    </div>
-  </div>
+  <div class="cat-section-header"><span class="cat-section-ic">💼</span><div><div class="cat-section-title">Jobb & karriär</div><div class="cat-section-sub">Hitta jobb, CV och intervjutips</div></div></div>
   <div class="link-group">
     <div class="link-group-title">Söka jobb</div>
-    <div class="link-item">
-      <span class="li-ic">💼</span>
-      <a class="li-tx" href="https://arbetsformedlingen.se" target="_blank" rel="noopener">
-        <span class="li-name">Arbetsförmedlingen</span>
-        <span class="li-desc">Registrera dig, sök jobb och få stöd.</span>
-      </a>
-      <span class="li-arrow">↗</span>
-    </div>
-    <div class="link-item">
-      <span class="li-ic">🔍</span>
-      <a class="li-tx" href="https://arbetsformedlingen.se/platsbanken" target="_blank" rel="noopener">
-        <span class="li-name">Platsbanken</span>
-        <span class="li-desc">Sök bland tusentals lediga jobb i hela Sverige.</span>
-      </a>
-      <span class="li-arrow">↗</span>
-    </div>
-    <div class="link-item">
-      <span class="li-ic">💼</span>
-      <a class="li-tx" href="https://www.linkedin.com" target="_blank" rel="noopener">
-        <span class="li-name">LinkedIn</span>
-        <span class="li-desc">Professionellt nätverk. Bygg din profil och hitta jobb.</span>
-      </a>
-      <span class="li-arrow">↗</span>
-    </div>
+    <a class="link-item" href="https://arbetsformedlingen.se" target="_blank" rel="noopener"><span class="li-ic">💼</span><span class="li-tx"><span class="li-name">Arbetsförmedlingen</span><span class="li-desc">Registrera dig, sök jobb och få stöd.</span></span><span class="li-arrow">↗</span></a>
+    <a class="link-item" href="https://arbetsformedlingen.se/platsbanken" target="_blank" rel="noopener"><span class="li-ic">🔍</span><span class="li-tx"><span class="li-name">Platsbanken</span><span class="li-desc">Sök bland tusentals lediga jobb i hela Sverige.</span></span><span class="li-arrow">↗</span></a>
+    <a class="link-item" href="https://www.linkedin.com" target="_blank" rel="noopener"><span class="li-ic">💼</span><span class="li-tx"><span class="li-name">LinkedIn</span><span class="li-desc">Professionellt nätverk. Bygg din profil och hitta jobb.</span></span><span class="li-arrow">↗</span></a>
   </div>
 </div>
 
 <!-- BOENDE -->
 <div class="cat-section wrap" id="cat-boende">
-  <div class="cat-section-header">
-    <span class="cat-section-ic">🏡</span>
-    <div>
-      <div class="cat-section-title">Boende</div>
-      <div class="cat-section-sub">Hitta bostad och dina rättigheter</div>
-    </div>
-  </div>
+  <div class="cat-section-header"><span class="cat-section-ic">🏡</span><div><div class="cat-section-title">Boende</div><div class="cat-section-sub">Hitta bostad och dina rättigheter</div></div></div>
   <div class="link-group">
     <div class="link-group-title">Hitta bostad</div>
-    <div class="link-item">
-      <span class="li-ic">🏠</span>
-      <a class="li-tx" href="https://bostad.blocket.se" target="_blank" rel="noopener">
-        <span class="li-name">Blocket Bostad</span>
-        <span class="li-desc">Hitta andrahandsboenden och privata hyresvärdar.</span>
-      </a>
-      <span class="li-arrow">↗</span>
-    </div>
-    <div class="link-item">
-      <span class="li-ic">🏢</span>
-      <a class="li-tx" href="https://www.hyresgastforeningen.se" target="_blank" rel="noopener">
-        <span class="li-name">Hyresgästföreningen</span>
-        <span class="li-desc">Juridisk rådgivning om du har problem med hyresvärden.</span>
-      </a>
-      <span class="li-arrow">↗</span>
-    </div>
+    <a class="link-item" href="https://bostad.blocket.se" target="_blank" rel="noopener"><span class="li-ic">🏠</span><span class="li-tx"><span class="li-name">Blocket Bostad</span><span class="li-desc">Hitta andrahandsboenden och privata hyresvärdar.</span></span><span class="li-arrow">↗</span></a>
+    <a class="link-item" href="https://www.hyresgastforeningen.se" target="_blank" rel="noopener"><span class="li-ic">🏢</span><span class="li-tx"><span class="li-name">Hyresgästföreningen</span><span class="li-desc">Juridisk rådgivning om du har problem med hyresvärden.</span></span><span class="li-arrow">↗</span></a>
   </div>
 </div>
 
 <!-- TRANSPORT -->
 <div class="cat-section wrap" id="cat-transport">
-  <div class="cat-section-header">
-    <span class="cat-section-ic">🚌</span>
-    <div>
-      <div class="cat-section-title">Transport</div>
-      <div class="cat-section-sub">Buss, tåg och kollektivtrafik</div>
-    </div>
-  </div>
+  <div class="cat-section-header"><span class="cat-section-ic">🚌</span><div><div class="cat-section-title">Transport</div><div class="cat-section-sub">Buss, tåg och kollektivtrafik</div></div></div>
   <div class="info-box" id="info-transport"></div>
-  <div class="link-group">
-    <div class="link-group-title" id="lg-transport-local"></div>
-    <div id="links-transport-local"></div>
-  </div>
+  <div class="link-group"><div class="link-group-title" id="lg-transport-local">Lokalt</div><div id="links-transport-local"></div></div>
   <div class="link-group">
     <div class="link-group-title">Nationellt</div>
-    <div class="link-item">
-      <span class="li-ic">🚆</span>
-      <a class="li-tx" href="https://www.sj.se" target="_blank" rel="noopener">
-        <span class="li-name">SJ – Tågbiljetter</span>
-        <span class="li-desc">Boka tåg i hela Sverige. Köp tidigt för bästa pris.</span>
-      </a>
-      <span class="li-arrow">↗</span>
-    </div>
-    <div class="link-item">
-      <span class="li-ic">🚍</span>
-      <a class="li-tx" href="https://www.flixbus.se" target="_blank" rel="noopener">
-        <span class="li-name">FlixBus</span>
-        <span class="li-desc">Billiga bussar för längre resor.</span>
-      </a>
-      <span class="li-arrow">↗</span>
-    </div>
+    <a class="link-item" href="https://www.sj.se" target="_blank" rel="noopener"><span class="li-ic">🚆</span><span class="li-tx"><span class="li-name">SJ – Tågbiljetter</span><span class="li-desc">Boka tåg i hela Sverige. Köp tidigt för bästa pris.</span></span><span class="li-arrow">↗</span></a>
+    <a class="link-item" href="https://www.flixbus.se" target="_blank" rel="noopener"><span class="li-ic">🚍</span><span class="li-tx"><span class="li-name">FlixBus</span><span class="li-desc">Billiga bussar för längre resor.</span></span><span class="li-arrow">↗</span></a>
   </div>
 </div>
 
 <!-- AKTIVITETER -->
 <div class="cat-section wrap" id="cat-aktiviteter">
-  <div class="cat-section-header">
-    <span class="cat-section-ic">🌟</span>
-    <div>
-      <div class="cat-section-title">Aktiviteter & fritid</div>
-      <div class="cat-section-sub">Föreningar, sport och kultur</div>
-    </div>
-  </div>
+  <div class="cat-section-header"><span class="cat-section-ic">🌟</span><div><div class="cat-section-title">Aktiviteter & fritid</div><div class="cat-section-sub">Föreningar, sport och kultur</div></div></div>
   <div class="info-box" id="info-aktiviteter"></div>
-  <div class="link-group">
-    <div class="link-group-title" id="lg-akt-local"></div>
-    <div id="links-akt-local"></div>
-  </div>
+  <div class="link-group"><div class="link-group-title" id="lg-akt-local">Lokalt</div><div id="links-akt-local"></div></div>
 </div>
 
-<!-- KONTAKT/KOMMUN -->
+<!-- KONTAKT -->
 <div class="cat-section wrap" id="cat-kontakt">
-  <div class="cat-section-header">
-    <span class="cat-section-ic">🏛️</span>
-    <div>
-      <div class="cat-section-title">Stöd från kommunen</div>
-      <div class="cat-section-sub" id="kontakt-sub">Kontaktperson och socialt stöd</div>
-    </div>
-  </div>
+  <div class="cat-section-header"><span class="cat-section-ic">🏛️</span><div><div class="cat-section-title">Stöd från kommunen</div><div class="cat-section-sub" id="kontakt-sub">Kontaktperson och socialt stöd</div></div></div>
   <div class="info-box" id="info-kontakt"></div>
-  <div class="link-group">
-    <div class="link-group-title" id="lg-kontakt-local"></div>
-    <div id="links-kontakt-local"></div>
-  </div>
+  <div class="link-group"><div class="link-group-title" id="lg-kontakt-local">Kommunen</div><div id="links-kontakt-local"></div></div>
 </div>
 
-<!-- VIKTIGA NUMMER -->
+<!-- NUMMER -->
 <div class="cat-section wrap" id="cat-nummer">
-  <div class="cat-section-header">
-    <span class="cat-section-ic">☎️</span>
-    <div>
-      <div class="cat-section-title">Viktiga nummer</div>
-      <div class="cat-section-sub">Akut, vård och myndigheter</div>
-    </div>
-  </div>
+  <div class="cat-section-header"><span class="cat-section-ic">☎️</span><div><div class="cat-section-title">Viktiga nummer</div><div class="cat-section-sub">Akut, vård och myndigheter</div></div></div>
   <div class="info-box"><strong>Viktigt:</strong> 112 fungerar alltid, även utan SIM-kort. 1177 har tolkar för de flesta språk.</div>
   <div class="num-grid">
     <a class="num-card" href="tel:112"><span class="nc-num">112</span><span class="nc-name">Nödsamtal (akut)</span></a>
@@ -444,170 +225,17 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
   </div>
 </div>
 
-<div class="footer">
-  <p>🔒 Anonymt & gratis · Vi sparar ingen data om dig</p>
-  <p style="margin-top:8px"><a href="index.html">Byt stad</a></p>
-</div>
-
-</div><!-- end #app -->
+<div class="footer"><p>🔒 Anonymt & gratis · Vi sparar ingen data om dig</p><p style="margin-top:8px"><a href="index.html">Byt stad</a></p></div>
 
 <script>
-let cityData = null;
-let currentCity = null;
-
-// Get city from URL
-function getCityFromUrl() {
-  const params = new URLSearchParams(window.location.search);
-  return params.get('city') || 'orebro';
-}
-
-// Load city data
-async function loadCityData(cityId) {
-  try {
-    const response = await fetch(`data/${cityId}.json`);
-    if (!response.ok) throw new Error('City not found');
-    return await response.json();
-  } catch (error) {
-    console.error('Error loading city:', error);
-    // Fallback to Örebro
-    const response = await fetch('data/orebro.json');
-    return await response.json();
-  }
-}
-
-// Create link item HTML
-function createLinkItem(icon, name, desc, url, isLocal = false) {
-  const localBadge = isLocal ? '<span class="li-local">LOKAL</span>' : '';
-  return `
-    <div class="link-item">
-      <span class="li-ic">${icon}</span>
-      <a class="li-tx" href="${url}" target="_blank" rel="noopener">
-        <span class="li-name">${name}${localBadge}</span>
-        <span class="li-desc">${desc}</span>
-      </a>
-      <span class="li-arrow">↗</span>
-    </div>
-  `;
-}
-
-// Populate the app with city data
-function populateApp(data) {
-  // Update title and header
-  document.title = `StödGuiden – ${data.city}`;
-  document.getElementById('cityName').textContent = data.city;
-  
-  // Save city preference
-  localStorage.setItem('stodguiden-city', currentCity);
-  
-  // HÄLSA section
-  if (data.infoBoxes?.halsa) {
-    document.getElementById('info-halsa').innerHTML = data.infoBoxes.halsa.sv;
-  }
-  document.getElementById('lg-halsa-local').textContent = `Vård i ${data.city}`;
-  
-  let halsaLinks = '';
-  if (data.local?.vardcentral) {
-    halsaLinks += createLinkItem('🏥', data.local.vardcentral.name.sv, data.local.vardcentral.desc.sv, data.local.vardcentral.url, true);
-  }
-  if (data.local?.region) {
-    halsaLinks += createLinkItem('💚', data.local.region.name.sv, data.local.region.desc.sv, data.local.region.url, true);
-  }
-  if (data.local?.mariaUngdom) {
-    halsaLinks += createLinkItem('💊', data.local.mariaUngdom.name.sv, data.local.mariaUngdom.desc.sv, data.local.mariaUngdom.url, true);
-  }
-  document.getElementById('links-halsa-local').innerHTML = halsaLinks;
-  
-  // EKONOMI section
-  document.getElementById('lg-ekon-local').textContent = `Lokalt i ${data.city}`;
-  
-  let ekonLinks = '';
-  if (data.local?.pengarBidrag) {
-    ekonLinks += createLinkItem('💵', data.local.pengarBidrag.name.sv, data.local.pengarBidrag.desc.sv, data.local.pengarBidrag.url, true);
-  }
-  if (data.local?.budgetSkuld) {
-    ekonLinks += createLinkItem('📊', data.local.budgetSkuld.name.sv, data.local.budgetSkuld.desc.sv, data.local.budgetSkuld.url, true);
-  }
-  document.getElementById('links-ekon-local').innerHTML = ekonLinks;
-  
-  // TRANSPORT section
-  if (data.infoBoxes?.transport) {
-    document.getElementById('info-transport').innerHTML = data.infoBoxes.transport.sv;
-  }
-  document.getElementById('lg-transport-local').textContent = `Lokalt i ${data.city}`;
-  
-  let transportLinks = '';
-  if (data.transport) {
-    transportLinks += createLinkItem('🚌', data.transport.name, data.transport.desc.sv, data.transport.url, true);
-  }
-  document.getElementById('links-transport-local').innerHTML = transportLinks;
-  
-  // AKTIVITETER section
-  if (data.infoBoxes?.aktiviteter) {
-    document.getElementById('info-aktiviteter').innerHTML = data.infoBoxes.aktiviteter.sv;
-  }
-  document.getElementById('lg-akt-local').textContent = `Aktiviteter i ${data.city}`;
-  
-  let aktLinks = '';
-  if (data.local?.motesplatser) {
-    aktLinks += createLinkItem('🏠', data.local.motesplatser.name.sv, data.local.motesplatser.desc.sv, data.local.motesplatser.url, true);
-  }
-  if (data.local?.fritidsaktiviteter) {
-    aktLinks += createLinkItem('🚀', data.local.fritidsaktiviteter.name.sv, data.local.fritidsaktiviteter.desc.sv, data.local.fritidsaktiviteter.url, true);
-  }
-  document.getElementById('links-akt-local').innerHTML = aktLinks;
-  
-  // KONTAKT section
-  document.getElementById('kontakt-sub').textContent = `Kontaktperson och socialt stöd i ${data.city}`;
-  if (data.infoBoxes?.kontakt) {
-    document.getElementById('info-kontakt').innerHTML = data.infoBoxes.kontakt.sv;
-  }
-  document.getElementById('lg-kontakt-local').textContent = `${data.city} kommun`;
-  
-  let kontaktLinks = '';
-  if (data.local?.kontaktperson) {
-    kontaktLinks += createLinkItem('🤝', data.local.kontaktperson.name.sv, data.local.kontaktperson.desc.sv, data.local.kontaktperson.url, true);
-  }
-  if (data.local?.bistandAnsokan) {
-    kontaktLinks += createLinkItem('📋', data.local.bistandAnsokan.name.sv, data.local.bistandAnsokan.desc.sv, data.local.bistandAnsokan.url, true);
-  }
-  document.getElementById('links-kontakt-local').innerHTML = kontaktLinks;
-}
-
-// Category navigation
-function openCat(catId) {
-  document.getElementById('categoriesView').style.display = 'none';
-  document.getElementById('backbar').style.display = 'block';
-  document.querySelectorAll('.cat-section').forEach(s => s.classList.remove('active'));
-  document.getElementById('cat-' + catId).classList.add('active');
-  window.scrollTo(0, 0);
-}
-
-function closeCat() {
-  document.querySelectorAll('.cat-section').forEach(s => s.classList.remove('active'));
-  document.getElementById('backbar').style.display = 'none';
-  document.getElementById('categoriesView').style.display = 'block';
-  window.scrollTo(0, 0);
-}
-
-// Initialize
-async function init() {
-  currentCity = getCityFromUrl();
-  cityData = await loadCityData(currentCity);
-  populateApp(cityData);
-  
-  // Show app, hide loading
-  document.getElementById('loading').style.display = 'none';
-  document.getElementById('app').style.display = 'block';
-}
-
-// Start
-init();
-
-// Service Worker
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js');
-}
+const CITIES={orebro:{city:"Örebro",transport:{name:"Länstrafiken Örebro",url:"https://www.lanstrafiken.se",desc:"Buss i Örebro stad och länet."},local:{vardcentral:{name:"Hitta vårdcentral i Örebro",url:"https://www.1177.se/Orebrolan/",desc:"Välj vårdcentral. Gratis vård under 20 år."},mariaUngdom:{name:"Maria Ungdom Örebro",url:"https://www.1177.se/Orebrolan/hitta-vard/kontaktkort/Maria-Ungdom-Orebro/",desc:"Stöd för unga om alkohol, droger eller spel."},pengarBidrag:{name:"Pengar & bidrag – Örebro",url:"https://www.orebro.se/omsorg--stod/pengar--bidrag.html",desc:"Ekonomiskt stöd via Örebro kommun."},budgetSkuld:{name:"Budget- och skuldrådgivning",url:"https://www.orebro.se/omsorg--stod/pengar--bidrag/budget---skuldradgivning.html",desc:"Gratis rådgivning om ekonomi."},kontaktperson:{name:"Kontaktperson – Örebro",url:"https://www.orebro.se/omsorg--stod/funktionsnedsattning/stod--insatser/kontaktperson---funktionsnedsattning.html",desc:"Ansök om kontaktperson."},motesplatser:{name:"Mötesplatser för unga",url:"https://www.orebro.se/kultur--fritid/fritid--aktiviteter/motesplatser/motesplatser-for-unga.html",desc:"Fritidsgårdar i Örebro. Gratis!"},fritidsaktiviteter:{name:"Fritidsboost Örebro",url:"https://www.orebro.se/fritidsboost",desc:"Gratis aktiviteter för unga."}},infoBoxes:{halsa:"<strong>Bra att veta:</strong> I Örebro är vård gratis under 20 år.",aktiviteter:"<strong>Tips:</strong> Örebro har över 20 gratis fritidsgårdar!",transport:"<strong>Tips:</strong> Köp månadskort — ungdomsrabatt finns!",kontakt:"<strong>Bra att veta:</strong> Kontaktperson är helt frivilligt och gratis."}},stockholm:{city:"Stockholm",transport:{name:"SL",url:"https://sl.se",desc:"Tunnelbana, buss, pendeltåg."},local:{vardcentral:{name:"Hitta vårdcentral",url:"https://www.1177.se/Stockholm/",desc:"Välj vårdcentral i Stockholm."},mariaUngdom:{name:"Maria Ungdom Stockholm",url:"https://www.mariaungdom.se/",desc:"Stöd för unga."},pengarBidrag:{name:"Ekonomiskt bistånd",url:"https://www.stockholm.se/FamiljOmsorg/Socialt-och-ekonomiskt-stod/",desc:"Ekonomiskt stöd via Stockholm stad."},budgetSkuld:{name:"Budget- och skuldrådgivning",url:"https://www.stockholm.se/FamiljOmsorg/Socialt-och-ekonomiskt-stod/Ekonomiskt-stod-och-radgivning/Budget--och-skuldradgivning/",desc:"Gratis rådgivning."},kontaktperson:{name:"Kontaktperson",url:"https://www.stockholm.se/FamiljOmsorg/Funktionsnedsattning/Stod-och-service/Kontaktperson/",desc:"Ansök om kontaktperson."},motesplatser:{name:"Fritidsgårdar",url:"https://start.stockholm/privatperson/fritid-och-natur/fritidsgardar/",desc:"Fritidsgårdar. Gratis!"},fritidsaktiviteter:{name:"Ung i Stockholm",url:"https://ungistockholm.se/",desc:"Aktiviteter för unga."}},infoBoxes:{halsa:"<strong>Bra att veta:</strong> Vård gratis under 18 år.",aktiviteter:"<strong>Tips:</strong> Kolla ungistockholm.se!",transport:"<strong>Tips:</strong> Ungdomspris för dig under 20!",kontakt:"<strong>Bra att veta:</strong> Kontaktperson är frivilligt."}},goteborg:{city:"Göteborg",transport:{name:"Västtrafik",url:"https://www.vasttrafik.se",desc:"Spårvagn, buss, båt och tåg."},local:{vardcentral:{name:"Hitta vårdcentral",url:"https://www.1177.se/Vastra-Gotaland/",desc:"Välj vårdcentral."},mariaUngdom:{name:"Mini Maria Göteborg",url:"https://goteborg.se/wps/portal/start/social-och-familjefragor/missbruk-och-beroende/mini-maria",desc:"Stöd för unga."},pengarBidrag:{name:"Ekonomiskt bistånd",url:"https://goteborg.se/wps/portal?uri=gbglnk%3A20120829-112101",desc:"Ekonomiskt stöd via Göteborg."},budgetSkuld:{name:"Budget- och skuldrådgivning",url:"https://goteborg.se/wps/portal/start/social-och-familjefragor/ekonomi-och-socialbidrag/budget--och-skuldradgivning",desc:"Gratis rådgivning."},kontaktperson:{name:"Kontaktperson",url:"https://goteborg.se/wps/portal/start/funktionsnedsattning/stod-och-service/kontaktperson",desc:"Ansök om kontaktperson."},motesplatser:{name:"Fritidsgårdar",url:"https://goteborg.se/wps/portal/start/kultur-och-fritid/fritidsgardar",desc:"Fritidsgårdar. Gratis!"},fritidsaktiviteter:{name:"Aktiviteter för unga",url:"https://goteborg.se/wps/portal/start/kultur-och-fritid/aktiviteter-for-unga",desc:"Aktiviteter i Göteborg."}},infoBoxes:{halsa:"<strong>Bra att veta:</strong> Vård gratis under 20 år.",aktiviteter:"<strong>Tips:</strong> Göteborg har många fritidsgårdar!",transport:"<strong>Tips:</strong> Ungdomsrabatt finns på Västtrafik!",kontakt:"<strong>Bra att veta:</strong> Kontaktperson är frivilligt."}},malmo:{city:"Malmö",transport:{name:"Skånetrafiken",url:"https://www.skanetrafiken.se",desc:"Buss och tåg i Skåne."},local:{vardcentral:{name:"Hitta vårdcentral",url:"https://www.1177.se/Skane/",desc:"Välj vårdcentral."},mariaUngdom:{name:"Maria Malmö",url:"https://malmo.se/Bo-och-leva/Stod-och-omsorg/Missbruk-och-beroende/Stod-for-unga.html",desc:"Stöd för unga."},pengarBidrag:{name:"Ekonomiskt bistånd",url:"https://malmo.se/Bo-och-leva/Stod-och-omsorg/Forsorjning-och-ekonomi/Ekonomiskt-bistand.html",desc:"Ekonomiskt stöd via Malmö."},budgetSkuld:{name:"Budget- och skuldrådgivning",url:"https://malmo.se/Bo-och-leva/Stod-och-omsorg/Forsorjning-och-ekonomi/Budget--och-skuldradgivning.html",desc:"Gratis rådgivning."},kontaktperson:{name:"Kontaktperson",url:"https://malmo.se/Bo-och-leva/Stod-och-omsorg/Funktionsnedsattning/Stod-och-service.html",desc:"Ansök om kontaktperson."},motesplatser:{name:"Fritidsgårdar",url:"https://malmo.se/Uppleva-och-gora/Fritidsgardar.html",desc:"Fritidsgårdar. Gratis!"},fritidsaktiviteter:{name:"Ung i Malmö",url:"https://malmo.se/Uppleva-och-gora/Ung-i-Malmo.html",desc:"Aktiviteter i Malmö."}},infoBoxes:{halsa:"<strong>Bra att veta:</strong> Vård gratis under 20 år.",aktiviteter:"<strong>Tips:</strong> Kolla Ung i Malmö!",transport:"<strong>Tips:</strong> Ungdomsrabatt finns!",kontakt:"<strong>Bra att veta:</strong> Kontaktperson är frivilligt."}},uppsala:{city:"Uppsala",transport:{name:"UL",url:"https://www.ul.se",desc:"Buss och tåg i Uppsala län."},local:{vardcentral:{name:"Hitta vårdcentral",url:"https://www.1177.se/Uppsala-lan/",desc:"Välj vårdcentral."},mariaUngdom:{name:"Mini-Maria Uppsala",url:"https://www.uppsala.se/stod-och-omsorg/missbruk-och-beroende/stod-for-unga/",desc:"Stöd för unga."},pengarBidrag:{name:"Ekonomiskt bistånd",url:"https://www.uppsala.se/stod-och-omsorg/privatekonomi-och-ekonomiskt-stod/",desc:"Ekonomiskt stöd."},budgetSkuld:{name:"Budget- och skuldrådgivning",url:"https://www.uppsala.se/stod-och-omsorg/privatekonomi-och-ekonomiskt-stod/ekonomisk-radgivning/budget--och-skuldradgivning-hos-konsument-uppsala/",desc:"Gratis rådgivning."},kontaktperson:{name:"Kontaktperson",url:"https://www.uppsala.se/stod-och-omsorg/funktionsnedsattning/stod-och-service/",desc:"Ansök om kontaktperson."},motesplatser:{name:"Fritidsgårdar",url:"https://www.uppsala.se/kulturochfritid/fritidsgardar/",desc:"Fritidsgårdar. Gratis!"},fritidsaktiviteter:{name:"Ung i Uppsala",url:"https://www.uppsala.se/kulturochfritid/ung-i-uppsala/",desc:"Aktiviteter."}},infoBoxes:{halsa:"<strong>Bra att veta:</strong> Vård gratis under 20 år.",aktiviteter:"<strong>Tips:</strong> Uppsala har många fritidsgårdar!",transport:"<strong>Tips:</strong> Ungdomsrabatt på UL!",kontakt:"<strong>Bra att veta:</strong> Kontaktperson är frivilligt."}},vasteras:{city:"Västerås",transport:{name:"VL",url:"https://www.vl.se",desc:"Buss i Västmanland."},local:{vardcentral:{name:"Hitta vårdcentral",url:"https://www.1177.se/Vastmanland/",desc:"Välj vårdcentral."},mariaUngdom:{name:"Stöd för unga",url:"https://www.vasteras.se/omsorg-stod-och-hjalp/missbruk-och-beroende/stod-for-unga.html",desc:"Stöd vid missbruk."},pengarBidrag:{name:"Försörjningsstöd",url:"https://www.vasteras.se/omsorg-stod-och-hjalp/ekonomi-forsorjningsstod/forsorjningsstod-ekonomiskt-bistand.html",desc:"Ekonomiskt stöd."},budgetSkuld:{name:"Budget- och skuldrådgivning",url:"https://www.vasteras.se/omsorg-stod-och-hjalp/ekonomi-forsorjningsstod/budget--och-skuldradgivning.html",desc:"Gratis rådgivning."},kontaktperson:{name:"Kontaktperson",url:"https://www.vasteras.se/omsorg-stod-och-hjalp/funktionsnedsattning/stod-och-service.html",desc:"Ansök om kontaktperson."},motesplatser:{name:"Fritidsgårdar",url:"https://www.vasteras.se/uppleva-och-gora/fritidsgardar.html",desc:"Fritidsgårdar."},fritidsaktiviteter:{name:"Aktiviteter",url:"https://www.vasteras.se/uppleva-och-gora/aktiviteter-for-unga.html",desc:"Aktiviteter."}},infoBoxes:{halsa:"<strong>Bra att veta:</strong> Vård gratis under 20 år.",aktiviteter:"<strong>Tips:</strong> Västerås har flera fritidsgårdar!",transport:"<strong>Tips:</strong> Ungdomsrabatt på VL!",kontakt:"<strong>Bra att veta:</strong> Kontaktperson är frivilligt."}},linkoping:{city:"Linköping",transport:{name:"Östgötatrafiken",url:"https://www.ostgotatrafiken.se",desc:"Buss och tåg."},local:{vardcentral:{name:"Hitta vårdcentral",url:"https://www.1177.se/Ostergotland/",desc:"Välj vårdcentral."},mariaUngdom:{name:"Stöd för unga",url:"https://www.linkoping.se/stod-och-omsorg/missbruk-och-beroende/stod-for-unga/",desc:"Stöd vid missbruk."},pengarBidrag:{name:"Ekonomiskt bistånd",url:"https://www.linkoping.se/stod-och-omsorg/ekonomiskt-stod/",desc:"Ekonomiskt stöd."},budgetSkuld:{name:"Budget- och skuldrådgivning",url:"https://www.linkoping.se/stod-och-omsorg/ekonomiskt-stod/budget--och-skuldradgivning/",desc:"Gratis rådgivning."},kontaktperson:{name:"Kontaktperson",url:"https://www.linkoping.se/stod-och-omsorg/funktionsnedsattning/stod-och-service/",desc:"Ansök."},motesplatser:{name:"Fritidsgårdar",url:"https://www.linkoping.se/kultur-och-fritid/fritidsgardar/",desc:"Fritidsgårdar."},fritidsaktiviteter:{name:"Aktiviteter",url:"https://www.linkoping.se/kultur-och-fritid/unga/",desc:"Aktiviteter."}},infoBoxes:{halsa:"<strong>Bra att veta:</strong> Vård gratis under 20 år.",aktiviteter:"<strong>Tips:</strong> Linköping har fritidsgårdar!",transport:"<strong>Tips:</strong> Köp månadskort!",kontakt:"<strong>Bra att veta:</strong> Kontaktperson är frivilligt."}},norrkoping:{city:"Norrköping",transport:{name:"Östgötatrafiken",url:"https://www.ostgotatrafiken.se",desc:"Buss, spårvagn och tåg."},local:{vardcentral:{name:"Hitta vårdcentral",url:"https://www.1177.se/Ostergotland/",desc:"Välj vårdcentral."},mariaUngdom:{name:"Stöd för unga",url:"https://www.norrkoping.se/stod-och-omsorg/missbruk-och-beroende/",desc:"Stöd vid missbruk."},pengarBidrag:{name:"Ekonomiskt bistånd",url:"https://www.norrkoping.se/stod-och-omsorg/ekonomiskt-stod/",desc:"Ekonomiskt stöd."},budgetSkuld:{name:"Budget- och skuldrådgivning",url:"https://www.norrkoping.se/stod-och-omsorg/ekonomiskt-stod/budget-och-skuldradgivning/",desc:"Gratis rådgivning."},kontaktperson:{name:"Kontaktperson",url:"https://www.norrkoping.se/stod-och-omsorg/funktionsnedsattning/",desc:"Ansök."},motesplatser:{name:"Fritidsgårdar",url:"https://www.norrkoping.se/kultur-och-fritid/fritidsgardar/",desc:"Fritidsgårdar."},fritidsaktiviteter:{name:"Aktiviteter",url:"https://www.norrkoping.se/kultur-och-fritid/unga/",desc:"Aktiviteter."}},infoBoxes:{halsa:"<strong>Bra att veta:</strong> Vård gratis under 20 år.",aktiviteter:"<strong>Tips:</strong> Norrköping har spårvagn!",transport:"<strong>Tips:</strong> Spårvagn i Norrköping!",kontakt:"<strong>Bra att veta:</strong> Kontaktperson är frivilligt."}},jonkoping:{city:"Jönköping",transport:{name:"JLT",url:"https://www.jlt.se",desc:"Buss i Jönköping."},local:{vardcentral:{name:"Hitta vårdcentral",url:"https://www.1177.se/Jonkopings-lan/",desc:"Välj vårdcentral."},mariaUngdom:{name:"Stöd för unga",url:"https://www.jonkoping.se/omsorgochhjalp/missbrukochberoende/",desc:"Stöd vid missbruk."},pengarBidrag:{name:"Ekonomiskt bistånd",url:"https://www.jonkoping.se/omsorgochhjalp/ekonomisktstod/",desc:"Ekonomiskt stöd."},budgetSkuld:{name:"Budget- och skuldrådgivning",url:"https://www.jonkoping.se/omsorgochhjalp/ekonomisktstod/budgetochskuldradgivning/",desc:"Gratis rådgivning."},kontaktperson:{name:"Kontaktperson",url:"https://www.jonkoping.se/omsorgochhjalp/funktionsnedsattning/",desc:"Ansök."},motesplatser:{name:"Fritidsgårdar",url:"https://www.jonkoping.se/kulturochfritid/fritidsgardar/",desc:"Fritidsgårdar."},fritidsaktiviteter:{name:"Aktiviteter",url:"https://www.jonkoping.se/kulturochfritid/ungijokoping/",desc:"Aktiviteter."}},infoBoxes:{halsa:"<strong>Bra att veta:</strong> Vård gratis under 20 år.",aktiviteter:"<strong>Tips:</strong> Jönköping har fritidsgårdar!",transport:"<strong>Tips:</strong> Köp månadskort på JLT!",kontakt:"<strong>Bra att veta:</strong> Kontaktperson är frivilligt."}},eskilstuna:{city:"Eskilstuna",transport:{name:"Sörmlandstrafiken",url:"https://www.sormlandstrafiken.se",desc:"Buss och tåg."},local:{vardcentral:{name:"Hitta vårdcentral",url:"https://www.1177.se/Sormland/",desc:"Välj vårdcentral."},mariaUngdom:{name:"Stöd för unga",url:"https://www.eskilstuna.se/stod-och-omsorg/missbruk-och-beroende/",desc:"Stöd vid missbruk."},pengarBidrag:{name:"Ekonomiskt bistånd",url:"https://www.eskilstuna.se/stod-och-omsorg/ekonomiskt-stod/",desc:"Ekonomiskt stöd."},budgetSkuld:{name:"Budget- och skuldrådgivning",url:"https://www.eskilstuna.se/stod-och-omsorg/ekonomiskt-stod/budget-och-skuldradgivning/",desc:"Gratis rådgivning."},kontaktperson:{name:"Kontaktperson",url:"https://www.eskilstuna.se/stod-och-omsorg/funktionsnedsattning/",desc:"Ansök."},motesplatser:{name:"Fritidsgårdar",url:"https://www.eskilstuna.se/kultur-och-fritid/fritidsgardar/",desc:"Fritidsgårdar."},fritidsaktiviteter:{name:"Aktiviteter",url:"https://www.eskilstuna.se/kultur-och-fritid/ung-i-eskilstuna/",desc:"Aktiviteter."}},infoBoxes:{halsa:"<strong>Bra att veta:</strong> Vård gratis under 20 år.",aktiviteter:"<strong>Tips:</strong> Eskilstuna har fritidsgårdar!",transport:"<strong>Tips:</strong> Köp månadskort!",kontakt:"<strong>Bra att veta:</strong> Kontaktperson är frivilligt."}}};
+function getCityFromUrl(){const p=new URLSearchParams(window.location.search);return p.get('city')||'orebro'}
+function createLink(ic,n,d,u,l){const b=l?'<span class="li-local">LOKAL</span>':'';return`<a class="link-item" href="${u}" target="_blank" rel="noopener"><span class="li-ic">${ic}</span><span class="li-tx"><span class="li-name">${n}${b}</span><span class="li-desc">${d}</span></span><span class="li-arrow">↗</span></a>`}
+function populateApp(d){document.title=`StödGuiden – ${d.city}`;document.getElementById('cityName').textContent=d.city;if(d.infoBoxes.halsa)document.getElementById('info-halsa').innerHTML=d.infoBoxes.halsa;if(d.infoBoxes.aktiviteter)document.getElementById('info-aktiviteter').innerHTML=d.infoBoxes.aktiviteter;if(d.infoBoxes.transport)document.getElementById('info-transport').innerHTML=d.infoBoxes.transport;if(d.infoBoxes.kontakt)document.getElementById('info-kontakt').innerHTML=d.infoBoxes.kontakt;document.getElementById('lg-halsa-local').textContent=`Vård i ${d.city}`;document.getElementById('lg-ekon-local').textContent=`Lokalt i ${d.city}`;document.getElementById('lg-transport-local').textContent=`Lokalt i ${d.city}`;document.getElementById('lg-akt-local').textContent=`Aktiviteter i ${d.city}`;document.getElementById('lg-kontakt-local').textContent=`${d.city} kommun`;document.getElementById('kontakt-sub').textContent=`Kontaktperson och stöd i ${d.city}`;let h='';if(d.local.vardcentral)h+=createLink('🏥',d.local.vardcentral.name,d.local.vardcentral.desc,d.local.vardcentral.url,true);if(d.local.mariaUngdom)h+=createLink('💊',d.local.mariaUngdom.name,d.local.mariaUngdom.desc,d.local.mariaUngdom.url,true);document.getElementById('links-halsa-local').innerHTML=h;let e='';if(d.local.pengarBidrag)e+=createLink('💵',d.local.pengarBidrag.name,d.local.pengarBidrag.desc,d.local.pengarBidrag.url,true);if(d.local.budgetSkuld)e+=createLink('📊',d.local.budgetSkuld.name,d.local.budgetSkuld.desc,d.local.budgetSkuld.url,true);document.getElementById('links-ekon-local').innerHTML=e;let t='';if(d.transport)t+=createLink('🚌',d.transport.name,d.transport.desc,d.transport.url,true);document.getElementById('links-transport-local').innerHTML=t;let a='';if(d.local.motesplatser)a+=createLink('🏠',d.local.motesplatser.name,d.local.motesplatser.desc,d.local.motesplatser.url,true);if(d.local.fritidsaktiviteter)a+=createLink('🚀',d.local.fritidsaktiviteter.name,d.local.fritidsaktiviteter.desc,d.local.fritidsaktiviteter.url,true);document.getElementById('links-akt-local').innerHTML=a;let k='';if(d.local.kontaktperson)k+=createLink('🤝',d.local.kontaktperson.name,d.local.kontaktperson.desc,d.local.kontaktperson.url,true);document.getElementById('links-kontakt-local').innerHTML=k}
+function openCat(c){document.getElementById('categoriesView').style.display='none';document.getElementById('backbar').style.display='block';document.querySelectorAll('.cat-section').forEach(s=>s.classList.remove('active'));document.getElementById('cat-'+c).classList.add('active');window.scrollTo(0,0)}
+function closeCat(){document.querySelectorAll('.cat-section').forEach(s=>s.classList.remove('active'));document.getElementById('backbar').style.display='none';document.getElementById('categoriesView').style.display='block';window.scrollTo(0,0)}
+const cityId=getCityFromUrl();const cityData=CITIES[cityId]||CITIES.orebro;populateApp(cityData);
+if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 </script>
-
 </body>
 </html>
