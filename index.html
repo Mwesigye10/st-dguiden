@@ -1,287 +1,1253 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0c1e19">
-<meta name="description" content="StödGuiden – hitta rätt enkelt och snabbt. Jobb, ekonomi, hälsa, boende och mycket mer.">
-<title>StödGuiden – Välj din stad</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="theme-color" content="#0c1e19"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="description" content="StödGuiden – hitta rätt enkelt och snabbt. Jobb, ekonomi, hälsa, boende och mycket mer."/>
+<title>StödGuiden</title>
 <link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
 <style>
 :root {
   --bg: #0c1e19;
   --panel: #112e24;
+  --panel2: #0f2820;
   --border: rgba(45,122,95,0.2);
+  --border2: rgba(255,255,255,0.07);
   --green: #2d7a5f;
   --green2: #1e5c45;
   --accent: #6dcfa0;
+  --accent2: #a8edc8;
   --text: #e8f5ee;
   --muted: #6a9a82;
   --muted2: #4a7062;
+  --red: #7a1818;
+  --red2: #5e1010;
+  --gold: #f0c674;
+  --gold2: #d4a84b;
 }
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh;overflow-x:hidden;padding-bottom:60px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 40px 20px;
-}
+/* ── ONBOARDING ── */
+#onboarding{position:fixed;inset:0;background:var(--bg);z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;text-align:center;transition:opacity 0.5s}
+#onboarding.hidden{opacity:0;pointer-events:none}
+.ob-logo{width:72px;height:72px;background:linear-gradient(135deg,var(--green),var(--green2));border-radius:20px;display:grid;place-items:center;font-weight:800;font-size:26px;color:var(--accent);margin:0 auto 24px;box-shadow:0 8px 32px rgba(45,122,95,0.4)}
+.ob-title{font-size:28px;font-weight:800;margin-bottom:12px;line-height:1.2}
+.ob-title em{font-style:normal;color:var(--accent)}
+.ob-sub{font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:32px;max-width:300px}
+.ob-features{display:flex;flex-direction:column;gap:14px;margin-bottom:36px;width:100%;max-width:320px}
+.ob-feat{display:flex;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:14px 16px;text-align:left}
+.ob-feat-ic{font-size:22px;flex-shrink:0}
+.ob-feat-text{font-size:13px;color:var(--muted);line-height:1.5}
+.ob-feat-text strong{color:var(--text);display:block;margin-bottom:2px;font-size:14px}
+.ob-btn{background:linear-gradient(135deg,var(--green),var(--green2));color:var(--text);padding:16px 40px;border-radius:16px;font-size:16px;font-weight:700;border:none;cursor:pointer;width:100%;max-width:320px;box-shadow:0 4px 20px rgba(45,122,95,0.4)}
+.ob-skip{font-size:12px;color:var(--muted2);margin-top:14px;cursor:pointer;padding:8px}
 
-.logo {
-  width: 80px;
-  height: 80px;
-  background: linear-gradient(135deg, var(--green), var(--green2));
-  border-radius: 24px;
-  display: grid;
-  place-items: center;
-  font-weight: 800;
-  font-size: 28px;
-  color: var(--accent);
-  margin-bottom: 24px;
-  box-shadow: 0 8px 32px rgba(45,122,95,0.4);
-}
+/* ── HEADER ── */
+header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-badge{width:34px;height:34px;background:linear-gradient(135deg,var(--green),var(--green2));border-radius:10px;display:grid;place-items:center;font-weight:800;font-size:13px;color:var(--accent);flex-shrink:0}
+.brand-name{font-weight:800;font-size:17px}
+.brand-tagline{font-size:10px;color:var(--muted2);margin-top:1px}
+.hdr-right{display:flex;align-items:center;gap:8px}
+.feedback-btn{background:rgba(45,122,95,0.15);border:1px solid var(--border);color:var(--accent);padding:7px 13px;border-radius:50px;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px}
+.lang-btn{background:rgba(255,255,255,0.05);border:1px solid var(--border2);color:var(--muted);padding:7px 10px;border-radius:50px;font-size:11px;font-weight:600;cursor:pointer}
+.lang-btn:hover{background:rgba(45,122,95,0.15);color:var(--accent);border-color:var(--border)}
 
-h1 {
-  font-size: 28px;
-  font-weight: 800;
-  text-align: center;
-  margin-bottom: 8px;
-}
+/* ── CITY SELECTOR ── */
+.city-selector{position:relative}
+.city-btn{background:linear-gradient(135deg,var(--green),var(--green2));border:1px solid var(--border);color:var(--text);padding:7px 12px;border-radius:50px;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px}
+.city-btn::after{content:"▼";font-size:8px;opacity:0.7}
+.city-dropdown{position:absolute;top:100%;right:0;margin-top:8px;background:var(--panel);border:1px solid var(--border);border-radius:14px;min-width:180px;display:none;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.4);z-index:100}
+.city-dropdown.open{display:block}
+.city-option{padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:13px;border-bottom:1px solid var(--border2);transition:background 0.2s}
+.city-option:last-child{border-bottom:none}
+.city-option:hover{background:rgba(45,122,95,0.15)}
+.city-option.active{background:rgba(45,122,95,0.2);color:var(--accent)}
+.city-option .city-check{opacity:0;color:var(--accent)}
+.city-option.active .city-check{opacity:1}
 
-h1 em {
-  font-style: normal;
-  color: var(--accent);
-}
+/* ── WRAP ── */
+.wrap{max-width:600px;margin:0 auto;padding:0 16px}
 
-.subtitle {
-  color: var(--muted);
-  font-size: 15px;
-  text-align: center;
-  margin-bottom: 32px;
-  max-width: 300px;
-  line-height: 1.6;
-}
+/* ── HERO ── */
+.hero{padding:22px 0 16px}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(45,122,95,0.15);border:1px solid rgba(45,122,95,0.3);color:var(--accent);font-size:11px;font-weight:600;padding:5px 12px;border-radius:50px;margin-bottom:14px;letter-spacing:0.4px}
+.hero-tag::before{content:"";width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
+.hero h1{font-size:28px;font-weight:800;line-height:1.15;margin-bottom:10px}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero-sub{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:20px}
+.hero-trust{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.trust-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted2);position:relative;cursor:pointer}
+.trust-item span{font-size:14px}
+.trust-item.has-tooltip:hover .trust-tooltip{opacity:1;transform:translateY(0);pointer-events:auto}
+.trust-tooltip{position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(5px);background:var(--panel);border:1px solid var(--gold);border-radius:12px;padding:12px 14px;width:200px;opacity:0;pointer-events:none;transition:all 0.2s;z-index:50;box-shadow:0 4px 20px rgba(0,0,0,0.3)}
+.trust-tooltip::after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);border:8px solid transparent;border-top-color:var(--gold)}
+.trust-tooltip-title{font-size:13px;font-weight:700;color:var(--gold);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.trust-tooltip-text{font-size:11px;color:var(--muted);line-height:1.5}
 
-.search-wrap {
-  width: 100%;
-  max-width: 400px;
-  margin-bottom: 24px;
-}
+/* ── SEARCH ── */
+.search-wrap{margin:16px 0}
+.search-box{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--border2);border-radius:14px;padding:12px 16px;transition:border-color 0.2s}
+.search-box:focus-within{border-color:rgba(45,122,95,0.5)}
+.search-icon{font-size:16px;opacity:0.5;flex-shrink:0}
+.search-box input{background:none;border:none;outline:none;color:var(--text);font-size:14px;flex:1;font-family:inherit}
+.search-box input::placeholder{color:var(--muted2)}
+.search-clear{background:none;border:none;color:var(--muted2);font-size:18px;cursor:pointer;padding:0 4px;display:none}
+#searchResults{margin-top:10px;display:none}
+.search-result{background:var(--panel);border:1px solid var(--border2);border-radius:12px;padding:12px 14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:border-color 0.2s}
+.search-result:hover{border-color:var(--border)}
+.search-result .sr-icon{font-size:20px;flex-shrink:0}
+.search-result .sr-text .sr-cat{font-size:11px;color:var(--muted2);margin-bottom:2px}
+.search-result .sr-text .sr-name{font-size:14px;font-weight:600}
+.search-no-result{text-align:center;padding:20px;color:var(--muted);font-size:14px}
 
-.search-box {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 14px 18px;
-}
+/* ── QUICK LINKS ── */
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.section-title{font-size:15px;font-weight:700;color:var(--text)}
+.quick-grid{display:flex;gap:10px;margin-bottom:20px;overflow-x:auto;padding-bottom:8px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.quick-grid::-webkit-scrollbar{display:none}
+.quick-card{flex:0 0 auto;width:130px}
+.quick-card .qtx{font-size:12px;font-weight:600;color:var(--text);line-height:1.3;word-break:break-word}
+.quick-card .qsub{font-size:10px;color:var(--muted2);margin-top:2px;line-height:1.3}
+.quick-card{background:var(--panel);border:1px solid var(--border2);border-radius:14px;padding:14px 12px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:all 0.2s;text-decoration:none}
+.quick-card:hover{border-color:var(--border);background:var(--panel2);text-decoration:none}
+.quick-card .qic{font-size:20px;flex-shrink:0}
 
-.search-box input {
-  background: none;
-  border: none;
-  outline: none;
-  color: var(--text);
-  font-size: 16px;
-  flex: 1;
-  font-family: inherit;
-}
+/* ── TIP ── */
+.tip-card{background:linear-gradient(135deg,rgba(45,122,95,0.15),rgba(30,92,69,0.1));border:1px solid rgba(45,122,95,0.25);border-radius:14px;padding:14px 16px;display:flex;gap:12px;margin-bottom:20px}
+.tip-ic{font-size:20px;flex-shrink:0;margin-top:1px}
+.tip-tx{font-size:13px;color:var(--muted);line-height:1.6}
+.tip-tx strong{color:var(--accent2);display:block;margin-bottom:3px;font-size:14px}
 
-.search-box input::placeholder {
-  color: var(--muted2);
-}
+/* ── FAVORITES SECTION ── */
+#favoritesSection{display:none;margin-bottom:20px}
+#favoritesSection.has-favorites{display:block}
+.favorites-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.favorites-title{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:700;color:var(--gold)}
+.favorites-title span{font-size:18px}
+.favorites-count{background:rgba(240,198,116,0.15);color:var(--gold);font-size:11px;font-weight:600;padding:3px 8px;border-radius:50px}
+.favorites-grid{display:flex;flex-direction:column;gap:8px}
+.fav-item{display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,rgba(240,198,116,0.08),rgba(212,168,75,0.04));border:1px solid rgba(240,198,116,0.2);border-radius:12px;padding:12px 14px;text-decoration:none;transition:all 0.2s}
+.fav-item:hover{border-color:rgba(240,198,116,0.4);background:linear-gradient(135deg,rgba(240,198,116,0.12),rgba(212,168,75,0.06));text-decoration:none}
+.fav-item .fi-ic{font-size:20px;flex-shrink:0}
+.fav-item .fi-tx{flex:1;min-width:0}
+.fav-item .fi-name{font-size:14px;font-weight:600;color:var(--text);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fav-item .fi-cat{font-size:11px;color:var(--muted2);margin-top:2px}
+.fav-remove{background:none;border:none;color:var(--muted2);font-size:16px;cursor:pointer;padding:6px;border-radius:8px;transition:all 0.2s;flex-shrink:0}
+.fav-remove:hover{background:rgba(122,24,24,0.2);color:#ff6b6b}
+.fav-item .fi-arrow{color:var(--gold);font-size:14px;flex-shrink:0;opacity:0.6}
 
-.cities-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  width: 100%;
-  max-width: 400px;
-}
+/* ── CATEGORIES ── */
+.cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+@media(min-width:420px){.cat-grid{grid-template-columns:1fr 1fr 1fr}}
+.cat-btn{background:var(--panel);border:1px solid var(--border2);border-radius:14px;padding:16px 12px;text-align:left;cursor:pointer;transition:all 0.2s;font-family:inherit}
+.cat-btn:hover{border-color:var(--border);background:var(--panel2);transform:translateY(-1px)}
+.cat-btn.active{border-color:var(--green);background:rgba(45,122,95,0.12)}
+.cat-ic{font-size:24px;display:block;margin-bottom:8px}
+.cat-name{font-size:13px;font-weight:700;color:var(--text);display:block}
+.cat-desc{font-size:11px;color:var(--muted2);margin-top:3px;display:block;line-height:1.4}
 
-@media (min-width: 500px) {
-  .cities-grid {
-    grid-template-columns: repeat(3, 1fr);
-    max-width: 500px;
-  }
-}
+/* ── BACK BAR ── */
+.backbar{display:none;margin:14px 0 10px}
+.back-btn{background:var(--panel);border:1px solid var(--border2);border-radius:12px;padding:10px 14px;color:var(--text);font-size:14px;cursor:pointer;display:flex;align-items:center;gap:8px;font-family:inherit}
 
-.city-card {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 20px 16px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.2s;
-  text-decoration: none;
-}
+/* ── CAT SECTION ── */
+.cat-section{display:none;background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:18px;margin-bottom:16px}
+.cat-section-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--border2)}
+.cat-section-ic{font-size:30px}
+.cat-section-title{font-size:18px;font-weight:800}
+.cat-section-sub{font-size:12px;color:var(--muted);margin-top:2px}
+.link-group{margin-bottom:16px}
+.link-group-title{font-size:11px;color:var(--muted2);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
 
-.city-card:hover {
-  border-color: var(--green);
-  background: rgba(45,122,95,0.15);
-  transform: translateY(-2px);
-}
+/* ── LINK ITEMS WITH FAVORITE & INFO ── */
+.link-item{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,0.03);border:1px solid var(--border2);border-radius:12px;padding:12px 14px;margin-bottom:8px;text-decoration:none;transition:border-color 0.2s;position:relative}
+.link-item:hover{border-color:var(--border);text-decoration:none}
+.link-item .li-ic{font-size:20px;flex-shrink:0;margin-top:1px}
+.link-item .li-tx{flex:1;min-width:0}
+.link-item .li-tx .li-name{font-size:14px;font-weight:600;color:var(--text);display:block}
+.link-item .li-tx .li-desc{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.5;display:none}
+.link-item .li-actions{display:flex;align-items:center;gap:4px;flex-shrink:0;align-self:center}
+.link-item .li-arrow{color:var(--muted2);font-size:14px}
 
-.city-card.featured {
-  grid-column: span 2;
-  background: linear-gradient(135deg, rgba(45,122,95,0.2), rgba(30,92,69,0.1));
-  border-color: rgba(45,122,95,0.4);
-}
+/* Favorite button */
+.fav-btn{background:none;border:none;font-size:16px;cursor:pointer;padding:6px;border-radius:8px;transition:all 0.2s;opacity:0.5;color:var(--muted2)}
+.fav-btn:hover{opacity:1;background:rgba(240,198,116,0.1)}
+.fav-btn.is-favorite{opacity:1;color:var(--gold);text-shadow:0 0 8px rgba(240,198,116,0.4)}
+.fav-btn.is-favorite:hover{background:rgba(240,198,116,0.15)}
 
-@media (min-width: 500px) {
-  .city-card.featured {
-    grid-column: span 1;
-  }
-}
+/* Info button */
+.info-btn{background:none;border:none;font-size:14px;cursor:pointer;padding:6px;border-radius:8px;transition:all 0.2s;opacity:0.5;color:var(--muted2)}
+.info-btn:hover{opacity:1;background:rgba(109,207,160,0.1);color:var(--accent)}
 
-.city-name {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--text);
-  display: block;
-  margin-bottom: 4px;
-}
+.info-box{background:rgba(45,122,95,0.1);border:1px solid rgba(45,122,95,0.2);border-radius:12px;padding:12px 14px;font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px}
+.info-box strong{color:var(--accent2)}
 
-.city-region {
-  font-size: 11px;
-  color: var(--muted2);
-}
+/* Local link indicator */
+.link-item.local-link{border-left:3px solid var(--accent)}
+.link-item.local-link::before{content:"";position:absolute;top:8px;right:8px;width:6px;height:6px;background:var(--accent);border-radius:50%;opacity:0.6}
 
-.city-card.hidden {
-  display: none;
-}
+/* ── INFO POPUP ── */
+#infoPopup{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:500;display:none;place-items:center;padding:20px}
+#infoPopup.open{display:grid}
+.info-popup-sheet{background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:20px;width:100%;max-width:400px;max-height:80vh;overflow-y:auto}
+.info-popup-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--border2)}
+.info-popup-icon{font-size:32px;flex-shrink:0}
+.info-popup-title{font-size:17px;font-weight:800;margin-bottom:4px}
+.info-popup-cat{font-size:11px;color:var(--muted2);text-transform:uppercase;letter-spacing:0.5px}
+.info-popup-close{background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;line-height:1;margin-left:auto;padding:4px}
+.info-popup-desc{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:16px}
+.info-popup-link{display:block;background:linear-gradient(135deg,var(--green),var(--green2));color:var(--text);padding:14px;border-radius:12px;text-align:center;font-weight:600;text-decoration:none;transition:opacity 0.2s}
+.info-popup-link:hover{opacity:0.9;text-decoration:none}
 
-.no-results {
-  text-align: center;
-  color: var(--muted);
-  padding: 40px 20px;
-  display: none;
-}
+/* ── NUMBERS ── */
+.num-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.num-card{background:rgba(255,255,255,0.03);border:1px solid var(--border2);border-radius:12px;padding:12px;text-align:center;text-decoration:none;transition:border-color 0.2s}
+.num-card:hover{border-color:var(--border)}
+.num-card .nc-num{font-size:18px;font-weight:800;color:var(--accent);display:block}
+.num-card .nc-name{font-size:11px;color:var(--muted);margin-top:3px;display:block}
 
-.footer {
-  margin-top: auto;
-  padding-top: 40px;
-  text-align: center;
-  color: var(--muted2);
-  font-size: 12px;
-}
+/* ── SAVINGS CALC ── */
+.calc-box{background:rgba(255,255,255,0.03);border:1px solid var(--border2);border-radius:12px;padding:14px}
+.calc-row{display:flex;gap:8px;align-items:center;margin-bottom:10px}
+.calc-box input{background:var(--bg);border:1px solid var(--border2);color:var(--text);padding:10px 12px;border-radius:10px;font-size:14px;flex:1;font-family:inherit;outline:none}
+.calc-box input:focus{border-color:var(--green)}
+.calc-box button{background:var(--green);color:var(--text);border:none;padding:10px 16px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit}
+.calc-result{font-size:14px;color:var(--accent);font-weight:700}
+.calc-motivation{font-size:12px;color:var(--muted);margin-top:4px}
 
-.footer a {
-  color: var(--accent);
-  text-decoration: none;
-}
+/* ── FEEDBACK MODAL ── */
+#feedbackModal{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:500;display:none;place-items:center;padding:20px}
+#feedbackModal.open{display:grid}
+.feedback-sheet{background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:20px;width:100%;max-width:400px}
+.feedback-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.feedback-header h3{font-size:17px;font-weight:800}
+.feedback-close{background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;line-height:1}
+.feedback-options{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.fb-opt{background:rgba(255,255,255,0.04);border:1px solid var(--border2);border-radius:12px;padding:10px;text-align:center;cursor:pointer;font-size:12px;font-weight:600;color:var(--muted);transition:all 0.2s}
+.fb-opt:hover,.fb-opt.selected{background:rgba(45,122,95,0.15);border-color:var(--green);color:var(--accent)}
+.feedback-sheet textarea{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border2);border-radius:12px;color:var(--text);padding:12px;font-size:13px;font-family:inherit;resize:none;outline:none;margin-bottom:12px}
+.feedback-sheet textarea:focus{border-color:var(--green)}
+.feedback-consent{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;background:rgba(45,122,95,0.08);border:1px solid rgba(45,122,95,0.2);border-radius:10px;padding:10px 12px}
+.feedback-consent input[type="checkbox"]{width:18px;height:18px;min-width:18px;accent-color:var(--green);margin-top:2px;cursor:pointer}
+.feedback-consent label{font-size:11px;color:var(--muted);line-height:1.6;cursor:pointer}
+.feedback-consent label a{color:var(--accent)}
+.feedback-send{width:100%;background:linear-gradient(135deg,var(--green),var(--green2));color:var(--text);border:none;padding:13px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:opacity 0.2s}
+.feedback-send:disabled{opacity:0.4;cursor:not-allowed}
+.feedback-thanks{text-align:center;padding:20px 0;display:none}
+.feedback-thanks .ft-ic{font-size:40px;margin-bottom:12px}
+.feedback-thanks p{font-size:14px;color:var(--muted);line-height:1.6}
 
-.coming-soon {
-  display: inline-block;
-  background: rgba(240,198,116,0.15);
-  color: #f0c674;
-  font-size: 9px;
-  font-weight: 600;
-  padding: 3px 8px;
-  border-radius: 20px;
-  margin-left: 6px;
-  vertical-align: middle;
-}
+/* ── AKUT FOOTER ── */
+.akut-bar{position:fixed;bottom:0;left:0;right:0;z-index:100;background:linear-gradient(90deg,var(--red),var(--red2));padding:10px 16px;display:flex;align-items:center;justify-content:space-between}
+.akut-left{font-size:13px;font-weight:700;color:#fff}
+.akut-right{font-size:12px;color:#ffbbbb}
+
+/* ── UP BUTTON ── */
+#upBtn{position:fixed;right:16px;bottom:70px;width:44px;height:44px;background:var(--green);color:var(--text);border:none;border-radius:50%;font-size:18px;cursor:pointer;display:none;place-items:center;box-shadow:0 4px 12px rgba(0,0,0,0.3);z-index:90}
+
+/* ── SUPPORT SECTION ── */
+.support-section{background:linear-gradient(135deg,rgba(45,122,95,0.1),rgba(30,92,69,0.05));border:1px solid rgba(45,122,95,0.2);border-radius:16px;padding:18px;margin:24px 0 20px;text-align:center}
+.support-title{font-size:16px;font-weight:700;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px}
+.support-text{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px}
+.support-swish{background:rgba(255,255,255,0.05);border:1px solid var(--border2);border-radius:10px;padding:10px 16px;display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--text)}
+.support-qr{margin:16px 0;display:flex;justify-content:center}
+.swish-qr-img{width:180px;height:auto;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.3)}
+.support-note{font-size:11px;color:var(--muted2);margin-top:10px}
+
+/* ── TOAST NOTIFICATION ── */
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--panel);border:1px solid var(--gold);border-radius:50px;padding:12px 20px;display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--gold);z-index:200;opacity:0;transition:all 0.3s;box-shadow:0 4px 20px rgba(0,0,0,0.3)}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.toast-icon{font-size:16px}
 </style>
 </head>
 <body>
 
-<div class="logo">SG</div>
+<!-- ONBOARDING -->
+<div id="onboarding">
+  <div class="ob-logo">SG</div>
+  <h1 class="ob-title">Välkommen till<br/><em>StödGuiden</em></h1>
+  <p class="ob-sub">Allt du behöver veta om jobb, ekonomi, hälsa och boende — samlat och enkelt på ett ställe.</p>
+  <div class="ob-features">
+    <div class="ob-feat"><span class="ob-feat-ic">🔒</span><div class="ob-feat-text"><strong>100% anonymt</strong>Vi sparar inga personuppgifter</div></div>
+    <div class="ob-feat"><span class="ob-feat-ic">⭐</span><div class="ob-feat-text"><strong>Spara favoriter</strong>Markera det du vill komma ihåg</div></div>
+    <div class="ob-feat"><span class="ob-feat-ic">🌐</span><div class="ob-feat-text"><strong>Officiella källor</strong>Enbart pålitliga länkar</div></div>
+  </div>
+  <button class="ob-btn" onclick="closeOnboarding()">Kom igång</button>
+  <div class="ob-skip" onclick="closeOnboarding()">Hoppa över</div>
+</div>
 
-<h1>Välkommen till <em>StödGuiden</em></h1>
-<p class="subtitle">Hitta information om jobb, ekonomi, hälsa och boende i din stad. Välj nedan för att komma igång.</p>
+<!-- HEADER -->
+<header>
+  <div class="brand">
+    <div class="brand-badge">SG</div>
+    <div><div class="brand-name">StödGuiden</div><div class="brand-tagline" id="cityTagline">Örebro</div></div>
+  </div>
+  <div class="hdr-right">
+    <div class="city-selector">
+      <button class="city-btn" id="cityBtn" onclick="toggleCityDropdown()">
+        <span id="cityBtnText">Örebro</span>
+      </button>
+      <div class="city-dropdown" id="cityDropdown">
+        <div class="city-option active" data-city="orebro" onclick="selectCity('orebro')"><span>📍</span> Örebro <span class="city-check">✓</span></div>
+        <div class="city-option" data-city="stockholm" onclick="selectCity('stockholm')"><span>📍</span> Stockholm <span class="city-check">✓</span></div>
+        <div class="city-option" data-city="goteborg" onclick="selectCity('goteborg')"><span>📍</span> Göteborg <span class="city-check">✓</span></div>
+        <div class="city-option" data-city="malmo" onclick="selectCity('malmo')"><span>📍</span> Malmö <span class="city-check">✓</span></div>
+        <div class="city-option" data-city="uppsala" onclick="selectCity('uppsala')"><span>📍</span> Uppsala <span class="city-check">✓</span></div>
+        <div class="city-option" data-city="vasteras" onclick="selectCity('vasteras')"><span>📍</span> Västerås <span class="city-check">✓</span></div>
+        <div class="city-option" data-city="linkoping" onclick="selectCity('linkoping')"><span>📍</span> Linköping <span class="city-check">✓</span></div>
+        <div class="city-option" data-city="norrkoping" onclick="selectCity('norrkoping')"><span>📍</span> Norrköping <span class="city-check">✓</span></div>
+        <div class="city-option" data-city="jonkoping" onclick="selectCity('jonkoping')"><span>📍</span> Jönköping <span class="city-check">✓</span></div>
+        <div class="city-option" data-city="eskilstuna" onclick="selectCity('eskilstuna')"><span>📍</span> Eskilstuna <span class="city-check">✓</span></div>
+      </div>
+    </div>
+    <button class="feedback-btn" onclick="openFeedback()" data-i18n="fb-btn">💬 Feedback</button>
+    <button class="lang-btn" id="langBtn" onclick="toggleLang()">🌐 EN</button>
+  </div>
+</header>
 
-<div class="search-wrap">
-  <div class="search-box">
-    <span>🔍</span>
-    <input type="text" id="citySearch" placeholder="Sök efter din stad..." oninput="filterCities()">
+<!-- HOME VIEW -->
+<div class="wrap" id="homeView">
+  <div class="hero">
+    <div class="hero-tag" data-i18n="hero-tag">Alltid anonymt & gratis</div>
+    <h1 data-i18n="hero-h1">Koll på läget<br/>— <em>direkt</em></h1>
+    <p class="hero-sub" data-i18n="hero-sub">Jobb, ekonomi, hälsa, boende och mycket mer — samlat på ett ställe. Enkelt, tryggt och alltid tillgängligt.</p>
+    <div class="hero-trust">
+      <div class="trust-item"><span>🔒</span> <span data-i18n="trust-1">Anonymt</span></div>
+      <div class="trust-item"><span>✅</span> <span data-i18n="trust-2">Officiella källor</span></div>
+      <div class="trust-item"><span>💚</span> <span data-i18n="trust-3">Gratis</span></div>
+      <div class="trust-item has-tooltip">
+        <span>⭐</span> <span>Favoriter</span>
+        <div class="trust-tooltip">
+          <div class="trust-tooltip-title">⭐ Spara favoriter</div>
+          <div class="trust-tooltip-text">Tryck på ☆ vid valfri länk för att spara den. Dina favoriter visas högst upp på startsidan!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEARCH -->
+  <div class="search-wrap">
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Sök t.ex. CSN, BankID, hyreskontrakt..." data-i18n="search-placeholder" oninput="doSearch(this.value)"/>
+      <button class="search-clear" id="clearBtn" onclick="clearSearch()">✕</button>
+    </div>
+    <div id="searchResults"></div>
+  </div>
+
+  <!-- FAVORITES SECTION -->
+  <div id="favoritesSection">
+    <div class="favorites-header">
+      <div class="favorites-title"><span>⭐</span> <span data-i18n="fav-title">Mina favoriter</span></div>
+      <div class="favorites-count" id="favCount">0</div>
+    </div>
+    <div class="favorites-grid" id="favoritesGrid"></div>
+  </div>
+
+  <!-- QUICK LINKS -->
+  <div class="section-header">
+    <span class="section-title" data-i18n="quick-title">Snabblänkar</span>
+  </div>
+  <div class="quick-grid">
+    <a class="quick-card" href="https://arbetsformedlingen.se" target="_blank" rel="noopener">
+      <span class="qic">💼</span><div><div class="qtx" data-i18n="ql-af">Arbets­förmedlingen</div><div class="qsub" data-i18n="ql-af-sub">Jobb & karriär</div></div>
+    </a>
+    <a class="quick-card" href="https://www.1177.se" target="_blank" rel="noopener">
+      <span class="qic">🏥</span><div><div class="qtx" data-i18n="ql-1177">1177 Vårdguiden</div><div class="qsub" data-i18n="ql-1177-sub">Råd & vård</div></div>
+    </a>
+    <a class="quick-card" href="https://www.forsakringskassan.se" target="_blank" rel="noopener">
+      <span class="qic">🏛️</span><div><div class="qtx" data-i18n="ql-fk">Försäkrings­kassan</div><div class="qsub" data-i18n="ql-fk-sub">Bidrag & ersättning</div></div>
+    </a>
+    <a class="quick-card" href="https://www.csn.se" target="_blank" rel="noopener">
+      <span class="qic">🎓</span><div><div class="qtx">CSN</div><div class="qsub" data-i18n="ql-csn-sub">Studiemedel</div></div>
+    </a>
+    <a class="quick-card" href="https://www.skatteverket.se" target="_blank" rel="noopener">
+      <span class="qic">📋</span><div><div class="qtx" data-i18n="ql-skv">Skatteverket</div><div class="qsub" data-i18n="ql-skv-sub">Skatt & folkbokföring</div></div>
+    </a>
+    <a class="quick-card" href="https://www.kronofogden.se" target="_blank" rel="noopener">
+      <span class="qic">⚖️</span><div><div class="qtx" data-i18n="ql-kfm">Kronofogden</div><div class="qsub" data-i18n="ql-kfm-sub">Skulder & betalning</div></div>
+    </a>
+    <a class="quick-card" href="https://www.sj.se" target="_blank" rel="noopener">
+      <span class="qic">🚆</span><div><div class="qtx">SJ</div><div class="qsub" data-i18n="ql-sj-sub">Tågbiljetter</div></div>
+    </a>
+    <a class="quick-card local-quick" id="qlTransport" href="#" target="_blank" rel="noopener">
+      <span class="qic">🚌</span><div><div class="qtx" id="qlTransportName">Länstrafiken</div><div class="qsub" id="qlTransportSub">Buss i Örebro</div></div>
+    </a>
+  </div>
+
+  <!-- TIP -->
+  <div class="tip-card">
+    <span class="tip-ic">💡</span>
+    <div class="tip-tx"><strong data-i18n="tip-title">Visste du?</strong> <span id="tipText"></span></div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <div class="section-header">
+    <span class="section-title" data-i18n="cat-title">Kategorier</span>
+  </div>
+  <div class="cat-grid">
+    <button class="cat-btn" onclick="openCat('halsa')"><span class="cat-ic">🧠</span><span class="cat-name" data-i18n="cat-halsa">Hälsa & vård</span><span class="cat-desc" data-i18n="cat-halsa-desc">Vård, psykisk hälsa, kontaktlinjer</span></button>
+    <button class="cat-btn" onclick="openCat('ekonomi')"><span class="cat-ic">💸</span><span class="cat-name" data-i18n="cat-ekonomi">Ekonomi</span><span class="cat-desc" data-i18n="cat-ekonomi-desc">Bidrag, budget, skulder</span></button>
+    <button class="cat-btn" onclick="openCat('jobb')"><span class="cat-ic">💼</span><span class="cat-name" data-i18n="cat-jobb">Jobb & karriär</span><span class="cat-desc" data-i18n="cat-jobb-desc">CV, intervju, söka jobb</span></button>
+    <button class="cat-btn" onclick="openCat('boende')"><span class="cat-ic">🏡</span><span class="cat-name" data-i18n="cat-boende">Boende</span><span class="cat-desc" data-i18n="cat-boende-desc">Hyra, kontrakt, regler</span></button>
+    <button class="cat-btn" onclick="openCat('studier')"><span class="cat-ic">🎓</span><span class="cat-name" data-i18n="cat-studier">Studier</span><span class="cat-desc" data-i18n="cat-studier-desc">CSN, antagning, komvux</span></button>
+    <button class="cat-btn" onclick="openCat('bank')"><span class="cat-ic">💳</span><span class="cat-name" data-i18n="cat-bank">Bank & betalningar</span><span class="cat-desc" data-i18n="cat-bank-desc">BankID, konto, skulder</span></button>
+    <button class="cat-btn" onclick="openCat('digital')"><span class="cat-ic">📱</span><span class="cat-name" data-i18n="cat-digital">Digital vardag</span><span class="cat-desc" data-i18n="cat-digital-desc">Mina sidor, e-tjänster</span></button>
+    <button class="cat-btn" onclick="openCat('vardag')"><span class="cat-ic">🧺</span><span class="cat-name" data-i18n="cat-vardag">Vardag & hemtips</span><span class="cat-desc" data-i18n="cat-vardag-desc">Mat, tvätt, hushåll</span></button>
+    <button class="cat-btn" onclick="openCat('kontakt')"><span class="cat-ic">🤝</span><span class="cat-name" data-i18n="cat-kontakt">Kontaktperson</span><span class="cat-desc" data-i18n="cat-kontakt-desc">Vägledning & praktisk info</span></button>
+    <button class="cat-btn" onclick="openCat('aktiviteter')"><span class="cat-ic">🌟</span><span class="cat-name" data-i18n="cat-aktiviteter">Aktiviteter</span><span class="cat-desc" data-i18n="cat-aktiviteter-desc">Fritid, föreningar, sport</span></button>
+    <button class="cat-btn" onclick="openCat('transport')"><span class="cat-ic">🚌</span><span class="cat-name" data-i18n="cat-transport">Transport</span><span class="cat-desc" data-i18n="cat-transport-desc">Buss, tåg och kollektivtrafik</span></button>
+    <button class="cat-btn" onclick="openCat('rattigheter')"><span class="cat-ic">⚖️</span><span class="cat-name" data-i18n="cat-rattigheter">Rättigheter</span><span class="cat-desc" data-i18n="cat-rattigheter-desc">Dina rättigheter, diskriminering</span></button>
+    <button class="cat-btn" onclick="openCat('nummer')"><span class="cat-ic">☎️</span><span class="cat-name" data-i18n="cat-nummer">Viktiga nummer</span><span class="cat-desc" data-i18n="cat-nummer-desc">Akut, vård, myndigheter</span></button>
+  </div>
+
+  <!-- SUPPORT SECTION -->
+  <div class="support-section">
+    <div class="support-title" data-i18n="support-title">💚 Stöd projektet</div>
+    <p class="support-text" data-i18n="support-text">StödGuiden är helt gratis och utan reklam. Om appen har hjälpt dig och du vill bidra till att den fortsätter utvecklas, kan du swisha valfritt belopp.</p>
+    <div class="support-qr">
+      <img src="swish-qr.png" alt="Swish QR-kod" class="swish-qr-img"/>
+    </div>
+    <div class="support-swish"><span data-i18n="support-swish-label">Swish:</span> 073 891 15 35</div>
+    <div class="support-note" data-i18n="support-note">Tack för att du stöttar fri och öppen samhällsinfo! 💚</div>
   </div>
 </div>
 
-<div class="cities-grid" id="citiesGrid">
-  <a href="app.html?city=orebro" class="city-card featured" data-city="örebro orebro">
-    <span class="city-name">Örebro</span>
-    <span class="city-region">Region Örebro län</span>
-  </a>
-  <a href="app.html?city=stockholm" class="city-card" data-city="stockholm">
-    <span class="city-name">Stockholm</span>
-    <span class="city-region">Region Stockholm</span>
-  </a>
-  <a href="app.html?city=goteborg" class="city-card" data-city="göteborg goteborg gothenburg">
-    <span class="city-name">Göteborg</span>
-    <span class="city-region">Västra Götaland</span>
-  </a>
-  <a href="app.html?city=malmo" class="city-card" data-city="malmö malmo">
-    <span class="city-name">Malmö</span>
-    <span class="city-region">Region Skåne</span>
-  </a>
-  <a href="app.html?city=uppsala" class="city-card" data-city="uppsala">
-    <span class="city-name">Uppsala</span>
-    <span class="city-region">Region Uppsala</span>
-  </a>
-  <a href="app.html?city=linkoping" class="city-card" data-city="linköping linkoping">
-    <span class="city-name">Linköping</span>
-    <span class="city-region">Östergötland</span>
-  </a>
-  <a href="app.html?city=vasteras" class="city-card" data-city="västerås vasteras">
-    <span class="city-name">Västerås</span>
-    <span class="city-region">Västmanland</span>
-  </a>
-  <a href="app.html?city=norrkoping" class="city-card" data-city="norrköping norrkoping">
-    <span class="city-name">Norrköping</span>
-    <span class="city-region">Östergötland</span>
-  </a>
-  <a href="app.html?city=jonkoping" class="city-card" data-city="jönköping jonkoping">
-    <span class="city-name">Jönköping</span>
-    <span class="city-region">Jönköpings län</span>
-  </a>
-  <a href="app.html?city=eskilstuna" class="city-card" data-city="eskilstuna">
-    <span class="city-name">Eskilstuna</span>
-    <span class="city-region">Sörmland</span>
-  </a>
+<!-- BACK BAR -->
+<div class="backbar wrap" id="backBar">
+  <button class="back-btn" onclick="goHome()" data-i18n="back-btn">← Tillbaka till startsidan</button>
 </div>
 
-<div class="no-results" id="noResults">
-  <p>🏙️ Din stad finns inte ännu</p>
-  <p style="margin-top:8px;font-size:13px;">Vi lägger till fler städer snart!</p>
+<!-- ═══ CATEGORY SECTIONS ═══ -->
+<!-- Content will be dynamically generated based on selected city -->
+<div id="categorySections"></div>
+
+<!-- INFO POPUP -->
+<div id="infoPopup">
+  <div class="info-popup-sheet">
+    <div class="info-popup-header">
+      <span class="info-popup-icon" id="infoPopupIcon">🔗</span>
+      <div>
+        <div class="info-popup-title" id="infoPopupTitle">Länktitel</div>
+        <div class="info-popup-cat" id="infoPopupCat">Kategori</div>
+      </div>
+      <button class="info-popup-close" onclick="closeInfoPopup()">×</button>
+    </div>
+    <div class="info-popup-desc" id="infoPopupDesc">Beskrivning av länken...</div>
+    <a class="info-popup-link" id="infoPopupLink" href="#" target="_blank" rel="noopener">Öppna länk ↗</a>
+  </div>
 </div>
 
-<div class="footer">
-  <p>🔒 Anonymt & gratis · Inga personuppgifter sparas</p>
+<!-- FEEDBACK MODAL -->
+<div id="feedbackModal">
+  <div class="feedback-sheet">
+    <div id="feedbackForm">
+      <div class="feedback-header">
+        <h3 data-i18n="fb-title">Skicka feedback</h3>
+        <button class="feedback-close" onclick="closeFeedback()">×</button>
+      </div>
+      <div class="feedback-options">
+        <div class="fb-opt" onclick="selectFbOpt(this,'Förslag')" data-i18n="fb-opt-1">💡 Förslag</div>
+        <div class="fb-opt" onclick="selectFbOpt(this,'Fel')" data-i18n="fb-opt-2">🐛 Något fel</div>
+        <div class="fb-opt" onclick="selectFbOpt(this,'Positivt')" data-i18n="fb-opt-3">💚 Positivt</div>
+        <div class="fb-opt" onclick="selectFbOpt(this,'Övrigt')" data-i18n="fb-opt-4">💬 Övrigt</div>
+      </div>
+      <textarea id="fbText" rows="4" placeholder="Skriv din feedback här..." data-i18n="fb-placeholder"></textarea>
+      <div class="feedback-consent">
+        <input type="checkbox" id="fbConsent" onchange="toggleSendBtn()"/>
+        <label for="fbConsent" data-i18n="fb-consent">Jag förstår att min feedback skickas anonymt till utvecklaren och kan användas för att förbättra appen.</label>
+      </div>
+      <button class="feedback-send" id="fbSendBtn" onclick="sendFeedback()" disabled data-i18n="fb-send">Skicka feedback</button>
+    </div>
+    <div class="feedback-thanks" id="feedbackThanks">
+      <div class="ft-ic">💚</div>
+      <p data-i18n="fb-thanks">Tack för din feedback!<br/>Din åsikt hjälper oss att göra StödGuiden bättre.</p>
+    </div>
+  </div>
+</div>
+
+<!-- AKUT BAR -->
+<div class="akut-bar">
+  <a class="akut-left" href="tel:112" data-i18n="akut-left">🚨 Akut? Ring 112</a>
+  <a class="akut-right" href="https://www.1177.se" target="_blank" rel="noopener" data-i18n="akut-right">Icke-akut: 1177 →</a>
+</div>
+
+<button id="upBtn" onclick="goHome()">↑</button>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span class="toast-icon">⭐</span>
+  <span id="toastText">Sparad som favorit!</span>
 </div>
 
 <script>
-function filterCities() {
-  const query = document.getElementById('citySearch').value.toLowerCase().trim();
-  const cards = document.querySelectorAll('.city-card');
-  let visibleCount = 0;
+// ═══ CITY DATA ═══
+const CITIES = {
+  orebro: {
+    name: "Örebro",
+    region: "Region Örebro län",
+    transport: { name: "Länstrafiken Örebro", url: "https://www.lanstrafiken.se", desc: "Buss i Örebro stad och länet." },
+    tips: [
+      {sv:'Ställ dig i ÖBOs bostadskö redan från 16 år — det är helt gratis och ger dig försprång.',en:'Join ÖBO housing queue from age 16 — it\'s free!'},
+      {sv:'Vård är gratis i Örebro om du är under 20 år. Ring 1177 för rådgivning.',en:'Healthcare is free in Örebro if you\'re under 20.'}
+    ],
+    localLinks: {
+      halsa: [
+        {id:'vardcentral-orebro',icon:'🏥',name:'Hitta vårdcentral i Örebro',desc:'Välj och lista dig på en vårdcentral i Region Örebro. Gratis vård under 20 år.',url:'https://www.1177.se/Orebrolan/sa-fungerar-varden/varden-i-orebro-lan/valja-vardcentral-i-region-orebro-lan/',cat:'Hälsa'},
+        {id:'umo-orebro',icon:'💚',name:'Ungdomsmottagningen Örebro',desc:'För dig 15–22 år. Hälsa, sex, identitet, stress och ångest. Kostnadsfritt.',url:'https://www.regionorebrolan.se/sv/vard-och-halsa/for-dig-som-ar-ung/ungdomsmottagning/',cat:'Hälsa'}
+      ],
+      boende: [
+        {id:'obo',icon:'🏠',name:'ÖBO – Bostadskö',desc:'Kommunala bostäder i Örebro. Gratis kö från 16 år.',url:'https://www.obo.se',cat:'Boende'},
+        {id:'behrn',icon:'🏠',name:'Behrn Fastigheter',desc:'Privat hyresvärd i Örebro. Ingen kötid krävs.',url:'https://www.bfrbo.se',cat:'Boende'}
+      ],
+      transport: [
+        {id:'lt-orebro',icon:'🚌',name:'Länstrafiken Örebro',desc:'Buss i Örebro stad och länet. Köp biljett i appen, online eller ombord med bankkort.',url:'https://www.lanstrafiken.se',cat:'Transport'}
+      ],
+      aktiviteter: [
+        {id:'fritidsgard-orebro',icon:'🏠',name:'Fritidsgårdar i Örebro',desc:'Över 20 fritidsgårdar och mötesplatser i Örebro. Gratis att besöka!',url:'https://www.orebro.se/uppleva-och-gora/fritidsgardar-och-motesplatser.html',cat:'Aktiviteter'},
+        {id:'fritidsboost',icon:'🚀',name:'Fritidsboost Örebro',desc:'Gratis aktiviteter för unga i Örebro — dans, gaming, simning, sport och mer.',url:'https://www.orebro.se/fritidsboost',cat:'Aktiviteter'}
+      ],
+      kontakt: [
+        {id:'kontaktperson-orebro',icon:'🤝',name:'Kontaktperson via Örebro kommun',desc:'Ansök om en kontaktperson som kan ge stöd i vardagen.',url:'https://www.orebro.se/omsorg--hjalp/funktionsnedsattning/stod-och-insatser/kontaktperson.html',cat:'Kontakt'}
+      ]
+    },
+    infoBoxes: {
+      halsa: '<strong>Bra att veta:</strong> I Örebro är vård gratis för dig under 20 år.',
+      boende: '<strong>Kom ihåg:</strong> Ställ dig i ÖBOs kö så tidigt som möjligt — det är gratis från 16 år.',
+      transport: '<strong>Tips:</strong> Köp månadskort på Länstrafiken — ungdomsrabatt finns för dig under 26 år!',
+      aktiviteter: '<strong>Tips:</strong> Örebro har över 20 gratis fritidsgårdar och mötesplatser!'
+    }
+  },
+  stockholm: {
+    name: "Stockholm",
+    region: "Region Stockholm",
+    transport: { name: "SL", url: "https://sl.se", desc: "Tunnelbana, buss och pendeltåg i Stockholm." },
+    tips: [
+      {sv:'Ställ dig i Stockholms bostadskö tidigt — kötiden kan vara över 10 år!',en:'Join Stockholm housing queue early — waiting time can be over 10 years!'},
+      {sv:'SL-kortet gäller i hela Stockholms län. Ungdomspris finns under 20.',en:'SL card works in all of Stockholm. Youth prices available under 20.'}
+    ],
+    localLinks: {
+      halsa: [
+        {id:'vardcentral-sthlm',icon:'🏥',name:'Hitta vårdcentral i Stockholm',desc:'Välj och lista dig på en vårdcentral i Region Stockholm.',url:'https://www.1177.se/Stockholm/',cat:'Hälsa'},
+        {id:'umo-sthlm',icon:'💚',name:'Ungdomsmottagningar Stockholm',desc:'För dig 12–23 år. Kostnadsfritt stöd kring hälsa och relationer.',url:'https://www.1177.se/Stockholm/sa-fungerar-varden/mottagningar/ungdomsmottagning/',cat:'Hälsa'}
+      ],
+      boende: [
+        {id:'bostad-sthlm',icon:'🏠',name:'Bostadsförmedlingen Stockholm',desc:'Stockholms bostadskö. Ställ dig i kö redan nu!',url:'https://bostad.stockholm.se',cat:'Boende'},
+        {id:'svb',icon:'🏠',name:'Svenska Bostäder',desc:'Kommunalt bostadsbolag i Stockholm.',url:'https://www.svenskabostader.se',cat:'Boende'}
+      ],
+      transport: [
+        {id:'sl',icon:'🚇',name:'SL – Stockholms lokaltrafik',desc:'Tunnelbana, buss och pendeltåg. Köp biljett i SL-appen.',url:'https://sl.se',cat:'Transport'}
+      ],
+      aktiviteter: [
+        {id:'fritidsgard-sthlm',icon:'🏠',name:'Fritidsgårdar i Stockholm',desc:'Stockholms stads fritidsgårdar för unga.',url:'https://fritid.stockholm/fritidsgardar/',cat:'Aktiviteter'}
+      ],
+      kontakt: [
+        {id:'socialtjanst-sthlm',icon:'🤝',name:'Socialtjänsten Stockholm',desc:'Kontakta din stadsdelsförvaltning för stöd.',url:'https://www.stockholm.se/socialtjanst',cat:'Kontakt'}
+      ]
+    },
+    infoBoxes: {
+      halsa: '<strong>Bra att veta:</strong> I Stockholm är vård gratis för dig under 18 år.',
+      boende: '<strong>Viktigt:</strong> Bostadskön i Stockholm har ofta 10+ års väntetid. Ställ dig i kö nu!',
+      transport: '<strong>Tips:</strong> SL-kortet gäller i hela länet. Ungdomspris finns för dig under 20 år.',
+      aktiviteter: '<strong>Tips:</strong> Stockholm har hundratals fritidsgårdar och mötesplatser för unga!'
+    }
+  },
+  goteborg: {
+    name: "Göteborg",
+    region: "Västra Götaland",
+    transport: { name: "Västtrafik", url: "https://www.vasttrafik.se", desc: "Spårvagn, buss och båt i Göteborg." },
+    tips: [
+      {sv:'Boplats Göteborg är stadens bostadskö — registrera dig gratis redan idag.',en:'Boplats Göteborg is the city housing queue — register for free today.'}
+    ],
+    localLinks: {
+      halsa: [
+        {id:'vardcentral-gbg',icon:'🏥',name:'Hitta vårdcentral i Göteborg',desc:'Välj vårdcentral i Västra Götalandsregionen.',url:'https://www.1177.se/Vastra-Gotaland/',cat:'Hälsa'}
+      ],
+      boende: [
+        {id:'boplats-gbg',icon:'🏠',name:'Boplats Göteborg',desc:'Göteborgs bostadskö. Gratis att registrera sig.',url:'https://boplats.se',cat:'Boende'}
+      ],
+      transport: [
+        {id:'vasttrafik',icon:'🚋',name:'Västtrafik',desc:'Spårvagn, buss och båt i Göteborg. Köp biljett i To Go-appen.',url:'https://www.vasttrafik.se',cat:'Transport'}
+      ],
+      aktiviteter: [
+        {id:'fritidsgard-gbg',icon:'🏠',name:'Fritidsgårdar i Göteborg',desc:'Göteborgs stads fritidsgårdar och ungdomsverksamhet.',url:'https://goteborg.se/fritidsgardar',cat:'Aktiviteter'}
+      ],
+      kontakt: [
+        {id:'socialtjanst-gbg',icon:'🤝',name:'Socialtjänsten Göteborg',desc:'Kontakta din stadsdel för stöd och hjälp.',url:'https://goteborg.se/socialtjanst',cat:'Kontakt'}
+      ]
+    },
+    infoBoxes: {
+      halsa: '<strong>Bra att veta:</strong> I Västra Götaland är vård gratis för dig under 18 år.',
+      boende: '<strong>Tips:</strong> Boplats Göteborg har kortare kötid än Stockholm. Registrera dig gratis!',
+      transport: '<strong>Tips:</strong> Västtrafiks To Go-app ger dig billigare biljetter vid köp i förväg.',
+      aktiviteter: '<strong>Tips:</strong> Göteborg har många gratis aktiviteter för unga via stadsdelarna.'
+    }
+  },
+  malmo: {
+    name: "Malmö",
+    region: "Region Skåne",
+    transport: { name: "Skånetrafiken", url: "https://www.skanetrafiken.se", desc: "Buss och tåg i Malmö och Skåne." },
+    tips: [{sv:'Boplats Syd är Malmös bostadskö — gratis att ställa sig från 16 år.',en:'Boplats Syd is Malmö\'s housing queue — free to join from 16.'}],
+    localLinks: {
+      halsa: [{id:'vardcentral-malmo',icon:'🏥',name:'Hitta vårdcentral i Malmö',desc:'Välj vårdcentral i Region Skåne.',url:'https://www.1177.se/Skane/',cat:'Hälsa'}],
+      boende: [{id:'boplats-syd',icon:'🏠',name:'Boplats Syd',desc:'Malmös bostadskö. Gratis från 16 år.',url:'https://www.boplatssyd.se',cat:'Boende'}],
+      transport: [{id:'skanetrafiken',icon:'🚌',name:'Skånetrafiken',desc:'Buss och tåg i Malmö och hela Skåne.',url:'https://www.skanetrafiken.se',cat:'Transport'}],
+      aktiviteter: [{id:'fritid-malmo',icon:'🏠',name:'Fritid Malmö',desc:'Fritidsgårdar och aktiviteter för unga i Malmö.',url:'https://malmo.se/fritidsgardar',cat:'Aktiviteter'}],
+      kontakt: [{id:'soc-malmo',icon:'🤝',name:'Socialtjänsten Malmö',desc:'Kontakta socialförvaltningen för stöd.',url:'https://malmo.se/socialtjanst',cat:'Kontakt'}]
+    },
+    infoBoxes: {
+      halsa: '<strong>Bra att veta:</strong> I Skåne är vård gratis för dig under 20 år.',
+      boende: '<strong>Tips:</strong> Boplats Syd har kortare kötider än storstäderna.',
+      transport: '<strong>Tips:</strong> Skånetrafikens app Jojo är smidigast för biljetter.',
+      aktiviteter: '<strong>Tips:</strong> Malmö stad har många gratis aktiviteter för unga.'
+    }
+  },
+  uppsala: {
+    name: "Uppsala",
+    region: "Region Uppsala",
+    transport: { name: "UL", url: "https://www.ul.se", desc: "Buss i Uppsala stad och län." },
+    tips: [{sv:'Uppsalahem har speciella studentbostäder. Ställ dig i kö tidigt!',en:'Uppsalahem has student housing. Join the queue early!'}],
+    localLinks: {
+      halsa: [{id:'vardcentral-uppsala',icon:'🏥',name:'Hitta vårdcentral i Uppsala',desc:'Välj vårdcentral i Region Uppsala.',url:'https://www.1177.se/Uppsala-lan/',cat:'Hälsa'}],
+      boende: [{id:'uppsalahem',icon:'🏠',name:'Uppsalahem',desc:'Kommunala bostäder i Uppsala.',url:'https://www.uppsalahem.se',cat:'Boende'}],
+      transport: [{id:'ul',icon:'🚌',name:'UL – Upplands Lokaltrafik',desc:'Buss i Uppsala stad och län.',url:'https://www.ul.se',cat:'Transport'}],
+      aktiviteter: [{id:'fritid-uppsala',icon:'🏠',name:'Fritidsgårdar Uppsala',desc:'Uppsala kommuns fritidsgårdar.',url:'https://www.uppsala.se/fritid',cat:'Aktiviteter'}],
+      kontakt: [{id:'soc-uppsala',icon:'🤝',name:'Socialtjänsten Uppsala',desc:'Kontakta för stöd och hjälp.',url:'https://www.uppsala.se/socialtjanst',cat:'Kontakt'}]
+    },
+    infoBoxes: {
+      halsa: '<strong>Bra att veta:</strong> I Uppsala är vård gratis för dig under 18 år.',
+      boende: '<strong>Tips:</strong> Uppsala är en studentstad — kolla även SGS och Heimstaden.',
+      transport: '<strong>Tips:</strong> UL har studentrabatt och ungdomspriser.',
+      aktiviteter: '<strong>Tips:</strong> Uppsala har många föreningar och fritidsaktiviteter.'
+    }
+  },
+  vasteras: {
+    name: "Västerås",
+    region: "Västmanland",
+    transport: { name: "VL", url: "https://www.vl.se", desc: "Buss i Västerås och Västmanland." },
+    tips: [{sv:'Mimer har bostäder i Västerås — kötiden är ofta kortare än i Stockholm.',en:'Mimer has housing in Västerås — queue is often shorter than Stockholm.'}],
+    localLinks: {
+      halsa: [{id:'vardcentral-vasteras',icon:'🏥',name:'Hitta vårdcentral i Västerås',desc:'Välj vårdcentral i Region Västmanland.',url:'https://www.1177.se/Vastmanland/',cat:'Hälsa'}],
+      boende: [{id:'mimer',icon:'🏠',name:'Mimer',desc:'Kommunala bostäder i Västerås.',url:'https://www.mimer.nu',cat:'Boende'}],
+      transport: [{id:'vl',icon:'🚌',name:'VL – Västmanlands Lokaltrafik',desc:'Buss i Västerås och länet.',url:'https://www.vl.se',cat:'Transport'}],
+      aktiviteter: [{id:'fritid-vasteras',icon:'🏠',name:'Fritidsgårdar Västerås',desc:'Västerås stads fritidsgårdar.',url:'https://www.vasteras.se/fritid',cat:'Aktiviteter'}],
+      kontakt: [{id:'soc-vasteras',icon:'🤝',name:'Socialtjänsten Västerås',desc:'Kontakta för stöd.',url:'https://www.vasteras.se/socialtjanst',cat:'Kontakt'}]
+    },
+    infoBoxes: {
+      halsa: '<strong>Bra att veta:</strong> I Västmanland är vård gratis för dig under 20 år.',
+      boende: '<strong>Tips:</strong> Mimer har ofta lediga lägenheter — kolla deras hemsida regelbundet.',
+      transport: '<strong>Tips:</strong> VL har ungdomsrabatt för dig under 26 år.',
+      aktiviteter: '<strong>Tips:</strong> Västerås har aktiva fritidsgårdar i flera stadsdelar.'
+    }
+  },
+  linkoping: {
+    name: "Linköping",
+    region: "Östergötland",
+    transport: { name: "Östgötatrafiken", url: "https://www.ostgotatrafiken.se", desc: "Buss i Linköping och Östergötland." },
+    tips: [{sv:'Stångåstaden är det kommunala bostadsbolaget i Linköping.',en:'Stångåstaden is the municipal housing company in Linköping.'}],
+    localLinks: {
+      halsa: [{id:'vardcentral-linkoping',icon:'🏥',name:'Hitta vårdcentral i Linköping',desc:'Välj vårdcentral i Region Östergötland.',url:'https://www.1177.se/Ostergotland/',cat:'Hälsa'}],
+      boende: [{id:'stangastaden',icon:'🏠',name:'Stångåstaden',desc:'Kommunala bostäder i Linköping.',url:'https://www.stangastaden.se',cat:'Boende'}],
+      transport: [{id:'otraf',icon:'🚌',name:'Östgötatrafiken',desc:'Buss i Linköping och länet.',url:'https://www.ostgotatrafiken.se',cat:'Transport'}],
+      aktiviteter: [{id:'fritid-linkoping',icon:'🏠',name:'Fritidsgårdar Linköping',desc:'Linköpings kommuns fritidsgårdar.',url:'https://www.linkoping.se/fritid',cat:'Aktiviteter'}],
+      kontakt: [{id:'soc-linkoping',icon:'🤝',name:'Socialtjänsten Linköping',desc:'Kontakta för stöd.',url:'https://www.linkoping.se/socialtjanst',cat:'Kontakt'}]
+    },
+    infoBoxes: {
+      halsa: '<strong>Bra att veta:</strong> I Östergötland är vård gratis för dig under 20 år.',
+      boende: '<strong>Tips:</strong> Linköping är en studentstad med relativt kort bostadskö.',
+      transport: '<strong>Tips:</strong> Östgötatrafikens app är smidigast för biljetter.',
+      aktiviteter: '<strong>Tips:</strong> Linköping har aktiva fritidsgårdar och föreningar.'
+    }
+  },
+  norrkoping: {
+    name: "Norrköping",
+    region: "Östergötland",
+    transport: { name: "Östgötatrafiken", url: "https://www.ostgotatrafiken.se", desc: "Buss och spårvagn i Norrköping." },
+    tips: [{sv:'Hyresbostäder i Norrköping har kortare kötider än storstäderna.',en:'Housing in Norrköping has shorter queues than big cities.'}],
+    localLinks: {
+      halsa: [{id:'vardcentral-norrkoping',icon:'🏥',name:'Hitta vårdcentral i Norrköping',desc:'Välj vårdcentral i Region Östergötland.',url:'https://www.1177.se/Ostergotland/',cat:'Hälsa'}],
+      boende: [{id:'hyresbostader-nkp',icon:'🏠',name:'Hyresbostäder i Norrköping',desc:'Kommunala bostäder i Norrköping.',url:'https://www.hyresbostader.se',cat:'Boende'}],
+      transport: [{id:'otraf-nkp',icon:'🚋',name:'Östgötatrafiken',desc:'Buss och spårvagn i Norrköping.',url:'https://www.ostgotatrafiken.se',cat:'Transport'}],
+      aktiviteter: [{id:'fritid-norrkoping',icon:'🏠',name:'Fritidsgårdar Norrköping',desc:'Norrköpings kommuns fritidsgårdar.',url:'https://www.norrkoping.se/fritid',cat:'Aktiviteter'}],
+      kontakt: [{id:'soc-norrkoping',icon:'🤝',name:'Socialtjänsten Norrköping',desc:'Kontakta för stöd.',url:'https://www.norrkoping.se/socialtjanst',cat:'Kontakt'}]
+    },
+    infoBoxes: {
+      halsa: '<strong>Bra att veta:</strong> I Östergötland är vård gratis för dig under 20 år.',
+      boende: '<strong>Tips:</strong> Norrköping har ofta kortare bostadsköer än Linköping.',
+      transport: '<strong>Tips:</strong> Norrköping har Sveriges äldsta spårvagnsnät!',
+      aktiviteter: '<strong>Tips:</strong> Norrköping har flera aktiva fritidsgårdar.'
+    }
+  },
+  jonkoping: {
+    name: "Jönköping",
+    region: "Jönköpings län",
+    transport: { name: "Jönköpings Länstrafik", url: "https://www.jlt.se", desc: "Buss i Jönköping och länet." },
+    tips: [{sv:'Vätterhem är det kommunala bostadsbolaget i Jönköping.',en:'Vätterhem is the municipal housing company in Jönköping.'}],
+    localLinks: {
+      halsa: [{id:'vardcentral-jonkoping',icon:'🏥',name:'Hitta vårdcentral i Jönköping',desc:'Välj vårdcentral i Region Jönköping.',url:'https://www.1177.se/Jonkopings-lan/',cat:'Hälsa'}],
+      boende: [{id:'vatterhem',icon:'🏠',name:'Vätterhem',desc:'Kommunala bostäder i Jönköping.',url:'https://www.vatterhem.se',cat:'Boende'}],
+      transport: [{id:'jlt',icon:'🚌',name:'JLT – Jönköpings Länstrafik',desc:'Buss i Jönköping och länet.',url:'https://www.jlt.se',cat:'Transport'}],
+      aktiviteter: [{id:'fritid-jonkoping',icon:'🏠',name:'Fritidsgårdar Jönköping',desc:'Jönköpings kommuns fritidsgårdar.',url:'https://www.jonkoping.se/fritid',cat:'Aktiviteter'}],
+      kontakt: [{id:'soc-jonkoping',icon:'🤝',name:'Socialtjänsten Jönköping',desc:'Kontakta för stöd.',url:'https://www.jonkoping.se/socialtjanst',cat:'Kontakt'}]
+    },
+    infoBoxes: {
+      halsa: '<strong>Bra att veta:</strong> I Jönköpings län är vård gratis för dig under 20 år.',
+      boende: '<strong>Tips:</strong> Vätterhem har relativt korta kötider.',
+      transport: '<strong>Tips:</strong> JLT har ungdomsrabatt för dig under 26 år.',
+      aktiviteter: '<strong>Tips:</strong> Jönköping har aktiva fritidsgårdar och föreningar.'
+    }
+  },
+  eskilstuna: {
+    name: "Eskilstuna",
+    region: "Sörmland",
+    transport: { name: "Sörmlandstrafiken", url: "https://www.sormlandstrafiken.se", desc: "Buss i Eskilstuna och Sörmland." },
+    tips: [{sv:'Eskilstuna Kommunfastigheter har bostäder med kortare kötid.',en:'Eskilstuna has housing with shorter waiting times.'}],
+    localLinks: {
+      halsa: [{id:'vardcentral-eskilstuna',icon:'🏥',name:'Hitta vårdcentral i Eskilstuna',desc:'Välj vårdcentral i Region Sörmland.',url:'https://www.1177.se/Sormland/',cat:'Hälsa'}],
+      boende: [{id:'ekf',icon:'🏠',name:'Eskilstuna Kommunfastigheter',desc:'Kommunala bostäder i Eskilstuna.',url:'https://www.ekfast.se',cat:'Boende'}],
+      transport: [{id:'sormtraf',icon:'🚌',name:'Sörmlandstrafiken',desc:'Buss i Eskilstuna och länet.',url:'https://www.sormlandstrafiken.se',cat:'Transport'}],
+      aktiviteter: [{id:'fritid-eskilstuna',icon:'🏠',name:'Fritidsgårdar Eskilstuna',desc:'Eskilstuna kommuns fritidsgårdar.',url:'https://www.eskilstuna.se/fritid',cat:'Aktiviteter'}],
+      kontakt: [{id:'soc-eskilstuna',icon:'🤝',name:'Socialtjänsten Eskilstuna',desc:'Kontakta för stöd.',url:'https://www.eskilstuna.se/socialtjanst',cat:'Kontakt'}]
+    },
+    infoBoxes: {
+      halsa: '<strong>Bra att veta:</strong> I Sörmland är vård gratis för dig under 20 år.',
+      boende: '<strong>Tips:</strong> Eskilstuna har ofta lediga lägenheter direkt.',
+      transport: '<strong>Tips:</strong> Sörmlandstrafiken har ungdomspriser.',
+      aktiviteter: '<strong>Tips:</strong> Eskilstuna har flera aktiva fritidsgårdar.'
+    }
+  }
+};
+
+// ═══ NATIONAL LINKS (same for all cities) ═══
+const NATIONAL_LINKS = {
+  halsa: [
+    {id:'1177',icon:'🏥',name:'1177 Vårdguiden',desc:'Råd, vägledning och hitta vård. Ring 1177 dygnet runt.',url:'https://www.1177.se',cat:'Hälsa'},
+    {id:'umo',icon:'💚',name:'UMO – Ungdomsmottagning online',desc:'Sex, relationer, hälsa och identitet för unga upp till 25 år.',url:'https://www.umo.se',cat:'Hälsa'},
+    {id:'mind',icon:'🫂',name:'Mind – Självmordslinjen & Äldrelinjen',desc:'Samtal, chatt och mail med utbildade samtalspersoner. Gratis & anonymt.',url:'https://mind.se',cat:'Hälsa'},
+    {id:'bris',icon:'🌈',name:'BRIS – Barnens rätt i samhället',desc:'För barn och unga under 18. Ring 116 111, chatt eller mail.',url:'https://www.bris.se',cat:'Hälsa'},
+    {id:'youmo',icon:'🧩',name:'Youmo – psykisk hälsa för nyanlända',desc:'Information om psykisk hälsa på flera språk.',url:'https://www.youmo.se',cat:'Hälsa'},
+    {id:'drugsmart',icon:'💊',name:'Drugsmart',desc:'Fakta om droger, alkohol och beroende för unga.',url:'https://www.drugsmart.se',cat:'Hälsa'},
+    {id:'kvinnofrid',icon:'💜',name:'Kvinnofridslinjen – 020-50 50 50',desc:'Vid våld i nära relationer. Gratis, anonymt, dygnet runt.',url:'tel:0200505050',cat:'Hälsa'}
+  ],
+  ekonomi: [
+    {id:'fk',icon:'🏛️',name:'Försäkringskassan',desc:'Sjukpenning, bostadsbidrag, föräldrapenning och mycket mer.',url:'https://www.forsakringskassan.se',cat:'Ekonomi'},
+    {id:'bostadsbidrag',icon:'🏠',name:'Bostadsbidrag',desc:'Bidrag till din boendekostnad om du har låg inkomst.',url:'https://www.forsakringskassan.se/privatperson/bostadsbidrag',cat:'Ekonomi'},
+    {id:'kfm',icon:'⚖️',name:'Kronofogden',desc:'Hjälp vid skulder och betalningsproblem.',url:'https://www.kronofogden.se',cat:'Ekonomi'},
+    {id:'budget-kv',icon:'📋',name:'Konsumentverket – rimlig hushållsbudget',desc:'Vad kostar ett rimligt liv? Jämför din budget med snittet.',url:'https://www.konsumentverket.se/budget',cat:'Ekonomi'}
+  ],
+  jobb: [
+    {id:'af',icon:'💼',name:'Arbetsförmedlingen',desc:'Registrera dig, sök jobb och få stöd i din jobbsökning.',url:'https://arbetsformedlingen.se',cat:'Jobb'},
+    {id:'platsbanken',icon:'🔍',name:'Platsbanken',desc:'Sök bland tusentals lediga jobb i hela Sverige.',url:'https://arbetsformedlingen.se/platsbanken',cat:'Jobb'},
+    {id:'linkedin',icon:'💼',name:'LinkedIn',desc:'Professionellt nätverk. Bygg din profil och hitta jobb.',url:'https://www.linkedin.com',cat:'Jobb'},
+    {id:'cv-tips',icon:'📝',name:'CV-tips från Arbetsförmedlingen',desc:'Hur du skriver ett bra CV och personligt brev.',url:'https://arbetsformedlingen.se/for-arbetssokande/tips-for-din-jobbsokning/cv-och-personligt-brev',cat:'Jobb'},
+    {id:'do',icon:'⚖️',name:'Diskrimineringsombudsmannen (DO)',desc:'Anmäl diskriminering på jobbet.',url:'https://www.do.se',cat:'Jobb'}
+  ],
+  boende: [
+    {id:'blocket',icon:'🔍',name:'Blocket Bostad',desc:'Andrahandsuthyrning och privata hyresvärdar.',url:'https://bostad.blocket.se',cat:'Boende'},
+    {id:'qasa',icon:'🏠',name:'Qasa',desc:'Trygg andrahandsuthyrning med försäkring.',url:'https://www.qasa.se',cat:'Boende'},
+    {id:'hemavi',icon:'🏠',name:'Hemavi',desc:'Hitta bostad i hela Sverige.',url:'https://www.hemavi.se',cat:'Boende'}
+  ],
+  studier: [
+    {id:'csn',icon:'🎓',name:'CSN – Studiestöd',desc:'Ansök om studiemedel, studiebidrag och studielån.',url:'https://www.csn.se',cat:'Studier'},
+    {id:'antagning',icon:'📚',name:'Antagning.se',desc:'Sök till högskola och universitet.',url:'https://www.antagning.se',cat:'Studier'},
+    {id:'studera',icon:'📖',name:'Studera.nu',desc:'Information om utbildningar i Sverige.',url:'https://www.studera.nu',cat:'Studier'}
+  ],
+  bank: [
+    {id:'bankid',icon:'🔐',name:'BankID',desc:'Legitimera dig online. Behövs för de flesta e-tjänster.',url:'https://www.bankid.com',cat:'Bank'},
+    {id:'swish',icon:'💸',name:'Swish',desc:'Betala och skicka pengar med mobilen.',url:'https://www.swish.nu',cat:'Bank'}
+  ],
+  digital: [
+    {id:'skv',icon:'📋',name:'Skatteverket – Mina sidor',desc:'Deklarera, ändra adress och beställ ID-kort.',url:'https://www.skatteverket.se',cat:'Digital'},
+    {id:'fk-mina',icon:'🏛️',name:'Försäkringskassan – Mina sidor',desc:'Se dina ersättningar och ansökningar.',url:'https://www.forsakringskassan.se/mina-sidor',cat:'Digital'}
+  ],
+  vardag: [
+    {id:'ica',icon:'🛒',name:'ICA – Recept',desc:'Tusentals gratis recept och matkassar.',url:'https://www.ica.se/recept',cat:'Vardag'},
+    {id:'budgetmal',icon:'🍳',name:'Budgetmål',desc:'Billig och enkel mat för studenter.',url:'https://www.budgetmal.se',cat:'Vardag'}
+  ],
+  rattigheter: [
+    {id:'do2',icon:'⚖️',name:'Diskrimineringsombudsmannen',desc:'Anmäl diskriminering på jobbet, i skolan eller i samhället.',url:'https://www.do.se',cat:'Rättigheter'},
+    {id:'rfsl',icon:'🏳️‍🌈',name:'RFSL',desc:'För HBTQI+-personer. Rådgivning, grupper och rättighetsinfo.',url:'https://www.rfsl.se',cat:'Rättigheter'}
+  ],
+  transport: [
+    {id:'sj',icon:'🚆',name:'SJ – Tågbiljetter',desc:'Boka tåg i hela Sverige. Köp tidigt för bästa pris.',url:'https://www.sj.se',cat:'Transport'},
+    {id:'flixbus',icon:'🚍',name:'FlixBus',desc:'Billiga bussar för längre resor.',url:'https://www.flixbus.se',cat:'Transport'},
+    {id:'resrobot',icon:'🗺️',name:'ResRobot',desc:'Planera resor med all kollektivtrafik i Sverige.',url:'https://www.resrobot.se',cat:'Transport'}
+  ]
+};
+
+// ═══ STATE ═══
+let currentCity = localStorage.getItem('sg_city') || 'orebro';
+let currentLang = 'sv';
+let currentCat = null;
+let favorites = JSON.parse(localStorage.getItem('sg_favorites') || '[]');
+
+// ═══ INIT ═══
+document.addEventListener('DOMContentLoaded', function() {
+  initCity();
+  showTip();
+  renderCategories();
+  initFavoriteButtons();
+  renderFavorites();
   
-  cards.forEach(card => {
-    const cityData = card.dataset.city.toLowerCase();
-    if (query === '' || cityData.includes(query)) {
-      card.classList.remove('hidden');
-      visibleCount++;
-    } else {
-      card.classList.add('hidden');
+  // Check onboarding
+  if(localStorage.getItem('sg_seen')){
+    document.getElementById('onboarding').style.display='none';
+  }
+});
+
+// ═══ CITY FUNCTIONS ═══
+function initCity() {
+  const city = CITIES[currentCity];
+  document.getElementById('cityTagline').textContent = city.name;
+  document.getElementById('cityBtnText').textContent = city.name;
+  document.title = `StödGuiden – ${city.name}`;
+  
+  // Update quick transport link
+  const ql = document.getElementById('qlTransport');
+  ql.href = city.transport.url;
+  document.getElementById('qlTransportName').textContent = city.transport.name;
+  document.getElementById('qlTransportSub').textContent = city.transport.desc.substring(0, 25) + '...';
+  
+  // Update city dropdown active state
+  document.querySelectorAll('.city-option').forEach(opt => {
+    opt.classList.toggle('active', opt.dataset.city === currentCity);
+  });
+}
+
+function toggleCityDropdown() {
+  document.getElementById('cityDropdown').classList.toggle('open');
+}
+
+function selectCity(cityId) {
+  currentCity = cityId;
+  localStorage.setItem('sg_city', cityId);
+  initCity();
+  renderCategories();
+  showTip();
+  document.getElementById('cityDropdown').classList.remove('open');
+  showToast(`Bytte till ${CITIES[cityId].name}`, '📍');
+  
+  // Go home if in category
+  if(currentCat) goHome();
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.city-selector')) {
+    document.getElementById('cityDropdown').classList.remove('open');
+  }
+});
+
+// ═══ RENDER CATEGORIES ═══
+function renderCategories() {
+  const city = CITIES[currentCity];
+  const container = document.getElementById('categorySections');
+  
+  container.innerHTML = `
+    ${renderCategorySection('halsa', '🧠', 'Hälsa & vård', 'Vård, psykisk hälsa och kontaktlinjer', city)}
+    ${renderCategorySection('ekonomi', '💸', 'Ekonomi', 'Bidrag, budget och privatekonomi', city)}
+    ${renderCategorySection('jobb', '💼', 'Jobb & karriär', 'Hitta jobb, CV och intervjutips', city)}
+    ${renderCategorySection('boende', '🏡', 'Boende', 'Hyra, kontrakt och bostadsrättigheter', city)}
+    ${renderCategorySection('studier', '🎓', 'Studier', 'CSN, antagning och utbildning', city)}
+    ${renderCategorySection('bank', '💳', 'Bank & betalningar', 'BankID, konto och Swish', city)}
+    ${renderCategorySection('digital', '📱', 'Digital vardag', 'Mina sidor och e-tjänster', city)}
+    ${renderCategorySection('vardag', '🧺', 'Vardag & hemtips', 'Mat, recept och hushåll', city)}
+    ${renderCategorySection('kontakt', '🤝', 'Kontaktperson', 'Vägledning och praktisk info', city)}
+    ${renderCategorySection('aktiviteter', '🌟', 'Aktiviteter & fritid', 'Föreningar, sport och kultur', city)}
+    ${renderCategorySection('transport', '🚌', 'Transport', 'Buss, tåg och kollektivtrafik', city)}
+    ${renderCategorySection('rattigheter', '⚖️', 'Rättigheter', 'Diskriminering och juridik', city)}
+    ${renderNumbersSection()}
+  `;
+}
+
+function renderCategorySection(catId, icon, title, subtitle, city) {
+  const localLinks = city.localLinks[catId] || [];
+  const nationalLinks = NATIONAL_LINKS[catId] || [];
+  const infoBox = city.infoBoxes[catId] || '';
+  
+  let html = `
+    <div class="cat-section wrap" id="cat-${catId}">
+      <div class="cat-section-header">
+        <span class="cat-section-ic">${icon}</span>
+        <div><div class="cat-section-title">${title}</div><div class="cat-section-sub">${subtitle}</div></div>
+      </div>
+      ${infoBox ? `<div class="info-box">${infoBox}</div>` : ''}
+  `;
+  
+  // Local links
+  if (localLinks.length > 0) {
+    html += `<div class="link-group"><div class="link-group-title">📍 Lokalt i ${city.name}</div>`;
+    localLinks.forEach(link => {
+      html += renderLinkItem(link, true);
+    });
+    html += `</div>`;
+  }
+  
+  // National links
+  if (nationalLinks.length > 0) {
+    html += `<div class="link-group"><div class="link-group-title">🌐 Nationellt</div>`;
+    nationalLinks.forEach(link => {
+      html += renderLinkItem(link, false);
+    });
+    html += `</div>`;
+  }
+  
+  html += `</div>`;
+  return html;
+}
+
+function renderLinkItem(link, isLocal) {
+  const isFav = favorites.some(f => f.id === link.id);
+  return `
+    <div class="link-item ${isLocal ? 'local-link' : ''}" data-fav-id="${link.id}" data-fav-name="${link.name}" data-fav-icon="${link.icon}" data-fav-cat="${link.cat}" data-fav-url="${link.url}" data-fav-desc="${link.desc}">
+      <span class="li-ic">${link.icon}</span>
+      <a href="${link.url}" target="_blank" rel="noopener" class="li-tx">
+        <span class="li-name">${link.name}</span>
+      </a>
+      <div class="li-actions">
+        <button class="info-btn" onclick="showInfo(event, '${link.id}')" title="Läs mer">ℹ️</button>
+        <button class="fav-btn ${isFav ? 'is-favorite' : ''}" onclick="toggleFavorite(this)" title="Spara som favorit">${isFav ? '★' : '☆'}</button>
+        <span class="li-arrow">↗</span>
+      </div>
+    </div>
+  `;
+}
+
+function renderNumbersSection() {
+  return `
+    <div class="cat-section wrap" id="cat-nummer">
+      <div class="cat-section-header">
+        <span class="cat-section-ic">☎️</span>
+        <div><div class="cat-section-title">Viktiga nummer</div><div class="cat-section-sub">Akut, vård och myndigheter</div></div>
+      </div>
+      <div class="info-box"><strong>Viktigt:</strong> 112 fungerar alltid, även utan SIM-kort. 1177 har tolkar för de flesta språk.</div>
+      <div class="num-grid">
+        <a class="num-card" href="tel:112"><span class="nc-num">112</span><span class="nc-name">Nödsamtal (akut)</span></a>
+        <a class="num-card" href="tel:1177"><span class="nc-num">1177</span><span class="nc-name">Sjukvårdsrådgivning</span></a>
+        <a class="num-card" href="tel:11414"><span class="nc-num">114 14</span><span class="nc-name">Polis (ej akut)</span></a>
+        <a class="num-card" href="tel:116111"><span class="nc-num">116 111</span><span class="nc-name">BRIS (under 18)</span></a>
+        <a class="num-card" href="tel:90101"><span class="nc-num">90 101</span><span class="nc-name">Mind Självmordslinjen</span></a>
+        <a class="num-card" href="tel:0200505050"><span class="nc-num">020-50 50 50</span><span class="nc-name">Kvinnofridslinjen</span></a>
+      </div>
+    </div>
+  `;
+}
+
+// ═══ INFO POPUP ═══
+function showInfo(event, linkId) {
+  event.preventDefault();
+  event.stopPropagation();
+  
+  // Find link data
+  let linkData = null;
+  const city = CITIES[currentCity];
+  
+  // Search in local links
+  for (const cat in city.localLinks) {
+    const found = city.localLinks[cat].find(l => l.id === linkId);
+    if (found) { linkData = found; break; }
+  }
+  
+  // Search in national links
+  if (!linkData) {
+    for (const cat in NATIONAL_LINKS) {
+      const found = NATIONAL_LINKS[cat].find(l => l.id === linkId);
+      if (found) { linkData = found; break; }
+    }
+  }
+  
+  if (linkData) {
+    document.getElementById('infoPopupIcon').textContent = linkData.icon;
+    document.getElementById('infoPopupTitle').textContent = linkData.name;
+    document.getElementById('infoPopupCat').textContent = linkData.cat;
+    document.getElementById('infoPopupDesc').textContent = linkData.desc;
+    document.getElementById('infoPopupLink').href = linkData.url;
+    document.getElementById('infoPopup').classList.add('open');
+  }
+}
+
+function closeInfoPopup() {
+  document.getElementById('infoPopup').classList.remove('open');
+}
+
+document.getElementById('infoPopup').addEventListener('click', function(e) {
+  if(e.target === this) closeInfoPopup();
+});
+
+// ═══ FAVORITES ═══
+function toggleFavorite(btn) {
+  event.preventDefault();
+  event.stopPropagation();
+  
+  const linkItem = btn.closest('.link-item');
+  const data = {
+    id: linkItem.dataset.favId,
+    name: linkItem.dataset.favName,
+    icon: linkItem.dataset.favIcon,
+    cat: linkItem.dataset.favCat,
+    url: linkItem.dataset.favUrl
+  };
+  
+  const idx = favorites.findIndex(f => f.id === data.id);
+  if (idx > -1) {
+    favorites.splice(idx, 1);
+    btn.classList.remove('is-favorite');
+    btn.innerHTML = '☆';
+    showToast('Borttagen från favoriter', '✕');
+  } else {
+    favorites.push(data);
+    btn.classList.add('is-favorite');
+    btn.innerHTML = '★';
+    showToast('Sparad som favorit!', '⭐');
+  }
+  
+  localStorage.setItem('sg_favorites', JSON.stringify(favorites));
+  renderFavorites();
+}
+
+function removeFavorite(id) {
+  event.preventDefault();
+  event.stopPropagation();
+  
+  favorites = favorites.filter(f => f.id !== id);
+  localStorage.setItem('sg_favorites', JSON.stringify(favorites));
+  
+  document.querySelectorAll(`[data-fav-id="${id}"]`).forEach(item => {
+    const btn = item.querySelector('.fav-btn');
+    if (btn) {
+      btn.classList.remove('is-favorite');
+      btn.innerHTML = '☆';
     }
   });
   
-  document.getElementById('noResults').style.display = visibleCount === 0 ? 'block' : 'none';
+  showToast('Borttagen från favoriter', '✕');
+  renderFavorites();
 }
 
-// Check if user has a saved city preference
-const savedCity = localStorage.getItem('stodguiden-city');
-if (savedCity) {
-  // Optional: Auto-redirect to saved city
-  // window.location.href = 'app.html?city=' + savedCity;
+function renderFavorites() {
+  const section = document.getElementById('favoritesSection');
+  const grid = document.getElementById('favoritesGrid');
+  const count = document.getElementById('favCount');
+  
+  if (favorites.length === 0) {
+    section.classList.remove('has-favorites');
+    return;
+  }
+  
+  section.classList.add('has-favorites');
+  count.textContent = favorites.length;
+  
+  grid.innerHTML = favorites.map(fav => `
+    <div class="fav-item">
+      <span class="fi-ic">${fav.icon}</span>
+      <a href="${fav.url}" target="_blank" rel="noopener" class="fi-tx">
+        <span class="fi-name">${fav.name}</span>
+        <span class="fi-cat">${fav.cat}</span>
+      </a>
+      <button class="fav-remove" onclick="removeFavorite('${fav.id}')" title="Ta bort">✕</button>
+      <span class="fi-arrow">↗</span>
+    </div>
+  `).join('');
+}
+
+function initFavoriteButtons() {
+  document.querySelectorAll('.link-item').forEach(item => {
+    const id = item.dataset.favId;
+    if (id && favorites.some(f => f.id === id)) {
+      const btn = item.querySelector('.fav-btn');
+      if (btn) {
+        btn.classList.add('is-favorite');
+        btn.innerHTML = '★';
+      }
+    }
+  });
+}
+
+// ═══ NAVIGATION ═══
+function openCat(id) {
+  if(currentCat) {
+    const prev = document.getElementById('cat-'+currentCat);
+    if(prev) prev.style.display = 'none';
+  }
+  currentCat = id;
+  document.getElementById('homeView').style.display = 'none';
+  document.getElementById('backBar').style.display = 'block';
+  const sec = document.getElementById('cat-'+id);
+  if(sec) { sec.style.display = 'block'; window.scrollTo({top:0,behavior:'smooth'}); }
+}
+
+function goHome() {
+  if(currentCat) {
+    const sec = document.getElementById('cat-'+currentCat);
+    if(sec) sec.style.display = 'none';
+    currentCat = null;
+  }
+  document.getElementById('homeView').style.display = 'block';
+  document.getElementById('backBar').style.display = 'none';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ═══ TIPS ═══
+const generalTips = [
+  {sv:'Du kan ansöka om CSN redan från gymnasiet. Studiebidraget är 1 250 kr/månad.',en:'You can apply for CSN student finance from high school.'},
+  {sv:'Med BankID kan du logga in på alla myndigheter. Skaffa det via din bank.',en:'With BankID you can access all government services.'},
+  {sv:'Tryck på ⭐ vid en länk för att spara den som favorit!',en:'Tap ⭐ on any link to save it as a favorite!'},
+  {sv:'Tryck på ℹ️ för att läsa mer om varje länk.',en:'Tap ℹ️ to read more about each link.'}
+];
+
+function showTip() {
+  const city = CITIES[currentCity];
+  const allTips = [...generalTips, ...(city.tips || [])];
+  const tip = allTips[Math.floor(Math.random() * allTips.length)];
+  document.getElementById('tipText').textContent = tip[currentLang];
+}
+
+// ═══ SEARCH ═══
+const searchData = [
+  {cat:'halsa',catName:'Hälsa & vård',icon:'🧠',keywords:['hälsa','vård','sjuk','1177','bris','mind','psykisk','beroende']},
+  {cat:'ekonomi',catName:'Ekonomi',icon:'💸',keywords:['ekonomi','pengar','bidrag','skuld','csn','budget','kronofogden']},
+  {cat:'jobb',catName:'Jobb & karriär',icon:'💼',keywords:['jobb','arbete','cv','intervju','arbetsförmedlingen']},
+  {cat:'boende',catName:'Boende',icon:'🏡',keywords:['boende','hyra','lägenhet','bostadskö','kontrakt']},
+  {cat:'studier',catName:'Studier',icon:'🎓',keywords:['studier','csn','antagning','gymnasium','högskola']},
+  {cat:'bank',catName:'Bank & betalningar',icon:'💳',keywords:['bank','bankid','swish','konto']},
+  {cat:'digital',catName:'Digital vardag',icon:'📱',keywords:['digital','mina sidor','e-tjänst','skatteverket']},
+  {cat:'vardag',catName:'Vardag & hemtips',icon:'🧺',keywords:['vardag','mat','recept','tvätt']},
+  {cat:'kontakt',catName:'Kontaktperson',icon:'🤝',keywords:['kontaktperson','vägledning','socialtjänst']},
+  {cat:'aktiviteter',catName:'Aktiviteter',icon:'🌟',keywords:['aktiviteter','fritid','sport','föreningar']},
+  {cat:'transport',catName:'Transport',icon:'🚌',keywords:['transport','buss','tåg','kollektivtrafik']},
+  {cat:'rattigheter',catName:'Rättigheter',icon:'⚖️',keywords:['rättigheter','diskriminering','do','rfsl']},
+  {cat:'nummer',catName:'Viktiga nummer',icon:'☎️',keywords:['nummer','telefon','112','1177','akut']}
+];
+
+function doSearch(q) {
+  const clearBtn = document.getElementById('clearBtn');
+  const resultsDiv = document.getElementById('searchResults');
+  q = q.toLowerCase().trim();
+  clearBtn.style.display = q ? 'block' : 'none';
+  if(!q) { resultsDiv.style.display = 'none'; return; }
+  
+  const matches = searchData.filter(d => d.keywords.some(k => k.includes(q) || q.includes(k)));
+  resultsDiv.style.display = 'block';
+  
+  if(matches.length === 0) {
+    resultsDiv.innerHTML = '<div class="search-no-result">😕 Inget hittades — prova ett annat ord</div>';
+    return;
+  }
+  
+  resultsDiv.innerHTML = matches.map(m => `
+    <div class="search-result" onclick="openCat('${m.cat}');clearSearch()">
+      <span class="sr-icon">${m.icon}</span>
+      <div class="sr-text"><div class="sr-cat">Kategori</div><div class="sr-name">${m.catName}</div></div>
+      <span style="color:var(--muted2)">→</span>
+    </div>
+  `).join('');
+}
+
+function clearSearch() {
+  document.getElementById('searchInput').value = '';
+  document.getElementById('clearBtn').style.display = 'none';
+  document.getElementById('searchResults').style.display = 'none';
+}
+
+// ═══ TOAST ═══
+function showToast(message, icon = '⭐') {
+  const toast = document.getElementById('toast');
+  document.getElementById('toastText').textContent = message;
+  toast.querySelector('.toast-icon').textContent = icon;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2000);
+}
+
+// ═══ ONBOARDING ═══
+function closeOnboarding() {
+  const ob = document.getElementById('onboarding');
+  ob.classList.add('hidden');
+  localStorage.setItem('sg_seen', '1');
+  setTimeout(() => ob.style.display = 'none', 500);
+}
+
+// ═══ FEEDBACK ═══
+let fbOpt = '';
+function selectFbOpt(el, val) {
+  fbOpt = val;
+  document.querySelectorAll('.fb-opt').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+function openFeedback() {
+  document.getElementById('feedbackModal').classList.add('open');
+  document.getElementById('feedbackForm').style.display = 'block';
+  document.getElementById('feedbackThanks').style.display = 'none';
+}
+function closeFeedback() {
+  document.getElementById('feedbackModal').classList.remove('open');
+  fbOpt = '';
+  document.querySelectorAll('.fb-opt').forEach(o => o.classList.remove('selected'));
+  document.getElementById('fbText').value = '';
+  document.getElementById('fbConsent').checked = false;
+  document.getElementById('fbSendBtn').disabled = true;
+}
+function toggleSendBtn() {
+  document.getElementById('fbSendBtn').disabled = !document.getElementById('fbConsent').checked;
+}
+function sendFeedback() {
+  if(!document.getElementById('fbConsent').checked) return;
+  const btn = document.getElementById('fbSendBtn');
+  btn.textContent = 'Skickar...';
+  btn.disabled = true;
+  
+  fetch('https://formspree.io/f/mgonjkeb', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json','Accept':'application/json'},
+    body: JSON.stringify({
+      typ: fbOpt || 'Övrigt',
+      meddelande: document.getElementById('fbText').value || '(inget meddelande)',
+      stad: currentCity,
+      datum: new Date().toLocaleString('sv-SE')
+    })
+  })
+  .then(() => {
+    document.getElementById('feedbackForm').style.display = 'none';
+    document.getElementById('feedbackThanks').style.display = 'block';
+    setTimeout(closeFeedback, 2500);
+  })
+  .catch(() => {
+    alert('Något gick fel. Försök igen.');
+    btn.textContent = 'Skicka feedback';
+    btn.disabled = false;
+  });
+}
+document.getElementById('feedbackModal').addEventListener('click', function(e) {
+  if(e.target === this) closeFeedback();
+});
+
+// ═══ LANGUAGE ═══
+function toggleLang() {
+  currentLang = currentLang === 'sv' ? 'en' : 'sv';
+  document.getElementById('langBtn').textContent = currentLang === 'sv' ? '🌐 EN' : '🌐 SV';
+  showTip();
+  // Note: Full i18n would need more implementation
+}
+
+// ═══ UP BUTTON ═══
+const upBtn = document.getElementById('upBtn');
+window.addEventListener('scroll', function() {
+  upBtn.style.display = window.scrollY > 400 ? 'grid' : 'none';
+}, {passive: true});
+
+// ═══ SERVICE WORKER ═══
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(() => {});
 }
 </script>
 

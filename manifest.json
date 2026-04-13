@@ -1,11 +1,12 @@
 {
-  "name": "StödGuiden – Örebro",
+  "name": "StödGuiden",
   "short_name": "StödGuiden",
-  "description": "Allt du behöver veta om jobb, ekonomi, hälsa och boende — samlat och enkelt.",
+  "description": "Hitta rätt enkelt och snabbt. Jobb, ekonomi, hälsa, boende och mycket mer.",
   "start_url": "/st-dguiden/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#10b981",
+  "background_color": "#0c1e19",
+  "theme_color": "#0c1e19",
+  "orientation": "portrait-primary",
   "icons": [
     {
       "src": "icon.svg",
@@ -13,5 +14,8 @@
       "type": "image/svg+xml",
       "purpose": "any maskable"
     }
-  ]
+  ],
+  "categories": ["lifestyle", "utilities", "education"],
+  "lang": "sv",
+  "dir": "ltr"
 }
