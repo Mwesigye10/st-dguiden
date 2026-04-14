@@ -62,26 +62,37 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
 .lang-btn{background:rgba(255,255,255,0.05);border:1px solid var(--border2);color:var(--muted);padding:7px 10px;border-radius:50px;font-size:11px;font-weight:600;cursor:pointer}
 .lang-btn:hover{background:rgba(45,122,95,0.15);color:var(--accent);border-color:var(--border)}
 
-/* ── CITY SELECTOR ── */
-.city-selector{position:relative}
-.city-btn{background:linear-gradient(135deg,var(--green),var(--green2));border:1px solid var(--border);color:var(--text);padding:7px 12px;border-radius:50px;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px}
-.city-btn::after{content:"▼";font-size:8px;opacity:0.7}
-.city-dropdown{position:absolute;top:100%;right:0;margin-top:8px;background:var(--panel);border:1px solid var(--border);border-radius:14px;min-width:180px;display:none;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.4);z-index:100}
-.city-dropdown.open{display:block}
-.city-option{padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:13px;border-bottom:1px solid var(--border2);transition:background 0.2s}
-.city-option:last-child{border-bottom:none}
-.city-option:hover{background:rgba(45,122,95,0.15)}
-.city-option.active{background:rgba(45,122,95,0.2);color:var(--accent)}
-.city-option .city-check{opacity:0;color:var(--accent)}
-.city-option.active .city-check{opacity:1}
+/* ── CITY & CATEGORY SELECTORS ── */
+.menu-selector{position:relative}
+.city-btn{background:linear-gradient(135deg,var(--green),var(--green2));border:1px solid var(--border);color:var(--text);padding:6px 10px;border-radius:50px;font-size:11px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:4px}
+.city-btn::before{content:"📍";font-size:10px}
+.city-btn::after{content:"▼";font-size:7px;opacity:0.7}
+.cat-menu-btn{background:rgba(255,255,255,0.08);border:1px solid var(--border2);color:var(--text);padding:6px 10px;border-radius:50px;font-size:11px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px}
+.cat-menu-btn:hover{background:rgba(45,122,95,0.15);border-color:var(--border)}
+.cat-menu-btn::after{content:"▼";font-size:7px;opacity:0.7}
+.menu-dropdown{position:absolute;top:100%;right:0;margin-top:8px;background:var(--panel);border:1px solid var(--border);border-radius:14px;min-width:200px;max-height:70vh;overflow-y:auto;display:none;box-shadow:0 8px 32px rgba(0,0,0,0.4);z-index:100}
+.menu-dropdown.open{display:block}
+.menu-dropdown::-webkit-scrollbar{width:6px}
+.menu-dropdown::-webkit-scrollbar-track{background:transparent}
+.menu-dropdown::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+.menu-option{padding:11px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:13px;border-bottom:1px solid var(--border2);transition:background 0.2s}
+.menu-option:last-child{border-bottom:none}
+.menu-option:hover{background:rgba(45,122,95,0.15)}
+.menu-option.active{background:rgba(45,122,95,0.2);color:var(--accent)}
+.menu-option .menu-check{opacity:0;color:var(--accent);margin-left:auto;font-size:12px}
+.menu-option.active .menu-check{opacity:1}
+.menu-option .menu-icon{font-size:16px;width:24px;text-align:center}
 
 /* ── WRAP ── */
 .wrap{max-width:600px;margin:0 auto;padding:0 16px}
 
 /* ── HERO ── */
 .hero{padding:22px 0 16px}
-.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(45,122,95,0.15);border:1px solid rgba(45,122,95,0.3);color:var(--accent);font-size:11px;font-weight:600;padding:5px 12px;border-radius:50px;margin-bottom:14px;letter-spacing:0.4px}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(45,122,95,0.15);border:1px solid rgba(45,122,95,0.3);color:var(--accent);font-size:11px;font-weight:600;padding:5px 12px;border-radius:50px;letter-spacing:0.4px}
 .hero-tag::before{content:"";width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite}
+.hero-tag-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.feedback-tag-btn{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,0.05);border:1px solid var(--border2);color:var(--muted);font-size:11px;font-weight:600;padding:5px 12px;border-radius:50px;cursor:pointer;transition:all 0.2s}
+.feedback-tag-btn:hover{background:rgba(45,122,95,0.15);border-color:var(--border);color:var(--accent)}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
 .hero h1{font-size:28px;font-weight:800;line-height:1.15;margin-bottom:10px}
 .hero h1 em{font-style:normal;color:var(--accent)}
@@ -249,9 +260,94 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
 .toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--panel);border:1px solid var(--gold);border-radius:50px;padding:12px 20px;display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--gold);z-index:200;opacity:0;transition:all 0.3s;box-shadow:0 4px 20px rgba(0,0,0,0.3)}
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 .toast-icon{font-size:16px}
+
+/* ── TOOLS GRID ── */
+.tools-section{margin:20px 0}
+.tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tool-card{background:var(--panel);border:1px solid var(--border2);border-radius:14px;padding:14px;cursor:pointer;transition:all 0.2s;text-align:center}
+.tool-card:hover{border-color:var(--border);background:var(--panel2)}
+.tool-card .tool-icon{font-size:28px;margin-bottom:8px}
+.tool-card .tool-name{font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px}
+.tool-card .tool-desc{font-size:10px;color:var(--muted2);line-height:1.4}
+.tool-card.highlight{background:linear-gradient(135deg,rgba(45,122,95,0.15),rgba(30,92,69,0.1));border-color:rgba(45,122,95,0.3)}
+
+/* ── TOOL MODAL ── */
+.tool-modal{position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:600;display:none;place-items:center;padding:16px;overflow-y:auto}
+.tool-modal.open{display:grid}
+.tool-sheet{background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:20px;width:100%;max-width:440px;max-height:90vh;overflow-y:auto}
+.tool-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--border2)}
+.tool-header h3{font-size:18px;font-weight:800;display:flex;align-items:center;gap:10px}
+.tool-close{background:none;border:none;color:var(--muted);font-size:24px;cursor:pointer;line-height:1}
+
+/* ── BUDGET CALCULATOR ── */
+.budget-intro{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:18px;padding:12px;background:rgba(45,122,95,0.1);border-radius:10px}
+.budget-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border2)}
+.budget-row:last-child{border-bottom:none}
+.budget-label{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600}
+.budget-label span{font-size:18px}
+.budget-input{display:flex;align-items:center;gap:8px}
+.budget-input input{width:90px;background:rgba(255,255,255,0.05);border:1px solid var(--border2);border-radius:8px;color:var(--text);padding:8px 10px;font-size:14px;text-align:right;font-family:inherit}
+.budget-input input:focus{border-color:var(--green);outline:none}
+.budget-unit{font-size:12px;color:var(--muted2);width:30px}
+.budget-result{margin-top:18px;padding:16px;background:linear-gradient(135deg,var(--green),var(--green2));border-radius:14px;text-align:center}
+.budget-total-label{font-size:12px;color:rgba(255,255,255,0.7);margin-bottom:4px}
+.budget-total{font-size:28px;font-weight:800;color:var(--text)}
+.budget-tip{margin-top:14px;font-size:12px;color:var(--muted);line-height:1.6;padding:12px;background:rgba(255,255,255,0.03);border-radius:10px}
+.budget-tip strong{color:var(--gold);display:block;margin-bottom:4px}
+
+/* ── CHECKLIST ── */
+.checklist-intro{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px}
+.checklist-progress{margin-bottom:16px}
+.checklist-progress-bar{height:8px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden}
+.checklist-progress-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--accent));transition:width 0.3s;border-radius:4px}
+.checklist-progress-text{font-size:12px;color:var(--muted);margin-top:6px;text-align:right}
+.checklist-group{margin-bottom:16px}
+.checklist-group-title{font-size:12px;font-weight:700;color:var(--muted2);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.checklist-item{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--border2)}
+.checklist-item:last-child{border-bottom:none}
+.checklist-item input[type="checkbox"]{width:20px;height:20px;min-width:20px;accent-color:var(--green);cursor:pointer;margin-top:2px}
+.checklist-item label{font-size:14px;color:var(--text);cursor:pointer;line-height:1.5}
+.checklist-item.done label{color:var(--muted2);text-decoration:line-through}
+.checklist-item .cl-tip{font-size:11px;color:var(--muted2);margin-top:3px;display:block}
+.checklist-reset{margin-top:14px;text-align:center}
+.checklist-reset button{background:rgba(255,255,255,0.05);border:1px solid var(--border2);color:var(--muted);padding:8px 16px;border-radius:8px;font-size:12px;cursor:pointer}
+.checklist-reset button:hover{background:rgba(122,24,24,0.15);border-color:var(--red);color:#ff9999}
+
+/* ── SOS CARD ── */
+.sos-section{margin:16px 0}
+.sos-card{background:linear-gradient(135deg,rgba(122,24,24,0.2),rgba(94,16,16,0.15));border:1px solid rgba(122,24,24,0.4);border-radius:14px;padding:14px 16px}
+.sos-title{font-size:14px;font-weight:700;color:#ff9999;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.sos-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sos-btn{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:10px;text-align:center;text-decoration:none;transition:all 0.2s}
+.sos-btn:hover{background:rgba(255,255,255,0.1);text-decoration:none}
+.sos-btn .sos-num{font-size:16px;font-weight:800;color:#ff9999;display:block}
+.sos-btn .sos-name{font-size:10px;color:var(--muted);margin-top:2px;display:block}
+.sos-local{margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.1)}
+.sos-local-title{font-size:11px;color:var(--muted2);margin-bottom:8px}
+.sos-local-btn{display:block;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:10px 12px;text-decoration:none;transition:all 0.2s}
+.sos-local-btn:hover{background:rgba(255,255,255,0.06);text-decoration:none}
+.sos-local-name{font-size:13px;font-weight:600;color:var(--text)}
+.sos-local-desc{font-size:11px;color:var(--muted2);margin-top:2px}
+
+/* ── DEADLINES ── */
+.deadlines-section{margin:16px 0}
+.deadline-card{background:linear-gradient(135deg,rgba(240,198,116,0.1),rgba(212,168,75,0.05));border:1px solid rgba(240,198,116,0.25);border-radius:14px;padding:14px 16px}
+.deadline-title{font-size:14px;font-weight:700;color:var(--gold);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.deadline-list{display:flex;flex-direction:column;gap:8px}
+.deadline-item{display:flex;align-items:center;gap:12px;padding:8px 10px;background:rgba(255,255,255,0.03);border-radius:10px}
+.deadline-age{background:var(--gold);color:#1a1a1a;font-size:11px;font-weight:800;padding:4px 8px;border-radius:6px;white-space:nowrap}
+.deadline-text{font-size:13px;color:var(--text);line-height:1.4}
+.deadline-text a{color:var(--accent)}
+
+/* ── OFFLINE INDICATOR ── */
+.offline-banner{display:none;background:linear-gradient(90deg,#5c4a20,#4a3d18);padding:8px 16px;text-align:center;font-size:12px;color:#f0c674}
+.offline-banner.show{display:block}
 </style>
 </head>
 <body>
+
+<!-- OFFLINE BANNER -->
+<div class="offline-banner" id="offlineBanner">📴 Du är offline – vissa funktioner kanske inte fungerar</div>
 
 <!-- ONBOARDING -->
 <div id="onboarding">
@@ -274,24 +370,43 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
     <div><div class="brand-name">StödGuiden</div><div class="brand-tagline" id="cityTagline">Örebro</div></div>
   </div>
   <div class="hdr-right">
-    <div class="city-selector">
-      <button class="city-btn" id="cityBtn" onclick="toggleCityDropdown()">
+    <div class="menu-selector">
+      <button class="city-btn" id="cityBtn" onclick="toggleMenu('city')">
         <span id="cityBtnText">Örebro</span>
       </button>
-      <div class="city-dropdown" id="cityDropdown">
-        <div class="city-option active" data-city="orebro" onclick="selectCity('orebro')"><span>📍</span> Örebro <span class="city-check">✓</span></div>
-        <div class="city-option" data-city="stockholm" onclick="selectCity('stockholm')"><span>📍</span> Stockholm <span class="city-check">✓</span></div>
-        <div class="city-option" data-city="goteborg" onclick="selectCity('goteborg')"><span>📍</span> Göteborg <span class="city-check">✓</span></div>
-        <div class="city-option" data-city="malmo" onclick="selectCity('malmo')"><span>📍</span> Malmö <span class="city-check">✓</span></div>
-        <div class="city-option" data-city="uppsala" onclick="selectCity('uppsala')"><span>📍</span> Uppsala <span class="city-check">✓</span></div>
-        <div class="city-option" data-city="vasteras" onclick="selectCity('vasteras')"><span>📍</span> Västerås <span class="city-check">✓</span></div>
-        <div class="city-option" data-city="linkoping" onclick="selectCity('linkoping')"><span>📍</span> Linköping <span class="city-check">✓</span></div>
-        <div class="city-option" data-city="norrkoping" onclick="selectCity('norrkoping')"><span>📍</span> Norrköping <span class="city-check">✓</span></div>
-        <div class="city-option" data-city="jonkoping" onclick="selectCity('jonkoping')"><span>📍</span> Jönköping <span class="city-check">✓</span></div>
-        <div class="city-option" data-city="eskilstuna" onclick="selectCity('eskilstuna')"><span>📍</span> Eskilstuna <span class="city-check">✓</span></div>
+      <div class="menu-dropdown" id="cityDropdown">
+        <div class="menu-option active" data-city="orebro" onclick="selectCity('orebro')"><span class="menu-icon">📍</span> Örebro <span class="menu-check">✓</span></div>
+        <div class="menu-option" data-city="stockholm" onclick="selectCity('stockholm')"><span class="menu-icon">📍</span> Stockholm <span class="menu-check">✓</span></div>
+        <div class="menu-option" data-city="goteborg" onclick="selectCity('goteborg')"><span class="menu-icon">📍</span> Göteborg <span class="menu-check">✓</span></div>
+        <div class="menu-option" data-city="malmo" onclick="selectCity('malmo')"><span class="menu-icon">📍</span> Malmö <span class="menu-check">✓</span></div>
+        <div class="menu-option" data-city="uppsala" onclick="selectCity('uppsala')"><span class="menu-icon">📍</span> Uppsala <span class="menu-check">✓</span></div>
+        <div class="menu-option" data-city="vasteras" onclick="selectCity('vasteras')"><span class="menu-icon">📍</span> Västerås <span class="menu-check">✓</span></div>
+        <div class="menu-option" data-city="linkoping" onclick="selectCity('linkoping')"><span class="menu-icon">📍</span> Linköping <span class="menu-check">✓</span></div>
+        <div class="menu-option" data-city="norrkoping" onclick="selectCity('norrkoping')"><span class="menu-icon">📍</span> Norrköping <span class="menu-check">✓</span></div>
+        <div class="menu-option" data-city="jonkoping" onclick="selectCity('jonkoping')"><span class="menu-icon">📍</span> Jönköping <span class="menu-check">✓</span></div>
+        <div class="menu-option" data-city="eskilstuna" onclick="selectCity('eskilstuna')"><span class="menu-icon">📍</span> Eskilstuna <span class="menu-check">✓</span></div>
       </div>
     </div>
-    <button class="feedback-btn" onclick="openFeedback()" id="feedbackBtnText">💬 Feedback</button>
+    <div class="menu-selector">
+      <button class="cat-menu-btn" id="catMenuBtn" onclick="toggleMenu('cat')">
+        <span>☰</span> <span id="catMenuText">Kategorier</span>
+      </button>
+      <div class="menu-dropdown" id="catDropdown">
+        <div class="menu-option" onclick="openCatFromMenu('halsa')"><span class="menu-icon">🧠</span> <span data-cat="halsa">Hälsa & vård</span></div>
+        <div class="menu-option" onclick="openCatFromMenu('ekonomi')"><span class="menu-icon">💸</span> <span data-cat="ekonomi">Ekonomi</span></div>
+        <div class="menu-option" onclick="openCatFromMenu('jobb')"><span class="menu-icon">💼</span> <span data-cat="jobb">Jobb & karriär</span></div>
+        <div class="menu-option" onclick="openCatFromMenu('boende')"><span class="menu-icon">🏡</span> <span data-cat="boende">Boende</span></div>
+        <div class="menu-option" onclick="openCatFromMenu('studier')"><span class="menu-icon">🎓</span> <span data-cat="studier">Studier</span></div>
+        <div class="menu-option" onclick="openCatFromMenu('bank')"><span class="menu-icon">💳</span> <span data-cat="bank">Bank & betalningar</span></div>
+        <div class="menu-option" onclick="openCatFromMenu('digital')"><span class="menu-icon">📱</span> <span data-cat="digital">Digital vardag</span></div>
+        <div class="menu-option" onclick="openCatFromMenu('vardag')"><span class="menu-icon">🧺</span> <span data-cat="vardag">Vardag & hemtips</span></div>
+        <div class="menu-option" onclick="openCatFromMenu('kontakt')"><span class="menu-icon">🤝</span> <span data-cat="kontakt">Kontaktperson</span></div>
+        <div class="menu-option" onclick="openCatFromMenu('aktiviteter')"><span class="menu-icon">🌟</span> <span data-cat="aktiviteter">Aktiviteter</span></div>
+        <div class="menu-option" onclick="openCatFromMenu('transport')"><span class="menu-icon">🚌</span> <span data-cat="transport">Transport</span></div>
+        <div class="menu-option" onclick="openCatFromMenu('rattigheter')"><span class="menu-icon">⚖️</span> <span data-cat="rattigheter">Rättigheter</span></div>
+        <div class="menu-option" onclick="openCatFromMenu('nummer')"><span class="menu-icon">☎️</span> <span data-cat="nummer">Viktiga nummer</span></div>
+      </div>
+    </div>
     <button class="lang-btn" id="langBtn" onclick="toggleLang()">🌐 EN</button>
   </div>
 </header>
@@ -299,7 +414,10 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
 <!-- HOME VIEW -->
 <div class="wrap" id="homeView">
   <div class="hero">
-    <div class="hero-tag" id="heroTag">Alltid anonymt & gratis</div>
+    <div class="hero-tag-row">
+      <div class="hero-tag" id="heroTag">Alltid anonymt & gratis</div>
+      <button class="feedback-tag-btn" onclick="openFeedback()">💬 <span id="feedbackBtnText">Feedback</span></button>
+    </div>
     <h1 id="heroH1">Koll på läget<br/>— <em>direkt</em></h1>
     <p class="hero-sub" id="heroSub">Jobb, ekonomi, hälsa, boende och mycket mer — samlat på ett ställe. Enkelt, tryggt och alltid tillgängligt.</p>
     <div class="hero-trust">
@@ -347,11 +465,67 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
     <div class="tip-tx"><strong id="tipTitle">Visste du?</strong> <span id="tipText"></span></div>
   </div>
 
+  <!-- TOOLS SECTION -->
+  <div class="tools-section">
+    <div class="section-header">
+      <span class="section-title" id="toolsTitle">🛠️ Verktyg</span>
+    </div>
+    <div class="tools-grid">
+      <div class="tool-card highlight" onclick="openBudget()">
+        <div class="tool-icon">🧮</div>
+        <div class="tool-name" id="toolBudgetName">Budgetkalkylator</div>
+        <div class="tool-desc" id="toolBudgetDesc">Vad kostar det att flytta hemifrån?</div>
+      </div>
+      <div class="tool-card" onclick="openChecklist()">
+        <div class="tool-icon">📋</div>
+        <div class="tool-name" id="toolChecklistName">Checklista</div>
+        <div class="tool-desc" id="toolChecklistDesc">Första lägenheten</div>
+      </div>
+      <div class="tool-card" onclick="openCat('nummer')">
+        <div class="tool-icon">📞</div>
+        <div class="tool-name" id="toolNummerName">Viktiga nummer</div>
+        <div class="tool-desc" id="toolNummerDesc">Spara offline</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEADLINES SECTION -->
+  <div class="deadlines-section" id="deadlinesSection">
+    <div class="deadline-card">
+      <div class="deadline-title">📅 <span id="deadlinesTitle">Viktiga åldersgränser</span></div>
+      <div class="deadline-list" id="deadlinesList">
+        <div class="deadline-item"><span class="deadline-age">16 år</span><div class="deadline-text" id="dl16">Ställ dig i bostadskö! Det är gratis.</div></div>
+        <div class="deadline-item"><span class="deadline-age">18 år</span><div class="deadline-text" id="dl18">Skaffa BankID och eget bankkonto.</div></div>
+        <div class="deadline-item"><span class="deadline-age">20 år</span><div class="deadline-text" id="dl20">CSN-studielån & bostadsbidrag.</div></div>
+      </div>
+    </div>
+  </div>
+
   <!-- CATEGORIES -->
   <div class="section-header">
     <span class="section-title" id="catTitle">Kategorier</span>
   </div>
   <div class="cat-grid" id="catGrid"></div>
+
+  <!-- SOS SECTION (placeret nederst for at appen ikke fremstår som en nødapp) -->
+  <div class="sos-section" id="sosSection">
+    <div class="sos-card">
+      <div class="sos-title">🚨 <span id="sosTitle">Akuta nummer</span></div>
+      <div class="sos-grid">
+        <a href="tel:112" class="sos-btn"><span class="sos-num">112</span><span class="sos-name" id="sosEmergency">Nödsamtal</span></a>
+        <a href="tel:1177" class="sos-btn"><span class="sos-num">1177</span><span class="sos-name" id="sosHealth">Sjukvårdsrådgivning</span></a>
+        <a href="tel:116111" class="sos-btn"><span class="sos-num">116 111</span><span class="sos-name">BRIS (under 18)</span></a>
+        <a href="tel:90101" class="sos-btn"><span class="sos-num">90 101</span><span class="sos-name" id="sosMind">Självmordslinjen</span></a>
+      </div>
+      <div class="sos-local" id="sosLocalSection">
+        <div class="sos-local-title" id="sosLocalTitle">📍 Lokalt i <span id="sosLocalCity">Örebro</span></div>
+        <a href="#" class="sos-local-btn" id="sosLocalBtn" target="_blank" rel="noopener">
+          <div class="sos-local-name" id="sosLocalName">Socialjour Örebro</div>
+          <div class="sos-local-desc" id="sosLocalDesc">Akut hjälp dygnet runt</div>
+        </a>
+      </div>
+    </div>
+  </div>
 
   <!-- SUPPORT SECTION -->
   <div class="support-section">
@@ -417,6 +591,113 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
   </div>
 </div>
 
+<!-- BUDGET MODAL -->
+<div class="tool-modal" id="budgetModal">
+  <div class="tool-sheet">
+    <div class="tool-header">
+      <h3>🧮 <span id="budgetTitle">Budgetkalkylator</span></h3>
+      <button class="tool-close" onclick="closeBudget()">×</button>
+    </div>
+    <div class="budget-intro" id="budgetIntro">Beräkna vad det kostar att bo själv. Siffrorna är genomsnitt för Sverige – justera efter din stad.</div>
+    <div class="budget-rows">
+      <div class="budget-row">
+        <div class="budget-label"><span>🏠</span> <span id="budgetRent">Hyra</span></div>
+        <div class="budget-input"><input type="number" id="bHyra" value="6000" oninput="calcBudget()"/><span class="budget-unit">kr</span></div>
+      </div>
+      <div class="budget-row">
+        <div class="budget-label"><span>⚡</span> <span id="budgetEl">El</span></div>
+        <div class="budget-input"><input type="number" id="bEl" value="300" oninput="calcBudget()"/><span class="budget-unit">kr</span></div>
+      </div>
+      <div class="budget-row">
+        <div class="budget-label"><span>📱</span> <span id="budgetPhone">Mobil & internet</span></div>
+        <div class="budget-input"><input type="number" id="bMobil" value="350" oninput="calcBudget()"/><span class="budget-unit">kr</span></div>
+      </div>
+      <div class="budget-row">
+        <div class="budget-label"><span>🛒</span> <span id="budgetFood">Mat</span></div>
+        <div class="budget-input"><input type="number" id="bMat" value="3500" oninput="calcBudget()"/><span class="budget-unit">kr</span></div>
+      </div>
+      <div class="budget-row">
+        <div class="budget-label"><span>🚌</span> <span id="budgetTransport">Kollektivtrafik</span></div>
+        <div class="budget-input"><input type="number" id="bTransport" value="950" oninput="calcBudget()"/><span class="budget-unit">kr</span></div>
+      </div>
+      <div class="budget-row">
+        <div class="budget-label"><span>🔒</span> <span id="budgetInsurance">Hemförsäkring</span></div>
+        <div class="budget-input"><input type="number" id="bForsakring" value="150" oninput="calcBudget()"/><span class="budget-unit">kr</span></div>
+      </div>
+      <div class="budget-row">
+        <div class="budget-label"><span>🧴</span> <span id="budgetHygiene">Hygien & hushåll</span></div>
+        <div class="budget-input"><input type="number" id="bHygien" value="400" oninput="calcBudget()"/><span class="budget-unit">kr</span></div>
+      </div>
+      <div class="budget-row">
+        <div class="budget-label"><span>👕</span> <span id="budgetClothes">Kläder</span></div>
+        <div class="budget-input"><input type="number" id="bKlader" value="500" oninput="calcBudget()"/><span class="budget-unit">kr</span></div>
+      </div>
+      <div class="budget-row">
+        <div class="budget-label"><span>🎉</span> <span id="budgetFun">Fritid & nöje</span></div>
+        <div class="budget-input"><input type="number" id="bFritid" value="800" oninput="calcBudget()"/><span class="budget-unit">kr</span></div>
+      </div>
+    </div>
+    <div class="budget-result">
+      <div class="budget-total-label" id="budgetTotalLabel">Total per månad</div>
+      <div class="budget-total" id="budgetTotal">12 950 kr</div>
+    </div>
+    <div class="budget-tip">
+      <strong id="budgetTipTitle">💡 Tips</strong>
+      <span id="budgetTipText">Studenter kan söka bostadsbidrag via Försäkringskassan. CSN-lånet är ca 12 500 kr/mån (2024).</span>
+    </div>
+  </div>
+</div>
+
+<!-- CHECKLIST MODAL -->
+<div class="tool-modal" id="checklistModal">
+  <div class="tool-sheet">
+    <div class="tool-header">
+      <h3>📋 <span id="checklistTitle">Checklista – Första lägenheten</span></h3>
+      <button class="tool-close" onclick="closeChecklist()">×</button>
+    </div>
+    <div class="checklist-intro" id="checklistIntro">Bocka av när du är klar. Din progress sparas automatiskt på din enhet.</div>
+    <div class="checklist-progress">
+      <div class="checklist-progress-bar"><div class="checklist-progress-fill" id="clProgressFill" style="width:0%"></div></div>
+      <div class="checklist-progress-text"><span id="clProgressText">0 av 15 klara</span></div>
+    </div>
+    
+    <div class="checklist-group">
+      <div class="checklist-group-title">🆔 <span id="clGroupId">Identitet & bank</span></div>
+      <div class="checklist-item" data-id="bankid"><input type="checkbox" id="cl-bankid" onchange="updateChecklist()"/><label for="cl-bankid">Skaffa BankID<span class="cl-tip" id="clTipBankid">Via din bank – gratis</span></label></div>
+      <div class="checklist-item" data-id="swish"><input type="checkbox" id="cl-swish" onchange="updateChecklist()"/><label for="cl-swish">Aktivera Swish<span class="cl-tip" id="clTipSwish">I din banks app</span></label></div>
+      <div class="checklist-item" data-id="idkort"><input type="checkbox" id="cl-idkort" onchange="updateChecklist()"/><label for="cl-idkort">Beställ ID-kort<span class="cl-tip" id="clTipIdkort">Skatteverket, 400 kr</span></label></div>
+    </div>
+    
+    <div class="checklist-group">
+      <div class="checklist-group-title">🏠 <span id="clGroupHome">Boende</span></div>
+      <div class="checklist-item" data-id="bostadsko"><input type="checkbox" id="cl-bostadsko" onchange="updateChecklist()"/><label for="cl-bostadsko">Ställ dig i bostadskö<span class="cl-tip" id="clTipBostadsko">Gratis från 16 år</span></label></div>
+      <div class="checklist-item" data-id="hyreskontrakt"><input type="checkbox" id="cl-hyreskontrakt" onchange="updateChecklist()"/><label for="cl-hyreskontrakt">Läs igenom hyreskontraktet<span class="cl-tip" id="clTipHyreskontrakt">Fråga om du inte förstår</span></label></div>
+      <div class="checklist-item" data-id="hemforsakring"><input type="checkbox" id="cl-hemforsakring" onchange="updateChecklist()"/><label for="cl-hemforsakring">Teckna hemförsäkring<span class="cl-tip" id="clTipHemforsakring">Ca 100–200 kr/mån</span></label></div>
+      <div class="checklist-item" data-id="elavtal"><input type="checkbox" id="cl-elavtal" onchange="updateChecklist()"/><label for="cl-elavtal">Teckna elavtal<span class="cl-tip" id="clTipElavtal">Jämför på Elpriskollen.se</span></label></div>
+      <div class="checklist-item" data-id="adress"><input type="checkbox" id="cl-adress" onchange="updateChecklist()"/><label for="cl-adress">Anmäl ny adress<span class="cl-tip" id="clTipAdress">Skatteverket – viktigt!</span></label></div>
+    </div>
+    
+    <div class="checklist-group">
+      <div class="checklist-group-title">💰 <span id="clGroupMoney">Ekonomi</span></div>
+      <div class="checklist-item" data-id="budget"><input type="checkbox" id="cl-budget" onchange="updateChecklist()"/><label for="cl-budget">Gör en månadsbudget<span class="cl-tip" id="clTipBudget">Använd kalkylatorn ovan!</span></label></div>
+      <div class="checklist-item" data-id="autogiro"><input type="checkbox" id="cl-autogiro" onchange="updateChecklist()"/><label for="cl-autogiro">Sätt upp autogiro för hyra<span class="cl-tip" id="clTipAutogiro">Så du aldrig missar</span></label></div>
+      <div class="checklist-item" data-id="bostadsbidrag"><input type="checkbox" id="cl-bostadsbidrag" onchange="updateChecklist()"/><label for="cl-bostadsbidrag">Kolla om du kan få bostadsbidrag<span class="cl-tip" id="clTipBostadsbidrag">Försäkringskassan</span></label></div>
+    </div>
+    
+    <div class="checklist-group">
+      <div class="checklist-group-title">🏃 <span id="clGroupPractical">Praktiskt</span></div>
+      <div class="checklist-item" data-id="nyckel"><input type="checkbox" id="cl-nyckel" onchange="updateChecklist()"/><label for="cl-nyckel">Hämta nycklar<span class="cl-tip" id="clTipNyckel">Ta en extranyckel!</span></label></div>
+      <div class="checklist-item" data-id="internet"><input type="checkbox" id="cl-internet" onchange="updateChecklist()"/><label for="cl-internet">Beställ bredband<span class="cl-tip" id="clTipInternet">Jämför priser</span></label></div>
+      <div class="checklist-item" data-id="eftersand"><input type="checkbox" id="cl-eftersand" onchange="updateChecklist()"/><label for="cl-eftersand">Eftersändning av post<span class="cl-tip" id="clTipEftersand">Postnord, 6 mån gratis</span></label></div>
+      <div class="checklist-item" data-id="grannar"><input type="checkbox" id="cl-grannar" onchange="updateChecklist()"/><label for="cl-grannar">Hälsa på grannarna<span class="cl-tip" id="clTipGrannar">Gör det enklare sen!</span></label></div>
+    </div>
+    
+    <div class="checklist-reset">
+      <button onclick="resetChecklist()" id="clResetBtn">🗑️ Rensa alla</button>
+    </div>
+  </div>
+</div>
+
 <!-- AKUT BAR -->
 <div class="akut-bar">
   <a class="akut-left" href="tel:112" id="akutLeft">🚨 Akut? Ring 112</a>
@@ -454,6 +735,7 @@ const T = {
     searchNoResult: '😕 Inget hittades — prova ett annat ord',
     // Sections
     quickTitle: 'Snabblänkar', favTitle: 'Mina favoriter', catTitle: 'Kategorier', tipTitle: 'Visste du?',
+    catMenuText: 'Kategorier',
     // Support
     supportTitle: '💚 Stöd projektet',
     supportText: 'StödGuiden är helt gratis och utan reklam. Om appen har hjälpt dig och du vill bidra till att den fortsätter utvecklas, kan du swisha valfritt belopp.',
@@ -461,7 +743,7 @@ const T = {
     supportNote: 'Tack för att du stöttar fri och öppen samhällsinfo! 💚',
     // Buttons
     backBtn: '← Tillbaka till startsidan',
-    feedbackBtnText: '💬 Feedback',
+    feedbackBtnText: 'Feedback',
     infoPopupLinkText: 'Öppna länk ↗',
     // Feedback
     fbModalTitle: 'Skicka feedback',
@@ -489,7 +771,32 @@ const T = {
     catAktiviteter: 'Aktiviteter', catAktiviteterDesc: 'Fritid, föreningar, sport',
     catTransport: 'Transport', catTransportDesc: 'Buss, tåg, kollektivtrafik',
     catRattigheter: 'Rättigheter', catRattigheterDesc: 'Dina rättigheter, diskriminering',
-    catNummer: 'Viktiga nummer', catNummerDesc: 'Akut, vård, myndigheter'
+    catNummer: 'Viktiga nummer', catNummerDesc: 'Akut, vård, myndigheter',
+    // Tools
+    toolsTitle: '🛠️ Verktyg',
+    toolBudgetName: 'Budgetkalkylator', toolBudgetDesc: 'Vad kostar det att flytta hemifrån?',
+    toolChecklistName: 'Checklista', toolChecklistDesc: 'Första lägenheten',
+    toolNummerName: 'Viktiga nummer', toolNummerDesc: 'Spara offline',
+    toolBibliotekName: 'Bibliotek & WiFi', toolBibliotekDesc: 'Gratis internet',
+    // SOS
+    sosTitle: 'Akuta nummer', sosEmergency: 'Nödsamtal', sosHealth: 'Sjukvårdsrådgivning', sosMind: 'Självmordslinjen',
+    sosLocalTitle: '📍 Lokalt i', sosLocalDesc: 'Akut hjälp dygnet runt',
+    // Deadlines
+    deadlinesTitle: 'Viktiga åldersgränser',
+    dl16: 'Ställ dig i bostadskö! Det är gratis.',
+    dl18: 'Skaffa BankID och eget bankkonto.',
+    dl20: 'CSN-studielån & bostadsbidrag.',
+    // Budget
+    budgetTitle: 'Budgetkalkylator', budgetIntro: 'Beräkna vad det kostar att bo själv. Siffrorna är genomsnitt för Sverige – justera efter din stad.',
+    budgetRent: 'Hyra', budgetEl: 'El', budgetPhone: 'Mobil & internet', budgetFood: 'Mat',
+    budgetTransport: 'Kollektivtrafik', budgetInsurance: 'Hemförsäkring', budgetHygiene: 'Hygien & hushåll',
+    budgetClothes: 'Kläder', budgetFun: 'Fritid & nöje', budgetTotalLabel: 'Total per månad',
+    budgetTipTitle: '💡 Tips', budgetTipText: 'Studenter kan söka bostadsbidrag via Försäkringskassan. CSN-lånet är ca 12 500 kr/mån.',
+    // Checklist
+    checklistTitle: 'Checklista – Första lägenheten', checklistIntro: 'Bocka av när du är klar. Din progress sparas automatiskt på din enhet.',
+    clProgressOf: 'av', clProgressDone: 'klara',
+    clGroupId: 'Identitet & bank', clGroupHome: 'Boende', clGroupMoney: 'Ekonomi', clGroupPractical: 'Praktiskt',
+    clResetBtn: '🗑️ Rensa alla'
   },
   en: {
     // Onboarding
@@ -511,6 +818,7 @@ const T = {
     searchNoResult: '😕 Nothing found — try another word',
     // Sections
     quickTitle: 'Quick links', favTitle: 'My favorites', catTitle: 'Categories', tipTitle: 'Did you know?',
+    catMenuText: 'Categories',
     // Support
     supportTitle: '💚 Support the project',
     supportText: 'StödGuiden is completely free and ad-free. If the app has helped you and you want to contribute to its development, you can Swish any amount.',
@@ -518,7 +826,7 @@ const T = {
     supportNote: 'Thank you for supporting free and open civic information! 💚',
     // Buttons
     backBtn: '← Back to start',
-    feedbackBtnText: '💬 Feedback',
+    feedbackBtnText: 'Feedback',
     infoPopupLinkText: 'Open link ↗',
     // Feedback
     fbModalTitle: 'Send feedback',
@@ -546,7 +854,32 @@ const T = {
     catAktiviteter: 'Activities', catAktiviteterDesc: 'Leisure, clubs, sports',
     catTransport: 'Transport', catTransportDesc: 'Bus, train, public transit',
     catRattigheter: 'Your rights', catRattigheterDesc: 'Rights, discrimination',
-    catNummer: 'Important numbers', catNummerDesc: 'Emergency, health, authorities'
+    catNummer: 'Important numbers', catNummerDesc: 'Emergency, health, authorities',
+    // Tools
+    toolsTitle: '🛠️ Tools',
+    toolBudgetName: 'Budget Calculator', toolBudgetDesc: 'What does moving out cost?',
+    toolChecklistName: 'Checklist', toolChecklistDesc: 'First apartment',
+    toolNummerName: 'Emergency numbers', toolNummerDesc: 'Save offline',
+    toolBibliotekName: 'Library & WiFi', toolBibliotekDesc: 'Free internet',
+    // SOS
+    sosTitle: 'Emergency numbers', sosEmergency: 'Emergency', sosHealth: 'Health advice', sosMind: 'Suicide helpline',
+    sosLocalTitle: '📍 Local in', sosLocalDesc: 'Emergency help 24/7',
+    // Deadlines
+    deadlinesTitle: 'Important age limits',
+    dl16: 'Join housing queue! It\'s free.',
+    dl18: 'Get BankID and your own bank account.',
+    dl20: 'CSN student loans & housing allowance.',
+    // Budget
+    budgetTitle: 'Budget Calculator', budgetIntro: 'Calculate what it costs to live alone. Numbers are Swedish averages – adjust for your city.',
+    budgetRent: 'Rent', budgetEl: 'Electricity', budgetPhone: 'Phone & internet', budgetFood: 'Food',
+    budgetTransport: 'Public transport', budgetInsurance: 'Home insurance', budgetHygiene: 'Hygiene & household',
+    budgetClothes: 'Clothes', budgetFun: 'Leisure & fun', budgetTotalLabel: 'Total per month',
+    budgetTipTitle: '💡 Tip', budgetTipText: 'Students can apply for housing allowance via Försäkringskassan. CSN loan is about 12,500 kr/month.',
+    // Checklist
+    checklistTitle: 'Checklist – First apartment', checklistIntro: 'Check off when done. Your progress is saved automatically on your device.',
+    clProgressOf: 'of', clProgressDone: 'done',
+    clGroupId: 'Identity & bank', clGroupHome: 'Housing', clGroupMoney: 'Economy', clGroupPractical: 'Practical',
+    clResetBtn: '🗑️ Clear all'
   }
 };
 
@@ -625,7 +958,7 @@ const CITIES = {
       halsa: [{id:'umo-orebro',icon:'💚',name:{sv:'Ungdomsmottagningen Örebro',en:'Youth Clinic Örebro'},desc:{sv:'För dig 15–22 år. Hälsa, sex, identitet.',en:'For ages 15-22. Health, sex, identity.'},url:'https://www.regionorebrolan.se/sv/vard-och-halsa/for-dig-som-ar-ung/ungdomsmottagning/',cat:{sv:'Hälsa',en:'Health'}}],
       boende: [{id:'obo',icon:'🏠',name:{sv:'ÖBO – Bostadskö',en:'ÖBO – Housing queue'},desc:{sv:'Kommunala bostäder. Gratis kö från 16 år.',en:'Municipal housing. Free queue from 16.'},url:'https://www.obo.se',cat:{sv:'Boende',en:'Housing'}}],
       transport: [{id:'lt-orebro',icon:'🚌',name:{sv:'Länstrafiken Örebro',en:'Länstrafiken Örebro'},desc:{sv:'Buss i Örebro stad och länet.',en:'Bus in Örebro city and county.'},url:'https://www.lanstrafiken.se',cat:{sv:'Transport',en:'Transport'}}],
-      aktiviteter: [{id:'fritidsgard-orebro',icon:'🏠',name:{sv:'Fritidsgårdar i Örebro',en:'Youth centers in Örebro'},desc:{sv:'Över 20 fritidsgårdar. Gratis!',en:'Over 20 youth centers. Free!'},url:'https://www.orebro.se/uppleva-och-gora/fritidsgardar-och-motesplatser.html',cat:{sv:'Aktiviteter',en:'Activities'}}]
+      aktiviteter: [{id:'fritidsgard-orebro',icon:'🎯',name:{sv:'Fritidsgårdar i Örebro',en:'Youth centers in Örebro'},desc:{sv:'Över 20 fritidsgårdar. Gratis!',en:'Over 20 youth centers. Free!'},url:'https://www.orebro.se/uppleva-och-gora/fritidsgardar-och-motesplatser.html',cat:{sv:'Aktiviteter',en:'Activities'}}]
     },
     infoBoxes: {halsa:{sv:'<strong>Bra att veta:</strong> I Örebro är vård gratis för dig under 20 år.',en:'<strong>Good to know:</strong> In Örebro, healthcare is free if you\'re under 20.'}}
   },
@@ -634,20 +967,109 @@ const CITIES = {
     transport: {name:'SL',url:'https://sl.se',sub:{sv:'Tunnelbana & buss',en:'Metro & bus'}},
     tips: [{sv:'Bostadskön i Stockholm kan ha 10+ års väntetid!',en:'Housing queue in Stockholm can be 10+ years!'}],
     localLinks: {
-      halsa: [{id:'umo-sthlm',icon:'💚',name:{sv:'Ungdomsmottagningar Stockholm',en:'Youth Clinics Stockholm'},desc:{sv:'För dig 12–23 år.',en:'For ages 12-23.'},url:'https://www.1177.se/Stockholm/',cat:{sv:'Hälsa',en:'Health'}}],
+      halsa: [{id:'umo-sthlm',icon:'💚',name:{sv:'Ungdomsmottagningar Stockholm',en:'Youth Clinics Stockholm'},desc:{sv:'För dig 12–22 år. Gratis & anonymt.',en:'For ages 12-22. Free & anonymous.'},url:'https://ung.stockholm/ungdomsmottagning/',cat:{sv:'Hälsa',en:'Health'}}],
       boende: [{id:'bostad-sthlm',icon:'🏠',name:{sv:'Bostadsförmedlingen',en:'Housing Agency'},desc:{sv:'Stockholms bostadskö.',en:'Stockholm housing queue.'},url:'https://bostad.stockholm.se',cat:{sv:'Boende',en:'Housing'}}],
-      transport: [{id:'sl',icon:'🚇',name:{sv:'SL – Stockholms lokaltrafik',en:'SL – Stockholm transit'},desc:{sv:'Tunnelbana, buss och pendeltåg.',en:'Metro, bus and commuter train.'},url:'https://sl.se',cat:{sv:'Transport',en:'Transport'}}]
+      transport: [{id:'sl',icon:'🚇',name:{sv:'SL – Stockholms lokaltrafik',en:'SL – Stockholm transit'},desc:{sv:'Tunnelbana, buss och pendeltåg.',en:'Metro, bus and commuter train.'},url:'https://sl.se',cat:{sv:'Transport',en:'Transport'}}],
+      aktiviteter: [{id:'fritidsgard-sthlm',icon:'🎯',name:{sv:'Fritidsgårdar i Stockholm',en:'Youth centers in Stockholm'},desc:{sv:'20+ gårdar för 13–17 år. Gratis!',en:'20+ centers for ages 13-17. Free!'},url:'https://ung.stockholm/hitta-fritidsgard-och-ungdomsgard/',cat:{sv:'Aktiviteter',en:'Activities'}}]
     },
     infoBoxes: {halsa:{sv:'<strong>Bra att veta:</strong> I Stockholm är vård gratis för dig under 18 år.',en:'<strong>Good to know:</strong> In Stockholm, healthcare is free if you\'re under 18.'}}
   },
-  goteborg: {name:'Göteborg',transport:{name:'Västtrafik',url:'https://www.vasttrafik.se',sub:{sv:'Spårvagn & buss',en:'Tram & bus'}},tips:[{sv:'Boplats Göteborg har kortare kötider!',en:'Boplats Göteborg has shorter queues!'}],localLinks:{boende:[{id:'boplats-gbg',icon:'🏠',name:{sv:'Boplats Göteborg',en:'Boplats Göteborg'},desc:{sv:'Göteborgs bostadskö.',en:'Gothenburg housing queue.'},url:'https://boplats.se',cat:{sv:'Boende',en:'Housing'}}],transport:[{id:'vasttrafik',icon:'🚋',name:{sv:'Västtrafik',en:'Västtrafik'},desc:{sv:'Spårvagn, buss och båt.',en:'Tram, bus and ferry.'},url:'https://www.vasttrafik.se',cat:{sv:'Transport',en:'Transport'}}]},infoBoxes:{}},
-  malmo: {name:'Malmö',transport:{name:'Skånetrafiken',url:'https://www.skanetrafiken.se',sub:{sv:'Buss & tåg',en:'Bus & train'}},tips:[{sv:'Boplats Syd är gratis från 16 år.',en:'Boplats Syd is free from 16.'}],localLinks:{boende:[{id:'boplats-syd',icon:'🏠',name:{sv:'Boplats Syd',en:'Boplats Syd'},desc:{sv:'Malmös bostadskö.',en:'Malmö housing queue.'},url:'https://www.boplatssyd.se',cat:{sv:'Boende',en:'Housing'}}],transport:[{id:'skanetrafiken',icon:'🚌',name:{sv:'Skånetrafiken',en:'Skånetrafiken'},desc:{sv:'Buss och tåg i Skåne.',en:'Bus and train in Skåne.'},url:'https://www.skanetrafiken.se',cat:{sv:'Transport',en:'Transport'}}]},infoBoxes:{}},
-  uppsala: {name:'Uppsala',transport:{name:'UL',url:'https://www.ul.se',sub:{sv:'Buss i Uppsala',en:'Bus in Uppsala'}},tips:[{sv:'Uppsala är en studentstad med bra bostadsalternativ.',en:'Uppsala is a student city with good housing options.'}],localLinks:{boende:[{id:'uppsalahem',icon:'🏠',name:{sv:'Uppsalahem',en:'Uppsalahem'},desc:{sv:'Kommunala bostäder.',en:'Municipal housing.'},url:'https://www.uppsalahem.se',cat:{sv:'Boende',en:'Housing'}}],transport:[{id:'ul',icon:'🚌',name:{sv:'UL',en:'UL'},desc:{sv:'Buss i Uppsala.',en:'Bus in Uppsala.'},url:'https://www.ul.se',cat:{sv:'Transport',en:'Transport'}}]},infoBoxes:{}},
-  vasteras: {name:'Västerås',transport:{name:'VL',url:'https://www.vl.se',sub:{sv:'Buss i Västerås',en:'Bus in Västerås'}},tips:[],localLinks:{boende:[{id:'mimer',icon:'🏠',name:{sv:'Mimer',en:'Mimer'},desc:{sv:'Kommunala bostäder.',en:'Municipal housing.'},url:'https://www.mimer.nu',cat:{sv:'Boende',en:'Housing'}}],transport:[{id:'vl',icon:'🚌',name:{sv:'VL',en:'VL'},desc:{sv:'Buss i Västerås.',en:'Bus in Västerås.'},url:'https://www.vl.se',cat:{sv:'Transport',en:'Transport'}}]},infoBoxes:{}},
-  linkoping: {name:'Linköping',transport:{name:'Östgötatrafiken',url:'https://www.ostgotatrafiken.se',sub:{sv:'Buss i Linköping',en:'Bus in Linköping'}},tips:[],localLinks:{boende:[{id:'stangastaden',icon:'🏠',name:{sv:'Stångåstaden',en:'Stångåstaden'},desc:{sv:'Kommunala bostäder.',en:'Municipal housing.'},url:'https://www.stangastaden.se',cat:{sv:'Boende',en:'Housing'}}],transport:[{id:'otraf',icon:'🚌',name:{sv:'Östgötatrafiken',en:'Östgötatrafiken'},desc:{sv:'Buss i Östergötland.',en:'Bus in Östergötland.'},url:'https://www.ostgotatrafiken.se',cat:{sv:'Transport',en:'Transport'}}]},infoBoxes:{}},
-  norrkoping: {name:'Norrköping',transport:{name:'Östgötatrafiken',url:'https://www.ostgotatrafiken.se',sub:{sv:'Buss & spårvagn',en:'Bus & tram'}},tips:[],localLinks:{boende:[{id:'hyresbostader-nkp',icon:'🏠',name:{sv:'Hyresbostäder',en:'Hyresbostäder'},desc:{sv:'Kommunala bostäder.',en:'Municipal housing.'},url:'https://www.hyresbostader.se',cat:{sv:'Boende',en:'Housing'}}],transport:[{id:'otraf-nkp',icon:'🚋',name:{sv:'Östgötatrafiken',en:'Östgötatrafiken'},desc:{sv:'Buss och spårvagn.',en:'Bus and tram.'},url:'https://www.ostgotatrafiken.se',cat:{sv:'Transport',en:'Transport'}}]},infoBoxes:{}},
-  jonkoping: {name:'Jönköping',transport:{name:'JLT',url:'https://www.jlt.se',sub:{sv:'Buss i Jönköping',en:'Bus in Jönköping'}},tips:[],localLinks:{boende:[{id:'vatterhem',icon:'🏠',name:{sv:'Vätterhem',en:'Vätterhem'},desc:{sv:'Kommunala bostäder.',en:'Municipal housing.'},url:'https://www.vatterhem.se',cat:{sv:'Boende',en:'Housing'}}],transport:[{id:'jlt',icon:'🚌',name:{sv:'JLT',en:'JLT'},desc:{sv:'Buss i Jönköping.',en:'Bus in Jönköping.'},url:'https://www.jlt.se',cat:{sv:'Transport',en:'Transport'}}]},infoBoxes:{}},
-  eskilstuna: {name:'Eskilstuna',transport:{name:'Sörmlandstrafiken',url:'https://www.sormlandstrafiken.se',sub:{sv:'Buss i Eskilstuna',en:'Bus in Eskilstuna'}},tips:[],localLinks:{boende:[{id:'ekf',icon:'🏠',name:{sv:'Eskilstuna Kommunfastigheter',en:'Eskilstuna Housing'},desc:{sv:'Kommunala bostäder.',en:'Municipal housing.'},url:'https://www.ekfast.se',cat:{sv:'Boende',en:'Housing'}}],transport:[{id:'sormtraf',icon:'🚌',name:{sv:'Sörmlandstrafiken',en:'Sörmlandstrafiken'},desc:{sv:'Buss i Sörmland.',en:'Bus in Sörmland.'},url:'https://www.sormlandstrafiken.se',cat:{sv:'Transport',en:'Transport'}}]},infoBoxes:{}}
+  goteborg: {
+    name:'Göteborg',
+    transport:{name:'Västtrafik',url:'https://www.vasttrafik.se',sub:{sv:'Spårvagn & buss',en:'Tram & bus'}},
+    tips:[{sv:'Boplats Göteborg har kortare kötider!',en:'Boplats Göteborg has shorter queues!'}],
+    localLinks:{
+      halsa:[{id:'umo-gbg',icon:'💚',name:{sv:'Ungdomsmottagningar Göteborg',en:'Youth Clinics Gothenburg'},desc:{sv:'För dig 13–24 år. Sex, hälsa, relationer.',en:'For ages 13-24. Sex, health, relationships.'},url:'https://www.vgregion.se/halsa-och-vard/ungdomsmottagning/hitta-mottagning/goteborg/',cat:{sv:'Hälsa',en:'Health'}}],
+      boende:[{id:'boplats-gbg',icon:'🏠',name:{sv:'Boplats Göteborg',en:'Boplats Göteborg'},desc:{sv:'Göteborgs bostadskö.',en:'Gothenburg housing queue.'},url:'https://boplats.se',cat:{sv:'Boende',en:'Housing'}}],
+      transport:[{id:'vasttrafik',icon:'🚋',name:{sv:'Västtrafik',en:'Västtrafik'},desc:{sv:'Spårvagn, buss och båt.',en:'Tram, bus and ferry.'},url:'https://www.vasttrafik.se',cat:{sv:'Transport',en:'Transport'}}],
+      aktiviteter:[{id:'fritidsgard-gbg',icon:'🎯',name:{sv:'Fritidsgårdar i Göteborg',en:'Youth centers in Gothenburg'},desc:{sv:'~30 gårdar för 10–19 år. Gratis!',en:'~30 centers for ages 10-19. Free!'},url:'https://goteborg.se/wps/portal/start/uppleva-och-gora/motesplatser/motesplatser-for-unga/hitta-fritidsgardar',cat:{sv:'Aktiviteter',en:'Activities'}}]
+    },
+    infoBoxes:{halsa:{sv:'<strong>Bra att veta:</strong> I Göteborg är vård gratis för dig under 25 år.',en:'<strong>Good to know:</strong> In Gothenburg, healthcare is free if you\'re under 25.'}}
+  },
+  malmo: {
+    name:'Malmö',
+    transport:{name:'Skånetrafiken',url:'https://www.skanetrafiken.se',sub:{sv:'Buss & tåg',en:'Bus & train'}},
+    tips:[{sv:'Boplats Syd är gratis från 16 år.',en:'Boplats Syd is free from 16.'}],
+    localLinks:{
+      halsa:[{id:'umo-malmo',icon:'💚',name:{sv:'Ungdomsmottagningen Malmö',en:'Youth Clinic Malmö'},desc:{sv:'För dig 12–22 år. Kattsundsgatan 21.',en:'For ages 12-22. Kattsundsgatan 21.'},url:'https://www.1177.se/hitta-vard/kontaktkort/Ungdomsmottagningen-Malmo/',cat:{sv:'Hälsa',en:'Health'}}],
+      boende:[{id:'boplats-syd',icon:'🏠',name:{sv:'Boplats Syd',en:'Boplats Syd'},desc:{sv:'Malmös bostadskö.',en:'Malmö housing queue.'},url:'https://www.boplatssyd.se',cat:{sv:'Boende',en:'Housing'}}],
+      transport:[{id:'skanetrafiken',icon:'🚌',name:{sv:'Skånetrafiken',en:'Skånetrafiken'},desc:{sv:'Buss och tåg i Skåne.',en:'Bus and train in Skåne.'},url:'https://www.skanetrafiken.se',cat:{sv:'Transport',en:'Transport'}}],
+      aktiviteter:[{id:'fritidsgard-malmo',icon:'🎯',name:{sv:'Fritidsgårdar i Malmö',en:'Youth centers in Malmö'},desc:{sv:'18 gårdar för åk 4–gymnasium. Gratis!',en:'18 centers for grades 4-high school. Free!'},url:'https://malmo.se/Uppleva-och-gora/For-familjer-barn-och-unga/Fritidsgardar.html',cat:{sv:'Aktiviteter',en:'Activities'}}]
+    },
+    infoBoxes:{halsa:{sv:'<strong>Bra att veta:</strong> I Malmö är vård gratis för dig under 20 år.',en:'<strong>Good to know:</strong> In Malmö, healthcare is free if you\'re under 20.'}}
+  },
+  uppsala: {
+    name:'Uppsala',
+    transport:{name:'UL',url:'https://www.ul.se',sub:{sv:'Buss i Uppsala',en:'Bus in Uppsala'}},
+    tips:[{sv:'Uppsala är en studentstad med bra bostadsalternativ.',en:'Uppsala is a student city with good housing options.'}],
+    localLinks:{
+      halsa:[{id:'umo-uppsala',icon:'💚',name:{sv:'Ungdomsmottagningar Uppsala',en:'Youth Clinics Uppsala'},desc:{sv:'För dig 13–22 år. Digital chatt via 1177.',en:'For ages 13-22. Digital chat via 1177.'},url:'https://www.1177.se/Uppsala-lan/sa-fungerar-varden/varden-i-uppsala-lan/ungdomsmottagningar/',cat:{sv:'Hälsa',en:'Health'}}],
+      boende:[{id:'uppsalahem',icon:'🏠',name:{sv:'Uppsalahem',en:'Uppsalahem'},desc:{sv:'Kommunala bostäder.',en:'Municipal housing.'},url:'https://www.uppsalahem.se',cat:{sv:'Boende',en:'Housing'}}],
+      transport:[{id:'ul',icon:'🚌',name:{sv:'UL',en:'UL'},desc:{sv:'Buss i Uppsala.',en:'Bus in Uppsala.'},url:'https://www.ul.se',cat:{sv:'Transport',en:'Transport'}}],
+      aktiviteter:[{id:'fritidsgard-uppsala',icon:'🎯',name:{sv:'Fritidsgårdar i Uppsala',en:'Youth centers in Uppsala'},desc:{sv:'16+ gårdar för 13–18 år. 100kr/år.',en:'16+ centers for ages 13-18. 100kr/year.'},url:'https://www.uppsala.se/kultur-och-fritid/aktiviteter-motion-och-idrott/aktiviteter-och-fritidsgardar/fritidsgardar-och-motesplatser-for-unga/',cat:{sv:'Aktiviteter',en:'Activities'}}]
+    },
+    infoBoxes:{halsa:{sv:'<strong>Bra att veta:</strong> I Uppsala finns digital chatt med ungdomsmottagningen via 1177.',en:'<strong>Good to know:</strong> In Uppsala, you can chat digitally with youth clinics via 1177.'}}
+  },
+  vasteras: {
+    name:'Västerås',
+    transport:{name:'VL',url:'https://www.vl.se',sub:{sv:'Buss i Västerås',en:'Bus in Västerås'}},
+    tips:[{sv:'Mimer har korta kötider jämfört med storstäderna.',en:'Mimer has shorter queues compared to big cities.'}],
+    localLinks:{
+      halsa:[{id:'umo-vasteras',icon:'💚',name:{sv:'Ungdomsmottagningen Västerås',en:'Youth Clinic Västerås'},desc:{sv:'För dig 13–22 år. Munkgatan 20B.',en:'For ages 13-22. Munkgatan 20B.'},url:'https://www.1177.se/hitta-vard/kontaktkort/Vasteras-ungdomsmottagning/',cat:{sv:'Hälsa',en:'Health'}}],
+      boende:[{id:'mimer',icon:'🏠',name:{sv:'Mimer',en:'Mimer'},desc:{sv:'Kommunala bostäder.',en:'Municipal housing.'},url:'https://www.mimer.nu',cat:{sv:'Boende',en:'Housing'}}],
+      transport:[{id:'vl',icon:'🚌',name:{sv:'VL',en:'VL'},desc:{sv:'Buss i Västerås.',en:'Bus in Västerås.'},url:'https://www.vl.se',cat:{sv:'Transport',en:'Transport'}}],
+      aktiviteter:[{id:'fritidsgard-vasteras',icon:'🎯',name:{sv:'Fritidsgårdar i Västerås',en:'Youth centers in Västerås'},desc:{sv:'16 gårdar. Dans, musik, gaming!',en:'16 centers. Dance, music, gaming!'},url:'https://www.vasteras.se/barn-och-utbildning/grundskola/fritidsgardar.html',cat:{sv:'Aktiviteter',en:'Activities'}}]
+    },
+    infoBoxes:{halsa:{sv:'<strong>Bra att veta:</strong> Ungdomsmottagningen i Västerås har även HBTQI-info.',en:'<strong>Good to know:</strong> Youth clinic in Västerås also has LGBTQ+ info.'}}
+  },
+  linkoping: {
+    name:'Linköping',
+    transport:{name:'Östgötatrafiken',url:'https://www.ostgotatrafiken.se',sub:{sv:'Buss i Linköping',en:'Bus in Linköping'}},
+    tips:[{sv:'Linköping har Sveriges femte största universitet!',en:'Linköping has Sweden\'s fifth largest university!'}],
+    localLinks:{
+      halsa:[{id:'umo-linkoping',icon:'💚',name:{sv:'Ungdomshälsan Linköping',en:'Youth Health Linköping'},desc:{sv:'För dig 13–25 år. Kallas "Ungdomshälsan".',en:'For ages 13-25. Called "Ungdomshälsan".'},url:'https://www.linkoping.se/omsorg-och-hjalp/barn-och-unga/karlek-sex-och-identitet/ungdomshalsan/',cat:{sv:'Hälsa',en:'Health'}}],
+      boende:[{id:'stangastaden',icon:'🏠',name:{sv:'Stångåstaden',en:'Stångåstaden'},desc:{sv:'Kommunala bostäder.',en:'Municipal housing.'},url:'https://www.stangastaden.se',cat:{sv:'Boende',en:'Housing'}}],
+      transport:[{id:'otraf',icon:'🚌',name:{sv:'Östgötatrafiken',en:'Östgötatrafiken'},desc:{sv:'Buss i Östergötland.',en:'Bus in Östergötland.'},url:'https://www.ostgotatrafiken.se',cat:{sv:'Transport',en:'Transport'}}],
+      aktiviteter:[{id:'fritidsgard-linkoping',icon:'🎯',name:{sv:'Ung Zon Linköping',en:'Ung Zon Linköping'},desc:{sv:'För dig 13–18 år. Ny samlad verksamhet!',en:'For ages 13-18. New unified activity!'},url:'https://www.linkoping.se/uppleva-och-gora/barn-och-unga/motesplatser-och-aktiviteter/fritidsverksamhet-och-lov/',cat:{sv:'Aktiviteter',en:'Activities'}}]
+    },
+    infoBoxes:{halsa:{sv:'<strong>Bra att veta:</strong> I Linköping kallas ungdomsmottagningen för "Ungdomshälsan" och tar emot upp till 25 år.',en:'<strong>Good to know:</strong> In Linköping, the youth clinic is called "Ungdomshälsan" and serves ages up to 25.'}}
+  },
+  norrkoping: {
+    name:'Norrköping',
+    transport:{name:'Östgötatrafiken',url:'https://www.ostgotatrafiken.se',sub:{sv:'Buss & spårvagn',en:'Bus & tram'}},
+    tips:[{sv:'Norrköping har egen spårvagnstrafik!',en:'Norrköping has its own tram system!'}],
+    localLinks:{
+      halsa:[{id:'umo-norrkoping',icon:'💚',name:{sv:'Ungdomshälsan Norrköping',en:'Youth Health Norrköping'},desc:{sv:'För dig 13–25 år. Kallas "Ungdomshälsan".',en:'For ages 13-25. Called "Ungdomshälsan".'},url:'https://www.umo.se/hitta-mottagning/kontaktkort/Ungdomshalsan-Norrkoping/',cat:{sv:'Hälsa',en:'Health'}}],
+      boende:[{id:'hyresbostader-nkp',icon:'🏠',name:{sv:'Hyresbostäder',en:'Hyresbostäder'},desc:{sv:'Kommunala bostäder.',en:'Municipal housing.'},url:'https://www.hyresbostader.se',cat:{sv:'Boende',en:'Housing'}}],
+      transport:[{id:'otraf-nkp',icon:'🚋',name:{sv:'Östgötatrafiken',en:'Östgötatrafiken'},desc:{sv:'Buss och spårvagn.',en:'Bus and tram.'},url:'https://www.ostgotatrafiken.se',cat:{sv:'Transport',en:'Transport'}}],
+      aktiviteter:[{id:'fritidsgard-norrkoping',icon:'🎯',name:{sv:'Fritidsgårdar i Norrköping',en:'Youth centers in Norrköping'},desc:{sv:'För åk 4–19 år. Gratis!',en:'For grades 4 to age 19. Free!'},url:'https://norrkoping.se/se-och-gora/fritid-och-aktiviteter/fritidsgardar/',cat:{sv:'Aktiviteter',en:'Activities'}}]
+    },
+    infoBoxes:{halsa:{sv:'<strong>Bra att veta:</strong> I Norrköping kallas ungdomsmottagningen för "Ungdomshälsan" och tar emot upp till 25 år.',en:'<strong>Good to know:</strong> In Norrköping, the youth clinic is called "Ungdomshälsan" and serves ages up to 25.'}}
+  },
+  jonkoping: {
+    name:'Jönköping',
+    transport:{name:'JLT',url:'https://www.jlt.se',sub:{sv:'Buss i Jönköping',en:'Bus in Jönköping'}},
+    tips:[{sv:'Jönköping är känt som Skandinaviens Jerusalem.',en:'Jönköping is known as the Jerusalem of Scandinavia.'}],
+    localLinks:{
+      halsa:[{id:'umo-jonkoping',icon:'💚',name:{sv:'Ungdomsmottagningen Jönköping',en:'Youth Clinic Jönköping'},desc:{sv:'För dig 13–21 år. Östra Storgatan 16B.',en:'For ages 13-21. Östra Storgatan 16B.'},url:'https://www.1177.se/hitta-vard/kontaktkort/Ungdomsmottagningen-Jonkoping/',cat:{sv:'Hälsa',en:'Health'}}],
+      boende:[{id:'vatterhem',icon:'🏠',name:{sv:'Vätterhem',en:'Vätterhem'},desc:{sv:'Kommunala bostäder.',en:'Municipal housing.'},url:'https://www.vatterhem.se',cat:{sv:'Boende',en:'Housing'}}],
+      transport:[{id:'jlt',icon:'🚌',name:{sv:'JLT',en:'JLT'},desc:{sv:'Buss i Jönköping.',en:'Bus in Jönköping.'},url:'https://www.jlt.se',cat:{sv:'Transport',en:'Transport'}}],
+      aktiviteter:[{id:'fritidsgard-jonkoping',icon:'🎯',name:{sv:'Fritidsgårdar i Jönköping',en:'Youth centers in Jönköping'},desc:{sv:'För 10–19 år. Även funkis-verksamhet!',en:'For ages 10-19. Also disability-friendly!'},url:'https://www.jonkoping.se/fritid-kultur--natur/motesplatser-och-fritidsgardar/fritidsgardar-motesplatser-for-unga',cat:{sv:'Aktiviteter',en:'Activities'}}]
+    },
+    infoBoxes:{halsa:{sv:'<strong>Bra att veta:</strong> Ungdomsmottagningen i Jönköping tar emot dig upp till 21 år.',en:'<strong>Good to know:</strong> Youth clinic in Jönköping serves ages up to 21.'}}
+  },
+  eskilstuna: {
+    name:'Eskilstuna',
+    transport:{name:'Sörmlandstrafiken',url:'https://www.sormlandstrafiken.se',sub:{sv:'Buss i Eskilstuna',en:'Bus in Eskilstuna'}},
+    tips:[{sv:'Eskilstuna kommun har 7 fritidsgårdar och mobilt team!',en:'Eskilstuna has 7 youth centers and a mobile team!'}],
+    localLinks:{
+      halsa:[{id:'umo-eskilstuna',icon:'💚',name:{sv:'Ungdomsmottagningen Eskilstuna',en:'Youth Clinic Eskilstuna'},desc:{sv:'För dig 13–22 år. HBTQI-certifierad!',en:'For ages 13-22. LGBTQ+ certified!'},url:'https://www.1177.se/hitta-vard/kontaktkort/Ungdomsmottagningen-Eskilstuna-Eskilstuna/',cat:{sv:'Hälsa',en:'Health'}}],
+      boende:[{id:'ekf',icon:'🏠',name:{sv:'Eskilstuna Kommunfastigheter',en:'Eskilstuna Housing'},desc:{sv:'Kommunala bostäder.',en:'Municipal housing.'},url:'https://www.ekfast.se',cat:{sv:'Boende',en:'Housing'}}],
+      transport:[{id:'sormtraf',icon:'🚌',name:{sv:'Sörmlandstrafiken',en:'Sörmlandstrafiken'},desc:{sv:'Buss i Sörmland.',en:'Bus in Sörmland.'},url:'https://www.sormlandstrafiken.se',cat:{sv:'Transport',en:'Transport'}}],
+      aktiviteter:[{id:'fritidsgard-eskilstuna',icon:'🎯',name:{sv:'Fritidsgårdar i Eskilstuna',en:'Youth centers in Eskilstuna'},desc:{sv:'7 gårdar för åk 6–20 år. Gratis!',en:'7 centers for grade 6 to age 20. Free!'},url:'https://www.eskilstuna.se/kultur-och-fritid/fritidsgardar',cat:{sv:'Aktiviteter',en:'Activities'}}]
+    },
+    infoBoxes:{halsa:{sv:'<strong>Bra att veta:</strong> Ungdomsmottagningen i Eskilstuna är HBTQI-certifierad.',en:'<strong>Good to know:</strong> Youth clinic in Eskilstuna is LGBTQ+ certified.'}}
+  }
 };
 
 // ═══ CATEGORIES ═══
@@ -682,6 +1104,7 @@ document.addEventListener('DOMContentLoaded', function() {
   renderCategories();
   renderFavorites();
   showTip();
+  initTools();
   if(localStorage.getItem('sg_seen')) document.getElementById('onboarding').style.display='none';
 });
 
@@ -705,6 +1128,14 @@ function applyTranslations() {
   document.getElementById('fbText').placeholder = t('fbPlaceholder');
   document.getElementById('fbSendBtn').textContent = t('fbSendBtn');
   document.getElementById('infoPopupLink').textContent = t('infoPopupLinkText');
+  document.getElementById('catMenuText').textContent = t('catMenuText');
+  
+  // Update category dropdown labels
+  document.querySelectorAll('#catDropdown [data-cat]').forEach(el => {
+    const catId = el.dataset.cat;
+    const cat = CATEGORIES.find(c => c.id === catId);
+    if(cat) el.textContent = t(cat.nameKey);
+  });
 }
 
 function toggleLang() {
@@ -725,10 +1156,25 @@ function initCity() {
   document.getElementById('cityTagline').textContent = city.name;
   document.getElementById('cityBtnText').textContent = city.name;
   document.title = `StödGuiden – ${city.name}`;
-  document.querySelectorAll('.city-option').forEach(opt => opt.classList.toggle('active', opt.dataset.city === currentCity));
+  document.querySelectorAll('.menu-option[data-city]').forEach(opt => opt.classList.toggle('active', opt.dataset.city === currentCity));
 }
 
-function toggleCityDropdown() { document.getElementById('cityDropdown').classList.toggle('open'); }
+function toggleMenu(type) {
+  const cityDrop = document.getElementById('cityDropdown');
+  const catDrop = document.getElementById('catDropdown');
+  if(type === 'city') {
+    catDrop.classList.remove('open');
+    cityDrop.classList.toggle('open');
+  } else {
+    cityDrop.classList.remove('open');
+    catDrop.classList.toggle('open');
+  }
+}
+
+function closeAllMenus() {
+  document.getElementById('cityDropdown').classList.remove('open');
+  document.getElementById('catDropdown').classList.remove('open');
+}
 
 function selectCity(cityId) {
   currentCity = cityId;
@@ -737,12 +1183,18 @@ function selectCity(cityId) {
   renderQuickLinks();
   renderCategories();
   showTip();
-  document.getElementById('cityDropdown').classList.remove('open');
+  updateSOS();
+  closeAllMenus();
   showToast(`${t('toastCityChanged')} ${CITIES[cityId].name}`, '📍');
   if(currentCat) goHome();
 }
 
-document.addEventListener('click', e => { if(!e.target.closest('.city-selector')) document.getElementById('cityDropdown').classList.remove('open'); });
+function openCatFromMenu(catId) {
+  closeAllMenus();
+  openCat(catId);
+}
+
+document.addEventListener('click', e => { if(!e.target.closest('.menu-selector')) closeAllMenus(); });
 
 // ═══ QUICK LINKS ═══
 function renderQuickLinks() {
@@ -952,6 +1404,127 @@ document.getElementById('feedbackModal').addEventListener('click', e => { if(e.t
 
 // ═══ UP BUTTON ═══
 window.addEventListener('scroll', () => { document.getElementById('upBtn').style.display = window.scrollY > 400 ? 'grid' : 'none'; }, {passive:true});
+
+// ═══ SOCIALJOUR DATA ═══
+const SOCIALJOUR = {
+  orebro: {name:{sv:'Socialjour Örebro',en:'Social Emergency Örebro'},desc:{sv:'Ring 019-21 10 00 (dygnet runt)',en:'Call 019-21 10 00 (24/7)'},url:'tel:0192110 00'},
+  stockholm: {name:{sv:'Socialjouren Stockholm',en:'Social Emergency Stockholm'},desc:{sv:'Ring 08-508 11 508 (dygnet runt)',en:'Call 08-508 11 508 (24/7)'},url:'tel:0850811508'},
+  goteborg: {name:{sv:'Socialjouren Göteborg',en:'Social Emergency Gothenburg'},desc:{sv:'Ring 031-365 87 00',en:'Call 031-365 87 00'},url:'tel:0313658700'},
+  malmo: {name:{sv:'Socialjouren Malmö',en:'Social Emergency Malmö'},desc:{sv:'Ring 040-34 51 14',en:'Call 040-34 51 14'},url:'tel:0403451 14'},
+  uppsala: {name:{sv:'Socialjouren Uppsala',en:'Social Emergency Uppsala'},desc:{sv:'Ring 018-727 00 00 (kvällar/helg)',en:'Call 018-727 00 00 (evenings/weekends)'},url:'tel:0187270000'},
+  vasteras: {name:{sv:'Socialjouren Västerås',en:'Social Emergency Västerås'},desc:{sv:'Ring 021-39 24 24',en:'Call 021-39 24 24'},url:'tel:0213924 24'},
+  linkoping: {name:{sv:'Socialjouren Linköping',en:'Social Emergency Linköping'},desc:{sv:'Ring 013-20 72 05',en:'Call 013-20 72 05'},url:'tel:0132072 05'},
+  norrkoping: {name:{sv:'Socialjouren Norrköping',en:'Social Emergency Norrköping'},desc:{sv:'Ring 011-15 26 00',en:'Call 011-15 26 00'},url:'tel:0111526 00'},
+  jonkoping: {name:{sv:'Socialjouren Jönköping',en:'Social Emergency Jönköping'},desc:{sv:'Ring 036-10 50 00 (dagtid)',en:'Call 036-10 50 00 (daytime)'},url:'tel:0361050 00'},
+  eskilstuna: {name:{sv:'Socialjouren Eskilstuna',en:'Social Emergency Eskilstuna'},desc:{sv:'Ring 016-710 20 00',en:'Call 016-710 20 00'},url:'tel:0167102000'}
+};
+
+// ═══ UPDATE SOS SECTION ═══
+function updateSOS() {
+  const city = CITIES[currentCity];
+  const jour = SOCIALJOUR[currentCity];
+  if(jour) {
+    document.getElementById('sosLocalCity').textContent = city.name;
+    document.getElementById('sosLocalName').textContent = jour.name[currentLang] || jour.name.sv;
+    document.getElementById('sosLocalDesc').textContent = jour.desc[currentLang] || jour.desc.sv;
+    document.getElementById('sosLocalBtn').href = jour.url;
+  }
+}
+
+// ═══ BUDGET CALCULATOR ═══
+function openBudget() {
+  document.getElementById('budgetModal').classList.add('open');
+  calcBudget();
+}
+function closeBudget() {
+  document.getElementById('budgetModal').classList.remove('open');
+}
+function calcBudget() {
+  const hyra = parseInt(document.getElementById('bHyra').value) || 0;
+  const el = parseInt(document.getElementById('bEl').value) || 0;
+  const mobil = parseInt(document.getElementById('bMobil').value) || 0;
+  const mat = parseInt(document.getElementById('bMat').value) || 0;
+  const transport = parseInt(document.getElementById('bTransport').value) || 0;
+  const forsakring = parseInt(document.getElementById('bForsakring').value) || 0;
+  const hygien = parseInt(document.getElementById('bHygien').value) || 0;
+  const klader = parseInt(document.getElementById('bKlader').value) || 0;
+  const fritid = parseInt(document.getElementById('bFritid').value) || 0;
+  const total = hyra + el + mobil + mat + transport + forsakring + hygien + klader + fritid;
+  document.getElementById('budgetTotal').textContent = total.toLocaleString('sv-SE') + ' kr';
+}
+document.getElementById('budgetModal').addEventListener('click', e => { if(e.target.id === 'budgetModal') closeBudget(); });
+
+// ═══ CHECKLIST ═══
+let checklist = JSON.parse(localStorage.getItem('sg_checklist') || '{}');
+
+function openChecklist() {
+  document.getElementById('checklistModal').classList.add('open');
+  loadChecklist();
+}
+function closeChecklist() {
+  document.getElementById('checklistModal').classList.remove('open');
+}
+function loadChecklist() {
+  document.querySelectorAll('.checklist-item input[type="checkbox"]').forEach(cb => {
+    const id = cb.id.replace('cl-','');
+    cb.checked = checklist[id] || false;
+    cb.closest('.checklist-item').classList.toggle('done', cb.checked);
+  });
+  updateChecklistProgress();
+}
+function updateChecklist() {
+  document.querySelectorAll('.checklist-item input[type="checkbox"]').forEach(cb => {
+    const id = cb.id.replace('cl-','');
+    checklist[id] = cb.checked;
+    cb.closest('.checklist-item').classList.toggle('done', cb.checked);
+  });
+  localStorage.setItem('sg_checklist', JSON.stringify(checklist));
+  updateChecklistProgress();
+}
+function updateChecklistProgress() {
+  const total = document.querySelectorAll('.checklist-item input[type="checkbox"]').length;
+  const done = Object.values(checklist).filter(v => v).length;
+  const pct = Math.round((done / total) * 100);
+  document.getElementById('clProgressFill').style.width = pct + '%';
+  document.getElementById('clProgressText').textContent = `${done} ${t('clProgressOf')} ${total} ${t('clProgressDone')}`;
+}
+function resetChecklist() {
+  if(!confirm(currentLang === 'sv' ? 'Vill du verkligen rensa hela checklistan?' : 'Do you really want to clear the entire checklist?')) return;
+  checklist = {};
+  localStorage.setItem('sg_checklist', JSON.stringify(checklist));
+  loadChecklist();
+  showToast(currentLang === 'sv' ? 'Checklistan rensad' : 'Checklist cleared', '🗑️');
+}
+document.getElementById('checklistModal').addEventListener('click', e => { if(e.target.id === 'checklistModal') closeChecklist(); });
+
+// ═══ OFFLINE CACHING ═══
+function cacheForOffline() {
+  // Save important numbers to localStorage for offline access
+  const offlineData = {
+    emergency: '112',
+    health: '1177',
+    bris: '116111',
+    mind: '90101',
+    socialjour: SOCIALJOUR,
+    savedAt: new Date().toISOString()
+  };
+  localStorage.setItem('sg_offline', JSON.stringify(offlineData));
+}
+
+// Check online status
+window.addEventListener('online', () => {
+  document.querySelector('.offline-banner')?.classList.remove('show');
+});
+window.addEventListener('offline', () => {
+  const banner = document.querySelector('.offline-banner');
+  if(banner) banner.classList.add('show');
+});
+
+// ═══ INIT TOOLS ═══
+function initTools() {
+  updateSOS();
+  cacheForOffline();
+}
 
 // ═══ SERVICE WORKER ═══
 if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
