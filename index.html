@@ -486,6 +486,11 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
         <div class="tool-name" id="toolNummerName">Viktiga nummer</div>
         <div class="tool-desc" id="toolNummerDesc">Spara offline</div>
       </div>
+      <div class="tool-card" onclick="openLibrary()">
+        <div class="tool-icon">📚</div>
+        <div class="tool-name" id="toolBibliotekName">Bibliotek & WiFi</div>
+        <div class="tool-desc" id="toolBibliotekDesc">Gratis internet</div>
+      </div>
     </div>
   </div>
 
@@ -534,7 +539,6 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
     <div class="support-qr">
       <img src="swish-qr.png" alt="Swish QR-kod" class="swish-qr-img"/>
     </div>
-    <div class="support-swish"><span id="supportSwishLabel">Swish:</span> 073 891 15 35</div>
     <div class="support-note" id="supportNote">Tack för att du stöttar fri och öppen samhällsinfo! 💚</div>
   </div>
 </div>
@@ -952,6 +956,7 @@ const NATIONAL_LINKS = {
 const CITIES = {
   orebro: {
     name: 'Örebro',
+    bibliotek: 'https://bibliotek.orebro.se/',
     transport: {name:'Länstrafiken',url:'https://www.lanstrafiken.se',sub:{sv:'Buss i Örebro',en:'Bus in Örebro'}},
     tips: [{sv:'Ställ dig i ÖBOs bostadskö redan från 16 år — det är helt gratis!',en:'Join ÖBO housing queue from age 16 — it\'s free!'}],
     localLinks: {
@@ -964,6 +969,7 @@ const CITIES = {
   },
   stockholm: {
     name: 'Stockholm',
+    bibliotek: 'https://biblioteket.stockholm.se/',
     transport: {name:'SL',url:'https://sl.se',sub:{sv:'Tunnelbana & buss',en:'Metro & bus'}},
     tips: [{sv:'Bostadskön i Stockholm kan ha 10+ års väntetid!',en:'Housing queue in Stockholm can be 10+ years!'}],
     localLinks: {
@@ -976,6 +982,7 @@ const CITIES = {
   },
   goteborg: {
     name:'Göteborg',
+    bibliotek: 'https://goteborg.se/wps/portal?uri=gbglnk%3AGBG.Inv.TopNav.Bibliotek',
     transport:{name:'Västtrafik',url:'https://www.vasttrafik.se',sub:{sv:'Spårvagn & buss',en:'Tram & bus'}},
     tips:[{sv:'Boplats Göteborg har kortare kötider!',en:'Boplats Göteborg has shorter queues!'}],
     localLinks:{
@@ -988,6 +995,7 @@ const CITIES = {
   },
   malmo: {
     name:'Malmö',
+    bibliotek: 'https://malmo.se/Uppleva-och-gora/Biblioteken.html',
     transport:{name:'Skånetrafiken',url:'https://www.skanetrafiken.se',sub:{sv:'Buss & tåg',en:'Bus & train'}},
     tips:[{sv:'Boplats Syd är gratis från 16 år.',en:'Boplats Syd is free from 16.'}],
     localLinks:{
@@ -1000,6 +1008,7 @@ const CITIES = {
   },
   uppsala: {
     name:'Uppsala',
+    bibliotek: 'https://bibliotekuppsala.se/',
     transport:{name:'UL',url:'https://www.ul.se',sub:{sv:'Buss i Uppsala',en:'Bus in Uppsala'}},
     tips:[{sv:'Uppsala är en studentstad med bra bostadsalternativ.',en:'Uppsala is a student city with good housing options.'}],
     localLinks:{
@@ -1012,6 +1021,7 @@ const CITIES = {
   },
   vasteras: {
     name:'Västerås',
+    bibliotek: 'https://www.vasteras.se/uppleva-och-gora/bibliotek.html',
     transport:{name:'VL',url:'https://www.vl.se',sub:{sv:'Buss i Västerås',en:'Bus in Västerås'}},
     tips:[{sv:'Mimer har korta kötider jämfört med storstäderna.',en:'Mimer has shorter queues compared to big cities.'}],
     localLinks:{
@@ -1024,6 +1034,7 @@ const CITIES = {
   },
   linkoping: {
     name:'Linköping',
+    bibliotek: 'https://www.linkoping.se/uppleva-och-gora/bibliotek',
     transport:{name:'Östgötatrafiken',url:'https://www.ostgotatrafiken.se',sub:{sv:'Buss i Linköping',en:'Bus in Linköping'}},
     tips:[{sv:'Linköping har Sveriges femte största universitet!',en:'Linköping has Sweden\'s fifth largest university!'}],
     localLinks:{
@@ -1036,6 +1047,7 @@ const CITIES = {
   },
   norrkoping: {
     name:'Norrköping',
+    bibliotek: 'https://norrkoping.se/se-och-gora/bibliotek-och-arkiv/bibliotek',
     transport:{name:'Östgötatrafiken',url:'https://www.ostgotatrafiken.se',sub:{sv:'Buss & spårvagn',en:'Bus & tram'}},
     tips:[{sv:'Norrköping har egen spårvagnstrafik!',en:'Norrköping has its own tram system!'}],
     localLinks:{
@@ -1048,6 +1060,7 @@ const CITIES = {
   },
   jonkoping: {
     name:'Jönköping',
+    bibliotek: 'https://bibliotek.jonkoping.se/',
     transport:{name:'JLT',url:'https://www.jlt.se',sub:{sv:'Buss i Jönköping',en:'Bus in Jönköping'}},
     tips:[{sv:'Jönköping är känt som Skandinaviens Jerusalem.',en:'Jönköping is known as the Jerusalem of Scandinavia.'}],
     localLinks:{
@@ -1060,6 +1073,7 @@ const CITIES = {
   },
   eskilstuna: {
     name:'Eskilstuna',
+    bibliotek: 'https://bibliotek.eskilstuna.se/',
     transport:{name:'Sörmlandstrafiken',url:'https://www.sormlandstrafiken.se',sub:{sv:'Buss i Eskilstuna',en:'Bus in Eskilstuna'}},
     tips:[{sv:'Eskilstuna kommun har 7 fritidsgårdar och mobilt team!',en:'Eskilstuna has 7 youth centers and a mobile team!'}],
     localLinks:{
@@ -1117,7 +1131,7 @@ function applyTranslations() {
   document.getElementById('langBtn').textContent = lang === 'sv' ? '🌐 EN' : '🌐 SV';
   
   // Apply all text translations
-  const elements = ['obTitle','obSub','obFeat1Title','obFeat1Text','obFeat2Title','obFeat2Text','obFeat3Title','obFeat3Text','obBtn','obSkip','heroTag','heroH1','heroSub','trust1','trust2','trust3','trust4','favTooltipTitle','favTooltipText','quickTitle','favTitle','catTitle','tipTitle','supportTitle','supportText','supportSwishLabel','supportNote','backBtn','feedbackBtnText','fbModalTitle','fbOpt1','fbOpt2','fbOpt3','fbOpt4','fbConsentLabel','fbThanksText','akutLeft','akutRight'];
+  const elements = ['obTitle','obSub','obFeat1Title','obFeat1Text','obFeat2Title','obFeat2Text','obFeat3Title','obFeat3Text','obBtn','obSkip','heroTag','heroH1','heroSub','trust1','trust2','trust3','trust4','favTooltipTitle','favTooltipText','quickTitle','favTitle','catTitle','tipTitle','supportTitle','supportText','supportNote','backBtn','feedbackBtnText','fbModalTitle','fbOpt1','fbOpt2','fbOpt3','fbOpt4','fbConsentLabel','fbThanksText','akutLeft','akutRight','toolsTitle','toolBudgetName','toolBudgetDesc','toolChecklistName','toolChecklistDesc','toolNummerName','toolNummerDesc','toolBibliotekName','toolBibliotekDesc','deadlinesTitle','dl16','dl18','dl20','sosTitle','sosEmergency','sosHealth','sosMind','sosLocalTitle','budgetTitle','budgetIntro','budgetRent','budgetEl','budgetPhone','budgetFood','budgetTransport','budgetInsurance','budgetHygiene','budgetClothes','budgetFun','budgetTotalLabel','budgetTipTitle','budgetTipText','checklistTitle','checklistIntro','clGroupId','clGroupHome','clGroupMoney','clGroupPractical','clResetBtn'];
   
   elements.forEach(id => {
     const el = document.getElementById(id);
@@ -1136,6 +1150,9 @@ function applyTranslations() {
     const cat = CATEGORIES.find(c => c.id === catId);
     if(cat) el.textContent = t(cat.nameKey);
   });
+  
+  // Update SOS section
+  updateSOS();
 }
 
 function toggleLang() {
@@ -1464,6 +1481,15 @@ function openChecklist() {
 function closeChecklist() {
   document.getElementById('checklistModal').classList.remove('open');
 }
+
+// ═══ LIBRARY LINK ═══
+function openLibrary() {
+  const city = CITIES[currentCity];
+  if(city && city.bibliotek) {
+    window.open(city.bibliotek, '_blank', 'noopener');
+  }
+}
+
 function loadChecklist() {
   document.querySelectorAll('.checklist-item input[type="checkbox"]').forEach(cb => {
     const id = cb.id.replace('cl-','');
