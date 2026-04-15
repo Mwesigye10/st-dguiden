@@ -539,6 +539,7 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
     <div class="support-qr">
       <img src="swish-qr.png" alt="Swish QR-kod" class="swish-qr-img"/>
     </div>
+    <div class="support-swish"><span id="supportSwishLabel">Swish:</span> 073 891 15 35</div>
     <div class="support-note" id="supportNote">Tack för att du stöttar fri och öppen samhällsinfo! 💚</div>
   </div>
 </div>
@@ -1131,7 +1132,7 @@ function applyTranslations() {
   document.getElementById('langBtn').textContent = lang === 'sv' ? '🌐 EN' : '🌐 SV';
   
   // Apply all text translations
-  const elements = ['obTitle','obSub','obFeat1Title','obFeat1Text','obFeat2Title','obFeat2Text','obFeat3Title','obFeat3Text','obBtn','obSkip','heroTag','heroH1','heroSub','trust1','trust2','trust3','trust4','favTooltipTitle','favTooltipText','quickTitle','favTitle','catTitle','tipTitle','supportTitle','supportText','supportNote','backBtn','feedbackBtnText','fbModalTitle','fbOpt1','fbOpt2','fbOpt3','fbOpt4','fbConsentLabel','fbThanksText','akutLeft','akutRight','toolsTitle','toolBudgetName','toolBudgetDesc','toolChecklistName','toolChecklistDesc','toolNummerName','toolNummerDesc','toolBibliotekName','toolBibliotekDesc','deadlinesTitle','dl16','dl18','dl20','sosTitle','sosEmergency','sosHealth','sosMind','sosLocalTitle','budgetTitle','budgetIntro','budgetRent','budgetEl','budgetPhone','budgetFood','budgetTransport','budgetInsurance','budgetHygiene','budgetClothes','budgetFun','budgetTotalLabel','budgetTipTitle','budgetTipText','checklistTitle','checklistIntro','clGroupId','clGroupHome','clGroupMoney','clGroupPractical','clResetBtn'];
+  const elements = ['obTitle','obSub','obFeat1Title','obFeat1Text','obFeat2Title','obFeat2Text','obFeat3Title','obFeat3Text','obBtn','obSkip','heroTag','heroH1','heroSub','trust1','trust2','trust3','trust4','favTooltipTitle','favTooltipText','quickTitle','favTitle','catTitle','tipTitle','supportTitle','supportText','supportSwishLabel','supportNote','backBtn','feedbackBtnText','fbModalTitle','fbOpt1','fbOpt2','fbOpt3','fbOpt4','fbConsentLabel','fbThanksText','akutLeft','akutRight'];
   
   elements.forEach(id => {
     const el = document.getElementById(id);
@@ -1150,9 +1151,6 @@ function applyTranslations() {
     const cat = CATEGORIES.find(c => c.id === catId);
     if(cat) el.textContent = t(cat.nameKey);
   });
-  
-  // Update SOS section
-  updateSOS();
 }
 
 function toggleLang() {
@@ -1481,15 +1479,6 @@ function openChecklist() {
 function closeChecklist() {
   document.getElementById('checklistModal').classList.remove('open');
 }
-
-// ═══ LIBRARY LINK ═══
-function openLibrary() {
-  const city = CITIES[currentCity];
-  if(city && city.bibliotek) {
-    window.open(city.bibliotek, '_blank', 'noopener');
-  }
-}
-
 function loadChecklist() {
   document.querySelectorAll('.checklist-item input[type="checkbox"]').forEach(cb => {
     const id = cb.id.replace('cl-','');
@@ -1522,6 +1511,14 @@ function resetChecklist() {
   showToast(currentLang === 'sv' ? 'Checklistan rensad' : 'Checklist cleared', '🗑️');
 }
 document.getElementById('checklistModal').addEventListener('click', e => { if(e.target.id === 'checklistModal') closeChecklist(); });
+
+// ═══ LIBRARY LINK ═══
+function openLibrary() {
+  const city = CITIES[currentCity];
+  if(city && city.bibliotek) {
+    window.open(city.bibliotek, '_blank', 'noopener');
+  }
+}
 
 // ═══ OFFLINE CACHING ═══
 function cacheForOffline() {
