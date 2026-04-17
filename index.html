@@ -36,6 +36,38 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
 
+/* ── DISCLAIMER ── */
+#disclaimer{position:fixed;inset:0;background:var(--bg);z-index:1001;display:flex;flex-direction:column;align-items:center;padding:24px;overflow-y:auto}
+#disclaimer.hidden{display:none}
+.disc-container{width:100%;max-width:440px;margin:auto}
+.disc-logo{width:56px;height:56px;background:linear-gradient(135deg,var(--green),var(--green2));border-radius:14px;display:grid;place-items:center;font-weight:800;font-size:20px;color:var(--accent);margin:0 auto 20px;box-shadow:0 6px 24px rgba(45,122,95,0.4)}
+.disc-header{text-align:center;margin-bottom:20px}
+.disc-title{font-size:22px;font-weight:800;margin-bottom:8px}
+.disc-title em{font-style:normal;color:var(--accent)}
+.disc-lang{display:flex;gap:8px;justify-content:center;margin-top:12px}
+.disc-lang-btn{background:rgba(255,255,255,0.05);border:1px solid var(--border2);color:var(--muted);padding:6px 14px;border-radius:50px;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.2s}
+.disc-lang-btn.active{background:rgba(45,122,95,0.2);border-color:var(--green);color:var(--accent)}
+.disc-content{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:20px;max-height:45vh;overflow-y:auto}
+.disc-content::-webkit-scrollbar{width:6px}
+.disc-content::-webkit-scrollbar-track{background:transparent}
+.disc-content::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+.disc-section{margin-bottom:16px}
+.disc-section:last-child{margin-bottom:0}
+.disc-section-title{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.disc-section-text{font-size:12px;color:var(--muted);line-height:1.7}
+.disc-section-text strong{color:var(--text)}
+.disc-highlight{background:rgba(240,198,116,0.1);border:1px solid rgba(240,198,116,0.25);border-radius:10px;padding:12px;margin-top:12px}
+.disc-highlight-title{font-size:12px;font-weight:700;color:var(--gold);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.disc-highlight-text{font-size:11px;color:var(--muted);line-height:1.6}
+.disc-checkbox{display:flex;align-items:flex-start;gap:12px;background:rgba(45,122,95,0.1);border:1px solid rgba(45,122,95,0.25);border-radius:12px;padding:14px;margin-bottom:16px}
+.disc-checkbox input{width:22px;height:22px;min-width:22px;accent-color:var(--green);cursor:pointer;margin-top:2px}
+.disc-checkbox label{font-size:13px;color:var(--text);line-height:1.5;cursor:pointer}
+.disc-checkbox label strong{color:var(--accent)}
+.disc-btn{width:100%;background:linear-gradient(135deg,var(--green),var(--green2));color:var(--text);padding:16px;border-radius:14px;font-size:15px;font-weight:700;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(45,122,95,0.4);transition:opacity 0.2s}
+.disc-btn:disabled{opacity:0.4;cursor:not-allowed}
+.disc-footer{text-align:center;margin-top:16px;font-size:11px;color:var(--muted2);line-height:1.6}
+.disc-date{font-size:10px;color:var(--muted2);text-align:center;margin-top:12px}
+
 /* ── ONBOARDING ── */
 #onboarding{position:fixed;inset:0;background:var(--bg);z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;text-align:center;transition:opacity 0.5s}
 #onboarding.hidden{opacity:0;pointer-events:none}
@@ -297,6 +329,45 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
 .tool-card .tool-desc{font-size:10px;color:var(--muted2);line-height:1.4}
 .tool-card.highlight{background:linear-gradient(135deg,rgba(45,122,95,0.15),rgba(30,92,69,0.1));border-color:rgba(45,122,95,0.3)}
 
+/* ── GLOSSARY ── */
+.glossary-section{margin:20px 0;display:none}
+.glossary-section.show{display:block}
+.glossary-card{background:linear-gradient(135deg,rgba(109,207,160,0.1),rgba(45,122,95,0.05));border:1px solid rgba(109,207,160,0.2);border-radius:16px;padding:16px}
+.glossary-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.glossary-title{font-size:15px;font-weight:700;color:var(--accent);display:flex;align-items:center;gap:8px}
+.glossary-toggle{background:rgba(255,255,255,0.05);border:1px solid var(--border2);color:var(--muted);padding:6px 12px;border-radius:50px;font-size:11px;font-weight:600;cursor:pointer;transition:all 0.2s}
+.glossary-toggle:hover{background:rgba(45,122,95,0.15);border-color:var(--border);color:var(--accent)}
+.glossary-intro{font-size:12px;color:var(--muted);margin-bottom:14px;line-height:1.5}
+.glossary-list{display:flex;flex-direction:column;gap:10px;max-height:300px;overflow-y:auto}
+.glossary-list.collapsed{max-height:180px}
+.glossary-item{background:rgba(255,255,255,0.03);border:1px solid var(--border2);border-radius:10px;padding:10px 12px}
+.glossary-term{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.glossary-term-sv{font-weight:400;color:var(--muted2);font-size:11px}
+.glossary-def{font-size:12px;color:var(--muted);line-height:1.5}
+.glossary-search{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.03);border:1px solid var(--border2);border-radius:10px;padding:10px 12px;margin-bottom:12px}
+.glossary-search input{background:none;border:none;outline:none;color:var(--text);font-size:13px;flex:1;font-family:inherit}
+.glossary-search input::placeholder{color:var(--muted2)}
+.glossary-search-icon{font-size:14px;opacity:0.5}
+
+/* ── TEXT TO SPEECH ── */
+.tts-btn{background:none;border:none;font-size:14px;cursor:pointer;padding:6px;border-radius:8px;transition:all 0.2s;opacity:0.5;color:var(--muted2)}
+.tts-btn:hover{opacity:1;background:rgba(109,207,160,0.1);color:var(--accent)}
+.tts-btn.speaking{opacity:1;color:var(--accent);animation:tts-pulse 1s infinite}
+@keyframes tts-pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+.tts-fab{position:fixed;right:16px;bottom:120px;width:48px;height:48px;background:linear-gradient(135deg,var(--green),var(--green2));color:var(--text);border:none;border-radius:50%;font-size:20px;cursor:pointer;display:none;place-items:center;box-shadow:0 4px 16px rgba(0,0,0,0.3);z-index:85;transition:all 0.2s}
+.tts-fab.show{display:grid}
+.tts-fab.speaking{background:linear-gradient(135deg,var(--gold),var(--gold2));animation:tts-pulse 1s infinite}
+.tts-fab:hover{transform:scale(1.05)}
+.tts-bar{position:fixed;bottom:60px;left:0;right:0;background:var(--panel);border-top:1px solid var(--border);padding:10px 16px;display:none;align-items:center;justify-content:space-between;z-index:95;gap:12px}
+.tts-bar.show{display:flex}
+.tts-bar-text{font-size:12px;color:var(--muted);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tts-bar-text strong{color:var(--accent)}
+.tts-bar-controls{display:flex;gap:8px}
+.tts-bar-btn{background:rgba(255,255,255,0.05);border:1px solid var(--border2);color:var(--text);padding:8px 12px;border-radius:8px;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px}
+.tts-bar-btn:hover{background:rgba(45,122,95,0.15);border-color:var(--border)}
+.tts-bar-btn.stop{background:rgba(122,24,24,0.2);border-color:rgba(122,24,24,0.4);color:#ff9999}
+.tts-bar-btn.stop:hover{background:rgba(122,24,24,0.3)}
+
 /* ── TOOL MODAL ── */
 .tool-modal{position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:600;display:none;place-items:center;padding:16px;overflow-y:auto}
 .tool-modal.open{display:grid}
@@ -374,6 +445,36 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
 
 <!-- OFFLINE BANNER -->
 <div class="offline-banner" id="offlineBanner">📴 Du är offline – vissa funktioner kanske inte fungerar</div>
+
+<!-- DISCLAIMER -->
+<div id="disclaimer">
+  <div class="disc-container">
+    <div class="disc-logo">SG</div>
+    <div class="disc-header">
+      <h1 class="disc-title" id="discTitle">Användarvillkor & <em>Integritet</em></h1>
+      <div class="disc-lang">
+        <button class="disc-lang-btn active" id="discLangSv" onclick="setDiscLang('sv')">🇸🇪 Svenska</button>
+        <button class="disc-lang-btn" id="discLangEn" onclick="setDiscLang('en')">🇬🇧 English</button>
+      </div>
+    </div>
+    
+    <div class="disc-content" id="discContent">
+      <!-- Content injected by JavaScript based on language -->
+    </div>
+    
+    <div class="disc-checkbox">
+      <input type="checkbox" id="discAgree" onchange="updateDiscBtn()"/>
+      <label for="discAgree" id="discAgreeLabel">Jag har läst och <strong>godkänner</strong> ovanstående villkor och förstår att StödGuiden endast tillhandahåller länkar till externa källor.</label>
+    </div>
+    
+    <button class="disc-btn" id="discBtn" disabled onclick="acceptDisclaimer()">Godkänn och fortsätt</button>
+    
+    <div class="disc-footer" id="discFooter">
+      Genom att använda StödGuiden godkänner du dessa villkor.
+    </div>
+    <div class="disc-date">Senast uppdaterad: April 2026</div>
+  </div>
+</div>
 
 <!-- ONBOARDING -->
 <div id="onboarding">
@@ -520,6 +621,24 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
         <div class="tool-icon">📚</div>
         <div class="tool-name" id="toolBibliotekName">Bibliotek & WiFi</div>
         <div class="tool-desc" id="toolBibliotekDesc">Gratis internet</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GLOSSARY SECTION (English only) -->
+  <div class="glossary-section" id="glossarySection">
+    <div class="glossary-card">
+      <div class="glossary-header">
+        <span class="glossary-title">📖 <span id="glossaryTitle">Swedish Terms Explained</span></span>
+        <button class="glossary-toggle" id="glossaryToggle" onclick="toggleGlossary()">Show all</button>
+      </div>
+      <div class="glossary-intro" id="glossaryIntro">Common Swedish words and concepts you'll encounter when dealing with authorities.</div>
+      <div class="glossary-search">
+        <span class="glossary-search-icon">🔍</span>
+        <input type="text" id="glossarySearch" placeholder="Search terms..." oninput="filterGlossary()"/>
+      </div>
+      <div class="glossary-list collapsed" id="glossaryList">
+        <!-- Populated by JavaScript -->
       </div>
     </div>
   </div>
@@ -740,6 +859,16 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
 
 <button id="upBtn" onclick="goHome()">↑</button>
 
+<!-- TEXT TO SPEECH -->
+<button class="tts-fab" id="ttsFab" onclick="toggleTTS()" title="Läs upp sidan">🔊</button>
+<div class="tts-bar" id="ttsBar">
+  <div class="tts-bar-text"><strong>🔊</strong> <span id="ttsStatus">Läser upp...</span></div>
+  <div class="tts-bar-controls">
+    <button class="tts-bar-btn" onclick="pauseResumeTTS()" id="ttsPauseBtn">⏸️ Pausa</button>
+    <button class="tts-bar-btn stop" onclick="stopTTS()">⏹️ Stopp</button>
+  </div>
+</div>
+
 <!-- TOAST -->
 <div class="toast" id="toast">
   <span class="toast-icon">⭐</span>
@@ -785,6 +914,140 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
 </div>
 
 <script>
+// ═══ DISCLAIMER ═══
+const DISCLAIMER = {
+  sv: {
+    title: 'Användarvillkor & <em>Integritet</em>',
+    sections: [
+      {
+        icon: '📋',
+        title: 'Om StödGuiden',
+        text: 'StödGuiden är en <strong>gratis informationstjänst</strong> som samlar länkar till officiella svenska myndigheter och organisationer. Appen är skapad för att underlätta navigering i det svenska samhället.'
+      },
+      {
+        icon: '⚠️',
+        title: 'Ansvarsfriskrivning',
+        text: 'StödGuiden tillhandahåller <strong>endast länkar</strong> till externa webbplatser. Vi ger <strong>ingen rådgivning</strong> inom juridik, ekonomi, hälsa eller andra områden. All information på de länkade sidorna tillhör respektive myndighet eller organisation. <strong>Du ansvarar själv</strong> för hur du använder informationen och vilka beslut du fattar baserat på den.'
+      },
+      {
+        icon: '🔗',
+        title: 'Externa länkar',
+        text: 'Vi ansvarar <strong>inte för innehållet</strong> på de webbplatser vi länkar till. Dessa sidor kan ändras utan förvarning. Kontrollera alltid att informationen är aktuell genom att besöka myndighetens officiella webbplats.'
+      },
+      {
+        icon: '🔒',
+        title: 'Integritet & GDPR',
+        text: 'StödGuiden samlar <strong>inte in några personuppgifter</strong>. Vi använder inga cookies för spårning eller analys. All data (favoriter, inställningar, checklista) sparas <strong>endast lokalt</strong> på din enhet och skickas aldrig till någon server. Du kan när som helst radera all sparad data genom att rensa webbläsarens lokala lagring.'
+      },
+      {
+        icon: '📧',
+        title: 'Feedback',
+        text: 'Om du skickar feedback via appen sker detta genom en extern tjänst (Formspree). Feedback är <strong>helt anonym</strong> om du inte själv väljer att ange kontaktuppgifter.'
+      }
+    ],
+    highlight: {
+      icon: '⚖️',
+      title: 'Viktigt att förstå',
+      text: 'StödGuiden ersätter inte professionell rådgivning. Vid behov av juridisk, ekonomisk eller medicinsk hjälp – kontakta alltid relevant myndighet eller yrkesperson direkt.'
+    },
+    agreeLabel: 'Jag har läst och <strong>godkänner</strong> ovanstående villkor och förstår att StödGuiden endast tillhandahåller länkar till externa källor.',
+    btnText: 'Godkänn och fortsätt',
+    footer: 'Genom att använda StödGuiden godkänner du dessa villkor.'
+  },
+  en: {
+    title: 'Terms of Use & <em>Privacy</em>',
+    sections: [
+      {
+        icon: '📋',
+        title: 'About StödGuiden',
+        text: 'StödGuiden is a <strong>free information service</strong> that collects links to official Swedish authorities and organizations. The app is designed to help navigate Swedish society.'
+      },
+      {
+        icon: '⚠️',
+        title: 'Disclaimer',
+        text: 'StödGuiden provides <strong>links only</strong> to external websites. We do <strong>not provide advice</strong> on legal, financial, health or other matters. All information on linked sites belongs to the respective authority or organization. <strong>You are responsible</strong> for how you use the information and any decisions you make based on it.'
+      },
+      {
+        icon: '🔗',
+        title: 'External Links',
+        text: 'We are <strong>not responsible for the content</strong> on websites we link to. These sites may change without notice. Always verify that information is current by visiting the official website.'
+      },
+      {
+        icon: '🔒',
+        title: 'Privacy & GDPR',
+        text: 'StödGuiden <strong>does not collect any personal data</strong>. We do not use cookies for tracking or analytics. All data (favorites, settings, checklist) is stored <strong>only locally</strong> on your device and is never sent to any server. You can delete all saved data at any time by clearing your browser\'s local storage.'
+      },
+      {
+        icon: '📧',
+        title: 'Feedback',
+        text: 'If you send feedback through the app, it is processed by an external service (Formspree). Feedback is <strong>completely anonymous</strong> unless you choose to provide contact information.'
+      }
+    ],
+    highlight: {
+      icon: '⚖️',
+      title: 'Important to understand',
+      text: 'StödGuiden does not replace professional advice. For legal, financial or medical help – always contact the relevant authority or professional directly.'
+    },
+    agreeLabel: 'I have read and <strong>accept</strong> the above terms and understand that StödGuiden only provides links to external sources.',
+    btnText: 'Accept and continue',
+    footer: 'By using StödGuiden you agree to these terms.'
+  }
+};
+
+let discLang = 'sv';
+
+function setDiscLang(lang) {
+  discLang = lang;
+  document.getElementById('discLangSv').classList.toggle('active', lang === 'sv');
+  document.getElementById('discLangEn').classList.toggle('active', lang === 'en');
+  renderDisclaimer();
+}
+
+function renderDisclaimer() {
+  const d = DISCLAIMER[discLang];
+  document.getElementById('discTitle').innerHTML = d.title;
+  
+  let html = d.sections.map(s => `
+    <div class="disc-section">
+      <div class="disc-section-title">${s.icon} ${s.title}</div>
+      <div class="disc-section-text">${s.text}</div>
+    </div>
+  `).join('');
+  
+  html += `
+    <div class="disc-highlight">
+      <div class="disc-highlight-title">${d.highlight.icon} ${d.highlight.title}</div>
+      <div class="disc-highlight-text">${d.highlight.text}</div>
+    </div>
+  `;
+  
+  document.getElementById('discContent').innerHTML = html;
+  document.getElementById('discAgreeLabel').innerHTML = d.agreeLabel;
+  document.getElementById('discBtn').textContent = d.btnText;
+  document.getElementById('discFooter').textContent = d.footer;
+}
+
+function updateDiscBtn() {
+  document.getElementById('discBtn').disabled = !document.getElementById('discAgree').checked;
+}
+
+function acceptDisclaimer() {
+  localStorage.setItem('sg_disclaimer_accepted', 'true');
+  localStorage.setItem('sg_lang', discLang);
+  document.getElementById('disclaimer').classList.add('hidden');
+}
+
+function initDisclaimer() {
+  if (localStorage.getItem('sg_disclaimer_accepted')) {
+    document.getElementById('disclaimer').classList.add('hidden');
+  } else {
+    renderDisclaimer();
+  }
+}
+
+// Initialize disclaimer on load
+initDisclaimer();
+
 // ═══ TRANSLATIONS ═══
 const T = {
   sv: {
@@ -1216,6 +1479,8 @@ document.addEventListener('DOMContentLoaded', function() {
   renderCatGrid();
   renderCategories();
   renderFavorites();
+  renderGlossary();
+  initTTS();
   showTip();
   initTools();
   if(localStorage.getItem('sg_seen')) document.getElementById('onboarding').style.display='none';
@@ -1292,6 +1557,7 @@ function toggleLang() {
   renderCatGrid();
   renderCategories();
   renderFavorites();
+  renderGlossary();
   showTip();
 }
 
@@ -1550,6 +1816,217 @@ document.getElementById('feedbackModal').addEventListener('click', e => { if(e.t
 
 // ═══ UP BUTTON ═══
 window.addEventListener('scroll', () => { document.getElementById('upBtn').style.display = window.scrollY > 400 ? 'grid' : 'none'; }, {passive:true});
+
+// ═══ GLOSSARY (English only) ═══
+const GLOSSARY = [
+  {term:'Personnummer',def:'Personal identity number (like SSN). A 10 or 12-digit number assigned to everyone registered in Sweden. Format: YYMMDD-XXXX. Essential for everything from healthcare to phone contracts.'},
+  {term:'Folkbokföring',def:'Population registration. The official record of where you live in Sweden. You must register your address with Skatteverket within one week of moving.'},
+  {term:'Samordningsnummer',def:'Coordination number. A temporary ID number for people not registered in Sweden but who need to interact with Swedish authorities.'},
+  {term:'BankID',def:'Digital identification. A secure electronic ID used to log into banks, government websites, and sign documents. Get it through your bank — it\'s free.'},
+  {term:'Försäkringskassan',def:'The Social Insurance Agency. Handles benefits like parental leave, sick pay, housing allowance (bostadsbidrag), and disability support.'},
+  {term:'Skatteverket',def:'The Swedish Tax Agency. Handles taxes, ID cards, population registration (folkbokföring), and name changes.'},
+  {term:'Arbetsförmedlingen',def:'The Public Employment Service. Helps with job searching, unemployment benefits registration, and career guidance.'},
+  {term:'CSN',def:'Centrala studiestödsnämnden. The agency that provides student grants and loans for studies in Sweden and abroad.'},
+  {term:'Bostadsbidrag',def:'Housing allowance. Financial support for housing costs. Available for young people (18-28) and families with children. Apply via Försäkringskassan.'},
+  {term:'Försörjningsstöd',def:'Income support (social welfare). Last-resort financial help when you can\'t support yourself. Apply through your municipality\'s social services (socialtjänsten).'},
+  {term:'Socialtjänsten',def:'Social services. The municipal department that provides support for families, elderly, people with disabilities, and those in financial difficulty.'},
+  {term:'Hyreskontrakt',def:'Rental contract/lease agreement. The legal document between you and your landlord. Read it carefully before signing!'},
+  {term:'Förstahandskontrakt',def:'First-hand rental contract. A direct contract with the property owner — the most secure type of rental agreement.'},
+  {term:'Andrahandskontrakt',def:'Second-hand rental contract. Subletting from someone who has the first-hand contract. Usually temporary and requires landlord approval.'},
+  {term:'Bostadskö',def:'Housing queue. A waiting list for rental apartments. Sign up at 16 — it\'s free and queue time matters! Each city has its own system.'},
+  {term:'Hemförsäkring',def:'Home insurance. Covers theft, damage, and liability. Most landlords require it. Costs around 100-200 kr/month.'},
+  {term:'Autogiro',def:'Direct debit. Automatic payment from your bank account for recurring bills like rent and utilities. Set it up so you never miss payments.'},
+  {term:'E-legitimation',def:'Electronic ID. Digital identification for online services. BankID is the most common, but Freja eID is an alternative.'},
+  {term:'Mina sidor',def:'"My pages." The personal login area on government websites where you can see your information, apply for benefits, and manage your cases.'},
+  {term:'Vårdcentral',def:'Health center/primary care clinic. Your first stop for non-emergency health issues. You can choose which one to register with.'},
+  {term:'1177 Vårdguiden',def:'Healthcare guide. Call 1177 for medical advice 24/7, or visit 1177.se for health information and to find healthcare providers.'},
+  {term:'Ungdomsmottagning',def:'Youth clinic. Free, confidential healthcare for people roughly 13-25. Covers sexual health, mental health, and general questions.'},
+  {term:'Kronofogden',def:'The Enforcement Authority. Handles debt collection and payment orders. If you owe money you can\'t pay, contact them to arrange a payment plan.'},
+  {term:'Skuldsanering',def:'Debt restructuring. A legal process to help people with unmanageable debt get a fresh start. Apply through Kronofogden.'},
+  {term:'A-kassa',def:'Unemployment insurance fund. Voluntary insurance that provides income if you lose your job. You must be a member before becoming unemployed.'},
+  {term:'Fackförbund',def:'Trade union. Organizations that protect workers\' rights and help with workplace issues. Many offer A-kassa membership.'},
+  {term:'SFI',def:'Svenska för invandrare. Free Swedish language courses for immigrants. Apply through your municipality.'},
+  {term:'Komvux',def:'Municipal adult education. Free courses to complete or supplement your education. High school subjects, vocational training, and SFI.'},
+  {term:'Studiebidrag',def:'Student grant. Money from CSN that you don\'t have to pay back. Given to students in gymnasium and higher education.'},
+  {term:'Studielån',def:'Student loan. Money from CSN that must be repaid after you finish studying. Low interest rate.'},
+  {term:'Körkortstillstånd',def:'Driving license permit. Required before you can start practicing driving. Apply via Transportstyrelsen.'},
+  {term:'Swish',def:'Mobile payment app. Linked to your phone number and bank account. The most common way to pay friends and small businesses in Sweden.'}
+];
+
+let glossaryExpanded = false;
+
+function renderGlossary() {
+  const section = document.getElementById('glossarySection');
+  // Only show in English
+  if (currentLang !== 'en') {
+    section.classList.remove('show');
+    return;
+  }
+  section.classList.add('show');
+  
+  const list = document.getElementById('glossaryList');
+  const searchTerm = (document.getElementById('glossarySearch').value || '').toLowerCase();
+  
+  const filtered = GLOSSARY.filter(item => 
+    item.term.toLowerCase().includes(searchTerm) || 
+    item.def.toLowerCase().includes(searchTerm)
+  );
+  
+  list.innerHTML = filtered.map(item => `
+    <div class="glossary-item">
+      <div class="glossary-term">${item.term}</div>
+      <div class="glossary-def">${item.def}</div>
+    </div>
+  `).join('');
+  
+  if (filtered.length === 0) {
+    list.innerHTML = '<div class="glossary-item"><div class="glossary-def">No terms found. Try a different search.</div></div>';
+  }
+}
+
+function toggleGlossary() {
+  glossaryExpanded = !glossaryExpanded;
+  const list = document.getElementById('glossaryList');
+  const btn = document.getElementById('glossaryToggle');
+  
+  if (glossaryExpanded) {
+    list.classList.remove('collapsed');
+    btn.textContent = 'Show less';
+  } else {
+    list.classList.add('collapsed');
+    btn.textContent = 'Show all';
+  }
+}
+
+function filterGlossary() {
+  renderGlossary();
+}
+
+// ═══ TEXT TO SPEECH ═══
+let ttsUtterance = null;
+let ttsPaused = false;
+let ttsSupported = 'speechSynthesis' in window;
+
+const TTS_TEXT = {
+  sv: {
+    reading: 'Läser upp...',
+    paused: 'Pausad',
+    pause: '⏸️ Pausa',
+    resume: '▶️ Fortsätt',
+    noSupport: 'Din webbläsare stödjer inte uppläsning.',
+    fabTitle: 'Läs upp sidan'
+  },
+  en: {
+    reading: 'Reading...',
+    paused: 'Paused',
+    pause: '⏸️ Pause',
+    resume: '▶️ Resume',
+    noSupport: 'Your browser does not support text-to-speech.',
+    fabTitle: 'Read page aloud'
+  }
+};
+
+function initTTS() {
+  if (ttsSupported) {
+    document.getElementById('ttsFab').classList.add('show');
+    document.getElementById('ttsFab').title = TTS_TEXT[currentLang].fabTitle;
+  }
+}
+
+function getPageText() {
+  // Get visible text content from the current view
+  const homeView = document.getElementById('homeView');
+  const catSection = document.querySelector('.cat-section[style*="block"]');
+  
+  let text = '';
+  
+  if (catSection) {
+    // If a category is open, read that
+    text = catSection.innerText;
+  } else if (homeView.style.display !== 'none') {
+    // Read hero and visible sections
+    const hero = document.querySelector('.hero');
+    const tip = document.querySelector('.tip-card');
+    const deadlines = document.querySelector('.deadline-card');
+    
+    if (hero) text += hero.innerText + '. ';
+    if (tip) text += tip.innerText + '. ';
+    if (deadlines) text += deadlines.innerText + '. ';
+  }
+  
+  // Clean up text
+  text = text
+    .replace(/[↗←→↑↓]/g, '')
+    .replace(/[☆★]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  
+  return text || (currentLang === 'sv' ? 'Ingen text att läsa.' : 'No text to read.');
+}
+
+function toggleTTS() {
+  if (!ttsSupported) {
+    alert(TTS_TEXT[currentLang].noSupport);
+    return;
+  }
+  
+  if (speechSynthesis.speaking) {
+    stopTTS();
+  } else {
+    startTTS();
+  }
+}
+
+function startTTS() {
+  const text = getPageText();
+  ttsUtterance = new SpeechSynthesisUtterance(text);
+  
+  // Set language
+  ttsUtterance.lang = currentLang === 'sv' ? 'sv-SE' : 'en-US';
+  ttsUtterance.rate = 0.9;
+  ttsUtterance.pitch = 1;
+  
+  // Event handlers
+  ttsUtterance.onstart = () => {
+    document.getElementById('ttsFab').classList.add('speaking');
+    document.getElementById('ttsBar').classList.add('show');
+    document.getElementById('ttsStatus').textContent = TTS_TEXT[currentLang].reading;
+    document.getElementById('ttsPauseBtn').innerHTML = TTS_TEXT[currentLang].pause;
+    ttsPaused = false;
+  };
+  
+  ttsUtterance.onend = () => {
+    stopTTS();
+  };
+  
+  ttsUtterance.onerror = () => {
+    stopTTS();
+  };
+  
+  speechSynthesis.speak(ttsUtterance);
+}
+
+function pauseResumeTTS() {
+  if (ttsPaused) {
+    speechSynthesis.resume();
+    document.getElementById('ttsStatus').textContent = TTS_TEXT[currentLang].reading;
+    document.getElementById('ttsPauseBtn').innerHTML = TTS_TEXT[currentLang].pause;
+    ttsPaused = false;
+  } else {
+    speechSynthesis.pause();
+    document.getElementById('ttsStatus').textContent = TTS_TEXT[currentLang].paused;
+    document.getElementById('ttsPauseBtn').innerHTML = TTS_TEXT[currentLang].resume;
+    ttsPaused = true;
+  }
+}
+
+function stopTTS() {
+  speechSynthesis.cancel();
+  document.getElementById('ttsFab').classList.remove('speaking');
+  document.getElementById('ttsBar').classList.remove('show');
+  ttsUtterance = null;
+  ttsPaused = false;
+}
 
 // ═══ SOCIALJOUR DATA ═══
 const SOCIALJOUR = {

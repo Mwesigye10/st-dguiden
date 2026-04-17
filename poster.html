@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>StödGuiden – Poster</title>
+<style>
+@page {
+  size: A4;
+  margin: 0;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  width: 210mm;
+  height: 297mm;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: #0c1e19;
+  color: #e8f5ee;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.poster {
+  width: 100%;
+  height: 100%;
+  padding: 20mm;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  background: linear-gradient(180deg, #0c1e19 0%, #112e24 50%, #0c1e19 100%);
+}
+
+/* Header */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.logo {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #2d7a5f, #1e5c45);
+  border-radius: 20px;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 32px;
+  color: #6dcfa0;
+  box-shadow: 0 8px 32px rgba(45, 122, 95, 0.4);
+}
+.brand {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+.tagline {
+  font-size: 16px;
+  color: #6dcfa0;
+  font-weight: 600;
+  background: rgba(45, 122, 95, 0.2);
+  padding: 8px 20px;
+  border-radius: 50px;
+  border: 1px solid rgba(45, 122, 95, 0.3);
+}
+
+/* Main content */
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+.headline {
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1.2;
+  max-width: 400px;
+}
+.headline em {
+  font-style: normal;
+  color: #6dcfa0;
+}
+.description {
+  font-size: 18px;
+  color: #6a9a82;
+  line-height: 1.6;
+  max-width: 380px;
+}
+
+/* Features */
+.features {
+  display: flex;
+  gap: 24px;
+  margin-top: 8px;
+}
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #6a9a82;
+}
+.feature-icon {
+  font-size: 18px;
+}
+
+/* QR Section */
+.qr-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.qr-box {
+  background: #fff;
+  padding: 12px;
+  border-radius: 20px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+}
+.qr-code {
+  width: 180px;
+  height: 180px;
+  display: block;
+}
+.scan-text {
+  font-size: 20px;
+  font-weight: 700;
+  color: #6dcfa0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.scan-arrow {
+  font-size: 24px;
+}
+.url {
+  font-size: 14px;
+  color: #4a7062;
+  font-family: monospace;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Footer */
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.footer-text {
+  font-size: 13px;
+  color: #4a7062;
+}
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-width: 400px;
+}
+.cat-tag {
+  font-size: 11px;
+  color: #6a9a82;
+  background: rgba(45, 122, 95, 0.15);
+  padding: 5px 10px;
+  border-radius: 50px;
+  border: 1px solid rgba(45, 122, 95, 0.2);
+}
+
+/* Print adjustments */
+@media print {
+  html, body {
+    width: 210mm;
+    height: 297mm;
+  }
+  .poster {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+</style>
+</head>
+<body>
+<div class="poster">
+  
+  <div class="header">
+    <div class="logo">SG</div>
+    <div class="brand">StödGuiden</div>
+    <div class="tagline">🏛️ Vi guider dig till rätt myndighet</div>
+  </div>
+
+  <div class="main">
+    <h1 class="headline">Koll på läget<br/>— <em>direkt</em></h1>
+    <p class="description">
+      Hitta rätt bland myndigheter, bidrag, hälsa och boende. 
+      Allt samlat på ett ställe — enkelt, tryggt och gratis.
+    </p>
+    <div class="features">
+      <div class="feature"><span class="feature-icon">🔒</span> Anonymt</div>
+      <div class="feature"><span class="feature-icon">✅</span> Officiella källor</div>
+      <div class="feature"><span class="feature-icon">💚</span> 100% gratis</div>
+    </div>
+  </div>
+
+  <div class="qr-section">
+    <div class="scan-text">
+      <span class="scan-arrow">👇</span>
+      Scanna och kom igång!
+      <span class="scan-arrow">👇</span>
+    </div>
+    <div class="qr-box">
+      <img class="qr-code" src="sg-qr.png" alt="QR-kod till StödGuiden"/>
+    </div>
+    <div class="url">mwesigye10.github.io/stodguiden</div>
+    <div class="footer-text">Öppna kameran → Scanna koden → Klar!</div>
+  </div>
+
+  <div class="footer">
+    <div class="categories">
+      <span class="cat-tag">💼 Jobb</span>
+      <span class="cat-tag">💸 Ekonomi</span>
+      <span class="cat-tag">🧠 Hälsa</span>
+      <span class="cat-tag">🏡 Boende</span>
+      <span class="cat-tag">🎓 Studier</span>
+      <span class="cat-tag">💳 Bank</span>
+      <span class="cat-tag">⚖️ Rättigheter</span>
+      <span class="cat-tag">☎️ Viktiga nummer</span>
+    </div>
+    <div class="footer-text">Fungerar på mobil, surfplatta och dator • Ingen app att ladda ner</div>
+  </div>
+
+</div>
+</body>
+</html>
