@@ -1928,12 +1928,19 @@ const TTS_TEXT = {
     fabTitle: 'Läs upp sidan',
     section: 'Avsnitt',
     of: 'av',
-    welcomeIntro: 'Välkommen till StödGuiden.',
-    heroSection: 'Startsidan.',
-    tipSection: 'Tips.',
-    deadlineSection: 'Viktiga åldersgränser.',
-    categorySection: 'Kategori.',
-    done: 'Uppläsning klar.'
+    done: 'Uppläsning klar.',
+    // Descriptive phrases
+    welcomeIntro: 'Välkommen till StödGuiden. En app som hjälper dig hitta rätt bland svenska myndigheter.',
+    homeDesc: 'Du är på startsidan.',
+    tipIntro: 'Här är ett tips:',
+    deadlineIntro: 'Nu kommer viktiga åldersgränser.',
+    atAge: 'Vid',
+    yearsOld: 'år',
+    categoryIntro: 'Du är i kategorin',
+    categoryDesc: 'som handlar om',
+    linkIntro: 'Detta är en länk till',
+    linksInCategory: 'I denna kategori finns följande länkar:',
+    trustInfo: 'Appen är anonym, gratis, och använder endast officiella källor.'
   },
   en: {
     reading: 'Reading...',
@@ -1944,12 +1951,19 @@ const TTS_TEXT = {
     fabTitle: 'Read page aloud',
     section: 'Section',
     of: 'of',
-    welcomeIntro: 'Welcome to StödGuiden.',
-    heroSection: 'Home page.',
-    tipSection: 'Tip.',
-    deadlineSection: 'Important age limits.',
-    categorySection: 'Category.',
-    done: 'Reading complete.'
+    done: 'Reading complete.',
+    // Descriptive phrases
+    welcomeIntro: 'Welcome to StödGuiden. An app that helps you navigate Swedish authorities.',
+    homeDesc: 'You are on the home page.',
+    tipIntro: 'Here is a tip:',
+    deadlineIntro: 'Now, here are important age limits.',
+    atAge: 'At age',
+    yearsOld: '',
+    categoryIntro: 'You are in the category',
+    categoryDesc: 'which is about',
+    linkIntro: 'This is a link to',
+    linksInCategory: 'In this category you will find the following links:',
+    trustInfo: 'The app is anonymous, free, and uses only official sources.'
   }
 };
 
@@ -1970,90 +1984,79 @@ function getPageSections() {
   const catSection = document.querySelector('.cat-section[style*="block"]');
   
   if (catSection) {
-    // Reading a category
+    // Reading a category page
     const title = catSection.querySelector('.cat-section-title');
+    const subtitle = catSection.querySelector('.cat-section-sub');
     const links = catSection.querySelectorAll('.link-item');
     
+    // Introduce the category
     if (title) {
-      sections.push({
-        label: t.categorySection,
-        text: title.innerText
-      });
+      let catIntro = `${t.categoryIntro} "${stripEmojis(title.innerText)}"`;
+      if (subtitle) {
+        catIntro += `, ${t.categoryDesc} ${stripEmojis(subtitle.innerText)}.`;
+      }
+      sections.push({ label: '', text: catIntro });
     }
     
-    links.forEach((link, i) => {
-      const name = link.querySelector('.li-name');
-      if (name) {
-        sections.push({
-          label: `${i + 1}.`,
-          text: name.innerText
-        });
-      }
-    });
+    // Announce how many links
+    if (links.length > 0) {
+      sections.push({ label: '', text: t.linksInCategory });
+      
+      // Read each link
+      links.forEach((link, i) => {
+        const name = link.querySelector('.li-name');
+        if (name) {
+          const linkText = `${t.linkIntro} ${stripEmojis(name.innerText)}.`;
+          sections.push({ label: `${i + 1}.`, text: linkText });
+        }
+      });
+    }
   } else {
     // Reading home page
-    sections.push({
-      label: '',
-      text: t.welcomeIntro
-    });
     
-    // Hero section
-    const heroH1 = document.getElementById('heroH1');
-    const heroSub = document.getElementById('heroSub');
-    const heroMission = document.getElementById('heroMission');
+    // Welcome
+    sections.push({ label: '', text: t.welcomeIntro });
     
-    if (heroH1) {
-      const heroText = heroH1.innerText.replace(/\n/g, ' ').replace('—', '.');
-      sections.push({
-        label: t.heroSection,
-        text: heroText
-      });
-    }
+    // Where we are
+    sections.push({ label: '', text: t.homeDesc });
     
-    if (heroSub) {
-      sections.push({
-        label: '',
-        text: heroSub.innerText
-      });
-    }
-    
-    if (heroMission) {
-      sections.push({
-        label: '',
-        text: heroMission.innerText.replace('🏛️', '')
-      });
-    }
+    // Trust info
+    sections.push({ label: '', text: t.trustInfo });
     
     // Tip section
     const tipCard = document.querySelector('.tip-card');
     if (tipCard) {
-      const tipText = tipCard.innerText.replace('💡', '').trim();
-      sections.push({
-        label: t.tipSection,
-        text: tipText
-      });
+      const tipStrong = tipCard.querySelector('strong');
+      const tipText = tipCard.querySelector('.tip-tx');
+      if (tipText) {
+        let tip = stripEmojis(tipText.innerText);
+        sections.push({ label: t.tipIntro, text: tip });
+      }
     }
     
     // Deadlines
     const deadlineCard = document.querySelector('.deadline-card');
     if (deadlineCard) {
-      sections.push({
-        label: t.deadlineSection,
-        text: ''
-      });
+      sections.push({ label: '', text: t.deadlineIntro });
       
       const items = deadlineCard.querySelectorAll('.deadline-item');
       items.forEach(item => {
         const age = item.querySelector('.deadline-age');
         const desc = item.querySelector('.deadline-text');
         if (age && desc) {
-          sections.push({
-            label: age.innerText + ':',
-            text: desc.innerText
-          });
+          const ageNum = stripEmojis(age.innerText).replace(/[^\d]/g, '');
+          const descText = stripEmojis(desc.innerText);
+          const ageText = currentLang === 'sv' 
+            ? `${t.atAge} ${ageNum} ${t.yearsOld}: ${descText}`
+            : `${t.atAge} ${ageNum}: ${descText}`;
+          sections.push({ label: '', text: ageText });
         }
       });
     }
+  }
+  
+  // Completion message
+  sections.push({ label: '', text: t.done });
   }
   
   // Add completion message
@@ -2063,6 +2066,28 @@ function getPageSections() {
   });
   
   return sections;
+}
+
+// Remove all emojis and icons from text
+function stripEmojis(text) {
+  return text
+    .replace(/[\u{1F600}-\u{1F64F}]/gu, '') // Emoticons
+    .replace(/[\u{1F300}-\u{1F5FF}]/gu, '') // Misc symbols & pictographs
+    .replace(/[\u{1F680}-\u{1F6FF}]/gu, '') // Transport & map symbols
+    .replace(/[\u{1F700}-\u{1F77F}]/gu, '') // Alchemical symbols
+    .replace(/[\u{1F780}-\u{1F7FF}]/gu, '') // Geometric shapes
+    .replace(/[\u{1F800}-\u{1F8FF}]/gu, '') // Supplemental arrows
+    .replace(/[\u{1F900}-\u{1F9FF}]/gu, '') // Supplemental symbols
+    .replace(/[\u{1FA00}-\u{1FA6F}]/gu, '') // Chess symbols
+    .replace(/[\u{1FA70}-\u{1FAFF}]/gu, '') // Symbols & pictographs ext-A
+    .replace(/[\u{2600}-\u{26FF}]/gu, '')   // Misc symbols
+    .replace(/[\u{2700}-\u{27BF}]/gu, '')   // Dingbats
+    .replace(/[\u{FE00}-\u{FE0F}]/gu, '')   // Variation selectors
+    .replace(/[\u{1F000}-\u{1F02F}]/gu, '') // Mahjong tiles
+    .replace(/[\u{1F0A0}-\u{1F0FF}]/gu, '') // Playing cards
+    .replace(/[↗←→↑↓☆★●○◆◇▼▲]/g, '')       // Arrows & shapes
+    .replace(/\s+/g, ' ')                    // Multiple spaces to single
+    .trim();
 }
 
 function toggleTTS() {
@@ -2098,22 +2123,32 @@ function readNextSection() {
   }
   
   const section = ttsQueue[ttsCurrentIndex];
-  const fullText = section.label ? `${section.label} ${section.text}` : section.text;
+  let fullText = section.label ? `${section.label} ${section.text}` : section.text;
+  
+  // Remove all emojis and icons
+  fullText = stripEmojis(fullText);
+  
+  // Skip empty sections
+  if (!fullText.trim()) {
+    ttsCurrentIndex++;
+    readNextSection();
+    return;
+  }
   
   ttsUtterance = new SpeechSynthesisUtterance(fullText);
   ttsUtterance.lang = currentLang === 'sv' ? 'sv-SE' : 'en-US';
-  ttsUtterance.rate = 0.85;
+  ttsUtterance.rate = 0.75;  // Slower speed
   ttsUtterance.pitch = 1;
   
   ttsUtterance.onend = () => {
     ttsCurrentIndex++;
     updateTTSStatus();
-    // Small pause between sections
+    // Longer pause between sections
     setTimeout(() => {
       if (ttsIsReading && !ttsPaused) {
         readNextSection();
       }
-    }, 400);
+    }, 600);
   };
   
   ttsUtterance.onerror = () => {
