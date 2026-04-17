@@ -1035,6 +1035,17 @@ function acceptDisclaimer() {
   localStorage.setItem('sg_disclaimer_accepted', 'true');
   localStorage.setItem('sg_lang', discLang);
   document.getElementById('disclaimer').classList.add('hidden');
+  
+  // Sync app language with disclaimer language
+  currentLang = discLang;
+  applyTranslations();
+  initCity();
+  renderQuickLinks();
+  renderCatGrid();
+  renderCategories();
+  renderFavorites();
+  renderGlossary();
+  initTTS();
 }
 
 function initDisclaimer() {
@@ -1914,7 +1925,15 @@ const TTS_TEXT = {
     pause: '⏸️ Pausa',
     resume: '▶️ Fortsätt',
     noSupport: 'Din webbläsare stödjer inte uppläsning.',
-    fabTitle: 'Läs upp sidan'
+    fabTitle: 'Läs upp sidan',
+    section: 'Avsnitt',
+    of: 'av',
+    welcomeIntro: 'Välkommen till StödGuiden.',
+    heroSection: 'Startsidan.',
+    tipSection: 'Tips.',
+    deadlineSection: 'Viktiga åldersgränser.',
+    categorySection: 'Kategori.',
+    done: 'Uppläsning klar.'
   },
   en: {
     reading: 'Reading...',
@@ -1922,9 +1941,21 @@ const TTS_TEXT = {
     pause: '⏸️ Pause',
     resume: '▶️ Resume',
     noSupport: 'Your browser does not support text-to-speech.',
-    fabTitle: 'Read page aloud'
+    fabTitle: 'Read page aloud',
+    section: 'Section',
+    of: 'of',
+    welcomeIntro: 'Welcome to StödGuiden.',
+    heroSection: 'Home page.',
+    tipSection: 'Tip.',
+    deadlineSection: 'Important age limits.',
+    categorySection: 'Category.',
+    done: 'Reading complete.'
   }
 };
+
+let ttsQueue = [];
+let ttsCurrentIndex = 0;
+let ttsIsReading = false;
 
 function initTTS() {
   if (ttsSupported) {
@@ -1933,35 +1964,105 @@ function initTTS() {
   }
 }
 
-function getPageText() {
-  // Get visible text content from the current view
-  const homeView = document.getElementById('homeView');
+function getPageSections() {
+  const sections = [];
+  const t = TTS_TEXT[currentLang];
   const catSection = document.querySelector('.cat-section[style*="block"]');
   
-  let text = '';
-  
   if (catSection) {
-    // If a category is open, read that
-    text = catSection.innerText;
-  } else if (homeView.style.display !== 'none') {
-    // Read hero and visible sections
-    const hero = document.querySelector('.hero');
-    const tip = document.querySelector('.tip-card');
-    const deadlines = document.querySelector('.deadline-card');
+    // Reading a category
+    const title = catSection.querySelector('.cat-section-title');
+    const links = catSection.querySelectorAll('.link-item');
     
-    if (hero) text += hero.innerText + '. ';
-    if (tip) text += tip.innerText + '. ';
-    if (deadlines) text += deadlines.innerText + '. ';
+    if (title) {
+      sections.push({
+        label: t.categorySection,
+        text: title.innerText
+      });
+    }
+    
+    links.forEach((link, i) => {
+      const name = link.querySelector('.li-name');
+      if (name) {
+        sections.push({
+          label: `${i + 1}.`,
+          text: name.innerText
+        });
+      }
+    });
+  } else {
+    // Reading home page
+    sections.push({
+      label: '',
+      text: t.welcomeIntro
+    });
+    
+    // Hero section
+    const heroH1 = document.getElementById('heroH1');
+    const heroSub = document.getElementById('heroSub');
+    const heroMission = document.getElementById('heroMission');
+    
+    if (heroH1) {
+      const heroText = heroH1.innerText.replace(/\n/g, ' ').replace('—', '.');
+      sections.push({
+        label: t.heroSection,
+        text: heroText
+      });
+    }
+    
+    if (heroSub) {
+      sections.push({
+        label: '',
+        text: heroSub.innerText
+      });
+    }
+    
+    if (heroMission) {
+      sections.push({
+        label: '',
+        text: heroMission.innerText.replace('🏛️', '')
+      });
+    }
+    
+    // Tip section
+    const tipCard = document.querySelector('.tip-card');
+    if (tipCard) {
+      const tipText = tipCard.innerText.replace('💡', '').trim();
+      sections.push({
+        label: t.tipSection,
+        text: tipText
+      });
+    }
+    
+    // Deadlines
+    const deadlineCard = document.querySelector('.deadline-card');
+    if (deadlineCard) {
+      sections.push({
+        label: t.deadlineSection,
+        text: ''
+      });
+      
+      const items = deadlineCard.querySelectorAll('.deadline-item');
+      items.forEach(item => {
+        const age = item.querySelector('.deadline-age');
+        const desc = item.querySelector('.deadline-text');
+        if (age && desc) {
+          sections.push({
+            label: age.innerText + ':',
+            text: desc.innerText
+          });
+        }
+      });
+    }
   }
   
-  // Clean up text
-  text = text
-    .replace(/[↗←→↑↓]/g, '')
-    .replace(/[☆★]/g, '')
-    .replace(/\s+/g, ' ')
-    .trim();
+  // Add completion message
+  sections.push({
+    label: '',
+    text: t.done
+  });
   
-  return text || (currentLang === 'sv' ? 'Ingen text att läsa.' : 'No text to read.');
+  return sections;
 }
 
 function toggleTTS() {
@@ -1970,7 +2071,7 @@ function toggleTTS() {
     return;
   }
   
-  if (speechSynthesis.speaking) {
+  if (ttsIsReading) {
     stopTTS();
   } else {
     startTTS();
@@ -1978,45 +2079,81 @@ function toggleTTS() {
 }
 
 function startTTS() {
-  const text = getPageText();
-  ttsUtterance = new SpeechSynthesisUtterance(text);
+  ttsQueue = getPageSections();
+  ttsCurrentIndex = 0;
+  ttsIsReading = true;
+  ttsPaused = false;
   
-  // Set language
+  document.getElementById('ttsFab').classList.add('speaking');
+  document.getElementById('ttsBar').classList.add('show');
+  updateTTSStatus();
+  
+  readNextSection();
+}
+
+function readNextSection() {
+  if (ttsCurrentIndex >= ttsQueue.length || !ttsIsReading) {
+    stopTTS();
+    return;
+  }
+  
+  const section = ttsQueue[ttsCurrentIndex];
+  const fullText = section.label ? `${section.label} ${section.text}` : section.text;
+  
+  ttsUtterance = new SpeechSynthesisUtterance(fullText);
   ttsUtterance.lang = currentLang === 'sv' ? 'sv-SE' : 'en-US';
-  ttsUtterance.rate = 0.9;
+  ttsUtterance.rate = 0.85;
   ttsUtterance.pitch = 1;
   
-  // Event handlers
-  ttsUtterance.onstart = () => {
-    document.getElementById('ttsFab').classList.add('speaking');
-    document.getElementById('ttsBar').classList.add('show');
-    document.getElementById('ttsStatus').textContent = TTS_TEXT[currentLang].reading;
-    document.getElementById('ttsPauseBtn').innerHTML = TTS_TEXT[currentLang].pause;
-    ttsPaused = false;
-  };
-  
   ttsUtterance.onend = () => {
-    stopTTS();
+    ttsCurrentIndex++;
+    updateTTSStatus();
+    // Small pause between sections
+    setTimeout(() => {
+      if (ttsIsReading && !ttsPaused) {
+        readNextSection();
+      }
+    }, 400);
   };
   
   ttsUtterance.onerror = () => {
-    stopTTS();
+    ttsCurrentIndex++;
+    if (ttsIsReading) readNextSection();
   };
   
   speechSynthesis.speak(ttsUtterance);
 }
 
+function updateTTSStatus() {
+  const t = TTS_TEXT[currentLang];
+  const status = document.getElementById('ttsStatus');
+  const total = ttsQueue.length;
+  const current = Math.min(ttsCurrentIndex + 1, total);
+  
+  if (ttsPaused) {
+    status.textContent = t.paused;
+  } else if (ttsCurrentIndex < total) {
+    status.textContent = `${t.reading} ${t.section} ${current} ${t.of} ${total}`;
+  } else {
+    status.textContent = t.done;
+  }
+  
+  document.getElementById('ttsPauseBtn').innerHTML = ttsPaused ? TTS_TEXT[currentLang].resume : TTS_TEXT[currentLang].pause;
+}
+
 function pauseResumeTTS() {
   if (ttsPaused) {
     speechSynthesis.resume();
-    document.getElementById('ttsStatus').textContent = TTS_TEXT[currentLang].reading;
-    document.getElementById('ttsPauseBtn').innerHTML = TTS_TEXT[currentLang].pause;
     ttsPaused = false;
+    updateTTSStatus();
+    // Resume reading if needed
+    if (!speechSynthesis.speaking && ttsCurrentIndex < ttsQueue.length) {
+      readNextSection();
+    }
   } else {
     speechSynthesis.pause();
-    document.getElementById('ttsStatus').textContent = TTS_TEXT[currentLang].paused;
-    document.getElementById('ttsPauseBtn').innerHTML = TTS_TEXT[currentLang].resume;
     ttsPaused = true;
+    updateTTSStatus();
   }
 }
 
@@ -2026,6 +2163,9 @@ function stopTTS() {
   document.getElementById('ttsBar').classList.remove('show');
   ttsUtterance = null;
   ttsPaused = false;
+  ttsIsReading = false;
+  ttsQueue = [];
+  ttsCurrentIndex = 0;
 }
 
 // ═══ SOCIALJOUR DATA ═══
