@@ -221,6 +221,7 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
 .link-item .li-ic{font-size:20px;flex-shrink:0;margin-top:1px}
 .link-item .li-tx{flex:1;min-width:0}
 .link-item .li-tx .li-name{font-size:14px;font-weight:600;color:var(--text);display:block}
+.link-item .li-tx .li-desc{font-size:12px;color:var(--muted);line-height:1.4;margin-top:4px;display:block}
 .link-item .li-actions{display:flex;align-items:center;gap:4px;flex-shrink:0;align-self:center}
 .link-item .li-arrow{color:var(--muted2);font-size:14px}
 .fav-btn{background:none;border:none;font-size:16px;cursor:pointer;padding:6px;border-radius:8px;transition:all 0.2s;opacity:0.5;color:var(--muted2)}
@@ -1688,14 +1689,17 @@ function renderCategories() {
 
 function renderLink(link, isLocal) {
   const name = link.name[currentLang] || link.name.sv || link.name;
-  const desc = link.desc[currentLang] || link.desc.sv || link.desc;
+  const desc = link.desc?.[currentLang] || link.desc?.sv || link.desc || '';
   const url = link.url[currentLang] || link.url.sv || link.url;
-  const cat = link.cat[currentLang] || link.cat.sv || link.cat;
+  const cat = link.cat?.[currentLang] || link.cat?.sv || link.cat || '';
   const isFav = favorites.some(f => f.id === link.id);
   
   return `<div class="link-item ${isLocal ? 'local-link' : ''}" data-fav-id="${link.id}" data-fav-name="${name}" data-fav-icon="${link.icon}" data-fav-cat="${cat}" data-fav-url="${url}" data-fav-desc="${desc}">
     <span class="li-ic">${link.icon}</span>
-    <a href="${url}" target="_blank" rel="noopener" class="li-tx"><span class="li-name">${name}</span></a>
+    <a href="${url}" target="_blank" rel="noopener" class="li-tx">
+      <span class="li-name">${name}</span>
+      ${desc ? `<span class="li-desc">${desc}</span>` : ''}
+    </a>
     <div class="li-actions">
       <button class="share-btn" onclick="shareLink(event,'${link.id}')" title="Dela">📤</button>
       <button class="info-btn" onclick="showInfo(event,'${link.id}')" title="Info">ℹ️</button>
