@@ -1,64 +1,53 @@
-// Kosmos Åndedræt Service Worker
-// Network-first strategy ensures users always get latest updates
-const CACHE_NAME = 'kosmos-breath-v3-2026-04-18';
-const ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap'
+const CACHE_NAME = 'stodguiden-v5';
+const urlsToCache = [
+  './',
+  './index.html',
+  './icon.svg',
+  './swish-qr.png',
+  './manifest.json'
 ];
 
+// Install
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(ASSETS))
+      .then(cache => cache.addAll(urlsToCache))
       .then(() => self.skipWaiting())
   );
 });
 
+// Activate
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(keys => 
-      Promise.all(
-        keys.filter(key => key !== CACHE_NAME)
-            .map(key => caches.delete(key))
-      )
-    ).then(() => self.clients.claim())
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cacheName => {
+          if (cacheName !== CACHE_NAME) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    }).then(() => self.clients.claim())
   );
 });
 
-// Network-first strategy for HTML/JS/JSON, cache-first for assets
+// Fetch - Network first, fallback to cache
 self.addEventListener('fetch', event => {
-  const request = event.request;
-  const accept = request.headers.get('accept') || '';
-  const isHTML = accept.includes('text/html');
-  const isJSON = request.url.endsWith('.json');
-  const isJS = request.url.endsWith('.js');
-  
-  if(isHTML || isJSON || isJS) {
-    event.respondWith(
-      fetch(request)
-        .then(response => {
-          if(response && response.status === 200) {
-            const clone = response.clone();
-            caches.open(CACHE_NAME).then(cache => cache.put(request, clone));
-          }
-          return response;
-        })
-        .catch(() => caches.match(request).then(c => c || caches.match('/index.html')))
-    );
-  } else {
-    event.respondWith(
-      caches.match(request).then(response => {
-        if(response) return response;
-        return fetch(request).then(fr => {
-          if(fr && fr.status === 200) {
-            const clone = fr.clone();
-            caches.open(CACHE_NAME).then(cache => cache.put(request, clone));
-          }
-          return fr;
-        });
+  event.respondWith(
+    fetch(event.request)
+      .then(response => {
+        // Clone and cache the response
+        if (response.status === 200) {
+          const responseClone = response.clone();
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(event.request, responseClone);
+          });
+        }
+        return response;
       })
-    );
-  }
+      .catch(() => {
+        // Fallback to cache
+        return caches.match(event.request);
+      })
+  );
 });
