@@ -2059,9 +2059,6 @@ function getPageSections() {
     }
   }
   
-  // Completion message
-  sections.push({ label: '', text: t.done });
-  
   return sections;
 }
 
@@ -2164,10 +2161,8 @@ function updateTTSStatus() {
   
   if (ttsPaused) {
     status.textContent = t.paused;
-  } else if (ttsCurrentIndex < total) {
-    status.textContent = `${t.reading} ${t.section} ${current} ${t.of} ${total}`;
   } else {
-    status.textContent = t.done;
+    status.textContent = `${t.reading} ${t.section} ${current} ${t.of} ${total}`;
   }
   
   document.getElementById('ttsPauseBtn').innerHTML = ttsPaused ? TTS_TEXT[currentLang].resume : TTS_TEXT[currentLang].pause;
