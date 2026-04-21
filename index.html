@@ -891,6 +891,7 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
       <span>📤</span> <span id="shareNativeText">Dela via...</span>
     </button>
     <div class="share-options">
+<div class="share-opt" onclick="shareSMS()"><div class="share-opt-icon">💬</div><div class="share-opt-name">SMS</div></div>
       <a class="share-opt" id="shareWhatsApp" target="_blank" rel="noopener">
         <span class="share-opt-icon">💬</span>
         <span class="share-opt-name">WhatsApp</span>
@@ -1716,7 +1717,12 @@ function renderNumbersSection() {
   
   return `<div class="cat-section wrap" id="cat-nummer">
     <div class="cat-section-header"><span class="cat-section-ic">☎️</span><div><div class="cat-section-title">${t('catNummer')}</div><div class="cat-section-sub">${t('catNummerDesc')}</div></div></div>
-    <div class="num-grid">${nums.map(n => `<a class="num-card" href="tel:${n.n.replace(/\s/g,'')}"><span class="nc-num">${n.n}</span><span class="nc-name">${n.t}</span></a>`).join('')}</div>
+    <div class="num-grid">
+<a href="tel:11313" class="num-card"><span class="nc-num">113 13</span><span class="nc-name">Krisinformation</span></a>
+<a href="tel:020220060" class="num-card"><span class="nc-num">020-22 00 60</span><span class="nc-name">Giftinformation</span></a>
+<a href="tel:087021680" class="num-card"><span class="nc-num">08-702 16 80</span><span class="nc-name">Jourhavande medmänniska</span></a>
+<a href="tel:020222233" class="num-card"><span class="nc-num">020-22 22 33</span><span class="nc-name">Äldrelinjen</span></a>
+${nums.map(n => `<a class="num-card" href="tel:${n.n.replace(/\s/g,'')}"><span class="nc-num">${n.n}</span><span class="nc-name">${n.t}</span></a>`).join('')}</div>
   </div>`;
 }
 
@@ -2434,5 +2440,25 @@ function shareLink(e, id) {
   }
 }
 </script>
+
+<script>
+function shareSMS(){
+  const text = encodeURIComponent("Tjek StödGuiden: " + window.location.href);
+  window.location.href = "sms:?body=" + text;
+}
+</script>
+
+<div class="link-item">
+  <div class="li-ic">⚖️</div>
+  <div class="li-tx">
+    <span class="li-name">Samtycke & lag</span>
+    <span class="li-desc">Samtycke betyder at begge parter aktivt siger ja. Læs og forstå loven.</span>
+  </div>
+  <div class="li-actions">
+    <a href="https://www.riksdagen.se/sv/dokument-lagar/dokument/svensk-forfattningssamling/brottsbalk-1962700_sfs-1962-700" target="_blank" class="li-arrow">→</a>
+  </div>
+</div>
+
 </body>
+
 </html>
