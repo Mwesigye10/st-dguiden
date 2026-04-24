@@ -233,6 +233,25 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
 .info-box strong{color:var(--accent2)}
 .link-item.local-link{border-left:3px solid var(--accent)}
 
+/* ── BREATH FAB ── */
+.breath-fab{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));right:18px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--green2));border:1px solid rgba(168,237,200,0.2);box-shadow:0 6px 24px rgba(45,122,95,0.45),0 0 0 0 rgba(109,207,160,0.4);cursor:pointer;z-index:90;display:grid;place-items:center;transition:transform 0.2s,box-shadow 0.3s;padding:0;animation:breath-fab-glow 5s ease-in-out infinite}
+.breath-fab:hover{transform:scale(1.05)}
+.breath-fab:active{transform:scale(0.95)}
+.breath-fab-label{font-size:13px;font-weight:600;color:var(--accent2);letter-spacing:0.3px;animation:breath-fab-pulse 5s ease-in-out infinite;text-shadow:0 0 10px rgba(168,237,200,0.4);user-select:none}
+@keyframes breath-fab-pulse{0%{transform:scale(0.9);opacity:0.75}40%{transform:scale(1.12);opacity:1}100%{transform:scale(0.9);opacity:0.75}}
+@keyframes breath-fab-glow{0%{box-shadow:0 6px 24px rgba(45,122,95,0.45),0 0 0 0 rgba(109,207,160,0.35)}40%{box-shadow:0 6px 24px rgba(45,122,95,0.45),0 0 0 10px rgba(109,207,160,0)}100%{box-shadow:0 6px 24px rgba(45,122,95,0.45),0 0 0 0 rgba(109,207,160,0)}}
+
+/* ── BREATH MODAL ── */
+.breath-modal{position:fixed;inset:0;background:radial-gradient(ellipse at center,#143027 0%,#0c1e19 70%);z-index:2000;display:none;align-items:center;justify-content:center;opacity:0;transition:opacity 0.5s ease}
+.breath-modal.open{display:flex;opacity:1}
+.breath-close{position:absolute;top:calc(16px + env(safe-area-inset-top));right:16px;background:rgba(255,255,255,0.04);border:1px solid var(--border2);color:var(--muted);width:40px;height:40px;border-radius:50%;font-size:15px;cursor:pointer;display:grid;place-items:center;transition:all 0.2s}
+.breath-close:hover{background:rgba(255,255,255,0.08);color:var(--text)}
+.breath-content{display:flex;flex-direction:column;align-items:center;gap:44px;padding:20px;pointer-events:none}
+.breath-circle-wrap{width:240px;height:240px;display:grid;place-items:center}
+.breath-circle{width:90px;height:90px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--accent2),var(--accent) 50%,var(--green) 100%);box-shadow:0 0 80px rgba(109,207,160,0.35),0 0 40px rgba(168,237,200,0.25);transform:scale(1);transition:transform 4s ease-in-out}
+.breath-text{font-size:24px;font-weight:500;color:var(--accent2);text-align:center;letter-spacing:1px;min-height:30px;transition:opacity 0.5s}
+.breath-sub{font-size:12px;color:var(--muted2);text-align:center;letter-spacing:2px;text-transform:uppercase;min-height:16px}
+
 /* ── INFO POPUP ── */
 #infoPopup{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:500;display:none;place-items:center;padding:20px}
 #infoPopup.open{display:grid}
@@ -672,13 +691,6 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
         <a href="tel:116111" class="sos-btn"><span class="sos-num">116 111</span><span class="sos-name" id="sosBris">BRIS (under 18)</span></a>
         <a href="tel:90101" class="sos-btn"><span class="sos-num">90 101</span><span class="sos-name" id="sosMind">Självmordslinjen</span></a>
       </div>
-      <div class="sos-local" id="sosLocalSection">
-        <div class="sos-local-title" id="sosLocalTitle">📍 Lokalt i <span id="sosLocalCity">Örebro</span></div>
-        <a href="#" class="sos-local-btn" id="sosLocalBtn" target="_blank" rel="noopener">
-          <div class="sos-local-name" id="sosLocalName">Socialjour Örebro</div>
-          <div class="sos-local-desc" id="sosLocalDesc">Akut hjälp dygnet runt</div>
-        </a>
-      </div>
     </div>
   </div>
 
@@ -891,7 +903,6 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
       <span>📤</span> <span id="shareNativeText">Dela via...</span>
     </button>
     <div class="share-options">
-<div class="share-opt" onclick="shareSMS()"><div class="share-opt-icon">💬</div><div class="share-opt-name">SMS</div></div>
       <a class="share-opt" id="shareWhatsApp" target="_blank" rel="noopener">
         <span class="share-opt-icon">💬</span>
         <span class="share-opt-name">WhatsApp</span>
@@ -912,6 +923,23 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
     <button class="share-copy" id="shareCopyBtn" onclick="copyShareLink()">
       <span>📋</span> <span id="shareCopyText">Kopiera länk</span>
     </button>
+  </div>
+</div>
+
+<!-- BREATH FAB -->
+<button class="breath-fab" id="breathFab" onclick="openBreath()" aria-label="Ta en paus">
+  <span class="breath-fab-label">Paus</span>
+</button>
+
+<!-- BREATH MODAL -->
+<div id="breathModal" class="breath-modal" onclick="breathOutsideClick(event)">
+  <button class="breath-close" onclick="closeBreath()" aria-label="Stäng">✕</button>
+  <div class="breath-content">
+    <div class="breath-circle-wrap">
+      <div class="breath-circle" id="breathCircle"></div>
+    </div>
+    <div class="breath-text" id="breathText">&nbsp;</div>
+    <div class="breath-sub" id="breathSub">&nbsp;</div>
   </div>
 </div>
 
@@ -1133,7 +1161,6 @@ const T = {
     toolBibliotekName: 'Bibliotek & WiFi', toolBibliotekDesc: 'Gratis internet',
     // SOS
     sosTitle: 'Akuta nummer', sosEmergency: 'Nödsamtal', sosHealth: 'Sjukvårdsrådgivning', sosMind: 'Självmordslinjen',
-    sosLocalTitle: '📍 Lokalt i', sosLocalDesc: 'Akut hjälp dygnet runt',
     // Deadlines
     deadlinesTitle: 'Viktiga åldersgränser',
     dl16: 'Ställ dig i bostadskö! Det är gratis.',
@@ -1225,7 +1252,6 @@ const T = {
     toolBibliotekName: 'Library & WiFi', toolBibliotekDesc: 'Free internet',
     // SOS
     sosTitle: 'Emergency numbers', sosEmergency: 'Emergency', sosHealth: 'Health advice', sosMind: 'Suicide helpline',
-    sosLocalTitle: '📍 Local in', sosLocalDesc: 'Emergency help 24/7',
     // Deadlines
     deadlinesTitle: 'Important age limits',
     dl16: 'Join housing queue! It\'s free.',
@@ -1268,7 +1294,9 @@ const NATIONAL_LINKS = {
     {id:'mind',icon:'🫂',name:{sv:'Mind – Självmordslinjen',en:'Mind – Suicide helpline'},desc:{sv:'Samtal, chatt och mail med utbildade samtalspersoner. Gratis & anonymt.',en:'Talk, chat and email with trained counselors. Free & anonymous.'},url:{sv:'https://mind.se',en:'https://mind.se/en/'},cat:{sv:'Hälsa',en:'Health'}},
     {id:'bris',icon:'🌈',name:{sv:'BRIS – Barnens rätt i samhället',en:'BRIS – Children\'s rights'},desc:{sv:'För barn och unga under 18. Ring 116 111, chatt eller mail.',en:'For children and young people under 18. Call 116 111, chat or email.'},url:{sv:'https://www.bris.se',en:'https://www.bris.se/for-barn-och-unga/other-languages/'},cat:{sv:'Hälsa',en:'Health'}},
     {id:'youmo',icon:'🧩',name:{sv:'Youmo – psykisk hälsa för nyanlända',en:'Youmo – mental health for newcomers'},desc:{sv:'Information om psykisk hälsa på flera språk.',en:'Information about mental health in multiple languages.'},url:{sv:'https://www.youmo.se',en:'https://www.youmo.se'},cat:{sv:'Hälsa',en:'Health'}},
-    {id:'kvinnofrid',icon:'💜',name:{sv:'Kvinnofridslinjen – 020-50 50 50',en:'Women\'s helpline – 020-50 50 50'},desc:{sv:'Vid våld i nära relationer. Gratis, anonymt, dygnet runt.',en:'For domestic violence. Free, anonymous, 24/7.'},url:{sv:'tel:0200505050',en:'tel:0200505050'},cat:{sv:'Hälsa',en:'Health'}}
+    {id:'kvinnofrid',icon:'💜',name:{sv:'Kvinnofridslinjen – 020-50 50 50',en:'Women\'s helpline – 020-50 50 50'},desc:{sv:'Vid våld i nära relationer. Gratis, anonymt, dygnet runt.',en:'For domestic violence. Free, anonymous, 24/7.'},url:{sv:'tel:0200505050',en:'tel:0200505050'},cat:{sv:'Hälsa',en:'Health'}},
+    {id:'fattaman-te',icon:'🫖',name:{sv:'Te & samtycke',en:'Tea & consent'},desc:{sv:'Samtycke förklarat enkelt — med en kopp te.',en:'Consent explained simply — with a cup of tea.'},url:{sv:'http://fattaman.nu/te-samtycke/',en:'http://fattaman.nu/te-samtycke/'},cat:{sv:'Hälsa',en:'Health'}},
+    {id:'te-samtycke-video',icon:'▶️',name:{sv:'Te & samtycke (video)',en:'Tea & consent (video)'},desc:{sv:'Kort video om vad samtycke är — och inte är.',en:'Short video about what consent is — and isn\'t.'},url:{sv:'https://youtu.be/6i0JAfxbbKc',en:'https://youtu.be/6i0JAfxbbKc'},cat:{sv:'Hälsa',en:'Health'}}
   ],
   ekonomi: [
     {id:'fk',icon:'🏛️',name:{sv:'Försäkringskassan',en:'Social Insurance Agency'},desc:{sv:'Sjukpenning, bostadsbidrag, föräldrapenning och mycket mer.',en:'Sick pay, housing allowance, parental benefit and more.'},url:{sv:'https://www.forsakringskassan.se',en:'https://www.forsakringskassan.se/english'},cat:{sv:'Ekonomi',en:'Money'}},
@@ -1304,6 +1332,8 @@ const NATIONAL_LINKS = {
     {id:'budgetmal',icon:'🍳',name:{sv:'Budgetmål',en:'Budget meals'},desc:{sv:'Billig och enkel mat för studenter.',en:'Cheap and easy food for students.'},url:{sv:'https://www.budgetmal.se',en:'https://www.budgetmal.se'},cat:{sv:'Vardag',en:'Daily'}}
   ],
   rattigheter: [
+    {id:'regeringen-rattigheter',icon:'📜',name:{sv:'Grundläggande fri- och rättigheter',en:'Fundamental freedoms and rights'},desc:{sv:'Dina grundlagsskyddade rättigheter i Sverige — officiell info från regeringen.',en:'Your constitutional rights in Sweden — official info from the government.'},url:{sv:'https://www.regeringen.se/sa-styrs-sverige/grundlagar-och-demokratiskt-deltagande/grundlaggande-fri--och-rattigheter/',en:'https://www.regeringen.se/sa-styrs-sverige/grundlagar-och-demokratiskt-deltagande/grundlaggande-fri--och-rattigheter/'},cat:{sv:'Rättigheter',en:'Rights'}},
+    {id:'mrinstitutet-eu',icon:'🇪🇺',name:{sv:'EU:s stadga om grundläggande rättigheter',en:'EU Charter of Fundamental Rights'},desc:{sv:'EU:s rättighetsstadga som gäller dig — förklarad av MR-institutet.',en:'The EU rights charter that applies to you — explained by the Human Rights Institute.'},url:{sv:'https://mrinstitutet.se/manskliga-rattigheter/konventioner-och-stadgor/eus-stadga-om-de-grundlaggande-rattigheterna',en:'https://mrinstitutet.se/manskliga-rattigheter/konventioner-och-stadgor/eus-stadga-om-de-grundlaggande-rattigheterna'},cat:{sv:'Rättigheter',en:'Rights'}},
     {id:'do2',icon:'⚖️',name:{sv:'Diskrimineringsombudsmannen',en:'Equality Ombudsman'},desc:{sv:'Anmäl diskriminering på jobbet, i skolan eller i samhället.',en:'Report discrimination at work, school or in society.'},url:{sv:'https://www.do.se',en:'https://www.do.se/other-languages/english'},cat:{sv:'Rättigheter',en:'Rights'}},
     {id:'rfsl',icon:'🏳️‍🌈',name:{sv:'RFSL',en:'RFSL'},desc:{sv:'För HBTQI+-personer. Rådgivning, grupper och rättighetsinfo.',en:'For LGBTQI+ people. Counseling, groups and rights info.'},url:{sv:'https://www.rfsl.se',en:'https://www.rfsl.se/en/'},cat:{sv:'Rättigheter',en:'Rights'}}
   ],
@@ -1520,7 +1550,7 @@ function applyTranslations() {
     // Deadlines
     'deadlinesTitle','dl16','dl18','dl20','age16','age18','age20',
     // SOS
-    'sosTitle','sosEmergency','sosHealth','sosMind','sosBris','sosLocalTitle',
+    'sosTitle','sosEmergency','sosHealth','sosMind','sosBris',
     // Support
     'supportTitle','supportText','supportNote',
     // Buttons & misc
@@ -1717,12 +1747,7 @@ function renderNumbersSection() {
   
   return `<div class="cat-section wrap" id="cat-nummer">
     <div class="cat-section-header"><span class="cat-section-ic">☎️</span><div><div class="cat-section-title">${t('catNummer')}</div><div class="cat-section-sub">${t('catNummerDesc')}</div></div></div>
-    <div class="num-grid">
-<a href="tel:11313" class="num-card"><span class="nc-num">113 13</span><span class="nc-name">Krisinformation</span></a>
-<a href="tel:020220060" class="num-card"><span class="nc-num">020-22 00 60</span><span class="nc-name">Giftinformation</span></a>
-<a href="tel:087021680" class="num-card"><span class="nc-num">08-702 16 80</span><span class="nc-name">Jourhavande medmänniska</span></a>
-<a href="tel:020222233" class="num-card"><span class="nc-num">020-22 22 33</span><span class="nc-name">Äldrelinjen</span></a>
-${nums.map(n => `<a class="num-card" href="tel:${n.n.replace(/\s/g,'')}"><span class="nc-num">${n.n}</span><span class="nc-name">${n.t}</span></a>`).join('')}</div>
+    <div class="num-grid">${nums.map(n => `<a class="num-card" href="tel:${n.n.replace(/\s/g,'')}"><span class="nc-num">${n.n}</span><span class="nc-name">${n.t}</span></a>`).join('')}</div>
   </div>`;
 }
 
@@ -2201,30 +2226,9 @@ function stopTTS() {
   ttsCurrentIndex = 0;
 }
 
-// ═══ SOCIALJOUR DATA ═══
-const SOCIALJOUR = {
-  orebro: {name:{sv:'Socialjour Örebro',en:'Social Emergency Örebro'},desc:{sv:'Ring 019-21 10 00 (dygnet runt)',en:'Call 019-21 10 00 (24/7)'},url:'tel:0192110 00'},
-  stockholm: {name:{sv:'Socialjouren Stockholm',en:'Social Emergency Stockholm'},desc:{sv:'Ring 08-508 11 508 (dygnet runt)',en:'Call 08-508 11 508 (24/7)'},url:'tel:0850811508'},
-  goteborg: {name:{sv:'Socialjouren Göteborg',en:'Social Emergency Gothenburg'},desc:{sv:'Ring 031-365 87 00',en:'Call 031-365 87 00'},url:'tel:0313658700'},
-  malmo: {name:{sv:'Socialjouren Malmö',en:'Social Emergency Malmö'},desc:{sv:'Ring 040-34 51 14',en:'Call 040-34 51 14'},url:'tel:0403451 14'},
-  uppsala: {name:{sv:'Socialjouren Uppsala',en:'Social Emergency Uppsala'},desc:{sv:'Ring 018-727 00 00 (kvällar/helg)',en:'Call 018-727 00 00 (evenings/weekends)'},url:'tel:0187270000'},
-  vasteras: {name:{sv:'Socialjouren Västerås',en:'Social Emergency Västerås'},desc:{sv:'Ring 021-39 24 24',en:'Call 021-39 24 24'},url:'tel:0213924 24'},
-  linkoping: {name:{sv:'Socialjouren Linköping',en:'Social Emergency Linköping'},desc:{sv:'Ring 013-20 72 05',en:'Call 013-20 72 05'},url:'tel:0132072 05'},
-  norrkoping: {name:{sv:'Socialjouren Norrköping',en:'Social Emergency Norrköping'},desc:{sv:'Ring 011-15 26 00',en:'Call 011-15 26 00'},url:'tel:0111526 00'},
-  jonkoping: {name:{sv:'Socialjouren Jönköping',en:'Social Emergency Jönköping'},desc:{sv:'Ring 036-10 50 00 (dagtid)',en:'Call 036-10 50 00 (daytime)'},url:'tel:0361050 00'},
-  eskilstuna: {name:{sv:'Socialjouren Eskilstuna',en:'Social Emergency Eskilstuna'},desc:{sv:'Ring 016-710 20 00',en:'Call 016-710 20 00'},url:'tel:0167102000'}
-};
-
 // ═══ UPDATE SOS SECTION ═══
 function updateSOS() {
-  const city = CITIES[currentCity];
-  const jour = SOCIALJOUR[currentCity];
-  if(jour) {
-    document.getElementById('sosLocalCity').textContent = city.name;
-    document.getElementById('sosLocalName').textContent = jour.name[currentLang] || jour.name.sv;
-    document.getElementById('sosLocalDesc').textContent = jour.desc[currentLang] || jour.desc.sv;
-    document.getElementById('sosLocalBtn').href = jour.url;
-  }
+  // Socialjour removed — kept as no-op in case city switches call this
 }
 
 // ═══ BUDGET CALCULATOR ═══
@@ -2309,7 +2313,6 @@ function cacheForOffline() {
     health: '1177',
     bris: '116111',
     mind: '90101',
-    socialjour: SOCIALJOUR,
     savedAt: new Date().toISOString()
   };
   localStorage.setItem('sg_offline', JSON.stringify(offlineData));
@@ -2322,6 +2325,89 @@ window.addEventListener('online', () => {
 window.addEventListener('offline', () => {
   const banner = document.querySelector('.offline-banner');
   if(banner) banner.classList.add('show');
+});
+
+// ═══ BREATH PAUSE ═══
+const BREATH_TXT = {
+  sv: {in:'Andas in', out:'Andas ut', done:'Fortsätt när du är redo', inSub:'4 sekunder', outSub:'6 sekunder'},
+  en: {in:'Breathe in', out:'Breathe out', done:'Continue when you\'re ready', inSub:'4 seconds', outSub:'6 seconds'}
+};
+let breathTimers = [];
+const BREATH_CYCLES = 3;
+
+function openBreath() {
+  const modal = document.getElementById('breathModal');
+  modal.classList.add('open');
+  // Small delay so the fade-in completes before the animation starts
+  setTimeout(startBreath, 300);
+}
+
+function closeBreath() {
+  const modal = document.getElementById('breathModal');
+  modal.classList.remove('open');
+  stopBreath();
+}
+
+function breathOutsideClick(e) {
+  if(e.target.id === 'breathModal') closeBreath();
+}
+
+function stopBreath() {
+  breathTimers.forEach(t => clearTimeout(t));
+  breathTimers = [];
+  const circle = document.getElementById('breathCircle');
+  if(circle){
+    circle.style.transition = 'transform 0.4s ease';
+    circle.style.transform = 'scale(1)';
+  }
+  document.getElementById('breathText').textContent = '';
+  document.getElementById('breathSub').textContent = '';
+}
+
+function startBreath() {
+  stopBreath();
+  runBreathCycle(0);
+}
+
+function runBreathCycle(cycle) {
+  const txt = BREATH_TXT[currentLang] || BREATH_TXT.sv;
+  const circle = document.getElementById('breathCircle');
+  const textEl = document.getElementById('breathText');
+  const subEl = document.getElementById('breathSub');
+  if(!circle || !textEl || !subEl) return;
+
+  if(cycle >= BREATH_CYCLES) {
+    textEl.textContent = txt.done;
+    subEl.textContent = '';
+    circle.style.transition = 'transform 1.5s ease';
+    circle.style.transform = 'scale(1)';
+    return;
+  }
+
+  // Inhale — 4 seconds
+  textEl.textContent = txt.in;
+  subEl.textContent = txt.inSub;
+  circle.style.transition = 'transform 4s ease-in-out';
+  circle.style.transform = 'scale(2.2)';
+
+  breathTimers.push(setTimeout(() => {
+    // Exhale — 6 seconds
+    textEl.textContent = txt.out;
+    subEl.textContent = txt.outSub;
+    circle.style.transition = 'transform 6s ease-in-out';
+    circle.style.transform = 'scale(1)';
+
+    breathTimers.push(setTimeout(() => {
+      runBreathCycle(cycle + 1);
+    }, 6000));
+  }, 4000));
+}
+
+// Close on Escape
+document.addEventListener('keydown', (e) => {
+  if(e.key === 'Escape' && document.getElementById('breathModal').classList.contains('open')) {
+    closeBreath();
+  }
 });
 
 // ═══ INIT TOOLS ═══
@@ -2440,25 +2526,5 @@ function shareLink(e, id) {
   }
 }
 </script>
-
-<script>
-function shareSMS(){
-  const text = encodeURIComponent("Tjek StödGuiden: " + window.location.href);
-  window.location.href = "sms:?body=" + text;
-}
-</script>
-
-<div class="link-item">
-  <div class="li-ic">⚖️</div>
-  <div class="li-tx">
-    <span class="li-name">Samtycke & lag</span>
-    <span class="li-desc">Samtycke betyder at begge parter aktivt siger ja. Læs og forstå loven.</span>
-  </div>
-  <div class="li-actions">
-    <a href="https://www.riksdagen.se/sv/dokument-lagar/dokument/svensk-forfattningssamling/brottsbalk-1962700_sfs-1962-700" target="_blank" class="li-arrow">→</a>
-  </div>
-</div>
-
 </body>
-
 </html>
