@@ -301,15 +301,6 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
 /* ── UP BUTTON ── */
 #upBtn{position:fixed;right:16px;bottom:70px;width:44px;height:44px;background:var(--green);color:var(--text);border:none;border-radius:50%;font-size:18px;cursor:pointer;display:none;place-items:center;box-shadow:0 4px 12px rgba(0,0,0,0.3);z-index:90}
 
-/* ── SUPPORT SECTION ── */
-.support-section{background:linear-gradient(135deg,rgba(45,122,95,0.1),rgba(30,92,69,0.05));border:1px solid rgba(45,122,95,0.2);border-radius:16px;padding:18px;margin:24px 0 20px;text-align:center}
-.support-title{font-size:16px;font-weight:700;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px}
-.support-text{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px}
-.support-swish{background:rgba(255,255,255,0.05);border:1px solid var(--border2);border-radius:10px;padding:10px 16px;display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--text)}
-.support-qr{margin:16px 0;display:flex;justify-content:center}
-.swish-qr-img{width:180px;height:auto;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.3)}
-.support-note{font-size:11px;color:var(--muted2);margin-top:10px}
-
 /* ── TOAST ── */
 .toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--panel);border:1px solid var(--gold);border-radius:50px;padding:12px 20px;display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--gold);z-index:200;opacity:0;transition:all 0.3s;box-shadow:0 4px 20px rgba(0,0,0,0.3)}
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
@@ -432,13 +423,13 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
 
 /* ── SOS CARD ── */
 .sos-section{margin:16px 0}
-.sos-card{background:linear-gradient(135deg,rgba(122,24,24,0.2),rgba(94,16,16,0.15));border:1px solid rgba(122,24,24,0.4);border-radius:14px;padding:14px 16px}
-.sos-title{font-size:14px;font-weight:700;color:#ff9999;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.sos-card{background:linear-gradient(135deg,rgba(45,122,95,0.12),rgba(30,92,69,0.08));border:1px solid rgba(45,122,95,0.25);border-radius:14px;padding:14px 16px}
+.sos-title{font-size:14px;font-weight:700;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .sos-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.sos-btn{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:10px;text-align:center;text-decoration:none;transition:all 0.2s}
-.sos-btn:hover{background:rgba(255,255,255,0.1);text-decoration:none}
-.sos-btn .sos-num{font-size:16px;font-weight:800;color:#ff9999;display:block}
-.sos-btn .sos-name{font-size:10px;color:var(--muted);margin-top:2px;display:block}
+.sos-btn{background:rgba(255,255,255,0.04);border:1px solid var(--border2);border-radius:10px;padding:10px;text-align:center;text-decoration:none;transition:all 0.2s}
+.sos-btn:hover{background:rgba(45,122,95,0.12);border-color:rgba(45,122,95,0.35);text-decoration:none}
+.sos-btn .sos-num{font-size:16px;font-weight:800;color:var(--accent2);display:block}
+.sos-btn .sos-name{font-size:10px;color:var(--muted);margin-top:2px;display:block;line-height:1.3}
 .sos-local{margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.1)}
 .sos-local-title{font-size:11px;color:var(--muted2);margin-bottom:8px}
 .sos-local-btn{display:block;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:10px 12px;text-decoration:none;transition:all 0.2s}
@@ -684,24 +675,14 @@ header{position:sticky;top:0;z-index:60;background:rgba(12,30,25,0.95);backdrop-
   <!-- SOS SECTION (placeret nederst for at appen ikke fremstår som en nødapp) -->
   <div class="sos-section" id="sosSection">
     <div class="sos-card">
-      <div class="sos-title">🚨 <span id="sosTitle">Akuta nummer</span></div>
+      <div class="sos-title">📞 <span id="sosTitle">Viktiga nummer</span></div>
       <div class="sos-grid">
         <a href="tel:112" class="sos-btn"><span class="sos-num">112</span><span class="sos-name" id="sosEmergency">Nödsamtal</span></a>
         <a href="tel:1177" class="sos-btn"><span class="sos-num">1177</span><span class="sos-name" id="sosHealth">Sjukvårdsrådgivning</span></a>
         <a href="tel:116111" class="sos-btn"><span class="sos-num">116 111</span><span class="sos-name" id="sosBris">BRIS (under 18)</span></a>
-        <a href="tel:90101" class="sos-btn"><span class="sos-num">90 101</span><span class="sos-name" id="sosMind">Självmordslinjen</span></a>
+        <a href="tel:90101" class="sos-btn"><span class="sos-num">90 101</span><span class="sos-name" id="sosMind">Mind — när livet känns svårt</span></a>
       </div>
     </div>
-  </div>
-
-  <!-- SUPPORT SECTION -->
-  <div class="support-section">
-    <div class="support-title" id="supportTitle">💚 Stöd projektet</div>
-    <p class="support-text" id="supportText">StödGuiden är helt gratis och utan reklam. Om appen har hjälpt dig och du vill bidra till att den fortsätter utvecklas, kan du swisha valfritt belopp.</p>
-    <div class="support-qr">
-      <img src="swish-qr.png" alt="Swish QR-kod" class="swish-qr-img"/>
-    </div>
-    <div class="support-note" id="supportNote">Tack för att du stöttar fri och öppen samhällsinfo! 💚</div>
   </div>
 </div>
 
@@ -1113,11 +1094,6 @@ const T = {
     // Sections
     quickTitle: 'Snabblänkar', favTitle: 'Mina favoriter', catTitle: 'Kategorier', tipTitle: 'Visste du?',
     catMenuText: 'Kategorier',
-    // Support
-    supportTitle: '💚 Stöd projektet',
-    supportText: 'StödGuiden är helt gratis och utan reklam. Om appen har hjälpt dig och du vill bidra till att den fortsätter utvecklas, kan du swisha valfritt belopp.',
-    supportSwishLabel: 'Swish:',
-    supportNote: 'Tack för att du stöttar fri och öppen samhällsinfo! 💚',
     // Buttons
     backBtn: '← Tillbaka till startsidan',
     feedbackBtnText: 'Feedback',
@@ -1160,7 +1136,7 @@ const T = {
     toolNummerName: 'Viktiga nummer', toolNummerDesc: 'Spara offline',
     toolBibliotekName: 'Bibliotek & WiFi', toolBibliotekDesc: 'Gratis internet',
     // SOS
-    sosTitle: 'Akuta nummer', sosEmergency: 'Nödsamtal', sosHealth: 'Sjukvårdsrådgivning', sosMind: 'Självmordslinjen',
+    sosTitle: 'Viktiga nummer', sosEmergency: 'Nödsamtal', sosHealth: 'Sjukvårdsrådgivning', sosMind: 'Mind — när livet känns svårt',
     // Deadlines
     deadlinesTitle: 'Viktiga åldersgränser',
     dl16: 'Ställ dig i bostadskö! Det är gratis.',
@@ -1204,11 +1180,6 @@ const T = {
     // Sections
     quickTitle: 'Quick links', favTitle: 'My favorites', catTitle: 'Categories', tipTitle: 'Did you know?',
     catMenuText: 'Categories',
-    // Support
-    supportTitle: '💚 Support the project',
-    supportText: 'StödGuiden is completely free and ad-free. If the app has helped you and you want to contribute to its development, you can Swish any amount.',
-    supportSwishLabel: 'Swish:',
-    supportNote: 'Thank you for supporting free and open civic information! 💚',
     // Buttons
     backBtn: '← Back to start',
     feedbackBtnText: 'Feedback',
@@ -1251,7 +1222,7 @@ const T = {
     toolNummerName: 'Emergency numbers', toolNummerDesc: 'Save offline',
     toolBibliotekName: 'Library & WiFi', toolBibliotekDesc: 'Free internet',
     // SOS
-    sosTitle: 'Emergency numbers', sosEmergency: 'Emergency', sosHealth: 'Health advice', sosMind: 'Suicide helpline',
+    sosTitle: 'Important numbers', sosEmergency: 'Emergency', sosHealth: 'Health advice', sosMind: 'Mind — when life feels hard',
     // Deadlines
     deadlinesTitle: 'Important age limits',
     dl16: 'Join housing queue! It\'s free.',
@@ -1291,7 +1262,7 @@ const NATIONAL_LINKS = {
   halsa: [
     {id:'1177',icon:'🏥',name:{sv:'1177 Vårdguiden',en:'1177 Healthcare Guide'},desc:{sv:'Råd, vägledning och hitta vård. Ring 1177 dygnet runt.',en:'Advice, guidance and find healthcare. Call 1177 around the clock.'},url:{sv:'https://www.1177.se',en:'https://www.1177.se/other-languages/other-languages/'},cat:{sv:'Hälsa',en:'Health'}},
     {id:'umo',icon:'💚',name:{sv:'UMO – Ungdomsmottagning online',en:'UMO – Youth clinic online'},desc:{sv:'Sex, relationer, hälsa och identitet för unga upp till 25 år.',en:'Sex, relationships, health and identity for young people up to 25.'},url:{sv:'https://www.umo.se',en:'https://www.youmo.se'},cat:{sv:'Hälsa',en:'Health'}},
-    {id:'mind',icon:'🫂',name:{sv:'Mind – Självmordslinjen',en:'Mind – Suicide helpline'},desc:{sv:'Samtal, chatt och mail med utbildade samtalspersoner. Gratis & anonymt.',en:'Talk, chat and email with trained counselors. Free & anonymous.'},url:{sv:'https://mind.se',en:'https://mind.se/en/'},cat:{sv:'Hälsa',en:'Health'}},
+    {id:'mind',icon:'🫂',name:{sv:'Mind – stöd när livet är svårt',en:'Mind – support when life is hard'},desc:{sv:'Samtal, chatt och mail med utbildade samtalspersoner. Vid svåra tankar, ensamhet eller självmordstankar. Gratis & anonymt.',en:'Talk, chat and email with trained counselors. For difficult thoughts, loneliness or suicidal thoughts. Free & anonymous.'},url:{sv:'https://mind.se',en:'https://mind.se/en/'},cat:{sv:'Hälsa',en:'Health'}},
     {id:'bris',icon:'🌈',name:{sv:'BRIS – Barnens rätt i samhället',en:'BRIS – Children\'s rights'},desc:{sv:'För barn och unga under 18. Ring 116 111, chatt eller mail.',en:'For children and young people under 18. Call 116 111, chat or email.'},url:{sv:'https://www.bris.se',en:'https://www.bris.se/for-barn-och-unga/other-languages/'},cat:{sv:'Hälsa',en:'Health'}},
     {id:'youmo',icon:'🧩',name:{sv:'Youmo – psykisk hälsa för nyanlända',en:'Youmo – mental health for newcomers'},desc:{sv:'Information om psykisk hälsa på flera språk.',en:'Information about mental health in multiple languages.'},url:{sv:'https://www.youmo.se',en:'https://www.youmo.se'},cat:{sv:'Hälsa',en:'Health'}},
     {id:'kvinnofrid',icon:'💜',name:{sv:'Kvinnofridslinjen – 020-50 50 50',en:'Women\'s helpline – 020-50 50 50'},desc:{sv:'Vid våld i nära relationer. Gratis, anonymt, dygnet runt.',en:'For domestic violence. Free, anonymous, 24/7.'},url:{sv:'tel:0200505050',en:'tel:0200505050'},cat:{sv:'Hälsa',en:'Health'}},
@@ -1551,8 +1522,6 @@ function applyTranslations() {
     'deadlinesTitle','dl16','dl18','dl20','age16','age18','age20',
     // SOS
     'sosTitle','sosEmergency','sosHealth','sosMind','sosBris',
-    // Support
-    'supportTitle','supportText','supportNote',
     // Buttons & misc
     'backBtn','feedbackBtnText','shareBtnText',
     // Feedback modal
@@ -1742,8 +1711,8 @@ function renderLink(link, isLocal) {
 
 function renderNumbersSection() {
   const nums = currentLang === 'en' ? 
-    [{n:'112',t:'Emergency'},{n:'1177',t:'Healthcare advice'},{n:'114 14',t:'Police (non-urgent)'},{n:'116 111',t:'BRIS (under 18)'},{n:'90 101',t:'Mind Suicide Line'},{n:'020-50 50 50',t:'Women\'s helpline'}] :
-    [{n:'112',t:'Nödsamtal (akut)'},{n:'1177',t:'Sjukvårdsrådgivning'},{n:'114 14',t:'Polis (ej akut)'},{n:'116 111',t:'BRIS (under 18)'},{n:'90 101',t:'Mind Självmordslinjen'},{n:'020-50 50 50',t:'Kvinnofridslinjen'}];
+    [{n:'112',t:'Emergency'},{n:'1177',t:'Healthcare advice'},{n:'114 14',t:'Police (non-urgent)'},{n:'116 111',t:'BRIS (under 18)'},{n:'90 101',t:'Mind — when life feels hard'},{n:'020-50 50 50',t:'Women\'s helpline'}] :
+    [{n:'112',t:'Nödsamtal (akut)'},{n:'1177',t:'Sjukvårdsrådgivning'},{n:'114 14',t:'Polis (ej akut)'},{n:'116 111',t:'BRIS (under 18)'},{n:'90 101',t:'Mind — när livet känns svårt'},{n:'020-50 50 50',t:'Kvinnofridslinjen'}];
   
   return `<div class="cat-section wrap" id="cat-nummer">
     <div class="cat-section-header"><span class="cat-section-ic">☎️</span><div><div class="cat-section-title">${t('catNummer')}</div><div class="cat-section-sub">${t('catNummerDesc')}</div></div></div>
